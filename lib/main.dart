@@ -1,8 +1,167 @@
-import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as Http;
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/response/response.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:hive/hive.dart';
+import 'package:logger/logger.dart';
+import 'package:path_provider/path_provider.dart';
+import 'Dependenci Injection/getx Injection/getx_dependenci_injection.dart';
+import 'Dependenci Injection/init_dependencies.dart';
+import 'core/Location/location_config.dart';
+import 'core/config/color/app_colors.dart';
+import 'core/config/theme/app_themes.dart';
+import 'core/routes/routes.dart';
+import 'core/utils/system_util.dart';
+
+
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel', // id
+    'High Importance Notifications', // title
+    description: 'This channel is used for important notifications.', // description
+    importance: Importance.high,
+    playSound: true
+);
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  Logger().d("run");
+  if (Platform.isIOS) {
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+          apiKey: "AIzaSyAvQX1pe47rF6vVYsswuwOdSVpCO5nb-JY",
+          appId: "1:386436149198:android:f71cba3a6e2e43f4de459f",
+          messagingSenderId: "386436149198",
+          projectId: "ihb-9eddf"),
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
+  print('A bg message just showed up :  ${message.messageId}');
 }
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  HttpOverrides.global = MyHttpOverrides();
+
+  ///dp path
+  var databasePath = await getApplicationDocumentsDirectory();
+  Hive.init(databasePath.path);
+  Box? box= await Hive.openBox('users');
+
+
+  ///status bar style
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent, // transparent status bar
+    systemNavigationBarColor: Colors.black, // navigation bar color
+    statusBarIconBrightness: Brightness.dark, // status bar icons' color
+    systemNavigationBarIconBrightness: Brightness.dark, //navigation bar icons' color
+  ));
+
+  await init();
+  await initDependencies();
+  await serviceLocator<LocationConfig>().getCureentLocation();
+
+
+
+  ///firbase and notification
+  ///Firebase init
+  // if (Platform.isIOS) {
+  //   await Firebase.initializeApp(
+  //     options: const FirebaseOptions(
+  //         apiKey: "AIzaSyADChMpvtamd7yjP8QhUMRYoMK5oNq-JLI",
+  //         appId: "1:244012276431:ios:b176558ef1e6f7ccec75ba",
+  //         messagingSenderId: "244012276431",
+  //         projectId: "eatonomy-5567c"),
+  //   );
+  // } else {
+  //   await Firebase.initializeApp();
+  //   await FirebaseMessaging.instance.requestPermission();
+  // }
+  // if (Platform.isIOS) {
+  //   await FirebaseMessaging.instance.requestPermission();
+  // }
+  // ///push notification
+  // await FirebaseMessaging.instance.subscribeToTopic("all");
+  // await FirebaseMessaging.instance.subscribeToTopic("staging-eatonomy");
+  // await FirebaseMessaging.instance.subscribeToTopic("eatonomy");
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // await FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+  //   RemoteNotification? notification = message.notification;
+  //   AndroidNotification? android = message.notification?.android;
+  //   Logger().w(message.data);
+  //   Logger().w(message);
+  //   Logger().w("${notification!.android!} test");
+  //   if(notification.android!.imageUrl!=null) {
+  //     final Http.Response response = await Http.get(Uri.parse(notification.android!.imageUrl!));
+  //     flutterLocalNotificationsPlugin.show(
+  //       notification.hashCode,
+  //       notification.title,
+  //       notification.body,
+  //       NotificationDetails(
+  //         iOS: DarwinNotificationDetails(threadIdentifier: 'thread_id'),
+  //         android: AndroidNotificationDetails(
+  //           channel.id,
+  //           channel.name,
+  //           color:  AppColors.kPrimaryColorx,
+  //           styleInformation: BigPictureStyleInformation(
+  //               ByteArrayAndroidBitmap.fromBase64String(base64Encode(response.bodyBytes))),
+  //           largeIcon: DrawableResourceAndroidBitmap('@mipmap/ic_launcher'),
+  //           playSound: true,
+  //           channelShowBadge: true,
+  //           icon: '@mipmap/ic_launcher',
+  //         ),
+  //       ),
+  //
+  //     );
+  //   }
+  //   else{
+  //     flutterLocalNotificationsPlugin.show(
+  //       notification.hashCode,
+  //       notification.title,
+  //       notification.body,
+  //       NotificationDetails(
+  //         iOS: DarwinNotificationDetails(threadIdentifier: 'thread_id'),
+  //         android: AndroidNotificationDetails(
+  //           channel.id,
+  //           channel.name,
+  //           color: AppColors.kPrimaryColorx,
+  //           largeIcon: DrawableResourceAndroidBitmap('@mipmap/ic_launcher'),
+  //           playSound: true,
+  //           channelShowBadge: true,
+  //           icon: '@mipmap/ic_launcher',
+  //         ),
+  //       ),
+  //     );
+  //   }
+  // });
+  // await flutterLocalNotificationsPlugin
+  //     .resolvePlatformSpecificImplementation<
+  //     AndroidFlutterLocalNotificationsPlugin>()
+  //     ?.createNotificationChannel(channel);
+  //
+  // await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+  //   alert: true,
+  //   badge: true,
+  //   sound: true,
+  // );
+
+
+  runApp(
+    const MyApp(),
+  );
+}
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -10,116 +169,30 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return ScreenUtilInit(
+      designSize: const Size(393, 852),
+      minTextAdapt: true,
+      useInheritedMediaQuery: true,
+      // splitScreenMode: true,
+      builder: (context, child) => GetMaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        title: 'Biddabari',
+        theme: CustomTheme.lightTheme,
+        // darkTheme:CustomTheme.darkTheme, // standard dark theme
+        themeMode: ThemeMode.light,
+        routeInformationParser: AppRouter.router.routeInformationParser,
+        routerDelegate: AppRouter.router.routerDelegate,
+        routeInformationProvider: AppRouter.router.routeInformationProvider,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
+class MyHttpOverrides extends HttpOverrides {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
