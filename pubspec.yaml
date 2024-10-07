@@ -84,6 +84,16 @@ dependencies:
 
   fluttertoast: ^8.2.5
 
+  #slider
+  carousel_slider: ^5.0.0
+  smooth_page_indicator: ^1.1.0
+
+
+  flutter_rating_bar: ^4.0.1
+
+  pin_code_fields: ^8.0.1
+
+
   #db
   hive: ^2.2.3
   hive_flutter: ^1.1.0

@@ -17,6 +17,8 @@ class CustomElevatedButton extends StatelessWidget {
   final FontWeight titleWeight;
   final double borderRdius;
   final double buttonHeight;
+  final double buttonMarginLeft;
+  final double buttonMarginRight;
   final double? buttonWidth;
 
   final Widget? iconLeft;
@@ -35,7 +37,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.borderColor,
     this.iconLeft,
     this.iconRight,
-    super.key,
+    super.key, this.buttonMarginLeft=12,  this.buttonMarginRight=12,
   });
 
   @override
@@ -76,22 +78,22 @@ class CustomElevatedButton extends StatelessWidget {
         ),
         child: Center(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               iconLeft ?? SizedBox(),
               SizedBox(
-                width: titleText==""?0: 12.w,
+                width: titleText==""?0: buttonMarginLeft,
               ),
                Text(
                 titleText,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
-                style: robotoMedium.copyWith(color: titleColor, fontSize: titleSize, fontWeight: titleWeight
+                style: PoppinsMedium.copyWith(color: titleColor, fontSize: titleSize, fontWeight: titleWeight
                 ),
               ),
-              SizedBox(width: titleText==""?0:12.w,),
+              SizedBox(width: titleText==""?0:buttonMarginRight,),
               iconRight ?? SizedBox(),
 
             ],

@@ -28,3 +28,22 @@ class SystemUtil{
     FocusManager.instance.primaryFocus?.unfocus();
   }
 }
+
+class CustomTextInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue,
+      TextEditingValue newValue,
+      ) {
+    if (!newValue.text.startsWith("01")) {
+      final String newText = "01" + newValue.text.replaceFirst("01", "");
+      return TextEditingValue(
+        text: newText,
+        selection: TextSelection.collapsed(offset: newText.length),
+      );
+
+    }
+
+    return newValue;
+  }
+}

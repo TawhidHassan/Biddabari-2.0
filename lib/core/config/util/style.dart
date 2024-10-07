@@ -1,46 +1,59 @@
 import 'package:flutter/material.dart';
 
-const robotoLight = TextStyle(
-  fontFamily: 'Roboto',
+const PoppinsLight = TextStyle(
+  fontFamily: 'Poppins',
   fontWeight: FontWeight.w300,
 );
 
-const robotoExtraLight = TextStyle(
-  fontFamily: 'Roboto',
+const PoppinsExtraLight = TextStyle(
+  fontFamily: 'Poppins',
   fontWeight: FontWeight.w200,
 );
 
-const robotoThin = TextStyle(
-  fontFamily: 'Roboto',
+const PoppinsThin = TextStyle(
+  fontFamily: 'Poppins',
   fontWeight: FontWeight.w100,
 );
 
-const robotoRegular = TextStyle(
-  fontFamily: 'Roboto',
+const PoppinsRegular = TextStyle(
+  fontFamily: 'Poppins',
   fontWeight: FontWeight.w400,
 );
 
-const robotoMedium = TextStyle(
-  fontFamily: 'Roboto',
+const PoppinsMedium = TextStyle(
+  fontSize: 12,
+  fontFamily: 'Poppins',
   fontWeight: FontWeight.w500,
 );
 
-const robotoSemiBold = TextStyle(
-  fontFamily: 'Roboto',
-  fontWeight: FontWeight.w600,
+const PoppinsSemiBold = TextStyle(
+    color: Color(0xFF202244),
+    fontSize: 16,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w600
+);
+const PoppinsSemiBoldExtra = TextStyle(
+    color: Color(0xFF202244),
+    fontSize: 16,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w700
 );
 
-const robotoBold = TextStyle(
-  fontFamily: 'Roboto',
-  fontWeight: FontWeight.w700,
-);
-
-const robotoExtraBold = TextStyle(
-  fontFamily: 'Roboto',
+const PoppinsBold = TextStyle(
+  color: Color(0xFF202244),
+  fontSize: 16,
+  fontFamily: 'Poppins',
   fontWeight: FontWeight.w800,
 );
 
-const robotoBlack = TextStyle(
-  fontFamily: 'Roboto',
+const PoppinsExtraBold = TextStyle(
+  color: Color(0xFF202244),
+  fontSize: 16,
+  fontFamily: 'Poppins',
+  fontWeight: FontWeight.w900,
+);
+
+const PoppinsBlack = TextStyle(
+  fontFamily: 'Poppins',
   fontWeight: FontWeight.w900,
 );

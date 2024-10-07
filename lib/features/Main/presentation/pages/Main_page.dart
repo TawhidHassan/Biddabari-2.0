@@ -76,10 +76,10 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
           iconSize: 32,
           showUnselectedLabels: true,
           currentIndex: widget.navigationShell.currentIndex,
-          unselectedLabelStyle: robotoMedium.copyWith(
+          unselectedLabelStyle: PoppinsMedium.copyWith(
             fontSize: 12,
           ),
-          selectedLabelStyle:  robotoMedium.copyWith(
+          selectedLabelStyle:  PoppinsMedium.copyWith(
             fontSize: 12,
           ),
           unselectedItemColor:  AppColors.primarySlate300,
@@ -88,36 +88,36 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
           items: [
             BottomNavigationBarItem(
                 label: "হোম",
-                icon: Assets.icons.icHome.svg(color: AppColors.primarySlate200),
-                activeIcon: Assets.icons.icHome.svg(color: AppColors.palkiColor)
+                icon: Assets.icons.homeInactive.svg(),
+                activeIcon: Assets.icons.home.svg()
             ),
 
 
             BottomNavigationBarItem(
               label: "সব কোর্স",
-              icon:Assets.icons.icInbox.svg(color: AppColors.primarySlate200),
-              activeIcon: Assets.icons.icInbox.svg(color: AppColors.palkiColor),
+              icon:Assets.icons.allCourseInactive.svg(),
+              activeIcon: Assets.icons.allCourse.svg(),
 
             ),
 
             BottomNavigationBarItem(
                 label: "পরীক্ষা",
-                icon: Assets.icons.icMore.svg(),
-                activeIcon: Assets.icons.icMore.svg(color: AppColors.palkiColor)
+                icon: Assets.icons.examInactive.svg(),
+                activeIcon: Assets.icons.exam.svg()
             ),
             BottomNavigationBarItem(
                 label: "বুক স্টোর",
-                icon: Assets.icons.icMore.svg(),
-                activeIcon: Assets.icons.icMore.svg(color: AppColors.palkiColor)
+                icon: Assets.icons.bookStoreInactive.svg(),
+                activeIcon: Assets.icons.bookStore.svg()
             ),
             BottomNavigationBarItem(
                 label: "ফ্রি কোর্স",
-                icon: Assets.icons.icMore.svg(),
-                activeIcon: Assets.icons.icMore.svg(color: AppColors.palkiColor)
+                icon: Assets.icons.freeCourseInactive.svg(),
+                activeIcon: Assets.icons.freeCourse.svg()
             ), BottomNavigationBarItem(
                 label: "ক্লাসরুম",
-                icon: Assets.icons.icMore.svg(),
-                activeIcon: Assets.icons.icMore.svg(color: AppColors.palkiColor)
+                icon: Assets.icons.classRoomInactive.svg(),
+                activeIcon: Assets.icons.classRom.svg()
             ),
             // NavigationDestination(label: 'Home', icon: Icon(Icons.home)),
             // NavigationDestination(label: 'Image Generate', icon: Icon(Icons.image)),

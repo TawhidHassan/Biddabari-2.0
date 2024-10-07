@@ -89,79 +89,84 @@ class _CustomTextFieldState extends State<CustomTextField> {
   bool obscureText = true;
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      onTap: widget.onTap,
-      onFieldSubmitted: widget.onSubmit,
-      maxLength: widget.maxLength??null,
-      inputFormatters: widget.inputFormatters,
-      onChanged: widget.onChanged,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      readOnly: widget.readOnly,
-      controller: widget.textEditingController,
-      keyboardType: widget.keyboardType,
-      textInputAction: widget.textInputAction,
-      cursorColor: widget.cursorColor,
-      style: robotoMedium.copyWith(
-        color:AppColors.primarySlate400,
-        fontSize: 14.sp,
+    return Material(
+      elevation: 20.0,
+      borderRadius: BorderRadius.circular(12),
+      shadowColor: AppColors.primarySlate100.withAlpha(90),
+      child: TextFormField(
+        onTap: widget.onTap,
+        onFieldSubmitted: widget.onSubmit,
+        maxLength: widget.maxLength??null,
+        inputFormatters: widget.inputFormatters,
+        onChanged: widget.onChanged,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        readOnly: widget.readOnly,
+        controller: widget.textEditingController,
+        keyboardType: widget.keyboardType,
+        textInputAction: widget.textInputAction,
+        cursorColor: widget.cursorColor,
+        style: PoppinsMedium.copyWith(
+          color:AppColors.primarySlate400,
+          fontSize: 14.sp,
+        ),
+        maxLines: widget.maxLines??null,
+        minLines: widget.minLines??null,
+        obscureText: widget.isPassword ? obscureText : false,
+        validator: widget.validator,
+        decoration: InputDecoration(
+          errorMaxLines: 2,
+          contentPadding: EdgeInsets.only(
+              left:widget.paddingLeft?? 0,right: widget.paddingRight??0,top: widget.paddingTop??0),
+          counterText: "",
+          prefixStyle: const TextStyle(color:Color(0xffD7DFE9),fontSize: 18,fontWeight: FontWeight.w700,height: 0),
+          hintText: widget.hintText,
+          prefix: widget.prefixText,
+          prefixText: widget.preText,
+          hintStyle: widget.hintStyle ?? PoppinsMedium.copyWith (
+              color: AppColors.primarySlate400,
+              fontWeight: FontWeight.w500,
+              fontSize: 14.sp),
+          fillColor: widget.fillColor,
+          filled: true,
+          labelText:widget.labelText ,
+          floatingLabelStyle:  const TextStyle(color: AppColors.primarySlate400),
+          labelStyle:   const TextStyle(color: AppColors.primarySlate400,fontSize: 14.0,fontWeight: FontWeight.w400),
+          prefixIcon: widget.isPrefixIcon
+              ?  widget.icon
+              : null,
+          suffixIcon: widget.isPassword
+              ? GestureDetector(
+              onTap: toggle,
+              child: Padding(
+                padding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: 16, vertical: 14),
+                child: obscureText
+                    ?  const Icon(
+                  Icons.visibility_off_outlined,
+                  color: AppColors.primarySlate400,
+                )
+                    : const Icon(Icons.visibility_outlined,
+                    color:AppColors.primarySlate400),
+              ))
+              : widget.suffixIcon,
+          suffixIconColor: widget.suffixIconColor,
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(widget.fieldBorderRadius),
+              borderSide: BorderSide(color: widget.fieldBorderColor, width: 1),
+              gapPadding: 0),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(widget.fieldBorderRadius),
+              borderSide: BorderSide(color: widget.focusBorderColor, width: 1),
+              gapPadding: 0),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(widget.fieldBorderRadius),
+              borderSide: BorderSide(color: widget.fieldBorderColor, width: 1),
+              gapPadding: 0),
+        ),
+
+
+
       ),
-      maxLines: widget.maxLines??null,
-      minLines: widget.minLines??null,
-      obscureText: widget.isPassword ? obscureText : false,
-      validator: widget.validator,
-      decoration: InputDecoration(
-        errorMaxLines: 2,
-        contentPadding: EdgeInsets.only(
-            left:widget.paddingLeft?? 0,right: widget.paddingRight??0,top: widget.paddingTop??0),
-        counterText: "",
-        prefixStyle: const TextStyle(color:Color(0xffD7DFE9),fontSize: 18,fontWeight: FontWeight.w700,height: 0),
-        hintText: widget.hintText,
-        prefix: widget.prefixText,
-        prefixText: widget.preText,
-        hintStyle: widget.hintStyle ?? robotoMedium.copyWith (
-            color: AppColors.primarySlate400,
-            fontWeight: FontWeight.w500,
-            fontSize: 14.sp),
-        fillColor: widget.fillColor,
-        filled: true,
-        labelText:widget.labelText ,
-        floatingLabelStyle:  const TextStyle(color: AppColors.primarySlate400),
-        labelStyle:   const TextStyle(color: AppColors.primarySlate400,fontSize: 14.0,fontWeight: FontWeight.w400),
-        prefixIcon: widget.isPrefixIcon
-            ?  widget.icon
-            : null,
-        suffixIcon: widget.isPassword
-            ? GestureDetector(
-            onTap: toggle,
-            child: Padding(
-              padding: const EdgeInsetsDirectional.symmetric(
-                  horizontal: 16, vertical: 14),
-              child: obscureText
-                  ?  const Icon(
-                Icons.visibility_off_outlined,
-                color: AppColors.primarySlate400,
-              )
-                  : const Icon(Icons.visibility_outlined,
-                  color:AppColors.primarySlate400),
-            ))
-            : widget.suffixIcon,
-        suffixIconColor: widget.suffixIconColor,
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.fieldBorderRadius),
-            borderSide: BorderSide(color: widget.fieldBorderColor, width: 1),
-            gapPadding: 0),
-        focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.fieldBorderRadius),
-            borderSide: BorderSide(color: widget.focusBorderColor, width: 1),
-            gapPadding: 0),
-        enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.fieldBorderRadius),
-            borderSide: BorderSide(color: widget.fieldBorderColor, width: 1),
-            gapPadding: 0),
-      ),
-
-
-
     );
   }
 

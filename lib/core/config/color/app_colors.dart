@@ -4,16 +4,17 @@ class AppColors {
   static const whiteColor = Color(0xffffffff);
   static const primaryColor = Color(0xFFAA076B);
 
-  static const primaryBackground = Color(0xFFF7F9FC);
+  static const primaryBackground = Color(0xFFF8FBFF);
   static const blackColor = Color(0xff000000);
   static const containerColor = Color(0xffF7F9FC);
+  static const textClorColor = Color(0xFF191919);
 
 
   static const greenColor400 = Color(0xff1DB469);
 
   static const palkiColor = Color(0xFFAA076B);
   static const kalpiColor = Color(0xFfF18DB5);
-  static const primarySlate400 = Color(0xff8897AE);
+  static const primarySlate400 = Color(0xFF777777);
   static const primarySlate500 = Color(0xff5E718D);
   static const primaryTextButtonColor = Color(0xFF4A72FF);
 

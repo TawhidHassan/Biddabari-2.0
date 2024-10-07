@@ -11,8 +11,8 @@ class CustomTheme {
       darkThemeFont = "Poppins";
   // light theme
   static final lightTheme = ThemeData(
-    primaryColor: AppColors.whiteColor,
-    scaffoldBackgroundColor: AppColors.whiteColor,
+    primaryColor: AppColors.primaryBackground,
+    scaffoldBackgroundColor: AppColors.primaryBackground,
     brightness: Brightness.light,
     useMaterial3: true,
     fontFamily: lightThemeFont,
@@ -44,16 +44,16 @@ class CustomTheme {
       elevation: 0,
       centerTitle: false,
       iconTheme: IconThemeData(color: AppColors.primaryColor),
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: AppColors.primaryBackground,
       scrolledUnderElevation: 0,
-      titleTextStyle: robotoMedium.copyWith(
+      titleTextStyle: PoppinsMedium.copyWith(
         fontSize: 16.sp,
         color: black
       ),
       actionsIconTheme: IconThemeData(color: AppColors.kPrimaryColorx),
       systemOverlayStyle: SystemUiOverlayStyle(
         // Status bar color
-        statusBarColor: AppColors.whiteColor,
+        statusBarColor: AppColors.primaryBackground,
         // Status bar brightness (optional)
         statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
         statusBarBrightness: Brightness.dark, // For iOS (dark icons)

@@ -2,6 +2,8 @@ import 'package:biddabari_new/features/AllCourse/presentation/pages/AllCourse_pa
 import 'package:biddabari_new/features/BookStore/presentation/pages/BookStore_page.dart';
 import 'package:biddabari_new/features/ClassRoom/presentation/pages/ClassRoom_page.dart';
 import 'package:biddabari_new/features/Exam/presentation/pages/Exam_page.dart';
+import 'package:biddabari_new/features/Login/presentation/pages/forget_password_page.dart';
+import 'package:biddabari_new/features/Login/presentation/pages/otp_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,6 +11,7 @@ import '../../Dependenci Injection/init_dependencies.dart';
 import '../../features/Error/presentation/error_page.dart';
 import '../../features/Home/presentation/pages/Home_page.dart';
 import '../../features/Login/presentation/pages/Login_page.dart';
+import '../../features/Login/presentation/pages/set_password_page.dart';
 import '../../features/Main/presentation/pages/Main_page.dart';
 import '../../features/Splash/presentation/pages/Splash_page.dart';
 import '../../features/Splash/presentation/pages/onbording_page.dart';
@@ -71,7 +74,7 @@ class AppRouter {
         pageBuilder: (context, state) =>  NoTransitionPage(
           child: LoginPage(),
         ),
-          redirect:  (context, state) async {
+        redirect:  (context, state) async {
             DBHelper dbHelper=serviceLocator();
             if(await dbHelper.checkUserLogedIn()){
               // context.goNamed( Routes.mainPage);
@@ -82,7 +85,30 @@ class AppRouter {
             }
           },
         routes: [
+          GoRoute(
+            name: Routes.forgetPasswordPage,
+            path: Routes.forgetPasswordPagePath,
+            pageBuilder: (context, state) =>  NoTransitionPage(
+            child: ForgetPasswordPage(),
+           ),
+          ),
 
+          GoRoute(
+            name: Routes.otpPage,
+            path: Routes.otpPagePath,
+            pageBuilder: (context, state) =>  NoTransitionPage(
+              child: OtpPage(),
+            ),
+            routes: [
+              GoRoute(
+                name: Routes.setPasswordPage,
+                path: Routes.setPasswordPage,
+                pageBuilder: (context, state) =>  NoTransitionPage(
+                  child: SetPasswordPage(),
+                ),
+              ),
+            ]
+          ),
         ]
       ),
 

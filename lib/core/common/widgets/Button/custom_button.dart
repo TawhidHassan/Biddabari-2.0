@@ -45,7 +45,7 @@ class CustomButton extends StatelessWidget {
           ),
         child: Center(
           child: child ??  Text(title ?? 'text',
-                  style: robotoMedium.copyWith(
+                  style: PoppinsMedium.copyWith(
                       fontSize: textSize ?? 16,
                       color: textColor),
                   textScaler: TextScaler.linear(1.0)),

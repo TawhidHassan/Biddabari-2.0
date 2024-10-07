@@ -20,11 +20,11 @@ class CustomDrawer extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CustomText(text: "History",textStyle: robotoMedium.copyWith(
+            CustomText(text: "History",textStyle: PoppinsMedium.copyWith(
                 fontSize: 18.sp,
                 color: AppColors.primarySlate700
             ),),
-            Assets.icons.icHistory.svg()
+            Assets.icons.filter.svg()
           ],
         ),
         SizedBox(height: 12,),
@@ -51,7 +51,7 @@ class CustomDrawer extends StatelessWidget {
                             height: 24,
                             paddingLeft: 6,
                             paddingTop: 6,
-                            child: CustomText(text: "Host",textStyle: robotoMedium.copyWith(
+                            child: CustomText(text: "Host",textStyle: PoppinsMedium.copyWith(
                                 color: Color(0xff1EDCC5),
                                 fontSize: 12
                             ),),
@@ -71,46 +71,8 @@ class CustomDrawer extends StatelessWidget {
                         errorWidget: (context, url, error) => Icon(Icons.error)
 
                     ),
-                    SizedBox(width: 12,),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomText(
-                          text: "Nurnobi",textStyle: robotoMedium.copyWith(
-                          color: AppColors.primarySlate700,
-                          fontSize: 16.sp,
-                        ),),
-                        CustomText(
-                          text: "Dhaka,\nBangladesh",textStyle: robotoRegular.copyWith(
-                          color: AppColors.primarySlate500,
-                          fontSize: 12.sp,
-                        ),),
-                        CustomText(
-                          text: "01h 30m",textStyle: robotoRegular.copyWith(
-                          color: AppColors.primarySlate500,
-                          fontSize: 12.sp,
-                        ),),
-                        CustomText(
-                          text: "Video Room",textStyle: robotoRegular.copyWith(
-                          color: AppColors.primarySlate300,
-                          fontSize: 12.sp,
-                        ),),
-                        CustomText(
-                          text: "28 Jul, 2024",textStyle: robotoRegular.copyWith(
-                          color: AppColors.primarySlate500,
-                          fontSize: 12.sp,
-                        ),),
 
-                      ],
-                    ),
-                    Spacer(),
-                    CircleContainer(
-                      height: 28.h,
-                      width: 28.w,
-                      color: Colors.red,
-                      borderRadius: 100,
-                      child: Assets.icons.icPlus1.svg(),
-                    )
+
                   ],
                 ),
               );

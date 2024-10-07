@@ -74,7 +74,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           leading: leadingIcon,
           toolbarHeight: height.h,
           title: title,
-          titleTextStyle: robotoMedium.copyWith(
+          titleTextStyle: PoppinsMedium.copyWith(
             fontSize: Dimensions.getFontSizeLarge(context),
           ),
           centerTitle: centerTitle,

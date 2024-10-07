@@ -54,7 +54,7 @@ class CircleContainer extends StatelessWidget {
             borderRadius: BorderRadius.circular(borderRadius??8),
           border: Border.all(color:border?? Colors.transparent)
         ),
-        child: child?? CustomText(text: title??"",textStyle: robotoMedium.copyWith(
+        child: child?? CustomText(text: title??"",textStyle: PoppinsMedium.copyWith(
             color: titleColor??AppColors.primarySlate700,
             fontSize: 14.sp
 

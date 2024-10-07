@@ -11,17 +11,21 @@ class Routes {
   static const String onboardingScreen = 'onboardingScreen';
   static const String onboardingScreenPath = '/onboardingScreen';
 
-  //onboarding screen
-  static const String logInPageUser = 'logInPageUser';
-  static const String logInPageUserPath = '/logInPageUser';
 
-
+  ///auth pages
   static const String loginPage = 'LoginPage';
   static const String loginPagePath = '/LoginPage';
 
-  //auth screen path
-  static const String authPage = 'authPage';
-  static const String authPagePath = '/authPagePath';
+  static const String forgetPasswordPage = 'forgetPasswordPage';
+  static const String forgetPasswordPagePath = 'forgetPasswordPage';
+
+  static const String otpPage = 'otpPage';
+  static const String otpPagePath = 'otpPage';
+
+
+  static const String setPasswordPage = 'setPasswordPage';
+  static const String setPasswordPagePath = 'setPasswordPage';
+
 
 
   //Home
