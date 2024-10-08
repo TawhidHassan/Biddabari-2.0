@@ -1,4 +1,5 @@
 
+import 'package:biddabari_new/features/AllCourse/data/models/course/CourseResponse.dart';
 import 'package:fpdart/fpdart.dart';
 import '../../../../core/error/failures.dart';
 import '../entities/AllCourse.dart';
@@ -15,12 +16,11 @@ AllCourseUseCase({this.allCourseRepository});
     throw UnimplementedError();
     }
 
-//
-// @override
-// Future<Either<Failure, LoginResponseModel>> call(GetLoginParams params) {
-// // TODO: implement call
-// return loginRepository!.login(params.email!,params.deviceToken!, params.password!, params.isPG!);
-// }
+    @override
+    Future<Either<Failure, CourseResponse>> getRuningCourse() {
+    // TODO: implement call
+    return allCourseRepository!.getRuningCourse();
+    }
 
 }
 

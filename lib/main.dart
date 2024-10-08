@@ -70,7 +70,6 @@ void main() async {
 
   await init();
   await initDependencies();
-  await serviceLocator<LocationConfig>().getCureentLocation();
 
 
 

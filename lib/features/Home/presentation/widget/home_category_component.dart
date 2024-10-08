@@ -1,5 +1,7 @@
 import 'package:biddabari_new/core/config/color/app_colors.dart';
+import 'package:biddabari_new/features/Home/presentation/controller/Home_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/config/util/text_style.dart';
 import 'category_card.dart';
@@ -9,6 +11,9 @@ class HomeCategoryComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration.zero,(){
+      Get.find<HomeController>().getcatgeoryList();
+    });
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(

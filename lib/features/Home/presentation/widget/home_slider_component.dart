@@ -87,14 +87,15 @@ class HomeSliderComponent extends StatelessWidget {
           SizedBox(height:16 ,),
           AnimatedSmoothIndicator(
             activeIndex: 1,
-            count:3,
-            effect: const WormEffect(
-              dotHeight: 12,
-              dotWidth: 12,
+            count: 3,
+            effect: const ExpandingDotsEffect(
               activeDotColor: AppColors.primaryColor,
-              dotColor: Colors.grey,
+              dotHeight: 8,
+              dotWidth: 8,
+              expansionFactor: 3,
+              spacing: 5,
             ),
-          )
+          ),
         ],
       ),
     );

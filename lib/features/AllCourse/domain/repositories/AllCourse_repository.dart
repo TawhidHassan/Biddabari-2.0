@@ -1,5 +1,8 @@
-abstract class AllCourseRepository {
+import 'package:biddabari_new/core/error/failures.dart';
+import 'package:biddabari_new/features/AllCourse/data/models/course/CourseResponse.dart';
+import 'package:fpdart/src/either.dart';
 
-// Future<Either<Failure, LoginResponseModel>> login(String email);
+abstract class AllCourseRepository {
+  Future<Either<Failure, CourseResponse>> getRuningCourse();
 
 }

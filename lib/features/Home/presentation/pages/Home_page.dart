@@ -8,6 +8,7 @@ import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/config/util/style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/routes/route_path.dart';
+import '../widget/home_popular_book_component.dart';
 import '../widget/home_popular_course_component.dart';
 import '../widget/home_running_course_component.dart';
 import '../widget/home_top_mentor_component.dart';
@@ -124,6 +125,9 @@ class HomePage extends StatelessWidget {
               ),
               SliverToBoxAdapter(
                   child: HomeTopMentorComponent()
+              ),
+              SliverToBoxAdapter(
+                  child: HomePoularBookComponent()
               ),
             ],
           ),

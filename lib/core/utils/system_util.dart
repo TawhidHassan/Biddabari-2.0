@@ -3,6 +3,21 @@ import 'package:flutter/services.dart';
 
 class SystemUtil{
 
+  static double getChildAspectRatio(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    if (screenWidth < 600) {
+      // Mobile aspect ratio
+      return 0.7;
+    } else if (screenWidth < 900) {
+      // Tablet aspect ratio
+      return 0.7;
+    } else {
+      // Larger screen aspect ratio
+      return 0.8;
+    }
+  }
+
   //----------------------------------hide the system bottom navigation bar
   static void hideBottomNav() {
     try {
@@ -47,3 +62,4 @@ class CustomTextInputFormatter extends TextInputFormatter {
     return newValue;
   }
 }
+

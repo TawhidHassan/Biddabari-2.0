@@ -31,6 +31,19 @@ class DBHelper{
     }
     return users.get('token');
   }
+
+  getData() async{
+    var users= await Hive.openBox('users');
+
+    if(users.get('token')==null){
+      print("hive ");
+    }else{
+      print("hive "+users.get('token'));
+    }
+
+    return users;
+  }
+
   Future<String> getUserId() async{
     var users= await Hive.box('users',);
     // Logger().e("dd");

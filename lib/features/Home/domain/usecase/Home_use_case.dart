@@ -1,4 +1,6 @@
 
+import 'package:biddabari_new/core/common/data/Category/CategoryResponse.dart';
+import 'package:biddabari_new/core/common/data/Slider/SliderResponse.dart';
 import 'package:fpdart/fpdart.dart';
 import '../../../../core/error/failures.dart';
 import '../entities/Home.dart';
@@ -15,12 +17,19 @@ HomeUseCase({this.homeRepository});
     throw UnimplementedError();
     }
 
-//
-// @override
-// Future<Either<Failure, LoginResponseModel>> call(GetLoginParams params) {
-// // TODO: implement call
-// return loginRepository!.login(params.email!,params.deviceToken!, params.password!, params.isPG!);
-// }
+
+
+  @override
+  Future<Either<Failure, SliderResponse>> getSlider() {
+  // TODO: implement call
+  return homeRepository!.getSlider();
+  }
+  @override
+  Future<Either<Failure, CategoryResponse>> getcatgeoryList() {
+  // TODO: implement call
+  return homeRepository!.getcatgeoryList();
+  }
+
 
 }
 
