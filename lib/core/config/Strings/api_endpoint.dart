@@ -2,7 +2,7 @@ import '/core/extentions/custom_extentions.dart';
 
 class ApiEndpoint {
   ///staging
-  static const String mainDomain = "https://biddabari.online";
+  static const String mainDomain = "https://biddabari.com";
   static const String baseUrl = "$mainDomain/api/v1/";
   static const String imageBaseUrl = "https://biddabari-bucket.obs.as-south-208.rcloud.reddotdigitalit.com/";
 
@@ -15,11 +15,16 @@ class ApiEndpoint {
   static  String FORGET_PASSWORD_OTP= 'send-password-reset-otp'.addBaseURl;
   static  String FORGET_PASSWORD_CHANGE= 'verify-pass-reset-otp'.addBaseURl;
 
+  static  String GET_USER_PROFILE= 'app-get-user-info'.addBaseURl;
+
   ///Slider
   static  String SLIDER_GET= 'app-home-slider-courses'.addBaseURl;
   static  String CATEGORY_LIST_GET= 'app-home-course-categories'.addBaseURl;
 
   static  String RUNNING_COURSE_LIST= 'app-home-courses'.addBaseURl;
+
+  ///book
+  static  String TOP_BOOK_LIST= 'app-home-products'.addBaseURl;
 
 
 

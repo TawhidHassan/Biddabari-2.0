@@ -1,7 +1,11 @@
+import 'package:biddabari_new/features/BookStore/data/models/BookResponse.dart';
+
+import '../../../../core/config/Strings/api_endpoint.dart';
+import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/api_services.dart';
 
 abstract class BookStoreRemoteSource {
-// Future<LoginResponseModel?> login(String email,String deviceToken, String pass, bool isPg);
+  Future<BookResponse?> getPopularBok();
 
 }
 
@@ -9,6 +13,17 @@ abstract class BookStoreRemoteSource {
 class BookStoreRemoteSourceImpl implements BookStoreRemoteSource {
     final ApiMethod apiMethod;
    BookStoreRemoteSourceImpl({required this.apiMethod});
+
+  @override
+  Future<BookResponse?> getPopularBok()async {
+    // TODO: implement getPopularBok
+    try{
+      final result =await apiMethod.get(url: ApiEndpoint.TOP_BOOK_LIST,showResult: true,isBasic: true,duration: 30);
+      return BookResponse.fromJson(result!);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
 
 // @override
 // Future<LoginResponseModel?> login(String email,String deviceToken, String pass, bool isPg)async {

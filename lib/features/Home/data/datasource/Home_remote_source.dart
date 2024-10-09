@@ -21,7 +21,7 @@ class HomeRemoteSourceImpl implements HomeRemoteSource {
   Future<SliderResponse?> getSlider()async {
     // TODO: implement getSlider
     try{
-      final result =await apiMethod.post(url: ApiEndpoint.SLIDER_GET,showResult: true,isBasic: true,duration: 30);
+      final result =await apiMethod.get(url: ApiEndpoint.SLIDER_GET,showResult: true,isBasic: true,duration: 30);
       return SliderResponse.fromJson(result!);
     }catch (e) {
       throw ServerException(e.toString());
@@ -32,7 +32,7 @@ class HomeRemoteSourceImpl implements HomeRemoteSource {
   Future<CategoryResponse?> getcatgeoryList()async {
     // TODO: implement getcatgeoryList
   try{
-    final result =await apiMethod.post(url: ApiEndpoint.CATEGORY_LIST_GET,showResult: true,isBasic: true,duration: 30);
+    final result =await apiMethod.get(url: ApiEndpoint.CATEGORY_LIST_GET,showResult: true,isBasic: true,duration: 30);
     return CategoryResponse.fromJson(result!);
   }catch (e) {
     throw ServerException(e.toString());

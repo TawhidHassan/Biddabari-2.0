@@ -1,3 +1,4 @@
+import 'package:biddabari_new/features/profile/presentation/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,6 +47,14 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   @override
   void initState() {
     Future.delayed(Duration.zero,(){
+      Future.delayed(Duration.zero,(){
+        Get.find<ProfileController>().onInit();
+        // Get.find<HomeController>().requestPermission(context);
+        // // Get.find<HomeController>().showpopUp(context);
+        // Get.find<AuthController>().onInit();
+        Get.find<ProfileController>().getProfile(context,false);
+
+      });
     });
     super.initState();
     _motionTabBarController = MotionTabBarController(

@@ -7,6 +7,14 @@ import '../core/LocalDataBase/localdata.dart';
 import '../core/Location/location_config.dart';
 import '../core/network/api_services.dart';
 import '../core/network/connection_checker.dart';
+import '../features/AllCourse/data/datasource/AllCourse_remote_source.dart';
+import '../features/AllCourse/data/repositories/AllCourse_repository_impl.dart';
+import '../features/AllCourse/domain/repositories/AllCourse_repository.dart';
+import '../features/AllCourse/domain/usecase/AllCourse_use_case.dart';
+import '../features/BookStore/data/datasource/BookStore_remote_source.dart';
+import '../features/BookStore/data/repositories/BookStore_repository_impl.dart';
+import '../features/BookStore/domain/repositories/BookStore_repository.dart';
+import '../features/BookStore/domain/usecase/BookStore_use_case.dart';
 import '../features/Home/data/datasource/Home_remote_source.dart';
 import '../features/Home/data/repositories/Home_repository_impl.dart';
 import '../features/Home/domain/repositories/Home_repository.dart';
@@ -23,6 +31,10 @@ import '../features/Splash/data/datasource/Splash_remote_source.dart';
 import '../features/Splash/data/repositories/Splash_repository_impl.dart';
 import '../features/Splash/domain/repositories/Splash_repository.dart';
 import '../features/Splash/domain/usecase/Splash_use_case.dart';
+import '../features/profile/data/datasource/profile_remote_source.dart';
+import '../features/profile/data/repositories/profile_repository_impl.dart';
+import '../features/profile/domain/repositories/profile_repository.dart';
+import '../features/profile/domain/usecase/profile_use_case.dart';
 
 
 

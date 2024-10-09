@@ -19,7 +19,7 @@ class AllCourseRemoteSourceImpl implements AllCourseRemoteSource {
   Future<CourseResponse?> getRuningCourse()async {
     // TODO: implement getRuningCourse
     try{
-      final result =await apiMethod.post(url: ApiEndpoint.RUNNING_COURSE_LIST,showResult: true,isBasic: false,duration: 30);
+      final result =await apiMethod.get(url: ApiEndpoint.RUNNING_COURSE_LIST,showResult: true,isBasic: true,duration: 30);
       return CourseResponse.fromJson(result!);
     }catch (e) {
       throw ServerException(e.toString());

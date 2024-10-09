@@ -7,6 +7,9 @@ Future<void> initDependencies() async {
   _initLogin();
   _initHome();
   _initMain();
+  _initAllCourse();
+  _initBookStore();
+  _initProfile();
 
 
 
@@ -120,6 +123,65 @@ void _initMain(){
     ..registerFactory(
           () => MainUseCase(
         mainRepository:   serviceLocator(),
+      ),
+    );
+}
+
+void _initAllCourse(){
+  /// Datasource
+  serviceLocator
+    ..registerFactory<AllCourseRemoteSource>(
+          () => AllCourseRemoteSourceImpl(apiMethod: serviceLocator(),
+      ),
+    )/// Repository
+    ..registerFactory<AllCourseRepository>(
+          () => AllCourseRepositoryImpl(
+          connectionChecker:  serviceLocator(),
+          remoteSource:  serviceLocator()
+      ),
+    )/// Usecases
+    ..registerFactory(
+          () => AllCourseUseCase(
+        allCourseRepository:   serviceLocator(),
+      ),
+    );
+}
+void _initBookStore(){
+  /// Datasource
+  serviceLocator
+    ..registerFactory<BookStoreRemoteSource>(
+          () => BookStoreRemoteSourceImpl(apiMethod: serviceLocator(),
+      ),
+    )/// Repository
+    ..registerFactory<BookStoreRepository>(
+          () => BookStoreRepositoryImpl(
+          connectionChecker:  serviceLocator(),
+          remoteSource:  serviceLocator()
+      ),
+    )/// Usecases
+    ..registerFactory(
+          () => BookStoreUseCase(
+        bookStoreRepository:   serviceLocator(),
+      ),
+    );
+}
+
+void _initProfile(){
+  /// Datasource
+  serviceLocator
+    ..registerFactory<ProfileRemoteSource>(
+          () => ProfileRemoteSourceImpl(apiMethod: serviceLocator(),
+      ),
+    )/// Repository
+    ..registerFactory<ProfileRepository>(
+          () => ProfileRepositoryImpl(
+          connectionChecker:  serviceLocator(),
+          remoteSource:  serviceLocator()
+      ),
+    )/// Usecases
+    ..registerFactory(
+          () => ProfileUseCase(
+        profileRepository:   serviceLocator(),
       ),
     );
 }

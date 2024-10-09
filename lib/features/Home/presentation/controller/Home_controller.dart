@@ -20,7 +20,6 @@ class HomeController extends GetxController implements GetxService{
 
   Future getcatgeoryList()async {
    categoryLoading.value=true;
-   categoryResponse.value=null;
    var rs= await homeUseCase!.getcatgeoryList();
    rs.fold((l){
     Fluttertoast.showToast(

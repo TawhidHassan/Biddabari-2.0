@@ -68,7 +68,7 @@ LoginRepositoryImpl({required this.remoteSource,required this.connectionChecker}
       }else{
         final data = await remoteSource.login(mobile: mobile,password:password,name: name);
         if(data!.error!=null){
-          return left(Failure(data.message!));
+          return left(Failure(data.error!));
         }else{
           return right(data);
         }

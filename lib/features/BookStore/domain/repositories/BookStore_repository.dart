@@ -1,4 +1,9 @@
+import 'package:biddabari_new/core/error/failures.dart';
+import 'package:biddabari_new/features/BookStore/data/models/BookResponse.dart';
+import 'package:fpdart/src/either.dart';
+
 abstract class BookStoreRepository {
+  Future<Either<Failure, BookResponse>> getPopularBok();
 
 // Future<Either<Failure, LoginResponseModel>> login(String email);
 

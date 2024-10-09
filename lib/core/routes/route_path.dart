@@ -16,6 +16,10 @@ class Routes {
   static const String loginPage = 'LoginPage';
   static const String loginPagePath = '/LoginPage';
 
+  static const String loginPasswordPage = 'loginPasswordPage';
+  static const String loginPasswordPagePath = 'loginPasswordPage';
+
+
   static const String forgetPasswordPage = 'forgetPasswordPage';
   static const String forgetPasswordPagePath = 'forgetPasswordPage';
 

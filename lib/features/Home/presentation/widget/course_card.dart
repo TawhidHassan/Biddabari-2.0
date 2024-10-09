@@ -1,5 +1,7 @@
 import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
+import 'package:biddabari_new/core/config/Strings/api_endpoint.dart';
 import 'package:biddabari_new/core/config/color/app_colors.dart';
+import 'package:biddabari_new/features/AllCourse/data/models/course/Course.dart';
 import 'package:biddabari_new/features/Main/domain/entities/Main.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -10,8 +12,8 @@ import '../../../../core/config/util/text_style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 
 class CourseCard extends StatelessWidget {
-
-  const CourseCard({Key? key,}) : super(key: key);
+final Course? course;
+  const CourseCard({Key? key, this.course ,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class CourseCard extends StatelessWidget {
             Expanded(
               flex: 1,
               child: CachedNetworkImage(
-                imageUrl:"jdid",
+                imageUrl:course!.banner!,
                 placeholder: (context, url) => LoadingWidget(),
                 errorWidget: (context, url, error){
                   return Container(
@@ -76,11 +78,12 @@ class CourseCard extends StatelessWidget {
                 imageBuilder: (context, image) =>
                     Container(
                       height: 300,
+                      width: double.infinity,
                       decoration:  BoxDecoration(
                           borderRadius: BorderRadius.only(topRight: Radius.circular(4),topLeft: Radius.circular(4) ),
                           image: DecorationImage(
                               image: image,
-                              fit: BoxFit.fill
+                              fit: BoxFit.cover
                           )
                       ),
                       child: Container(
@@ -106,9 +109,11 @@ class CourseCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'Bank Job Special\nCare Live Batch-2',
+                      course!.title??"",
                       style:boldText(16,color: AppColors.textClorColor),
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.start,
+                      maxLines: 2, // Set a limit for lines
+                      overflow: TextOverflow.ellipsis,
                     ),
                     SizedBox(height: 4,),
                     RatingBar.builder(
@@ -135,8 +140,9 @@ class CourseCard extends StatelessWidget {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
+                            course!.discount_amount!=null?
                             Text(
-                              '৳ 14000',
+                              '৳ ${course!.price!}',
                               style: TextStyle(
                                 color: Color(0xFFC71720),
                                 fontSize: 10,
@@ -144,10 +150,19 @@ class CourseCard extends StatelessWidget {
                                 fontWeight: FontWeight.w600,
                                 decoration: TextDecoration.lineThrough,
                               ),
-                            ),
-
+                            ):SizedBox(),
+                            course!.discount_amount!=null?
                             Text(
-                              '৳ 7000',
+                              '৳ ${(course!.price!-course!.discount_amount!)}',
+                              style: TextStyle(
+                                color: Color(0xFF191919),
+                                fontSize: 16,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ):
+                            Text(
+                              '৳ ${course!.price!}',
                               style: TextStyle(
                                 color: Color(0xFF191919),
                                 fontSize: 16,

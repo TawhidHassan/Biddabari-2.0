@@ -4,9 +4,11 @@ import 'package:biddabari_new/core/config/color/app_colors.dart';
 import 'package:biddabari_new/features/Login/data/models/Auth/LoginResponse.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import '../../../../core/Data/Location/location/location_model.dart';
 import '../../../../core/LocalDataBase/localdata.dart';
+import '../../../../core/routes/route_path.dart';
 import '../../data/models/Auth/ForgetPasswordResponse.dart';
 import '../../data/models/Auth/OtpResponse.dart';
 import '../../domain/usecase/Login_use_case.dart';
@@ -29,16 +31,16 @@ class LoginController extends GetxController implements GetxService{
   final currentTime=0.obs;
   final count = 0.obs;
   final otpText = "".obs;
-  final selectGender = "".obs;
-  final selectDob = "".obs;
-  Rx<LocationModel?>  location=Rx<LocationModel?>(null);
+
   CountdownTimer? countDownTimer;
+
+  final formKey = GlobalKey<FormState>();
+  final loginFormKey = GlobalKey<FormState>();
 
   TextEditingController emailController = TextEditingController();
   TextEditingController mobileController = TextEditingController();
   TextEditingController userNameController = TextEditingController();
-  TextEditingController fisrtNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
 
   ///otp get
@@ -90,47 +92,27 @@ class LoginController extends GetxController implements GetxService{
   final fisrtname="".obs;
   final lastName="".obs;
   final name="".obs;
-  final device_token="".obs;
   final number="".obs;
-  final image="".obs;
-  final imageUrl="".obs;
-
-  final filePath="".obs;
-  File? file;
 
 
   @override
   void onInit() {
-    getToken();
 
     fisrtname.value="";
     lastName.value="";
     name.value="";
     number.value="";
-    image.value="";
-    filePath.value="";
-    imageUrl.value="";
     super.onInit();
   }
 
 
-  void getToken() async {
-    var tokenx = await serviceLocator<DBHelper>().getData();
-    if (tokenx.get('deviceToken') != null) {
-      device_token.value = tokenx.get('deviceToken');
-      Logger().e(tokenx.get('deviceToken'));
-    } else {
-      device_token.value = "";
-      Logger().e(tokenx.get('deviceToken'));
-    }
-  }
 
 
   ///otp get
 
-  Future<OtpResponse?> otpGet(String email)  async{
+  Future<OtpResponse?> otpGet(BuildContext context)  async{
       circuler.value=true;
-      var res=await loginUseCase!.otpGet(email);
+      var res=await loginUseCase!.otpGet(emailController.text);
       res.fold((onLeft){
         Fluttertoast.showToast(
             msg: onLeft.message,
@@ -143,6 +125,21 @@ class LoginController extends GetxController implements GetxService{
         );
       },(onRight){
         otpResponse.value=onRight;
+
+        if(onRight.user_status=="exist"){
+          context.pushNamed(Routes.loginPasswordPage);
+          // Navigator.pushNamed(context, LOGIN_PASSWORD_PAGE,arguments: {
+          //   "mobile":mobileTextController.text
+          // });
+        }else{
+          context.pushNamed(Routes.otpPage);
+          // Navigator.pushNamed(context, OTP_PAGE, arguments: {
+          //   'mobile': mobileTextController.text,
+          //   'otp':value.otp.toString()
+          // });
+        }
+
+
       });
     circuler.value=false;
     return otpResponse.value;
@@ -170,9 +167,9 @@ class LoginController extends GetxController implements GetxService{
   }
 
 
-  Future<LoginResponse?> login({String? mobile,  String? password, String? name})  async{
+  Future<LoginResponse?> login(BuildContext contex)  async{
     circuler.value=true;
-    var res=await loginUseCase!.login(mobile: mobile,password:password,name: name);
+    var res=await loginUseCase!.login(mobile: emailController.text,password:passwordController.text,name: "");
     res.fold((onLeft){
       Fluttertoast.showToast(
           msg: onLeft.message,
@@ -183,12 +180,23 @@ class LoginController extends GetxController implements GetxService{
           textColor: Colors.white,
           fontSize: 16.0
       );
-    },(onRight){
-     loginResponse.value=onRight;
-     if(onRight!.error=="Phone no and Password does not match . Please try again."){
-       circuler.value=false;
-       Get.snackbar("Failed", onRight.error,backgroundColor: AppColors.primaryColor,colorText: Colors.white);
-     }
+    },(r) async {
+     loginResponse.value=r;
+     await localBd.storeTokenUserdata(
+         deviceToken:r.user!.device_token!,id:r.user!.id.toString(),email: r.user!.email,token: r.auth_token,name: r.user!.name,
+         mobile: r.user!.mobile,image: r.user!.profile_photo_url
+     );
+
+     Fluttertoast.showToast(
+         msg: "Login Successfully",
+         toastLength: Toast.LENGTH_SHORT,
+         gravity: ToastGravity.BOTTOM,
+         timeInSecForIosWeb: 2,
+         backgroundColor: Colors.green,
+         textColor: Colors.white,
+         fontSize: 16.0
+     );
+     contex.goNamed(Routes.mainPage);
     });
     circuler.value=false;
     return loginResponse.value;
