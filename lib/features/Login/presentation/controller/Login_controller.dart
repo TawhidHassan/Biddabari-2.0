@@ -36,11 +36,16 @@ class LoginController extends GetxController implements GetxService{
 
   final formKey = GlobalKey<FormState>();
   final loginFormKey = GlobalKey<FormState>();
+  final registerFormKey = GlobalKey<FormState>();
+  final newPassFormKey = GlobalKey<FormState>();
+  final forgetFormKey = GlobalKey<FormState>();
 
   TextEditingController emailController = TextEditingController();
   TextEditingController mobileController = TextEditingController();
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController otpController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
 
   ///otp get
@@ -146,9 +151,9 @@ class LoginController extends GetxController implements GetxService{
   }
 
 
-  Future<OtpResponse?> otpMtch(String?mobile,BuildContext context)  async{
+  Future<OtpResponse?> otpMtch(BuildContext context)  async{
       circuler.value=true;
-      var res=await loginUseCase!.otpMtch(mobile,otpText.value);
+      var res=await loginUseCase!.otpMtch(emailController.text,otpText.value);
       res.fold((onLeft){
         Fluttertoast.showToast(
             msg: onLeft.message,
@@ -161,6 +166,16 @@ class LoginController extends GetxController implements GetxService{
         );
       },(onRight){
         otpResponse.value=onRight;
+        Fluttertoast.showToast(
+            msg: "Otp match",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 2,
+            backgroundColor: Colors.green,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
+        context.pushNamed(Routes.setPasswordPage);
       });
     circuler.value=false;
     return otpResponse.value;
@@ -203,9 +218,9 @@ class LoginController extends GetxController implements GetxService{
   }
 
 
-  Future<LoginResponse?> signUp({String? mobile,  String? password, String? name})  async{
+  Future<LoginResponse?> signUp(BuildContext context)  async{
     circuler.value=true;
-    var res=await loginUseCase!.signUp(mobile: mobile,password:password,name: name);
+    var res=await loginUseCase!.signUp(mobile: emailController.text,password:passwordController.text,name: userNameController.text);
     res.fold((onLeft){
       Fluttertoast.showToast(
           msg: onLeft.message,
@@ -216,8 +231,23 @@ class LoginController extends GetxController implements GetxService{
           textColor: Colors.white,
           fontSize: 16.0
       );
-    },(onRight){
-      loginResponse.value=onRight;
+    },(r)async{
+      loginResponse.value=r;
+      await localBd.storeTokenUserdata(
+          deviceToken:r.user!.device_token!,id:r.user!.id.toString(),email: r.user!.email,token: r.auth_token,name: r.user!.name,
+          mobile: r.user!.mobile,image: r.user!.profile_photo_url
+      );
+
+      Fluttertoast.showToast(
+          msg: "Login Successfully",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+      context.goNamed(Routes.mainPage);
     });
     circuler.value=false;
     return loginResponse.value;
@@ -225,9 +255,9 @@ class LoginController extends GetxController implements GetxService{
 
 
 
-  Future<ForgetPasswordResponse?> resetPassword({String? mobile})  async{
+  Future<ForgetPasswordResponse?> resetPassword(BuildContext context)  async{
     circuler.value=true;
-    var res=await loginUseCase!.resetPassword(mobile: mobile);
+    var res=await loginUseCase!.resetPassword(mobile: emailController.text);
     res.fold((onLeft){
       Fluttertoast.showToast(
           msg: onLeft.message,
@@ -240,14 +270,24 @@ class LoginController extends GetxController implements GetxService{
       );
     },(onRight){
       forgetResponse.value=onRight;
+      Fluttertoast.showToast(
+          msg: "Reset OTP sent",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+      context.pushNamed(Routes.newPasswordPage);
     });
     circuler.value=false;
     return forgetResponse.value;
   }
 
-  Future<ForgetPasswordResponse?> passwordChange({ForgetPasswordResponse? datax, String? newPassword,otp})  async{
+  Future<ForgetPasswordResponse?> passwordChange(BuildContext context)  async{
     circuler.value=true;
-    var res=await loginUseCase!.passwordChange(datax: datax,newPassword:newPassword,otp:otp);
+    var res=await loginUseCase!.passwordChange(datax: forgetResponse.value,newPassword:passwordController.text,otp:otpController.text);
     res.fold((onLeft){
       Fluttertoast.showToast(
           msg: onLeft.message,
@@ -259,7 +299,18 @@ class LoginController extends GetxController implements GetxService{
           fontSize: 16.0
       );
     },(onRight){
-      forgetResponse.value=onRight;
+      // forgetResponse.value=onRight;
+      Fluttertoast.showToast(
+          msg:onRight.message??'',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+      context.pop();
+      context.pop();
     });
     circuler.value=false;
     return forgetResponse.value;

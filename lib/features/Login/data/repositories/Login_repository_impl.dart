@@ -130,7 +130,7 @@ LoginRepositoryImpl({required this.remoteSource,required this.connectionChecker}
       }else{
         final data = await remoteSource.passwordChange(datax: datax,newPassword:newPassword,otp:otp);
         if(data!.error!=null){
-          return left(Failure(data.message!));
+          return left(Failure(data.error!));
         }else{
           return right(data);
         }

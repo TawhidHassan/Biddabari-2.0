@@ -19,7 +19,7 @@ class HomePoularBookComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration.zero, () {
-      // Get.find<BookStoreController>().getPopularBok();
+      Get.find<BookStoreController>().getPopularBok();
     });
     return GetBuilder<BookStoreController>(
       assignId: true,

@@ -30,6 +30,9 @@ class Routes {
   static const String setPasswordPage = 'setPasswordPage';
   static const String setPasswordPagePath = 'setPasswordPage';
 
+  static const String newPasswordPage = 'newPasswordPage';
+  static const String newPasswordPagePath = 'newPasswordPage';
+
 
 
   //Home

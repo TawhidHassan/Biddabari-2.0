@@ -13,8 +13,8 @@ import '../../../../core/common/widgets/text field/text_field.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/utils/system_util.dart';
 
-class ForgetPasswordPage extends StatelessWidget {
-  const ForgetPasswordPage({super.key});
+class SetNewPasswordPage extends StatelessWidget {
+  const SetNewPasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,70 +33,93 @@ class ForgetPasswordPage extends StatelessWidget {
         assignId: true,
         builder: (controller) {
           return Obx(() {
-            return  Container(
+            return
+            Container(
               height: 1.0.sh,
               width: 1.0.sw,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Form(
-                    key: controller.forgetFormKey,
+                    key: controller.newPassFormKey,
                     child: Column(
                       children: [
                         Text(
-                          'Forgot Password',
+                          'Set New Password',
                           style: boldText(20),
                         ),
 
                         Text(
-                          'Please enter your email to reset the password',
+                          'We sent a reset link to ${controller.emailController.text}\nenter 5 digit code that mentioned in the email',
                           style: semiBoldText(12, color: Color(0xFF545454),),
+                          textAlign: TextAlign.center,
                         ),
 
-                        SizedBox(height: 45,),
+                        SizedBox(height: 30,),
 
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+
                               Text(
-                                'মোবাইল নাম্বার দিয়ে এগিয়ে যান ',
+                                'Password',
                                 style: boldText(14),
                               ),
                               SizedBox(height: 8,),
+                              controller.circuler.value?LoadingWidget():
                               CustomTextField(
-                                textEditingController: controller.emailController,
-                                hintText: "Enter your mobile number",
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp(r"[0-9]")),
-                                  CustomTextInputFormatter(),
-                                  // FilteringTextInputFormatter.allow(RegExp(r'^01[7835]\d*')),
-                                  LengthLimitingTextInputFormatter(11),
-                                ],
+                                isPassword: true,
+                                hintText: "Enter your password",
+                                inputFormatters: [],
+                                textEditingController: controller.passwordController,
                                 validator: (text) {
-                                  if(text!.isEmpty){
-                                    return "Please enter your mobile number";
+                                  if (text!.isEmpty) {
+                                    return "Please enter your password";
                                   }
                                 },
                                 isPrefixIcon: true,
                                 icon: Padding(
                                   padding: const EdgeInsets.all(14.0),
-                                  child: Assets.icons.email.svg(),
+                                  child: Icon(Icons.key),
                                 ),
                               ),
-                              SizedBox(height: 48,),
+                              SizedBox(height: 16,),
 
-                              controller.circuler.value?LoadingWidget():
 
-                              CustomElevatedButton(
-                                onPressed: () {
-                                  if(controller.forgetFormKey.currentState!.validate()){
-                                    controller.resetPassword(context);
+                              Text(
+                                'Otp',
+                                style: boldText(14),
+                              ),
+                              SizedBox(height: 8,),
+                              CustomTextField(
+                                isPassword: true,
+                                inputFormatters: [],
+                                textEditingController: controller.otpController,
+                                hintText: "Enter your otp",
+                                validator: (text) {
+                                  if (text!.isEmpty) {
+                                    return "Please enter your otp";
                                   }
                                 },
-                                titleText: 'Reset Password',
+                                isPrefixIcon: true,
+                                icon: Padding(
+                                  padding: const EdgeInsets.all(14.0),
+                                  child: Icon(Icons.password_outlined),
+                                ),
+                              ),
+                              SizedBox(height: 16,),
+
+
+                              SizedBox(height: 17,),
+                              CustomElevatedButton(
+                                onPressed: () {
+                                  if(controller.newPassFormKey.currentState!.validate()){
+                                     controller.passwordChange(context);
+                                  }
+                                },
+                                titleText: 'Register',
                                 titleSize: 14,
                                 titleColor: Colors.white,
                                 buttonColor: AppColors.primaryColor,
@@ -115,6 +138,7 @@ class ForgetPasswordPage extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(height: 27,),
+
                             ],
                           ),
                         ),

@@ -12,6 +12,7 @@ import '../../features/Error/presentation/error_page.dart';
 import '../../features/Home/presentation/pages/Home_page.dart';
 import '../../features/Login/presentation/pages/Login_page.dart';
 import '../../features/Login/presentation/pages/login_password_page.dart';
+import '../../features/Login/presentation/pages/set_new_password_page.dart';
 import '../../features/Login/presentation/pages/set_password_page.dart';
 import '../../features/Main/presentation/pages/Main_page.dart';
 import '../../features/Splash/presentation/pages/Splash_page.dart';
@@ -98,6 +99,13 @@ class AppRouter {
             path: Routes.forgetPasswordPagePath,
             pageBuilder: (context, state) =>  NoTransitionPage(
             child: ForgetPasswordPage(),
+           ),
+          ),
+          GoRoute(
+            name: Routes.newPasswordPage,
+            path: Routes.newPasswordPagePath,
+            pageBuilder: (context, state) =>  NoTransitionPage(
+            child: SetNewPasswordPage(),
            ),
           ),
 
