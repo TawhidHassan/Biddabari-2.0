@@ -10,6 +10,8 @@ Future<void> initDependencies() async {
   _initAllCourse();
   _initBookStore();
   _initProfile();
+  _initTeacher();
+  _initClassRoom();
 
 
 
@@ -182,6 +184,44 @@ void _initProfile(){
     ..registerFactory(
           () => ProfileUseCase(
         profileRepository:   serviceLocator(),
+      ),
+    );
+}
+void _initTeacher(){
+  /// Datasource
+  serviceLocator
+    ..registerFactory<TeacherRemoteSource>(
+          () => TeacherRemoteSourceImpl(apiMethod: serviceLocator(),
+      ),
+    )/// Repository
+    ..registerFactory<TeacherRepository>(
+          () => TeacherRepositoryImpl(
+          connectionChecker:  serviceLocator(),
+          remoteSource:  serviceLocator()
+      ),
+    )/// Usecases
+    ..registerFactory(
+          () => TeacherUseCase(
+        teacherRepository:   serviceLocator(),
+      ),
+    );
+}
+void _initClassRoom(){
+  /// Datasource
+  serviceLocator
+    ..registerFactory<ClassRoomRemoteSource>(
+          () => ClassRoomRemoteSourceImpl(apiMethod: serviceLocator(),
+      ),
+    )/// Repository
+    ..registerFactory<ClassRoomRepository>(
+          () => ClassRoomRepositoryImpl(
+          connectionChecker:  serviceLocator(),
+          remoteSource:  serviceLocator()
+      ),
+    )/// Usecases
+    ..registerFactory(
+          () => ClassRoomUseCase(
+        classRoomRepository:   serviceLocator(),
       ),
     );
 }

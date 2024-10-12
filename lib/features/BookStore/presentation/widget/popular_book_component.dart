@@ -13,13 +13,13 @@ import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/common/widgets/card/category_card.dart';
 import '../../../../core/common/widgets/card/course_card.dart';
 
-class HomePoularBookComponent extends StatelessWidget {
-  const HomePoularBookComponent({super.key});
+class StorePoularBookComponent extends StatelessWidget {
+  const StorePoularBookComponent({super.key});
 
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration.zero, () {
-      Get.find<BookStoreController>().getPopularBok();
+      Get.find<BookStoreController>().getStoreBok();
     });
     return GetBuilder<BookStoreController>(
       assignId: true,
@@ -27,7 +27,7 @@ class HomePoularBookComponent extends StatelessWidget {
         return Obx(() {
           return Padding(
             padding: const EdgeInsets.all(24.0),
-            child:controller.topBookLoading.value?LoadingWidget():
+            child:controller.storeBookLoading.value?LoadingWidget():
             Column(
               children: [
 
@@ -38,21 +38,10 @@ class HomePoularBookComponent extends StatelessWidget {
                         'পপুলার বুকস ',
                         style: boldText(16, color: Color(0xFF202244))
                     ),
-
-                    Row(
-                      children: [
-                        Text(
-                            'See All',
-                            style: boldText(12, color: Color(0xFF5F61F0))
-                        ),
-                        SizedBox(width: 12,),
-                        Assets.icons.forwordArrow.svg(height: 12)
-                      ],
-                    ),
                   ],
                 ),
                 SizedBox(height: 19,),
-                controller.topBookResponse.value==null?SizedBox():
+                controller.storeBookResponse.value==null?SizedBox():
                 GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -62,10 +51,10 @@ class HomePoularBookComponent extends StatelessWidget {
                       mainAxisSpacing: 12.0,
                       childAspectRatio: SystemUtil.getChildAspectRatio(context)
                   ),
-                  itemCount: controller.topBookResponse.value!.products!.length,
+                  itemCount: controller.storeBookResponse.value!.products!.length,
                   itemBuilder: (context, index) {
                     return BookCard(
-                      book: controller.topBookResponse.value!.products![index],
+                      book: controller.storeBookResponse.value!.products![index],
                     );
                   },
                 )

@@ -1,4 +1,5 @@
 
+import 'package:biddabari_new/features/Teacher/data/models/Teacher/TeacherResponse.dart';
 import 'package:fpdart/fpdart.dart';
 import '../../../../core/error/failures.dart';
 import '../../data/models/Teacher/Teacher.dart';
@@ -16,12 +17,16 @@ TeacherUseCase({this.teacherRepository});
     throw UnimplementedError();
     }
 
-//
-// @override
-// Future<Either<Failure, LoginResponseModel>> call(GetLoginParams params) {
-// // TODO: implement call
-// return loginRepository!.login(params.email!,params.deviceToken!, params.password!, params.isPG!);
-// }
+
+
+  @override
+  Future<Either<Failure, TeacherResponse>> getAllTeacher({required int limit, required String page}) {
+  // TODO: implement call
+  return teacherRepository!.getAllTeacher(
+    limit: limit,
+    page: page,
+  );
+  }
 
 }
 

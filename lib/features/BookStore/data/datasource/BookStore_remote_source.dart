@@ -6,6 +6,8 @@ import '../../../../core/network/api_services.dart';
 
 abstract class BookStoreRemoteSource {
   Future<BookResponse?> getPopularBok();
+  Future<BookResponse?> getStoreBok();
+
 
 }
 
@@ -19,6 +21,16 @@ class BookStoreRemoteSourceImpl implements BookStoreRemoteSource {
     // TODO: implement getPopularBok
     try{
       final result =await apiMethod.get(url: ApiEndpoint.TOP_BOOK_LIST,showResult: true,isBasic: true,duration: 30);
+      return BookResponse.fromJson(result!);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+  @override
+  Future<BookResponse?> getStoreBok()async {
+    // TODO: implement getPopularBok
+    try{
+      final result =await apiMethod.get(url: ApiEndpoint.STORE_BOOK_LIST,showResult: true,isBasic: true,duration: 30);
       return BookResponse.fromJson(result!);
     }catch (e) {
       throw ServerException(e.toString());

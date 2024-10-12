@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/config/util/text_style.dart';
-import 'category_card.dart';
+import '../../../../core/common/widgets/card/category_card.dart';
 
 class HomeCategoryComponent extends StatelessWidget {
   const HomeCategoryComponent({super.key});

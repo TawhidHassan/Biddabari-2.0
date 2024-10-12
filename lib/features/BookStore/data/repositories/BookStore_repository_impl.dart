@@ -36,4 +36,26 @@ BookStoreRepositoryImpl({required this.remoteSource,required this.connectionChec
     }
   }
 
+  @override
+  Future<Either<Failure, BookResponse>> getStoreBok()async {
+      // TODO: implement getPopularBok
+    try{
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure("no internet connection!!"));
+      }else{
+        final data = await remoteSource.getStoreBok();
+        if(data!.success==false){
+          return left(Failure(data.message!));
+        }else{
+          return right(data);
+        }
+        // return right(episodes!.results!);
+      }
+    }on ServerException catch(e){
+      return left(Failure(e.message));
+    }
+  }
+
+
+
 }

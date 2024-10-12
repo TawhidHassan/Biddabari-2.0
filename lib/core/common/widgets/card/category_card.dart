@@ -3,8 +3,8 @@ import 'package:biddabari_new/core/config/color/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import '../../../../core/config/util/text_style.dart';
-import '../../../../core/custom_assets/assets.gen.dart';
+import '../../../config/util/text_style.dart';
+import '../../../custom_assets/assets.gen.dart';
 
 class CategoryCard extends StatelessWidget {
   final String? name;

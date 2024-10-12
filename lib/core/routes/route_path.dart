@@ -64,12 +64,8 @@ class Routes {
   static const String cartPage = 'cartPage';
   static const String cartPagePath = '/cartPage';
 
-
-  static const String ledgerPage = 'ledgerPage';
-  static const String ledgerPagePath = '/ledgerPage';
-
-  static const String moePage = 'moePage';
-  static const String moePagePath = '/moePage';
+  static const String allTeacherPage = 'allTeacherPage';
+  static const String allTeacherPagePath = '/allTeacherPage';
 
 
 
@@ -77,7 +73,10 @@ class Routes {
 
 
 
-/// more info
+
+
+
+  /// more info
 
   static const String moreInfoMore = 'moreInfoMore';
   static const String moreInfoMorePath = '/moreInfoMore';

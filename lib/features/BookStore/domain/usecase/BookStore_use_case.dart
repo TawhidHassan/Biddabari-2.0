@@ -24,6 +24,13 @@ BookStoreUseCase({this.bookStoreRepository});
   return bookStoreRepository!.getPopularBok();
   }
 
+  @override
+  Future<Either<Failure, BookResponse>> getStoreBok() {
+  // TODO: implement call
+  return bookStoreRepository!.getStoreBok();
+  }
+
+
 }
 
 

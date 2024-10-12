@@ -8,8 +8,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/config/util/text_style.dart';
-import '../../../../core/custom_assets/assets.gen.dart';
+import '../../../config/util/text_style.dart';
+import '../../../custom_assets/assets.gen.dart';
 
 class CourseCard extends StatelessWidget {
 final Course? course;

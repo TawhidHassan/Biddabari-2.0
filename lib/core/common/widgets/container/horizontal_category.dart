@@ -1,7 +1,10 @@
+import 'package:biddabari_new/core/config/color/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class PopularCategoryCard extends StatelessWidget {
-  const PopularCategoryCard({super.key});
+class HorizontalCategoryCard extends StatelessWidget {
+  final String? title;
+  final bool? active;
+  const HorizontalCategoryCard({super.key, this.title, this.active=false});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,7 @@ class PopularCategoryCard extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment(1.00, -0.02),
           end: Alignment(-1, 0.02),
-          colors: [Color(0xFFAA076B), Color(0xFF61045F)],
+          colors:active!? [ Color(0xFF61045F),Color(0xFFAA076B)]:[Color(0xFFE8F1FF),Color(0xFFE8F1FF)],
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -21,10 +24,10 @@ class PopularCategoryCard extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          'বিসিএস ',
+          title??'বিসিএস ',
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Colors.white,
+            color:active!? Colors.white:AppColors.textClorColor,
             fontSize: 12,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w700,

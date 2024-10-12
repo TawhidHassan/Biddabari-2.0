@@ -5,6 +5,8 @@ import 'package:fpdart/src/either.dart';
 abstract class BookStoreRepository {
   Future<Either<Failure, BookResponse>> getPopularBok();
 
+  Future<Either<Failure, BookResponse>> getStoreBok();
+
 // Future<Either<Failure, LoginResponseModel>> login(String email);
 
 }

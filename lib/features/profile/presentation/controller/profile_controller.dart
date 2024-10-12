@@ -99,7 +99,6 @@ class ProfileController extends GetxController implements GetxService{
    if(isCheckout!){
 
    }else{
-    Logger().i(onRight.student!.image);
     device_token.value!=onRight.user!.device_token?
     _showMyDialog(context) :SizedBox();
    }

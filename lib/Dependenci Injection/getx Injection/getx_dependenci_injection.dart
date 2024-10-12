@@ -1,6 +1,8 @@
 
 import 'package:biddabari_new/features/AllCourse/presentation/controller/AllCourse_controller.dart';
 import 'package:biddabari_new/features/BookStore/presentation/controller/BookStore_controller.dart';
+import 'package:biddabari_new/features/ClassRoom/presentation/controller/ClassRoom_controller.dart';
+import 'package:biddabari_new/features/Teacher/presentation/controller/Teacher_controller.dart';
 import 'package:biddabari_new/features/profile/presentation/controller/profile_controller.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -33,6 +35,8 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.lazyPut(() => AllCourseController(allCourseUseCase: serviceLocator()));
   Get.lazyPut(() => BookStoreController(bookStoreUseCase: serviceLocator()));
   Get.lazyPut(() => ProfileController(profileUseCase: serviceLocator()));
+  Get.lazyPut(() => TeacherController(teacherUseCase: serviceLocator()));
+  Get.lazyPut(() => ClassRoomController(classRoomUseCase: serviceLocator()));
 
 
 

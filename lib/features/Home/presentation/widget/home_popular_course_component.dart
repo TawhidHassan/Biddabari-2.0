@@ -1,14 +1,14 @@
 import 'package:biddabari_new/core/config/color/app_colors.dart';
-import 'package:biddabari_new/features/Home/presentation/widget/popular_category.dart';
 import 'package:biddabari_new/features/Home/presentation/widget/popular_course_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/common/widgets/container/horizontal_category.dart';
 import '../../../../core/common/widgets/loading/loading_widget.dart';
 import '../../../../core/config/util/text_style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
-import 'category_card.dart';
-import 'course_card.dart';
+import '../../../../core/common/widgets/card/category_card.dart';
+import '../../../../core/common/widgets/card/course_card.dart';
 
 
 class HomePopularCourseComponent extends StatelessWidget {
@@ -50,7 +50,7 @@ class HomePopularCourseComponent extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
               itemBuilder: (context,index){
-                return   PopularCategoryCard();
+                return   HorizontalCategoryCard();
               },
             ),
           ),

@@ -4,6 +4,7 @@ import 'package:biddabari_new/features/ClassRoom/presentation/pages/ClassRoom_pa
 import 'package:biddabari_new/features/Exam/presentation/pages/Exam_page.dart';
 import 'package:biddabari_new/features/Login/presentation/pages/forget_password_page.dart';
 import 'package:biddabari_new/features/Login/presentation/pages/otp_page.dart';
+import 'package:biddabari_new/features/Teacher/presentation/pages/all_teacher_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -128,6 +129,15 @@ class AppRouter {
         ]
       ),
 
+
+      GoRoute(
+          name: Routes.allTeacherPage,
+          path: Routes.allTeacherPagePath,
+          pageBuilder: (context, state) => const NoTransitionPage(
+            child: AllTeacherPage(),
+          ),
+          routes: []
+      ),
 
       ///Bottom nav bar
       StatefulShellRoute.indexedStack(

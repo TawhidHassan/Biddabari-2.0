@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 
 import '../../../../core/config/util/text_style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
-import 'category_card.dart';
-import 'course_card.dart';
+import '../../../../core/common/widgets/card/category_card.dart';
+import '../../../../core/common/widgets/card/course_card.dart';
 
 class HomeRunningCourseComponent extends StatelessWidget {
   const HomeRunningCourseComponent({super.key});

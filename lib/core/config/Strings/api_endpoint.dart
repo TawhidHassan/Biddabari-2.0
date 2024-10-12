@@ -2,7 +2,7 @@ import '/core/extentions/custom_extentions.dart';
 
 class ApiEndpoint {
   ///staging
-  static const String mainDomain = "https://biddabari.com";
+  static const String mainDomain = "https://biddabari.online";
   static const String baseUrl = "$mainDomain/api/v1/";
   static const String imageBaseUrl = "https://biddabari-bucket.obs.as-south-208.rcloud.reddotdigitalit.com/";
 
@@ -22,9 +22,17 @@ class ApiEndpoint {
   static  String CATEGORY_LIST_GET= 'app-home-course-categories'.addBaseURl;
 
   static  String RUNNING_COURSE_LIST= 'app-home-courses'.addBaseURl;
+  static  String CLASSROM_MY_COURSE_LIST= 'student/my-courses'.addBaseURl;
+  static  String CLASSROM_MY_CLASS_LIST= 'student/today-classes'.addBaseURl;
+  static  String CLASSROM_MTODAY_EXAM_LIST= 'student/today-exams'.addBaseURl;
 
   ///book
   static  String TOP_BOOK_LIST= 'app-home-products'.addBaseURl;
+  static  String STORE_BOOK_LIST= 'all-products'.addBaseURl;
+
+
+  ///teacher
+  static  String TEACHER_LIST= 'all-instructors?page='.addBaseURl;
 
 
 
