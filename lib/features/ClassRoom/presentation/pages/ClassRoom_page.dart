@@ -13,8 +13,8 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import '../../../../core/common/widgets/container/discount_badge.dart';
 import '../../../../core/common/widgets/container/horizontal_category.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
+import 'ajker_class.dart';
 import 'ajker_exam.dart';
-import 'class_my.dart';
 import 'class_my_course.dart';
 
 class ClassRoomPage extends StatelessWidget {
