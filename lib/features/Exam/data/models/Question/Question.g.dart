@@ -7,14 +7,14 @@ part of 'Question.dart';
 // **************************************************************************
 
 Question _$QuestionFromJson(Map<String, dynamic> json) => Question(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       questionType: json['question_type'] as String?,
       question: json['question'] as String?,
       mcq_ans_description: json['mcq_ans_description'] as String?,
       questionImage: json['question_image'],
       questionVideoLink: json['question_video_link'],
       hasAllWrongAns: json['has_all_wrong_ans'],
-      status: json['status'] as int?,
+      status: (json['status'] as num?)?.toInt(),
       subjectName: json['subject_name'],
       answer: json['answer'] as String?,
       isfixed: json['isfixed'] as bool? ?? false,

@@ -53,6 +53,9 @@ class Routes {
   static const String bookStorePage = 'bookStorePage';
   static const String bookStorePagePath = '/bookStorePage';
 
+  static const String bookDetailsPage = 'bookDetailsPage';
+  static const String bookDetailsPagePath = '/bookDetailsPage';
+
   static const String freeCoursePage = 'freeCoursePage';
   static const String freeCoursePagePath = '/freeCoursePage';
 

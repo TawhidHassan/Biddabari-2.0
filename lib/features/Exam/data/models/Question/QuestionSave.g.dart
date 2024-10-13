@@ -7,9 +7,9 @@ part of 'QuestionSave.dart';
 // **************************************************************************
 
 QuestionSave _$QuestionSaveFromJson(Map<String, dynamic> json) => QuestionSave(
-      json['id'] as int?,
-      json['user_id'] as int?,
-      json['question_store_id'] as int?,
+      (json['id'] as num?)?.toInt(),
+      (json['user_id'] as num?)?.toInt(),
+      (json['question_store_id'] as num?)?.toInt(),
       json['created_at'] as String?,
       json['question_store'] == null
           ? null

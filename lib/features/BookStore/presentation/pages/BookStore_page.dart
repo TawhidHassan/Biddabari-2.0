@@ -32,7 +32,6 @@ class BookStorePage extends StatelessWidget {
           color: AppColors.primaryBackground,
           child: CustomScrollView(
             slivers: [
-
               SliverToBoxAdapter(
                   child: StorePoularBookComponent()
               ),

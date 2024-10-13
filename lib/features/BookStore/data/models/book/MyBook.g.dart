@@ -7,10 +7,10 @@ part of 'MyBook.dart';
 // **************************************************************************
 
 MyBook _$MyBookFromJson(Map<String, dynamic> json) => MyBook(
-      json['id'] as int?,
-      json['slug'] as int?,
-      json['user_id'] as int?,
-      json['parent_model_id'] as int?,
+      (json['id'] as num?)?.toInt(),
+      (json['slug'] as num?)?.toInt(),
+      (json['user_id'] as num?)?.toInt(),
+      (json['parent_model_id'] as num?)?.toInt(),
       json['batch_exam_subscription_id'],
       json['ordered_for'] as String?,
       json['status'] as String?,

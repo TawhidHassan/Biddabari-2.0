@@ -7,12 +7,12 @@ part of 'Option.dart';
 // **************************************************************************
 
 Option _$OptionFromJson(Map<String, dynamic> json) => Option(
-      json['id'] as int?,
-      json['question_store_id'] as int?,
-      json['created_by'] as int?,
+      (json['id'] as num?)?.toInt(),
+      (json['question_store_id'] as num?)?.toInt(),
+      (json['created_by'] as num?)?.toInt(),
       json['option_title'] as String?,
-      json['is_correct'] as int?,
-      json['my_ans'] as int?,
+      (json['is_correct'] as num?)?.toInt(),
+      (json['my_ans'] as num?)?.toInt(),
       json['option_description'],
       json['option_image'],
       json['option_video_url'],

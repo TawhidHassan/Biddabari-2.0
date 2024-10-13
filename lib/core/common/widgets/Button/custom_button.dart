@@ -1,3 +1,4 @@
+import 'package:biddabari_new/core/config/color/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/config/util/style.dart';
@@ -9,6 +10,7 @@ class CustomButton extends StatelessWidget {
   final double? height;
   final double? width;
   final double? borderRadius;
+  final bool? isBorder;
   final Color? textColor;
   final double? textSize;
   final VoidCallback? onTap;
@@ -22,7 +24,7 @@ class CustomButton extends StatelessWidget {
       this.width,
       this.borderRadius,
       this.textSize,
-        this.child, });
+        this.child, this.isBorder=false, });
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class CustomButton extends StatelessWidget {
         height: height ?? 36.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(borderRadius??8),
-            gradient: LinearGradient(
+            gradient:isBorder!?null: LinearGradient(
               colors: [
                 Color(0xffFFB199),
                Color(0xffFF0844)
@@ -41,6 +43,7 @@ class CustomButton extends StatelessWidget {
               begin:  Alignment.topRight,
               end: Alignment.topLeft,
             ),
+            border: Border.all(color: AppColors.kPrimaryColorx)
 
           ),
         child: Center(

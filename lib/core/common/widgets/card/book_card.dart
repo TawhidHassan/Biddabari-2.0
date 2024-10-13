@@ -1,7 +1,9 @@
+import 'package:biddabari_new/core/routes/route_path.dart';
 import 'package:biddabari_new/features/BookStore/data/models/book/Book.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../config/color/app_colors.dart';
 import '../../../config/util/text_style.dart';
@@ -16,7 +18,7 @@ class BookCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-
+        context.pushNamed(Routes.bookDetailsPage);
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 10.0),

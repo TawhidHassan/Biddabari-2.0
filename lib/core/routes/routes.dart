@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../Dependenci Injection/init_dependencies.dart';
+import '../../features/BookStore/presentation/pages/book_details.dart';
 import '../../features/Error/presentation/error_page.dart';
 import '../../features/Home/presentation/pages/Home_page.dart';
 import '../../features/Login/presentation/pages/Login_page.dart';
@@ -70,7 +71,7 @@ class AppRouter {
         builder: (context, state) => OnbordingPage(),
       ),
 
-      //-------------------------------chat with person
+
       GoRoute(
         name: Routes.loginPage,
         path: Routes.loginPagePath,
@@ -138,6 +139,14 @@ class AppRouter {
           ),
           routes: []
       ),
+     GoRoute(
+              name: Routes.bookDetailsPage,
+              path: Routes.bookDetailsPagePath,
+              pageBuilder: (context, state) => const NoTransitionPage(
+                child: BookDetailsPage(),
+              ),
+              routes: []
+          ),
 
       ///Bottom nav bar
       StatefulShellRoute.indexedStack(
