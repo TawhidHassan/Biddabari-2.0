@@ -2,6 +2,7 @@
 import 'package:biddabari_new/features/AllCourse/data/models/course/CourseResponse.dart';
 import 'package:fpdart/fpdart.dart';
 import '../../../../core/error/failures.dart';
+import '../../data/models/AllCourseResponse.dart';
 import '../entities/AllCourse.dart';
 import '../repositories/AllCourse_repository.dart';
 import '../../../../core/usecase/usecase.dart';
@@ -21,6 +22,13 @@ AllCourseUseCase({this.allCourseRepository});
     // TODO: implement call
     return allCourseRepository!.getRuningCourse();
     }
+    @override
+    Future<Either<Failure, AllCourseResponse>> getAllCourse() {
+    // TODO: implement call
+    return allCourseRepository!.getAllCourse();
+    }
+
+
 
 }
 

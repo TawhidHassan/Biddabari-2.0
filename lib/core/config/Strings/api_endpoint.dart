@@ -22,6 +22,7 @@ class ApiEndpoint {
   static  String CATEGORY_LIST_GET= 'app-home-course-categories'.addBaseURl;
 
   static  String RUNNING_COURSE_LIST= 'app-home-courses'.addBaseURl;
+  static  String ALL_COURSE_LIST= 'app-all-courses'.addBaseURl;
   static  String CLASSROM_MY_COURSE_LIST= 'student/my-courses'.addBaseURl;
   static  String CLASSROM_MY_CLASS_LIST= 'student/today-classes'.addBaseURl;
   static  String CLASSROM_MTODAY_EXAM_LIST= 'student/today-exams'.addBaseURl;

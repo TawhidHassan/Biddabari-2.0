@@ -1,4 +1,5 @@
 import 'package:biddabari_new/core/error/failures.dart';
+import 'package:biddabari_new/features/AllCourse/data/models/AllCourseResponse.dart';
 
 import 'package:biddabari_new/features/AllCourse/data/models/course/CourseResponse.dart';
 
@@ -26,6 +27,26 @@ AllCourseRepositoryImpl({required this.remoteSource,required this.connectionChec
         final data = await remoteSource.getRuningCourse();
         if(data!.success==false){
           return left(Failure(data.message!));
+        }else{
+          return right(data);
+        }
+        // return right(episodes!.results!);
+      }
+    }on ServerException catch(e){
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, AllCourseResponse>> getAllCourse()async {
+    // TODO: implement getAllCourse
+    try{
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure("no internet connection!!"));
+      }else{
+        final data = await remoteSource.getAllCourse();
+        if(data!.courseCategories==null){
+          return left(Failure("Some things wrong"));
         }else{
           return right(data);
         }
