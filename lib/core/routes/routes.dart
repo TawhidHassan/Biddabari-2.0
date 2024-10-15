@@ -1,5 +1,7 @@
 import 'package:biddabari_new/features/AllCourse/presentation/pages/AllCourse_page.dart';
+import 'package:biddabari_new/features/BookStore/data/models/book/Book.dart';
 import 'package:biddabari_new/features/BookStore/presentation/pages/BookStore_page.dart';
+import 'package:biddabari_new/features/Checkout/presentation/pages/Checkout_page.dart';
 import 'package:biddabari_new/features/ClassRoom/presentation/pages/ClassRoom_page.dart';
 import 'package:biddabari_new/features/Exam/presentation/pages/Exam_page.dart';
 import 'package:biddabari_new/features/Login/presentation/pages/forget_password_page.dart';
@@ -71,6 +73,14 @@ class AppRouter {
         builder: (context, state) => OnbordingPage(),
       ),
 
+      GoRoute(
+          name: Routes.checkOutPage,
+          path: Routes.checkOutPagePath,
+          pageBuilder: (context, state) =>  NoTransitionPage(
+            child: CheckoutPage(),
+          ),
+          routes: []
+      ),
 
       GoRoute(
         name: Routes.loginPage,
@@ -142,11 +152,13 @@ class AppRouter {
      GoRoute(
               name: Routes.bookDetailsPage,
               path: Routes.bookDetailsPagePath,
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: BookDetailsPage(),
+              pageBuilder: (context, state) =>  NoTransitionPage(
+                child: BookDetailsPage( book: state.extra as Book,),
               ),
               routes: []
           ),
+
+
 
       ///Bottom nav bar
       StatefulShellRoute.indexedStack(

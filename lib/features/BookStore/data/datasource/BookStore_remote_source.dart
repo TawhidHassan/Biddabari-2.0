@@ -3,9 +3,11 @@ import 'package:biddabari_new/features/BookStore/data/models/BookResponse.dart';
 import '../../../../core/config/Strings/api_endpoint.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/api_services.dart';
+import '../models/SingleBookResponse.dart';
 
 abstract class BookStoreRemoteSource {
   Future<BookResponse?> getPopularBok();
+  Future<SingleBookResponse?>getBookDetails(String id);
   Future<BookResponse?> getStoreBok();
 
 
@@ -32,6 +34,17 @@ class BookStoreRemoteSourceImpl implements BookStoreRemoteSource {
     try{
       final result =await apiMethod.get(url: ApiEndpoint.STORE_BOOK_LIST,showResult: true,isBasic: true,duration: 30);
       return BookResponse.fromJson(result!);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<SingleBookResponse?> getBookDetails(String id)async {
+    // TODO: implement getBookDetails
+    try{
+      final result =await apiMethod.get(url: ApiEndpoint.STORE_BOOK_DETAILS+"$id",showResult: true,isBasic: true,duration: 30);
+      return SingleBookResponse.fromJson(result!);
     }catch (e) {
       throw ServerException(e.toString());
     }

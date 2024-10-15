@@ -2,6 +2,7 @@
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../../data/models/BookResponse.dart';
+import '../../data/models/SingleBookResponse.dart';
 import '../../domain/usecase/BookStore_use_case.dart';
 import 'package:flutter/material.dart';
 
@@ -56,6 +57,28 @@ class BookStoreController extends GetxController implements GetxService{
        );
      }, (r){
        storeBookResponse.value=r;
+       ///"pending", "start", "continue", "stop"
+     });
+     storeBookLoading.value=false;
+   }
+
+
+   Rx<SingleBookResponse?>  bookSingelResponse=Rx<SingleBookResponse?>(null);
+   Future getBookDetails(String id)async {
+     storeBookLoading.value=true;
+     var rs= await bookStoreUseCase!.getBookDetails(id);
+     rs.fold((l){
+       Fluttertoast.showToast(
+           msg: l.message,
+           toastLength: Toast.LENGTH_SHORT,
+           gravity: ToastGravity.BOTTOM,
+           timeInSecForIosWeb: 2,
+           backgroundColor: Colors.red,
+           textColor: Colors.white,
+           fontSize: 16.0
+       );
+     }, (r){
+       bookSingelResponse.value=r;
        ///"pending", "start", "continue", "stop"
      });
      storeBookLoading.value=false;

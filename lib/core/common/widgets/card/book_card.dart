@@ -18,7 +18,7 @@ class BookCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.pushNamed(Routes.bookDetailsPage);
+        context.pushNamed(Routes.bookDetailsPage,extra:book );
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 10.0),

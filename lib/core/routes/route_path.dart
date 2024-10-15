@@ -71,12 +71,8 @@ class Routes {
   static const String allTeacherPagePath = '/allTeacherPage';
 
 
-
-
-
-
-
-
+  static const String checkOutPage = 'checkOutPage';
+  static const String checkOutPagePath = '/checkOutPage';
 
 
   /// more info

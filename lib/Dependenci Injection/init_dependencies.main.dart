@@ -12,6 +12,7 @@ Future<void> initDependencies() async {
   _initProfile();
   _initTeacher();
   _initClassRoom();
+  _initCheckout();
 
 
 
@@ -222,6 +223,25 @@ void _initClassRoom(){
     ..registerFactory(
           () => ClassRoomUseCase(
         classRoomRepository:   serviceLocator(),
+      ),
+    );
+}
+void _initCheckout(){
+  /// Datasource
+  serviceLocator
+    ..registerFactory<CheckoutRemoteSource>(
+          () => CheckoutRemoteSourceImpl(apiMethod: serviceLocator(),
+      ),
+    )/// Repository
+    ..registerFactory<CheckoutRepository>(
+          () => CheckoutRepositoryImpl(
+          connectionChecker:  serviceLocator(),
+          remoteSource:  serviceLocator()
+      ),
+    )/// Usecases
+    ..registerFactory(
+          () => CheckoutUseCase(
+         checkoutRepository:   serviceLocator(),
       ),
     );
 }

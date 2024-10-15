@@ -1,6 +1,7 @@
 import 'package:biddabari_new/core/error/failures.dart';
 
 import 'package:biddabari_new/features/BookStore/data/models/BookResponse.dart';
+import 'package:biddabari_new/features/BookStore/data/models/SingleBookResponse.dart';
 
 import 'package:fpdart/src/either.dart';
 
@@ -44,6 +45,26 @@ BookStoreRepositoryImpl({required this.remoteSource,required this.connectionChec
         return left(Failure("no internet connection!!"));
       }else{
         final data = await remoteSource.getStoreBok();
+        if(data!.success==false){
+          return left(Failure(data.message!));
+        }else{
+          return right(data);
+        }
+        // return right(episodes!.results!);
+      }
+    }on ServerException catch(e){
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, SingleBookResponse>> getBookDetails(String id)async {
+    // TODO: implement getBookDetails
+    try{
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure("no internet connection!!"));
+      }else{
+        final data = await remoteSource.getBookDetails(id);
         if(data!.success==false){
           return left(Failure(data.message!));
         }else{

@@ -29,6 +29,7 @@ class ApiEndpoint {
   ///book
   static  String TOP_BOOK_LIST= 'app-home-products'.addBaseURl;
   static  String STORE_BOOK_LIST= 'all-products'.addBaseURl;
+  static  String STORE_BOOK_DETAILS= "product-details/".addBaseURl;
 
 
   ///teacher
