@@ -23,9 +23,9 @@ class CategoryCoursePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Future.delayed(Duration.zero, () {
-    //   Get.find<AllCourseController>().getCategoryCourse(categorie!.slug);
-    // });
+    Future.delayed(Duration.zero, () {
+      Get.find<AllCourseController>().getCategoryCourse(categorie!.slug);
+    });
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
