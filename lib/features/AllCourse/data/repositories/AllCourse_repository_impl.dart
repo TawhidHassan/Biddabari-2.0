@@ -9,6 +9,7 @@ import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/connection_checker.dart';
 import '../datasource/AllCourse_remote_source.dart';
 import '../../domain/repositories/AllCourse_repository.dart';
+import '../models/CourseCategory/CourseCategoryResponse.dart';
 
 class AllCourseRepositoryImpl implements AllCourseRepository{
 
@@ -46,6 +47,26 @@ AllCourseRepositoryImpl({required this.remoteSource,required this.connectionChec
       }else{
         final data = await remoteSource.getAllCourse();
         if(data!.courseCategories==null){
+          return left(Failure("Some things wrong"));
+        }else{
+          return right(data);
+        }
+        // return right(episodes!.results!);
+      }
+    }on ServerException catch(e){
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, CourseCategoryResponse>> getCategoryCourse(String? slug)async {
+    // TODO: implement getCategoryCourse
+    try{
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure("no internet connection!!"));
+      }else{
+        final data = await remoteSource.getCategoryCourse(slug);
+        if(data==null){
           return left(Failure("Some things wrong"));
         }else{
           return right(data);

@@ -3,9 +3,13 @@ import 'package:biddabari_new/features/AllCourse/data/models/AllCourseResponse.d
 import 'package:biddabari_new/features/AllCourse/data/models/course/CourseResponse.dart';
 import 'package:fpdart/src/either.dart';
 
+import '../../data/models/CourseCategory/CourseCategoryResponse.dart';
+
 abstract class AllCourseRepository {
   Future<Either<Failure, CourseResponse>> getRuningCourse();
 
   Future<Either<Failure, AllCourseResponse>> getAllCourse() ;
+
+  Future<Either<Failure, CourseCategoryResponse>> getCategoryCourse(String? slug);
 
 }

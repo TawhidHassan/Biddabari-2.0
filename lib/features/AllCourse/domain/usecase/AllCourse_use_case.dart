@@ -3,6 +3,7 @@ import 'package:biddabari_new/features/AllCourse/data/models/course/CourseRespon
 import 'package:fpdart/fpdart.dart';
 import '../../../../core/error/failures.dart';
 import '../../data/models/AllCourseResponse.dart';
+import '../../data/models/CourseCategory/CourseCategoryResponse.dart';
 import '../entities/AllCourse.dart';
 import '../repositories/AllCourse_repository.dart';
 import '../../../../core/usecase/usecase.dart';
@@ -27,6 +28,12 @@ AllCourseUseCase({this.allCourseRepository});
     // TODO: implement call
     return allCourseRepository!.getAllCourse();
     }
+    @override
+    Future<Either<Failure, CourseCategoryResponse>> getCategoryCourse(String? slug)async {
+    // TODO: implement call
+    return allCourseRepository!.getCategoryCourse(slug);
+    }
+
 
 
 

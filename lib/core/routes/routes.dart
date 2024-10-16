@@ -1,4 +1,6 @@
+import 'package:biddabari_new/core/common/data/Category/Categorie.dart';
 import 'package:biddabari_new/features/AllCourse/presentation/pages/AllCourse_page.dart';
+import 'package:biddabari_new/features/AllCourse/presentation/pages/category_course_page.dart';
 import 'package:biddabari_new/features/BookStore/data/models/book/Book.dart';
 import 'package:biddabari_new/features/BookStore/presentation/pages/BookStore_page.dart';
 import 'package:biddabari_new/features/Checkout/presentation/pages/Checkout_page.dart';
@@ -179,7 +181,16 @@ class AppRouter {
                   pageBuilder: (context, state) => const NoTransitionPage(
                         child: HomePage(),
                   ),
-                routes: []
+                routes: [
+                  GoRoute(
+                      name: Routes.categoryCoursePage,
+                      path: Routes.categoryCoursePagePath,
+                      pageBuilder: (context, state) =>  NoTransitionPage(
+                        child: CategoryCoursePage(categorie:state.extra as Categorie ,),
+                      ),
+                      routes: []
+                  ),
+                ]
               ),
 
             ],
