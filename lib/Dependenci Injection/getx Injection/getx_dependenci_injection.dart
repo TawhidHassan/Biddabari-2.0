@@ -3,11 +3,15 @@ import 'package:biddabari_new/features/AllCourse/presentation/controller/AllCour
 import 'package:biddabari_new/features/BookStore/presentation/controller/BookStore_controller.dart';
 import 'package:biddabari_new/features/Checkout/presentation/controller/Checkout_controller.dart';
 import 'package:biddabari_new/features/ClassRoom/presentation/controller/ClassRoom_controller.dart';
+import 'package:biddabari_new/features/More/presentation/controller/More_controller.dart';
+import 'package:biddabari_new/features/Notice/presentation/controller/Notice_controller.dart';
 import 'package:biddabari_new/features/Teacher/presentation/controller/Teacher_controller.dart';
+import 'package:biddabari_new/features/dwonloads/presentation/controller/dwonloads_controller.dart';
 import 'package:biddabari_new/features/profile/presentation/controller/profile_controller.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../../features/Blog/presentation/controller/Blog_controller.dart';
 import '../../features/Home/presentation/controller/Home_controller.dart';
 import '../../features/Login/presentation/controller/Login_controller.dart';
 import '../../features/Main/presentation/controller/Main_controller.dart';
@@ -39,6 +43,10 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.lazyPut(() => TeacherController(teacherUseCase: serviceLocator()));
   Get.lazyPut(() => ClassRoomController(classRoomUseCase: serviceLocator()));
   Get.lazyPut(() => CheckoutController(checkoutUseCase: serviceLocator()));
+  Get.lazyPut(() => MoreController(moreUseCase: serviceLocator()));
+  Get.lazyPut(() => DwonloadsController(dwonloadsUseCase: serviceLocator()));
+  Get.lazyPut(() => BlogController(blogUseCase: serviceLocator()));
+  Get.lazyPut(() => NoticeController(noticeUseCase: serviceLocator()));
 
 
 

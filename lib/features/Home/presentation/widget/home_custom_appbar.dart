@@ -82,40 +82,45 @@ class HomeCustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                         builder: (logic) {
                           return Obx(() {
                             return logic.circuler.value?CircularProgressIndicator():
-                            CachedNetworkImage(
-                                imageUrl: ApiEndpoint.imageBaseUrl+logic.profileResponse.value!.student!.image.toString(),
-                                // imageUrl: ApiEndpoint.imageBaseUrl+controller.response.value!.myProfile!.image!,
-                                imageBuilder: (context, imageProvider) =>
-                                    Container(
-                                      height: 32,
-                                      width: 32,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            100),
-                                        image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.fill
+                            InkWell(
+                              onTap: (){
+                                context.pushNamed(Routes.morePage);
+                              },
+                              child: CachedNetworkImage(
+                                  imageUrl: ApiEndpoint.imageBaseUrl+logic.profileResponse.value!.student!.image.toString(),
+                                  // imageUrl: ApiEndpoint.imageBaseUrl+controller.response.value!.myProfile!.image!,
+                                  imageBuilder: (context, imageProvider) =>
+                                      Container(
+                                        height: 32,
+                                        width: 32,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                              100),
+                                          image: DecorationImage(
+                                              image: imageProvider,
+                                              fit: BoxFit.fill
+                                          ),
+                                          color: const Color(0xfff7ffff),
                                         ),
-                                        color: const Color(0xfff7ffff),
+                                        alignment: Alignment.topLeft,
                                       ),
-                                      alignment: Alignment.topLeft,
-                                    ),
-                                placeholder: (context, url) =>
-                                    CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    Container(
-                                      height: 32,
-                                      width: 32,
-                                      decoration: ShapeDecoration(
-                                        shape: OvalBorder(
-                                          side: BorderSide(width: 1,
-                                              color: AppColors.primaryColor),
+                                  placeholder: (context, url) =>
+                                      CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      Container(
+                                        height: 32,
+                                        width: 32,
+                                        decoration: ShapeDecoration(
+                                          shape: OvalBorder(
+                                            side: BorderSide(width: 1,
+                                                color: AppColors.primaryColor),
+                                          ),
                                         ),
-                                      ),
-                                      alignment: Alignment.center,
-                                      child: Icon(Icons.person_outline),
-                                    )
+                                        alignment: Alignment.center,
+                                        child: Icon(Icons.person_outline),
+                                      )
 
+                              ),
                             );
                           });
                         },

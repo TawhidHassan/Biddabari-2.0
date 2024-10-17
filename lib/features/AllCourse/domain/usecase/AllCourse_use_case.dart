@@ -4,6 +4,7 @@ import 'package:fpdart/fpdart.dart';
 import '../../../../core/error/failures.dart';
 import '../../data/models/AllCourseResponse.dart';
 import '../../data/models/CourseCategory/CourseCategoryResponse.dart';
+import '../../data/models/course/CourseDetailsResponse.dart';
 import '../entities/AllCourse.dart';
 import '../repositories/AllCourse_repository.dart';
 import '../../../../core/usecase/usecase.dart';
@@ -33,6 +34,10 @@ AllCourseUseCase({this.allCourseRepository});
     // TODO: implement call
     return allCourseRepository!.getCategoryCourse(slug);
     }
+
+  Future<Either<Failure, CourseDetailsResponse>>detailsCourse(String? id)async {
+      return allCourseRepository!.detailsCourse(id);
+  }
 
 
 

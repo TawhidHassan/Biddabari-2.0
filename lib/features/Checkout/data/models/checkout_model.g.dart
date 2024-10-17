@@ -6,11 +6,12 @@ part of 'checkout_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-CheckoutModel _$CheckoutModelFromJson(Map<String, dynamic> json) => CheckoutModel(
-      json['name'] as String?
+CheckoutModel _$CheckoutModelFromJson(Map<String, dynamic> json) =>
+    CheckoutModel(
+      json['name'] as String?,
     );
 
 Map<String, dynamic> _$CheckoutModelToJson(CheckoutModel instance) =>
     <String, dynamic>{
-      'name': instance.name
+      'name': instance.name,
     };

@@ -23,6 +23,7 @@ class ApiEndpoint {
 
   static  String RUNNING_COURSE_LIST= 'app-home-courses'.addBaseURl;
   static  String ALL_COURSE_LIST= 'app-all-courses'.addBaseURl;
+  static  String COURSE_DETAILS= 'app-course-details/'.addBaseURl;
   static  String CATEGORY_COURSE_LIST= 'category-courses/'.addBaseURl;
   static  String CLASSROM_MY_COURSE_LIST= 'student/my-courses'.addBaseURl;
   static  String CLASSROM_MY_CLASS_LIST= 'student/today-classes'.addBaseURl;

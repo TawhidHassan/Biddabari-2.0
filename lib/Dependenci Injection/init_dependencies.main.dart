@@ -13,6 +13,8 @@ Future<void> initDependencies() async {
   _initTeacher();
   _initClassRoom();
   _initCheckout();
+  _initMore();
+  _initDwonloads();
 
 
 
@@ -242,6 +244,45 @@ void _initCheckout(){
     ..registerFactory(
           () => CheckoutUseCase(
          checkoutRepository:   serviceLocator(),
+      ),
+    );
+}
+void _initMore(){
+  /// Datasource
+  serviceLocator
+    ..registerFactory<MoreRemoteSource>(
+          () => MoreRemoteSourceImpl(apiMethod: serviceLocator(),
+      ),
+    )/// Repository
+    ..registerFactory<MoreRepository>(
+          () => MoreRepositoryImpl(
+          connectionChecker:  serviceLocator(),
+          remoteSource:  serviceLocator()
+      ),
+    )/// Usecases
+    ..registerFactory(
+          () => MoreUseCase(
+         moreRepository:   serviceLocator(),
+      ),
+    );
+}
+
+void _initDwonloads(){
+  /// Datasource
+  serviceLocator
+    ..registerFactory<DwonloadsRemoteSource>(
+          () => DwonloadsRemoteSourceImpl(apiMethod: serviceLocator(),
+      ),
+    )/// Repository
+    ..registerFactory<DwonloadsRepository>(
+          () => DwonloadsRepositoryImpl(
+          connectionChecker:  serviceLocator(),
+          remoteSource:  serviceLocator()
+      ),
+    )/// Usecases
+    ..registerFactory(
+          () => DwonloadsUseCase(
+         dwonloadsRepository:   serviceLocator(),
       ),
     );
 }

@@ -39,12 +39,21 @@ class $AssetsIconsGen {
   /// File path: assets/icons/bell.svg
   SvgGenImage get bell => const SvgGenImage('assets/icons/bell.svg');
 
+  /// File path: assets/icons/blog.svg
+  SvgGenImage get blog => const SvgGenImage('assets/icons/blog.svg');
+
+  /// File path: assets/icons/book.svg
+  SvgGenImage get book => const SvgGenImage('assets/icons/book.svg');
+
   /// File path: assets/icons/bookStore.svg
   SvgGenImage get bookStore => const SvgGenImage('assets/icons/bookStore.svg');
 
   /// File path: assets/icons/bookStore_inactive.svg
   SvgGenImage get bookStoreInactive =>
       const SvgGenImage('assets/icons/bookStore_inactive.svg');
+
+  /// File path: assets/icons/book_cart.svg
+  SvgGenImage get bookCart => const SvgGenImage('assets/icons/book_cart.svg');
 
   /// File path: assets/icons/category.png
   AssetGenImage get category =>
@@ -61,11 +70,17 @@ class $AssetsIconsGen {
   SvgGenImage get classRoomInactive =>
       const SvgGenImage('assets/icons/classRoom_inactive.svg');
 
+  /// File path: assets/icons/course.svg
+  SvgGenImage get course => const SvgGenImage('assets/icons/course.svg');
+
   /// File path: assets/icons/email.svg
   SvgGenImage get email => const SvgGenImage('assets/icons/email.svg');
 
   /// File path: assets/icons/exam.svg
   SvgGenImage get exam => const SvgGenImage('assets/icons/exam.svg');
+
+  /// File path: assets/icons/exam2.svg
+  SvgGenImage get exam2 => const SvgGenImage('assets/icons/exam2.svg');
 
   /// File path: assets/icons/exam_inactive.svg
   SvgGenImage get examInactive =>
@@ -89,12 +104,33 @@ class $AssetsIconsGen {
   SvgGenImage get freeCourseInactive =>
       const SvgGenImage('assets/icons/freeCourse_inactive.svg');
 
+  /// File path: assets/icons/free_class.svg
+  SvgGenImage get freeClass => const SvgGenImage('assets/icons/free_class.svg');
+
   /// File path: assets/icons/home.svg
   SvgGenImage get home => const SvgGenImage('assets/icons/home.svg');
 
   /// File path: assets/icons/home_inactive.svg
   SvgGenImage get homeInactive =>
       const SvgGenImage('assets/icons/home_inactive.svg');
+
+  /// File path: assets/icons/job.svg
+  SvgGenImage get job => const SvgGenImage('assets/icons/job.svg');
+
+  /// File path: assets/icons/language.svg
+  SvgGenImage get language => const SvgGenImage('assets/icons/language.svg');
+
+  /// File path: assets/icons/notice.svg
+  SvgGenImage get notice => const SvgGenImage('assets/icons/notice.svg');
+
+  /// File path: assets/icons/people.svg
+  SvgGenImage get people => const SvgGenImage('assets/icons/people.svg');
+
+  /// File path: assets/icons/photo.svg
+  SvgGenImage get photo => const SvgGenImage('assets/icons/photo.svg');
+
+  /// File path: assets/icons/review.svg
+  SvgGenImage get review => const SvgGenImage('assets/icons/review.svg');
 
   /// File path: assets/icons/save_green.svg
   SvgGenImage get saveGreenSvg =>
@@ -107,6 +143,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/search.svg
   SvgGenImage get search => const SvgGenImage('assets/icons/search.svg');
 
+  /// File path: assets/icons/teacher.svg
+  SvgGenImage get teacher => const SvgGenImage('assets/icons/teacher.svg');
+
   /// List of all assets
   List<dynamic> get values => [
         star,
@@ -115,25 +154,38 @@ class $AssetsIconsGen {
         allCourseInactive,
         backArrow,
         bell,
+        blog,
+        book,
         bookStore,
         bookStoreInactive,
+        bookCart,
         category,
         categoryTwo,
         classRom,
         classRoomInactive,
+        course,
         email,
         exam,
+        exam2,
         examInactive,
         filter,
         filterTwo,
         forwordArrow,
         freeCourse,
         freeCourseInactive,
+        freeClass,
         home,
         homeInactive,
+        job,
+        language,
+        notice,
+        people,
+        photo,
+        review,
         saveGreenSvg,
         saveGreenSvg_,
-        search
+        search,
+        teacher
       ];
 }
 
@@ -146,6 +198,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/course.png
   AssetGenImage get course => const AssetGenImage('assets/images/course.png');
+
+  /// File path: assets/images/empty.svg
+  SvgGenImage get empty => const SvgGenImage('assets/images/empty.svg');
 
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
@@ -183,9 +238,10 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/wallet_bg.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [
+  List<dynamic> get values => [
         biddabariWhite,
         course,
+        empty,
         logo,
         onboarding1,
         onboarding2,

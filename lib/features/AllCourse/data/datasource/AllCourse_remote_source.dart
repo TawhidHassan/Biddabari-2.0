@@ -1,4 +1,5 @@
 import 'package:biddabari_new/features/AllCourse/data/models/AllCourseResponse.dart';
+import 'package:biddabari_new/features/AllCourse/data/models/course/CourseDetailsResponse.dart';
 import 'package:biddabari_new/features/AllCourse/data/models/course/CourseResponse.dart';
 
 import '../../../../core/config/Strings/api_endpoint.dart';
@@ -11,6 +12,8 @@ abstract class AllCourseRemoteSource {
 Future<CourseResponse?> getRuningCourse();
 Future<AllCourseResponse?> getAllCourse();
 Future<CourseCategoryResponse?> getCategoryCourse(String? slug);
+Future<CourseDetailsResponse?> detailsCourse(String? id);
+
 
 
 
@@ -50,6 +53,17 @@ class AllCourseRemoteSourceImpl implements AllCourseRemoteSource {
     try{
       final result =await apiMethod.get(url: ApiEndpoint.CATEGORY_COURSE_LIST+"$slug",showResult: true,isBasic: true,duration: 30);
       return CourseCategoryResponse.fromJson(result!);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<CourseDetailsResponse?> detailsCourse(String? id)async {
+    // TODO: implement detailsCourse
+    try{
+      final result =await apiMethod.get(url: ApiEndpoint.COURSE_DETAILS+"$id",showResult: true,isBasic: true,duration: 30);
+      return CourseDetailsResponse.fromJson(result!);
     }catch (e) {
       throw ServerException(e.toString());
     }

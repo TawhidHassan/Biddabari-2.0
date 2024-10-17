@@ -1,6 +1,8 @@
 import 'package:biddabari_new/core/common/data/Category/Categorie.dart';
 import 'package:biddabari_new/features/AllCourse/presentation/pages/AllCourse_page.dart';
 import 'package:biddabari_new/features/AllCourse/presentation/pages/category_course_page.dart';
+import 'package:biddabari_new/features/AllCourse/presentation/pages/my_course_page.dart';
+import 'package:biddabari_new/features/Blog/presentation/pages/Blog_page.dart';
 import 'package:biddabari_new/features/BookStore/data/models/book/Book.dart';
 import 'package:biddabari_new/features/BookStore/presentation/pages/BookStore_page.dart';
 import 'package:biddabari_new/features/Checkout/presentation/pages/Checkout_page.dart';
@@ -8,19 +10,25 @@ import 'package:biddabari_new/features/ClassRoom/presentation/pages/ClassRoom_pa
 import 'package:biddabari_new/features/Exam/presentation/pages/Exam_page.dart';
 import 'package:biddabari_new/features/Login/presentation/pages/forget_password_page.dart';
 import 'package:biddabari_new/features/Login/presentation/pages/otp_page.dart';
+import 'package:biddabari_new/features/More/presentation/pages/More_page.dart';
+import 'package:biddabari_new/features/Notice/presentation/pages/Notice_page.dart';
 import 'package:biddabari_new/features/Teacher/presentation/pages/all_teacher_page.dart';
+import 'package:biddabari_new/features/dwonloads/presentation/pages/dwonloads_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../Dependenci Injection/init_dependencies.dart';
 import '../../features/BookStore/presentation/pages/book_details.dart';
+import '../../features/BookStore/presentation/pages/my_book_page.dart';
 import '../../features/Error/presentation/error_page.dart';
 import '../../features/Home/presentation/pages/Home_page.dart';
 import '../../features/Login/presentation/pages/Login_page.dart';
+import '../../features/Login/presentation/pages/change_password_page.dart';
 import '../../features/Login/presentation/pages/login_password_page.dart';
 import '../../features/Login/presentation/pages/set_new_password_page.dart';
 import '../../features/Login/presentation/pages/set_password_page.dart';
 import '../../features/Main/presentation/pages/Main_page.dart';
+import '../../features/More/presentation/pages/order/order_page.dart';
 import '../../features/Splash/presentation/pages/Splash_page.dart';
 import '../../features/Splash/presentation/pages/onbording_page.dart';
 import '../LocalDataBase/localdata.dart';
@@ -151,16 +159,85 @@ class AppRouter {
           ),
           routes: []
       ),
-     GoRoute(
-              name: Routes.bookDetailsPage,
-              path: Routes.bookDetailsPagePath,
-              pageBuilder: (context, state) =>  NoTransitionPage(
-                child: BookDetailsPage( book: state.extra as Book,),
-              ),
-              routes: []
+
+      GoRoute(
+                name: Routes.bookDetailsPage,
+                path: Routes.bookDetailsPagePath,
+                pageBuilder: (context, state) =>  NoTransitionPage(
+                  child: BookDetailsPage( book: state.extra as Book,),
+                ),
+                routes: []
+            ),
+
+
+      GoRoute(
+          name: Routes.morePage,
+          path: Routes.morePagePath,
+          pageBuilder: (context, state) =>  NoTransitionPage(
+            child: MorePage(),
           ),
+          routes: []
+      ),
 
+      GoRoute(
+          name: Routes.myCoursePage,
+          path: Routes.myCoursePagePath,
+          pageBuilder: (context, state) =>  NoTransitionPage(
+            child: MyCoursePage(),
+          ),
+          routes: []
+      ),
+      GoRoute(
+                name: Routes.myBookPage,
+                path: Routes.myBookPagePath,
+                pageBuilder: (context, state) =>  NoTransitionPage(
+                  child: MyBookPage(),
+                ),
+                routes: []
+            ),
+       GoRoute(
+            name: Routes.noticePage,
+            path: Routes.noticePagePath,
+            pageBuilder: (context, state) =>  NoTransitionPage(
+              child: NoticePage(),
+            ),
+            routes: []
+        ),
+       GoRoute(
+            name: Routes.blogPage,
+            path: Routes.blogPagePath,
+            pageBuilder: (context, state) =>  NoTransitionPage(
+              child: BlogPage(),
+            ),
+            routes: []
+        ),
 
+      GoRoute(
+          name: Routes.changePasswordPage,
+          path: Routes.changePasswordPagePath,
+          pageBuilder: (context, state) =>  NoTransitionPage(
+            child: ChangePasswordPage(),
+          ),
+          routes: []
+      ),
+
+      GoRoute(
+          name: Routes.myDwonloadsPage,
+          path: Routes.myDwonloadsPagePath,
+          pageBuilder: (context, state) =>  NoTransitionPage(
+            child: DwonloadsPage(),
+          ),
+          routes: []
+      ),
+
+      GoRoute(
+          name: Routes.myOrderPage,
+          path: Routes.myOrderPagePath,
+          pageBuilder: (context, state) =>  NoTransitionPage(
+            child: OrderPage(),
+          ),
+          routes: []
+      ),
 
       ///Bottom nav bar
       StatefulShellRoute.indexedStack(

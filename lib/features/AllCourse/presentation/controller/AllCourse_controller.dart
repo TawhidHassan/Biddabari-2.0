@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../data/models/AllCourseResponse.dart';
 import '../../data/models/CourseCategory/CourseCategoryData.dart';
 import '../../data/models/CourseCategory/CourseCategoryResponse.dart';
+import '../../data/models/course/CourseDetailsResponse.dart';
 import '../../domain/usecase/AllCourse_use_case.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ class AllCourseController extends GetxController implements GetxService{
   final popularCourseLoading=false.obs;
   final categoryCourseLoading=false.obs;
   final allCourseLoading=false.obs;
+  final deatilsCourseLoading=false.obs;
   final selectedcategory = 0.obs;
   final catetegoryList=["Courses","Mentors"].obs;
   Rx<CourseResponse?>  runingCourseResponse=Rx<CourseResponse?>(null);
@@ -24,6 +26,7 @@ class AllCourseController extends GetxController implements GetxService{
   Rx<CourseCategoryData?> courseCategoryData = Rx<CourseCategoryData?>(null);
 
   Rx<CourseCategoryResponse?> courseCategoryResponse = Rx<CourseCategoryResponse?>(null);
+  Rx<CourseDetailsResponse?> detailsCategoryResponse = Rx<CourseDetailsResponse?>(null);
 
   void selectCat(num? id, CourseCategoryData? courseCategoryDatax) {
     selectedcategory.value = id!.toInt();
@@ -94,6 +97,29 @@ class AllCourseController extends GetxController implements GetxService{
     });
     categoryCourseLoading.value=false;
   }
+  Future detailsCourse(String? id) async{
+    deatilsCourseLoading.value=true;
+    detailsCategoryResponse.value=null;
+    var rs= await allCourseUseCase!.detailsCourse(id);
+    rs.fold((l){
+      Fluttertoast.showToast(
+          msg: l.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    }, (r){
+      detailsCategoryResponse.value=r;
+
+      ///"pending", "start", "continue", "stop"
+    });
+    deatilsCourseLoading.value=false;
+  }
+
+
 
 
 }
