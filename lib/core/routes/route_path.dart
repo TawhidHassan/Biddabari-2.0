@@ -66,6 +66,10 @@ class Routes {
   static const String myBookPage = 'myBookPage';
   static const String myBookPagePath = '/myBookPage';
 
+
+  static const String bookCartPage = 'bookCartPage';
+  static const String bookCartPagePath = '/bookCartPage';
+
   static const String bookDetailsPage = 'bookDetailsPage';
   static const String bookDetailsPagePath = '/bookDetailsPage';
 
@@ -93,9 +97,22 @@ class Routes {
   static const String noticePage = 'noticePage';
   static const String noticePagePath = '/noticePage';
 
+  static const String noticeDetailsPage = 'noticeDetailsPage';
+  static const String noticeDetailsPagePath = 'noticeDetailsPage';
+
 
   static const String blogPage = 'blogPage';
   static const String blogPagePath = '/blogPage';
+
+  static const String blogDetailsPage = 'blogDetailsPage';
+  static const String blogDetailsPagePath = 'blogDetailsPage';
+
+  static const String jobPage = 'jobPage';
+  static const String jobPagePath = '/jobPage';
+
+
+  static const String jobDetailsPage = 'jobDetailsPage';
+  static const String jobDetailsPagePath = 'jobDetailsPage';
 
   static const String allTeacherPage = 'allTeacherPage';
   static const String allTeacherPagePath = '/allTeacherPage';
@@ -112,6 +129,9 @@ class Routes {
 
   static const String profilePage = 'profilePage';
   static const String profilePagePath = 'profilePage';
+
+  static const String profileEditPage = 'profileEditPage';
+  static const String profileEditPagePath = '/profileEditPage';
 
   static const String MainPage = 'mainPage';
   static const String MainPagePath = '/mainPage';

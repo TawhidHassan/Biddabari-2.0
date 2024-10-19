@@ -1,3 +1,4 @@
+import 'package:biddabari_new/core/common/widgets/Button/custom_button.dart';
 import 'package:biddabari_new/core/config/Strings/api_endpoint.dart';
 import 'package:biddabari_new/core/routes/route_path.dart';
 import 'package:biddabari_new/features/BookStore/data/models/book/Book.dart';
@@ -16,15 +17,15 @@ import '../../../../core/custom_assets/assets.gen.dart';
 
 
 
-class NoticeCard extends StatelessWidget {
+class BookCartCard extends StatelessWidget {
 
-  const NoticeCard({super.key,});
+  const BookCartCard({super.key,});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.pushNamed(Routes.noticeDetailsPage, );
+        // context.pushNamed(Routes.bookDetailsPage,extra:course );
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 12),
@@ -52,7 +53,7 @@ class NoticeCard extends StatelessWidget {
                 placeholder: (context, url) => LoadingWidget(),
                 errorWidget: (context, url, error){
                   return Container(
-                    height: 110,
+                    height: 120,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: Assets.images.course.provider(),
@@ -64,7 +65,7 @@ class NoticeCard extends StatelessWidget {
                 },
                 imageBuilder: (context, image) =>
                     Container(
-                      height: 110,
+                      height: 120,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: image,
@@ -87,7 +88,15 @@ class NoticeCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-
+                   
+                    Text(
+                      "Category",
+                      textAlign: TextAlign.justify,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style:mediumText(11,color: AppColors.orange400),
+                    ),
+                    SizedBox(height: 4,),
                     Text(
                       "Bank Job Special Care Live Batch-2",
                       textAlign: TextAlign.justify,
@@ -101,14 +110,70 @@ class NoticeCard extends StatelessWidget {
 
                     const SizedBox(height: 8),
 
-                    RichText(
-                      text: TextSpan(
-                        style: semiBoldText(14),
-                        children: <TextSpan>[
-                          TextSpan(text: 'Date: ',),
-                          TextSpan(text: '12/11/2021 ', style: TextStyle(color: Color(0xff167F71))),
-                        ],
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        RichText(
+                          text: TextSpan(
+
+                            style: extraBoldText(20,color: AppColors.primaryColor),
+                            children:[
+
+                              WidgetSpan(
+                                child:SizedBox(width: 6,),
+                              ),
+                              TextSpan(text: '7058/-',),
+
+
+
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          children: [
+
+                            // total rating count
+                            Text(
+                              '4.5',
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.black54,
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+                            RatingBar.builder(
+                              initialRating: 3,
+                              minRating: 1,
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              itemCount: 5,
+                              itemSize: 12,
+                              itemPadding: EdgeInsets.symmetric(
+                                  horizontal: 0.0),
+                              itemBuilder: (context, _) =>
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                              onRatingUpdate: (rating) {
+                                print(rating);
+                              },
+                            ),
+                            const SizedBox(width: 5),
+
+                            // total rating count
+                            Text(
+                              '(12)',
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.black54,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                      ],
                     ),
 
                     // price

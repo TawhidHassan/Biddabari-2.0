@@ -20,7 +20,7 @@ class NoticePage extends StatelessWidget {
             padding: EdgeInsets.all(18),
             child: Assets.icons.backArrow.svg()),
       ),
-      title: Text(''),
+      title: Text('Notices'),
      ),
       body: Container(
         height: 1.0.sw,

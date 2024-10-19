@@ -117,6 +117,9 @@ class MorePage extends StatelessWidget {
             SizedBox(height: 32,),
 
             MoreOtptionCard(
+              onTap: (){
+                context.pushNamed(Routes.profileEditPage);
+              },
               title: "Edit Profile",
               icon: Assets.icons.people.path,
             ),
@@ -158,6 +161,9 @@ class MorePage extends StatelessWidget {
             ),
 
             MoreOtptionCard(
+              onTap: (){
+                context.pushNamed(Routes.jobPage);
+              },
               title: "Job Circular",
               icon: Assets.icons.job.path,
             ),
@@ -184,6 +190,9 @@ class MorePage extends StatelessWidget {
 
 
             MoreOtptionCard(
+              onTap: (){
+                context.pushNamed(Routes.bookCartPage);
+              },
               title: "Book cart",
               icon: Assets.icons.bookCart.path,
             ),

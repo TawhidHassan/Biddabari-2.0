@@ -8,6 +8,7 @@ import 'package:biddabari_new/features/BookStore/presentation/pages/BookStore_pa
 import 'package:biddabari_new/features/Checkout/presentation/pages/Checkout_page.dart';
 import 'package:biddabari_new/features/ClassRoom/presentation/pages/ClassRoom_page.dart';
 import 'package:biddabari_new/features/Exam/presentation/pages/Exam_page.dart';
+import 'package:biddabari_new/features/Job/presentation/pages/Job_page.dart';
 import 'package:biddabari_new/features/Login/presentation/pages/forget_password_page.dart';
 import 'package:biddabari_new/features/Login/presentation/pages/otp_page.dart';
 import 'package:biddabari_new/features/More/presentation/pages/More_page.dart';
@@ -18,17 +19,22 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../Dependenci Injection/init_dependencies.dart';
+import '../../features/Blog/presentation/pages/blog_details_page.dart';
+import '../../features/BookStore/presentation/pages/book_cart.dart';
 import '../../features/BookStore/presentation/pages/book_details.dart';
 import '../../features/BookStore/presentation/pages/my_book_page.dart';
 import '../../features/Error/presentation/error_page.dart';
 import '../../features/Home/presentation/pages/Home_page.dart';
+import '../../features/Job/presentation/pages/Job_details_page.dart';
 import '../../features/Login/presentation/pages/Login_page.dart';
 import '../../features/Login/presentation/pages/change_password_page.dart';
 import '../../features/Login/presentation/pages/login_password_page.dart';
+import '../../features/Login/presentation/pages/profile_edit_page.dart';
 import '../../features/Login/presentation/pages/set_new_password_page.dart';
 import '../../features/Login/presentation/pages/set_password_page.dart';
 import '../../features/Main/presentation/pages/Main_page.dart';
 import '../../features/More/presentation/pages/order/order_page.dart';
+import '../../features/Notice/presentation/pages/notice_details_page.dart';
 import '../../features/Splash/presentation/pages/Splash_page.dart';
 import '../../features/Splash/presentation/pages/onbording_page.dart';
 import '../LocalDataBase/localdata.dart';
@@ -195,13 +201,30 @@ class AppRouter {
                 ),
                 routes: []
             ),
+      GoRoute(
+                name: Routes.bookCartPage,
+                path: Routes.bookCartPagePath,
+                pageBuilder: (context, state) =>  NoTransitionPage(
+                  child: BookCartPage(),
+                ),
+                routes: []
+            ),
        GoRoute(
             name: Routes.noticePage,
             path: Routes.noticePagePath,
             pageBuilder: (context, state) =>  NoTransitionPage(
               child: NoticePage(),
             ),
-            routes: []
+            routes: [
+              GoRoute(
+                  name: Routes.noticeDetailsPage,
+                  path: Routes.noticeDetailsPagePath,
+                  pageBuilder: (context, state) =>  NoTransitionPage(
+                    child: NoticeDetailsPage(),
+                  ),
+                  routes: []
+              ),
+            ]
         ),
        GoRoute(
             name: Routes.blogPage,
@@ -209,8 +232,36 @@ class AppRouter {
             pageBuilder: (context, state) =>  NoTransitionPage(
               child: BlogPage(),
             ),
-            routes: []
+            routes: [
+              GoRoute(
+                  name: Routes.blogDetailsPage,
+                  path: Routes.blogDetailsPagePath,
+                  pageBuilder: (context, state) =>  NoTransitionPage(
+                    child: BlogDetailsPage(),
+                  ),
+                  routes: []
+              ),
+            ]
         ),
+
+      GoRoute(
+            name: Routes.jobPage,
+            path: Routes.jobPagePath,
+            pageBuilder: (context, state) =>  NoTransitionPage(
+              child: JobPage(),
+            ),
+            routes: [
+              GoRoute(
+                  name: Routes.jobDetailsPage,
+                  path: Routes.jobDetailsPagePath,
+                  pageBuilder: (context, state) =>  NoTransitionPage(
+                    child: JobDetailsPage(),
+                  ),
+                  routes: []
+              ),
+            ]
+        ),
+
 
       GoRoute(
           name: Routes.changePasswordPage,
@@ -235,6 +286,15 @@ class AppRouter {
           path: Routes.myOrderPagePath,
           pageBuilder: (context, state) =>  NoTransitionPage(
             child: OrderPage(),
+          ),
+          routes: []
+      ),
+
+      GoRoute(
+          name: Routes.profileEditPage,
+          path: Routes.profileEditPagePath,
+          pageBuilder: (context, state) =>  NoTransitionPage(
+            child: ProfileEditPage(),
           ),
           routes: []
       ),

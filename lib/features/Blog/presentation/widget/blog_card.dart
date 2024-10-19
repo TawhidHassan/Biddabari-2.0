@@ -25,7 +25,7 @@ class BlogCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // context.pushNamed(Routes.bookDetailsPage,extra:course );
+        context.pushNamed(Routes.blogDetailsPage );
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 12),
