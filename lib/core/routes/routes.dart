@@ -35,8 +35,11 @@ import '../../features/Login/presentation/pages/set_password_page.dart';
 import '../../features/Main/presentation/pages/Main_page.dart';
 import '../../features/More/presentation/pages/order/order_page.dart';
 import '../../features/Notice/presentation/pages/notice_details_page.dart';
+import '../../features/NotificationApp/presentation/pages/NotificationApp_page.dart';
+import '../../features/SaveIteam/presentation/pages/SaveIteam_page.dart';
 import '../../features/Splash/presentation/pages/Splash_page.dart';
 import '../../features/Splash/presentation/pages/onbording_page.dart';
+import '../../features/Teacher/presentation/pages/teacher_details_page.dart';
 import '../LocalDataBase/localdata.dart';
 import '/core/routes/route_path.dart';
 
@@ -165,6 +168,14 @@ class AppRouter {
           ),
           routes: []
       ),
+      GoRoute(
+          name: Routes.teacherDetailsPage,
+          path: Routes.teacherDetailsPagePath,
+          pageBuilder: (context, state) => const NoTransitionPage(
+            child: TeacherDetailsPage(),
+          ),
+          routes: []
+      ),
 
       GoRoute(
                 name: Routes.bookDetailsPage,
@@ -181,6 +192,22 @@ class AppRouter {
           path: Routes.morePagePath,
           pageBuilder: (context, state) =>  NoTransitionPage(
             child: MorePage(),
+          ),
+          routes: []
+      ),
+      GoRoute(
+          name: Routes.saveIteamPage,
+          path: Routes.saveIteamPagePath,
+          pageBuilder: (context, state) =>  NoTransitionPage(
+            child: SaveIteamPage(),
+          ),
+          routes: []
+      ),
+      GoRoute(
+          name: Routes.notificationPage,
+          path: Routes.notificationPagePath,
+          pageBuilder: (context, state) =>  NoTransitionPage(
+            child: NotificationAppPage(),
           ),
           routes: []
       ),

@@ -174,6 +174,13 @@ class MorePage extends StatelessWidget {
               title: "Blog",
               icon: Assets.icons.blog.path,
             ),
+            MoreOtptionCard(
+              onTap: (){
+                context.pushNamed(Routes.saveIteamPage);
+              },
+              title: "Save Item",
+              icon: Assets.icons.saveGreenSvg.path,
+            ),
 
             MoreOtptionCard(
               onTap: (){

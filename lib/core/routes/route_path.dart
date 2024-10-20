@@ -46,6 +46,12 @@ class Routes {
   static const String morePage = 'morePage';
   static const String morePagePath = '/morePage';
 
+  static const String saveIteamPage = 'saveIteamPage';
+  static const String saveIteamPagePath = '/saveIteamPage';
+
+  static const String notificationPage = 'notificationPage';
+  static const String notificationPagePath = '/notificationPage';
+
 
   /// home page
   static const String HomePage = 'home';
@@ -116,6 +122,9 @@ class Routes {
 
   static const String allTeacherPage = 'allTeacherPage';
   static const String allTeacherPagePath = '/allTeacherPage';
+
+  static const String teacherDetailsPage = 'teacherDetailsPage';
+  static const String teacherDetailsPagePath = '/teacherDetailsPage';
 
 
   static const String checkOutPage = 'checkOutPage';

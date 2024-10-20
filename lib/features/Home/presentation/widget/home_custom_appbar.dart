@@ -58,18 +58,23 @@ class HomeCustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                 margin: EdgeInsets.only(right: 12),
                 child: Row(
                   children: [
-                    Container(
-                      width: 32,
-                      height: 32,
-                      padding: EdgeInsets.all(6),
-                      decoration: ShapeDecoration(
-                        shape: OvalBorder(
-                          side: BorderSide(
-                              width: 1, color: AppColors.primaryColor),
-                        ),
+                    InkWell(
+                      onTap:(){
+                        context.pushNamed(Routes.notificationPage);
+                      },
+                      child: Container(
+                        width: 32,
+                        height: 32,
+                        padding: EdgeInsets.all(6),
+                        decoration: ShapeDecoration(
+                          shape: OvalBorder(
+                            side: BorderSide(
+                                width: 1, color: AppColors.primaryColor),
+                          ),
 
+                        ),
+                        child: Assets.icons.bell.svg(),
                       ),
-                      child: Assets.icons.bell.svg(),
                     ),
                     SizedBox(width: 14,),
                     data.data!.get("token") != null ?
