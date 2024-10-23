@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import '../../domain/entities/Blog.dart';
+import 'Blog/Blog.dart';
 
 
 part 'blog_model.g.dart';
@@ -8,7 +9,7 @@ part 'blog_model.g.dart';
 class BlogModel extends Blog {
 
   String? name;
-  BlogModel(this.name,);
+  BlogModel(this.name,) : super(null, null, null, null, null, null, '', '', '', '', '', '', '', '', null);
 
 
 

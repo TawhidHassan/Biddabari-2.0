@@ -16,6 +16,7 @@ Future<void> initDependencies() async {
   _initMore();
   _initDwonloads();
   _initNotice();
+  _initBlog();
 
 
 
@@ -303,6 +304,25 @@ void _initNotice(){
     ..registerFactory(
           () => NoticeUseCase(
          noticeRepository:   serviceLocator(),
+      ),
+    );
+}
+void _initBlog(){
+  /// Datasource
+  serviceLocator
+    ..registerFactory<BlogRemoteSource>(
+          () => BlogRemoteSourceImpl(apiMethod: serviceLocator(),
+      ),
+    )/// Repository
+    ..registerFactory<BlogRepository>(
+          () => BlogRepositoryImpl(
+          connectionChecker:  serviceLocator(),
+          remoteSource:  serviceLocator()
+      ),
+    )/// Usecases
+    ..registerFactory(
+          () => BlogUseCase(
+         blogRepository:   serviceLocator(),
       ),
     );
 }

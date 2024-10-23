@@ -1,6 +1,7 @@
 import 'package:biddabari_new/core/common/widgets/Button/custom_button.dart';
 import 'package:biddabari_new/core/config/Strings/api_endpoint.dart';
 import 'package:biddabari_new/core/routes/route_path.dart';
+import 'package:biddabari_new/features/Blog/data/models/Blog/Blog.dart';
 import 'package:biddabari_new/features/BookStore/data/models/book/Book.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -13,19 +14,21 @@ import '../../../../core/common/widgets/loading/loading_widget.dart';
 import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/config/util/text_style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
+import '../../../../core/utils/format_date.dart';
 
 
 
 
 class BlogCard extends StatelessWidget {
+  final Blog?  blog;
 
-  const BlogCard({super.key,});
+  const BlogCard({super.key, this.blog,});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.pushNamed(Routes.blogDetailsPage );
+        context.pushNamed(Routes.blogDetailsPage,extra: blog! );
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 12),
@@ -49,7 +52,7 @@ class BlogCard extends StatelessWidget {
             Expanded(
               flex: 3,
               child: CachedNetworkImage(
-                imageUrl:ApiEndpoint.imageBaseUrl+"course!.banner!",
+                imageUrl:blog!.image!,
                 placeholder: (context, url) => LoadingWidget(),
                 errorWidget: (context, url, error){
                   return Container(
@@ -90,14 +93,14 @@ class BlogCard extends StatelessWidget {
                   children: [
                     DiscountBadge(
                       textSize: 8,
-                      text: 'বিসিএস',
+                      text: blog!.blog_category!.name??"",
                       backgroundColor: Color(0xFFEB6A20)
                           .withOpacity(0.20),
                       foregroundColor: Color(0xFFEB6A20),
                     ),
                     SizedBox(height: 8,),
                     Text(
-                      "Bank Job Special Care Live Batch-2",
+                      blog!.title??'',
                       textAlign: TextAlign.justify,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -139,7 +142,7 @@ class BlogCard extends StatelessWidget {
                               WidgetSpan(
                                 child:SizedBox(width: 6,),
                               ),
-                              TextSpan(text: '11/11/2011', style: TextStyle(color: Color(0xff777777))),
+                              TextSpan(text: getCustomFormattedDateTime(blog!.updated_at??'','yyy-MMM-dd').toString(), style: TextStyle(color: Color(0xff777777))),
                               WidgetSpan(
                                 child:SizedBox(width: 6,),
                               ),
@@ -156,7 +159,7 @@ class BlogCard extends StatelessWidget {
                               WidgetSpan(
                                 child:SizedBox(width: 6,),
                               ),
-                              TextSpan(text: '12:11pm', style: TextStyle(color: Color(0xff777777))),
+                              TextSpan(text:  getCustomFormattedDateTime(blog!.updated_at??'','h:mm a').toString(), style: TextStyle(color: Color(0xff777777))),
 
 
                             ],
@@ -166,7 +169,7 @@ class BlogCard extends StatelessWidget {
                         CustomButton(
                           height: 30,
                            width: 100,
-                           onTap: (){},
+                           onTap: null,
                            isBorder: true,
                           textColor: AppColors.primaryColor,
                           title: "Read more",

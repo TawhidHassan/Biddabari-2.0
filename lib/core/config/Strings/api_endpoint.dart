@@ -44,6 +44,9 @@ class ApiEndpoint {
 
   static  String NOTICE_LIST= 'all-notices'.addBaseURl;
 
+  static  String BLOG_LIST= 'all-blogs?page='.addBaseURl;
+  static  String BLOG_DETAILS= 'blog-details/'.addBaseURl;
+
 
 
 

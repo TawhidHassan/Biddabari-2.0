@@ -20,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../Dependenci Injection/init_dependencies.dart';
+import '../../features/Blog/data/models/Blog/Blog.dart';
 import '../../features/Blog/presentation/pages/blog_details_page.dart';
 import '../../features/BookStore/presentation/pages/book_cart.dart';
 import '../../features/BookStore/presentation/pages/book_details.dart';
@@ -267,7 +268,9 @@ class AppRouter {
                   name: Routes.blogDetailsPage,
                   path: Routes.blogDetailsPagePath,
                   pageBuilder: (context, state) =>  NoTransitionPage(
-                    child: BlogDetailsPage(),
+                    child: BlogDetailsPage(
+                       blog:state.extra as Blog
+                    ),
                   ),
                   routes: []
               ),
