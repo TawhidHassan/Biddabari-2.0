@@ -1,8 +1,11 @@
 import 'package:biddabari_new/Dependenci%20Injection/init_dependencies.dart';
 import 'package:biddabari_new/core/LocalDataBase/localdata.dart';
 import 'package:biddabari_new/core/config/Strings/api_endpoint.dart';
+import 'package:biddabari_new/features/Home/presentation/controller/Home_controller.dart';
 import 'package:biddabari_new/features/profile/presentation/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:go_router/go_router.dart';
@@ -21,22 +24,26 @@ class HomeCustomAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    serviceLocator<DBHelper>().getUser();
-    return FutureBuilder(
-        future: serviceLocator<DBHelper>().getUser(),
-        builder: (context, data) {
+    Future.delayed(Duration.zero, () {
+      Get.find<HomeController>().getUserData(context);
+    });
+
+    return GetBuilder<HomeController>(
+      assignId: true,
+      builder: (controller) {
+        return Obx(() {
           return AppBar(
             automaticallyImplyLeading: false,
             backgroundColor: AppColors.primaryBackground,
             title: Container(
               padding: EdgeInsets.symmetric(horizontal: 0),
               color: AppColors.primaryBackground,
-              child: data.data!.get("token") != null ?
+              child: controller.userName.value != "" ?
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                      data.data!.get("name"),
+                      controller.userName.value,
                       style: PoppinsSemiBoldExtra.copyWith(
                         fontSize: 16,
                       )
@@ -59,7 +66,7 @@ class HomeCustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                 child: Row(
                   children: [
                     InkWell(
-                      onTap:(){
+                      onTap: () {
                         context.pushNamed(Routes.notificationPage);
                       },
                       child: Container(
@@ -77,7 +84,7 @@ class HomeCustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                       ),
                     ),
                     SizedBox(width: 14,),
-                    data.data!.get("token") != null ?
+                    controller.userName.value != "" ?
                     InkWell(
                       onTap: () {
                         context.pushNamed(Routes.loginPage);
@@ -86,20 +93,27 @@ class HomeCustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                         assignId: true,
                         builder: (logic) {
                           return Obx(() {
-                            return logic.circuler.value?CircularProgressIndicator():
+                            return logic.circuler.value
+                                ? CircularProgressIndicator()
+                                :
                             InkWell(
-                              onTap: (){
+                              onTap: () {
                                 context.pushNamed(Routes.morePage);
                               },
                               child: CachedNetworkImage(
-                                  imageUrl: ApiEndpoint.imageBaseUrl+logic.profileResponse.value!.student!.image.toString(),
+                                  imageUrl: ApiEndpoint.imageBaseUrl +
+                                      logic.profileResponse.value!
+                                          .student!
+                                          .image.toString(),
                                   // imageUrl: ApiEndpoint.imageBaseUrl+controller.response.value!.myProfile!.image!,
-                                  imageBuilder: (context, imageProvider) =>
+                                  imageBuilder: (context,
+                                      imageProvider) =>
                                       Container(
                                         height: 32,
                                         width: 32,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
+                                          borderRadius: BorderRadius
+                                              .circular(
                                               100),
                                           image: DecorationImage(
                                               image: imageProvider,
@@ -118,7 +132,8 @@ class HomeCustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                                         decoration: ShapeDecoration(
                                           shape: OvalBorder(
                                             side: BorderSide(width: 1,
-                                                color: AppColors.primaryColor),
+                                                color: AppColors
+                                                    .primaryColor),
                                           ),
                                         ),
                                         alignment: Alignment.center,
@@ -156,5 +171,7 @@ class HomeCustomAppbar extends StatelessWidget implements PreferredSizeWidget {
             ],
           );
         });
+      },
+    );
   }
 }

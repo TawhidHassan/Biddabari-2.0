@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:biddabari_new/features/Home/presentation/controller/Home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -17,7 +19,7 @@ class HomeSliderComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration.zero, () {
-      // Get.find<HomeController>().getSlider();
+      Get.find<HomeController>().getSlider();
     });
     return GetBuilder<HomeController>(
       assignId: true,
@@ -60,14 +62,11 @@ class HomeSliderComponent extends StatelessWidget {
                           itemBuilder: (BuildContext context,
                               int itemIndex, int pageIndex) =>
                               CachedNetworkImage(
-                                imageUrl: ApiEndpoint.imageBaseUrl +
+                                imageUrl:
                                     controller.sliderResponse.value!.sliderCourses![itemIndex].image!,
                                 imageBuilder: (context, imageProvider) =>
                                     Container(
-                                      width: MediaQuery
-                                          .of(context)
-                                          .size
-                                          .width,
+                                      width: MediaQuery.of(context).size.width,
                                       height: 164,
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
@@ -82,25 +81,22 @@ class HomeSliderComponent extends StatelessWidget {
                                 placeholder: (context, url) => LoadingWidget(),
                                 errorWidget: (context, url, error) =>
                                     Container(
-                                      width: MediaQuery
-                                          .of(context)
-                                          .size
-                                          .width,
+                                      width: MediaQuery.of(context).size.width,
                                       height: 164,
                                       decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image: Assets.images.slider.provider(),
-                                              fit: BoxFit.fill
-                                          ),
+                                          // image: DecorationImage(
+                                          //     image: Assets.images.slider.provider(),
+                                          //     fit: BoxFit.fill
+                                          // ),
                                           color: const Color(0xfff7ffff),
                                           borderRadius: BorderRadius.circular(16)
                                       ),
                                       alignment: Alignment.center,
                                     ),
                               ),
-                          options: CarouselOptions(
+                            options: CarouselOptions(
                             onPageChanged: (index, reason) {
-
+                              controller.sliderIndex.value=index;
                             },
                             enableInfiniteScroll: true,
                             autoPlay: true,
@@ -111,8 +107,8 @@ class HomeSliderComponent extends StatelessWidget {
                         ),
                         SizedBox(height: 16,),
                         AnimatedSmoothIndicator(
-                          activeIndex: 1,
-                          count: 3,
+                          activeIndex: controller.sliderIndex.value,
+                          count: controller.sliderResponse.value!.sliderCourses!.length,
                           effect: const ExpandingDotsEffect(
                             activeDotColor: AppColors.primaryColor,
                             dotHeight: 8,

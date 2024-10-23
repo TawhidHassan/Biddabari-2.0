@@ -14,7 +14,7 @@ Notice _$NoticeFromJson(Map<String, dynamic> json) => Notice(
       json['body'] as String?,
       json['type'] as String?,
       json['slug'] as String?,
-      json['status'] as int?,
+      (json['status'] as num?)?.toInt(),
       json['created_at'] as String?,
       json['updated_at'] as String?,
     );

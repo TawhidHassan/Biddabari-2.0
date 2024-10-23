@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import '../../../../core/common/data/Category/Categorie.dart';
 import '../../domain/entities/Blog.dart';
 import 'Blog/Blog.dart';
 

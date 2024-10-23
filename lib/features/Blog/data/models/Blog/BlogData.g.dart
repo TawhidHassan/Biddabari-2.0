@@ -7,7 +7,7 @@ part of 'BlogData.dart';
 // **************************************************************************
 
 BlogData _$BlogDataFromJson(Map<String, dynamic> json) => BlogData(
-      json['current_page'] as int?,
+      (json['current_page'] as num?)?.toInt(),
       (json['data'] as List<dynamic>?)
           ?.map((e) => Blog.fromJson(e as Map<String, dynamic>))
           .toList(),

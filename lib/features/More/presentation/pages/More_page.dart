@@ -4,6 +4,7 @@ import 'package:biddabari_new/features/More/presentation/widget/more_otption_car
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive/hive.dart';
 
 import '../../../../core/custom_assets/assets.gen.dart';
 
@@ -207,6 +208,18 @@ class MorePage extends StatelessWidget {
             MoreOtptionCard(
               title: "Language",
               icon: Assets.icons.language.path,
+            ),
+
+            MoreOtptionCard(
+              onTap: ()async{
+                var users = await Hive.openBox('users');
+                users.clear().then((value) {
+                 context.goNamed(Routes.loginPage);
+                });
+
+              },
+              title: "Logout",
+              icon: Assets.icons.logout.path,
             ),
 
 

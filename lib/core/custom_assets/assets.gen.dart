@@ -123,6 +123,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/language.svg
   SvgGenImage get language => const SvgGenImage('assets/icons/language.svg');
 
+  /// File path: assets/icons/logout.svg
+  SvgGenImage get logout => const SvgGenImage('assets/icons/logout.svg');
+
   /// File path: assets/icons/notice.svg
   SvgGenImage get notice => const SvgGenImage('assets/icons/notice.svg');
 
@@ -182,6 +185,7 @@ class $AssetsIconsGen {
         homeInactive,
         job,
         language,
+        logout,
         notice,
         people,
         photo,

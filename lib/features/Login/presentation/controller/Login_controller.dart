@@ -9,6 +9,8 @@ import 'package:logger/logger.dart';
 import '../../../../core/Data/Location/location/location_model.dart';
 import '../../../../core/LocalDataBase/localdata.dart';
 import '../../../../core/routes/route_path.dart';
+import '../../../Home/presentation/controller/Home_controller.dart';
+import '../../../profile/presentation/controller/profile_controller.dart';
 import '../../data/models/Auth/ForgetPasswordResponse.dart';
 import '../../data/models/Auth/OtpResponse.dart';
 import '../../domain/usecase/Login_use_case.dart';
@@ -212,7 +214,10 @@ class LoginController extends GetxController implements GetxService{
          textColor: Colors.white,
          fontSize: 16.0
      );
+     Get.find<ProfileController>().getProfile(contex,false);
+     Get.find<HomeController>().getUserData(contex);
      contex.goNamed(Routes.mainPage);
+
     });
     circuler.value=false;
     return loginResponse.value;
@@ -248,7 +253,10 @@ class LoginController extends GetxController implements GetxService{
           textColor: Colors.white,
           fontSize: 16.0
       );
+      Get.find<ProfileController>().getProfile(context,false);
+      Get.find<HomeController>().getUserData(context);
       context.goNamed(Routes.mainPage);
+
     });
     circuler.value=false;
     return loginResponse.value;

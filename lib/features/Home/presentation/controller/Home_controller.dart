@@ -1,6 +1,8 @@
 
 import 'package:biddabari_new/core/common/data/Slider/SliderResponse.dart';
 import 'package:get/get.dart';
+import '../../../../Dependenci Injection/init_dependencies.dart';
+import '../../../../core/LocalDataBase/localdata.dart';
 import '../../../../core/common/data/Category/CategoryResponse.dart';
 import '../../domain/usecase/Home_use_case.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,7 @@ class HomeController extends GetxController implements GetxService{
   HomeController({ this.homeUseCase });
 
 
+  final sliderIndex=0.obs;
   final categoryLoading=false.obs;
   final sliderLoading=false.obs;
 
@@ -55,6 +58,16 @@ class HomeController extends GetxController implements GetxService{
     sliderResponse.value=r;
    });
    sliderLoading.value=false;
+  }
+
+
+ final userName="".obs;
+  Future getUserData(BuildContext context)async {
+   serviceLocator<DBHelper>().getUser().then((onValue){
+    userName.value=onValue.get("name");
+   });
+
+
   }
 
 

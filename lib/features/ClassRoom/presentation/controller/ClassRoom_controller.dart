@@ -1,4 +1,6 @@
 
+import 'package:biddabari_new/Dependenci%20Injection/init_dependencies.dart';
+import 'package:biddabari_new/core/LocalDataBase/localdata.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../../../AllCourse/data/models/Student/CourseOrderResponse.dart';
@@ -22,7 +24,11 @@ class ClassRoomController extends GetxController implements GetxService{
   final myClassCourseLoading=false.obs;
   final myClassLoading=false.obs;
   final myClassExamLoading=false.obs;
+  final token="".obs;
   Future getMyCourse() async {
+    serviceLocator<DBHelper>().getToken().then((onValue){
+      token.value=onValue;
+    });
     myClassCourseLoading.value = true;
     var rs= await classRoomUseCase!.getMyCourse();
     rs.fold((l){

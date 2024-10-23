@@ -43,7 +43,7 @@ class BlogDetailsPage extends StatelessWidget {
           return Obx(() {
             return controller.blogDetailsCircle.value?LoadingWidget():
             Container(
-              height: 1.0.sw,
+              height: 1.0.sh,
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: SingleChildScrollView(
                 child: Column(
@@ -94,7 +94,7 @@ class BlogDetailsPage extends StatelessWidget {
                         SizedBox(width: 12,),
                       ],
                     ),
-                    SizedBox(height: 4,),
+                    SizedBox(height: 12,),
                     CachedNetworkImage(
                       imageUrl:controller.blogDetailsResponse.value!.blog!.image!,
                       placeholder: (context, url) => LoadingWidget(),
