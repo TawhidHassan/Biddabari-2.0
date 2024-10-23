@@ -1,6 +1,8 @@
 
+import 'package:biddabari_new/features/Notice/data/models/Notice/NoticeResponse.dart';
 import 'package:fpdart/fpdart.dart';
 import '../../../../core/error/failures.dart';
+import '../../data/models/Notice/Notice.dart';
 import '../entities/Notice.dart';
 import '../repositories/Notice_repository.dart';
 import '../../../../core/usecase/usecase.dart';
@@ -15,12 +17,13 @@ NoticeUseCase({this.noticeRepository});
     throw UnimplementedError();
     }
 
-//
-// @override
-// Future<Either<Failure, LoginResponseModel>> call(GetLoginParams params) {
-// // TODO: implement call
-// return loginRepository!.login(params.email!,params.deviceToken!, params.password!, params.isPG!);
-// }
+
+
+@override
+Future<Either<Failure, NoticeResponse>> getNotice() {
+// TODO: implement call
+return noticeRepository!.getNotice();
+}
 
 }
 

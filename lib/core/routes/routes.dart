@@ -12,6 +12,7 @@ import 'package:biddabari_new/features/Job/presentation/pages/Job_page.dart';
 import 'package:biddabari_new/features/Login/presentation/pages/forget_password_page.dart';
 import 'package:biddabari_new/features/Login/presentation/pages/otp_page.dart';
 import 'package:biddabari_new/features/More/presentation/pages/More_page.dart';
+import 'package:biddabari_new/features/Notice/data/models/Notice/Notice.dart';
 import 'package:biddabari_new/features/Notice/presentation/pages/Notice_page.dart';
 import 'package:biddabari_new/features/Teacher/presentation/pages/all_teacher_page.dart';
 import 'package:biddabari_new/features/dwonloads/presentation/pages/dwonloads_page.dart';
@@ -247,7 +248,9 @@ class AppRouter {
                   name: Routes.noticeDetailsPage,
                   path: Routes.noticeDetailsPagePath,
                   pageBuilder: (context, state) =>  NoTransitionPage(
-                    child: NoticeDetailsPage(),
+                    child: NoticeDetailsPage(
+                      notice: state.extra as Notice
+                    ),
                   ),
                   routes: []
               ),

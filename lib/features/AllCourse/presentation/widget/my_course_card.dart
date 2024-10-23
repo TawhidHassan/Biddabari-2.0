@@ -13,13 +13,14 @@ import '../../../../core/common/widgets/loading/loading_widget.dart';
 import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/config/util/text_style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
+import '../../data/models/Student/CourseOrder.dart';
 
 
 
 
 class MyCourseCard extends StatelessWidget {
-
-  const MyCourseCard({super.key,});
+  final CourseOrder? course;
+  const MyCourseCard({super.key, this.course,});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class MyCourseCard extends StatelessWidget {
             Expanded(
               flex: 3,
               child: CachedNetworkImage(
-                imageUrl:ApiEndpoint.imageBaseUrl+"course!.banner!",
+                imageUrl:ApiEndpoint.imageBaseUrl+course!.course!.banner!,
                 placeholder: (context, url) => LoadingWidget(),
                 errorWidget: (context, url, error){
                   return Container(
@@ -81,7 +82,7 @@ class MyCourseCard extends StatelessWidget {
 
             // title
             Expanded(
-              flex: 8,
+              flex: 7,
               child: Padding(
                 padding: const EdgeInsets.only(right: 18,top: 12,bottom: 12),
                 child: Column(
@@ -89,16 +90,22 @@ class MyCourseCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
 
-                    Text(
-                      "Category",
-                      textAlign: TextAlign.justify,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style:mediumText(11,color: AppColors.orange400),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Category",
+                          textAlign: TextAlign.justify,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style:mediumText(11,color: AppColors.orange400),
+                        ),
+                        Assets.icons.done.image()
+                      ],
                     ),
                     SizedBox(height: 4,),
                     Text(
-                      "Bank Job Special Care Live Batch-2",
+                      course!.course!.title??"",
                       textAlign: TextAlign.justify,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -113,22 +120,22 @@ class MyCourseCard extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        RichText(
-                          text: TextSpan(
-
-                            style: extraBoldText(20,color: AppColors.primaryColor),
-                            children:[
-
-                              WidgetSpan(
-                                child:SizedBox(width: 6,),
-                              ),
-                              TextSpan(text: '7058/-',),
-
-
-
-                            ],
-                          ),
-                        ),
+                        // RichText(
+                        //   text: TextSpan(
+                        //
+                        //     style: extraBoldText(20,color: AppColors.primaryColor),
+                        //     children:[
+                        //
+                        //       WidgetSpan(
+                        //         child:SizedBox(width: 6,),
+                        //       ),
+                        //       TextSpan(text: '7058/-',),
+                        //
+                        //
+                        //
+                        //     ],
+                        //   ),
+                        // ),
                         const SizedBox(height: 8),
                         Row(
                           children: [

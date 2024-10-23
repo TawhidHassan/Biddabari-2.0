@@ -1,6 +1,8 @@
+import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
 import 'package:biddabari_new/features/More/presentation/controller/More_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:go_router/go_router.dart';
@@ -15,6 +17,9 @@ class OrderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration.zero,(){
+      Get.find<MoreController>().getMyOrder();
+    });
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -30,49 +35,72 @@ class OrderPage extends StatelessWidget {
       body: GetBuilder<MoreController>(
         assignId: true,
         builder: (controller) {
-          return Container(
-            height: 1.0.sh,
-            width: 1.0.sw,
-            color: AppColors.primaryBackground,
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 50,
-                    width: 1.0.sw,
-                    child: Row(
-                      children: ["Pending","Confirm"].map((cat){
-                        return Expanded(
-                          child: HorizontalCategoryCard(
-                            title: cat,
-                          ),
-                        );
-                      }).toList(),
+          return Obx(() {
+            return Container(
+              height: 1.0.sh,
+              width: 1.0.sw,
+              color: AppColors.primaryBackground,
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: controller.orderLoading.value?LoadingWidget():
+              CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: 50,
+                      width: 1.0.sw,
+                      child: Row(
+                        children: ["Pending", "Confirm"].map((cat) {
+                          return Expanded(
+                            child: InkWell(
+                              onTap: (){
+                                controller.selectFilter.value=cat;
+                              },
+                              child: HorizontalCategoryCard(
+                                active: controller.selectFilter.value==cat,
+                                title: cat,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+
+                  ),
+                  SliverToBoxAdapter(
+                    child: SizedBox(height: 12,),
+                  ),
+                  SliverToBoxAdapter(
+                    child:controller.selectFilter.value=="Pending"?
+                    ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: controller.pendingList.value.length,
+                        itemBuilder: (context, index) {
+                          return MyOrderCard(
+                            order: controller.pendingList.value[index],
+                          );
+                        }
+                    )
+                    :
+                    ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: controller.confirmList.value.length,
+                        itemBuilder: (context, index) {
+                          return MyOrderCard(
+                            order: controller.confirmList.value[index],
+                          );
+                        }
                     ),
                   ),
-
-                ),
-                SliverToBoxAdapter(
-                  child: SizedBox(height: 12,),
-                ),
-                SliverToBoxAdapter(
-                  child:ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: 10,
-                      itemBuilder: (context,index){
-                        return MyOrderCard();
-                      }
+                  SliverToBoxAdapter(
+                    child: SizedBox(height: 80,),
                   ),
-                ),
-                SliverToBoxAdapter(
-                  child: SizedBox(height: 80,),
-                ),
 
-              ],
-            ),
-          );
+                ],
+              ),
+            );
+          });
         },
       ),
 

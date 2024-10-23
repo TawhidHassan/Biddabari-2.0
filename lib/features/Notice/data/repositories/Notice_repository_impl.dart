@@ -1,3 +1,10 @@
+import 'package:biddabari_new/core/error/failures.dart';
+
+import 'package:biddabari_new/features/Notice/data/models/Notice/NoticeResponse.dart';
+
+import 'package:fpdart/src/either.dart';
+
+import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/connection_checker.dart';
 import '../datasource/Notice_remote_source.dart';
 import '../../domain/repositories/Notice_repository.dart';
@@ -8,6 +15,26 @@ final NoticeRemoteSource remoteSource;
 final ConnectionChecker connectionChecker;
 
 NoticeRepositoryImpl({required this.remoteSource,required this.connectionChecker});
+
+  @override
+  Future<Either<Failure, NoticeResponse>> getNotice()async {
+    // TODO: implement getNotice
+  try{
+    if (!await (connectionChecker.isConnected)) {
+      return left(Failure("no internet connection!!"));
+    }else{
+      final data = await remoteSource.getNotice();
+      if(data!.notices==null){
+        return left(Failure("Some things wrong"));
+      }else{
+        return right(data);
+      }
+      // return right(episodes!.results!);
+    }
+  }on ServerException catch(e){
+    return left(Failure(e.message));
+  }
+  }
 
 
 // @override

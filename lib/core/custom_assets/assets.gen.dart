@@ -73,6 +73,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/course.svg
   SvgGenImage get course => const SvgGenImage('assets/icons/course.svg');
 
+  /// File path: assets/icons/done.png
+  AssetGenImage get done => const AssetGenImage('assets/icons/done.png');
+
   /// File path: assets/icons/email.svg
   SvgGenImage get email => const SvgGenImage('assets/icons/email.svg');
 
@@ -164,6 +167,7 @@ class $AssetsIconsGen {
         classRom,
         classRoomInactive,
         course,
+        done,
         email,
         exam,
         exam2,

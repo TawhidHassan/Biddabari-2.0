@@ -7,10 +7,10 @@ part of 'notice_model.dart';
 // **************************************************************************
 
 NoticeModel _$NoticeModelFromJson(Map<String, dynamic> json) => NoticeModel(
-      json['name'] as String?
+      json['name'] as String?,
     );
 
 Map<String, dynamic> _$NoticeModelToJson(NoticeModel instance) =>
     <String, dynamic>{
-      'name': instance.name
+      'name': instance.name,
     };

@@ -1,4 +1,5 @@
 
+import 'package:biddabari_new/features/More/data/models/Order/OrderResponse.dart';
 import 'package:fpdart/fpdart.dart';
 import '../../../../core/error/failures.dart';
 import '../entities/More.dart';
@@ -15,12 +16,11 @@ MoreUseCase({this.moreRepository});
     throw UnimplementedError();
     }
 
-//
-// @override
-// Future<Either<Failure, LoginResponseModel>> call(GetLoginParams params) {
-// // TODO: implement call
-// return loginRepository!.login(params.email!,params.deviceToken!, params.password!, params.isPG!);
-// }
+  @override
+  Future<Either<Failure, OrderResponse>> getMyOrder() {
+  // TODO: implement call
+  return moreRepository!.getMyOrder();
+  }
 
 }
 

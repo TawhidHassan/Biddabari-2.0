@@ -15,6 +15,7 @@ import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../BookStore/presentation/widget/popular_book_component.dart';
 import '../../../Home/presentation/widget/home_slider_component.dart';
 import '../widget/all_course_component.dart';
+import '../widget/my_course_card.dart';
 
 class MyCoursePage extends StatelessWidget {
 
@@ -23,7 +24,7 @@ class MyCoursePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration.zero, () {
-      // Get.find<AllCourseController>().getCategoryCourse(categorie!.slug);
+      Get.find<AllCourseController>().getMyCourse();
     });
     return Scaffold(
       appBar: AppBar(
@@ -66,7 +67,7 @@ class MyCoursePage extends StatelessWidget {
           assignId: true,
           builder: (controller) {
             return Obx(() {
-              return controller.categoryCourseLoading.value?LoadingWidget():
+              return controller.myCourseLoading.value?LoadingWidget():
               Container(
                 height: 1.0.sh,
                 width: 1.0.sw,
@@ -74,17 +75,18 @@ class MyCoursePage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: CustomScrollView(
                   slivers: [
-
                     SliverToBoxAdapter(
                       child: SizedBox(height: 12,),
                     ),
                     SliverToBoxAdapter(
-                      child:ListView.builder(
+                      child: controller.myCourseResponse!.value==null||controller.myCourseResponse!.value!.courseOrders==null?SizedBox():ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: 10,
+                          itemCount: controller.myCourseResponse!.value!.courseOrders!.length,
                           itemBuilder: (context,index){
-                            return Text("data");
+                            return MyCourseCard(
+                              course:controller.myCourseResponse!.value!.courseOrders![index],
+                            );
                           }
                       ),
                     ),

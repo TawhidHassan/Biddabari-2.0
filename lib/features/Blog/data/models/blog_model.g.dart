@@ -7,10 +7,9 @@ part of 'blog_model.dart';
 // **************************************************************************
 
 BlogModel _$BlogModelFromJson(Map<String, dynamic> json) => BlogModel(
-      json['name'] as String?
+      json['name'] as String?,
     );
 
-Map<String, dynamic> _$BlogModelToJson(BlogModel instance) =>
-    <String, dynamic>{
-      'name': instance.name
+Map<String, dynamic> _$BlogModelToJson(BlogModel instance) => <String, dynamic>{
+      'name': instance.name,
     };

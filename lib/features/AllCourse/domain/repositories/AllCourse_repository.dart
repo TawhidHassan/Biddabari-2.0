@@ -1,5 +1,6 @@
 import 'package:biddabari_new/core/error/failures.dart';
 import 'package:biddabari_new/features/AllCourse/data/models/AllCourseResponse.dart';
+import 'package:biddabari_new/features/AllCourse/data/models/Student/CourseOrderResponse.dart';
 import 'package:biddabari_new/features/AllCourse/data/models/course/CourseDetailsResponse.dart';
 import 'package:biddabari_new/features/AllCourse/data/models/course/CourseResponse.dart';
 import 'package:fpdart/src/either.dart';
@@ -13,6 +14,8 @@ abstract class AllCourseRepository {
 
   Future<Either<Failure, CourseCategoryResponse>> getCategoryCourse(String? slug);
   Future<Either<Failure, CourseDetailsResponse>> detailsCourse(String? slug);
+
+  Future<Either<Failure, CourseOrderResponse>> getMyCourse();
 
 
 

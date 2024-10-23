@@ -12,13 +12,15 @@ import '../../../../core/common/widgets/loading/loading_widget.dart';
 import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/config/util/text_style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
+import '../../data/models/Order/Order.dart';
 
 
 
 
 class MyOrderCard extends StatelessWidget {
+  final Order? order;
 
-  const MyOrderCard({super.key,});
+  const MyOrderCard({super.key, this.order,});
 
   @override
   Widget build(BuildContext context) {
@@ -88,20 +90,23 @@ class MyOrderCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     DiscountBadge(
-                      text: 1 == 1
+                      text:  order!.status=="approved"
                           ? 'Approved'
                           : 'Pending',
-                      backgroundColor: 1 == 1 ? Color(
+                      backgroundColor:order!.status=="approved" ? Color(
                           0xFf18C667)
                           .withOpacity(0.14) : Colors.red
                           .withOpacity(0.14),
-                      foregroundColor: 1 == 1
+                      foregroundColor: order!.status=="approved"
                           ? Color(0xFf18C667)
                           : Colors.red,
                     ),
                     SizedBox(height: 8,),
                     Text(
-                      "Bank Job Special Care Live Batch-2",
+                      order!.ordered_for=="batch_exam"?
+                      order!.batch_exam!.title!:
+                      order!.course!=null?
+                      order!.course!.title!:order!.product!.title!,
                       textAlign: TextAlign.justify,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -125,7 +130,7 @@ class MyOrderCard extends StatelessWidget {
                                 style: semiBoldText(10),
                                 children: <TextSpan>[
                                   TextSpan(text: 'Type: ',),
-                                  TextSpan(text: 'Course ', style: TextStyle(color: Color(0xff167F71))),
+                                  TextSpan(text: order!.ordered_for.toString(), style: TextStyle(color: Color(0xff167F71))),
                                 ],
                               ),
                             ),
@@ -135,7 +140,7 @@ class MyOrderCard extends StatelessWidget {
                                 style: semiBoldText(10),
                                 children: <TextSpan>[
                                   TextSpan(text: 'Order Id: ',),
-                                  TextSpan(text: '5778533401 ', style: TextStyle(color: Color(0xff167F71))),
+                                  TextSpan(text: order!.order_invoice_number.toString(), style: TextStyle(color: Color(0xff167F71))),
                                 ],
                               ),
                             ),
@@ -150,7 +155,11 @@ class MyOrderCard extends StatelessWidget {
                                 style: semiBoldText(10),
                                 children: <TextSpan>[
                                   TextSpan(text: 'Total: ',),
-                                  TextSpan(text: '8000 ', style: TextStyle(color: Color(0xff167F71))),
+                                  TextSpan(text: order!.batch_exam!=null?
+                                  order!.batch_exam!.price!.toString():
+                                  order!.course!=null?
+                                  order!.course!.price!.toString():
+                                  order!.product!.price!.toString(), style: TextStyle(color: Color(0xff167F71))),
                                 ],
                               ),
                             ),
@@ -160,7 +169,7 @@ class MyOrderCard extends StatelessWidget {
                                 style: semiBoldText(10),
                                 children: <TextSpan>[
                                   TextSpan(text: 'Grand Total: ',),
-                                  TextSpan(text: '3250 ', style: TextStyle(color: Color(0xff167F71))),
+                                  TextSpan(text:  order!.total_amount!.toString(), style: TextStyle(color: Color(0xff167F71))),
                                 ],
                               ),
                             ),

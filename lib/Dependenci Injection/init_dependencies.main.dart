@@ -15,6 +15,7 @@ Future<void> initDependencies() async {
   _initCheckout();
   _initMore();
   _initDwonloads();
+  _initNotice();
 
 
 
@@ -283,6 +284,25 @@ void _initDwonloads(){
     ..registerFactory(
           () => DwonloadsUseCase(
          dwonloadsRepository:   serviceLocator(),
+      ),
+    );
+}
+void _initNotice(){
+  /// Datasource
+  serviceLocator
+    ..registerFactory<NoticeRemoteSource>(
+          () => NoticeRemoteSourceImpl(apiMethod: serviceLocator(),
+      ),
+    )/// Repository
+    ..registerFactory<NoticeRepository>(
+          () => NoticeRepositoryImpl(
+          connectionChecker:  serviceLocator(),
+          remoteSource:  serviceLocator()
+      ),
+    )/// Usecases
+    ..registerFactory(
+          () => NoticeUseCase(
+         noticeRepository:   serviceLocator(),
       ),
     );
 }

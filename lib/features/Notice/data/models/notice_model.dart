@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import '../../domain/entities/Notice.dart';
+import 'Notice/Notice.dart';
 
 
 part 'notice_model.g.dart';
@@ -8,7 +9,7 @@ part 'notice_model.g.dart';
 class NoticeModel extends Notice {
 
   String? name;
-  NoticeModel(this.name,);
+  NoticeModel(this.name,) : super(null, null, '', '', '', '', '', 0, '', '');
 
 
 

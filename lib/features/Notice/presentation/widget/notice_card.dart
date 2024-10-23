@@ -1,6 +1,7 @@
 import 'package:biddabari_new/core/config/Strings/api_endpoint.dart';
 import 'package:biddabari_new/core/routes/route_path.dart';
 import 'package:biddabari_new/features/BookStore/data/models/book/Book.dart';
+import 'package:biddabari_new/features/Notice/data/models/Notice/Notice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -12,19 +13,21 @@ import '../../../../core/common/widgets/loading/loading_widget.dart';
 import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/config/util/text_style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
+import '../../../../core/utils/format_date.dart';
 
 
 
 
 class NoticeCard extends StatelessWidget {
+  final Notice? notice;
 
-  const NoticeCard({super.key,});
+  const NoticeCard({super.key, this.notice,});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.pushNamed(Routes.noticeDetailsPage, );
+        context.pushNamed(Routes.noticeDetailsPage,extra: notice! );
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 12),
@@ -48,7 +51,7 @@ class NoticeCard extends StatelessWidget {
             Expanded(
               flex: 3,
               child: CachedNetworkImage(
-                imageUrl:ApiEndpoint.imageBaseUrl+"course!.banner!",
+                imageUrl:notice!.image!,
                 placeholder: (context, url) => LoadingWidget(),
                 errorWidget: (context, url, error){
                   return Container(
@@ -89,9 +92,9 @@ class NoticeCard extends StatelessWidget {
                   children: [
 
                     Text(
-                      "Bank Job Special Care Live Batch-2",
+                      notice!.title??"",
                       textAlign: TextAlign.justify,
-                      maxLines: 1,
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
@@ -106,7 +109,7 @@ class NoticeCard extends StatelessWidget {
                         style: semiBoldText(14),
                         children: <TextSpan>[
                           TextSpan(text: 'Date: ',),
-                          TextSpan(text: '12/11/2021 ', style: TextStyle(color: Color(0xff167F71))),
+                          TextSpan(text: getCustomFormattedDateTime(notice!.created_at??"",'yyy-MMM-dd h:mm a'), style: TextStyle(color: Color(0xff167F71))),
                         ],
                       ),
                     ),

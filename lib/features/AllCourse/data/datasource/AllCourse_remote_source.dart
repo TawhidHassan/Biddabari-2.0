@@ -6,6 +6,7 @@ import '../../../../core/config/Strings/api_endpoint.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/api_services.dart';
 import '../models/CourseCategory/CourseCategoryResponse.dart';
+import '../models/Student/CourseOrderResponse.dart';
 
 abstract class AllCourseRemoteSource {
 
@@ -13,10 +14,7 @@ Future<CourseResponse?> getRuningCourse();
 Future<AllCourseResponse?> getAllCourse();
 Future<CourseCategoryResponse?> getCategoryCourse(String? slug);
 Future<CourseDetailsResponse?> detailsCourse(String? id);
-
-
-
-
+Future<CourseOrderResponse?> getMyCourse();
 
 }
 
@@ -64,6 +62,17 @@ class AllCourseRemoteSourceImpl implements AllCourseRemoteSource {
     try{
       final result =await apiMethod.get(url: ApiEndpoint.COURSE_DETAILS+"$id",showResult: true,isBasic: true,duration: 30);
       return CourseDetailsResponse.fromJson(result!);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<CourseOrderResponse?> getMyCourse()async {
+    // TODO: implement getMyCourse
+    try{
+      final result =await apiMethod.get(url: ApiEndpoint.MY_COURSE,showResult: true,isBasic: false,duration: 30);
+      return CourseOrderResponse.fromJson(result!);
     }catch (e) {
       throw ServerException(e.toString());
     }

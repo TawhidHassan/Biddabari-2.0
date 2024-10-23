@@ -24,6 +24,7 @@ class ApiEndpoint {
   static  String RUNNING_COURSE_LIST= 'app-home-courses'.addBaseURl;
   static  String ALL_COURSE_LIST= 'app-all-courses'.addBaseURl;
   static  String COURSE_DETAILS= 'app-course-details/'.addBaseURl;
+  static  String MY_COURSE= 'student/my-courses'.addBaseURl;
   static  String CATEGORY_COURSE_LIST= 'category-courses/'.addBaseURl;
   static  String CLASSROM_MY_COURSE_LIST= 'student/my-courses'.addBaseURl;
   static  String CLASSROM_MY_CLASS_LIST= 'student/today-classes'.addBaseURl;
@@ -37,6 +38,11 @@ class ApiEndpoint {
 
   ///teacher
   static  String TEACHER_LIST= 'all-instructors?page='.addBaseURl;
+
+
+  static  String ORDER_LIST= 'student/my-orders'.addBaseURl;
+
+  static  String NOTICE_LIST= 'all-notices'.addBaseURl;
 
 
 
