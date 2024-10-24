@@ -130,6 +130,11 @@ class Routes {
   static const String checkOutPage = 'checkOutPage';
   static const String checkOutPagePath = '/checkOutPage';
 
+  static const String photoGallaryListPage = 'photoGallaryListPage';
+  static const String photoGallaryListPagePath = '/photoGallaryListPage';
+
+  static const String photoGallaryDetailsPage = 'photoGallaryDetailsPage';
+  static const String photoGallaryDetailsPagePath = 'photoGallaryDetailsPage';
 
   /// more info
 

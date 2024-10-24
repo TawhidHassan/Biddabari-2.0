@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../Home/presentation/widget/home_slider_component.dart';
+import '../controller/BookStore_controller.dart';
 import '../widget/popular_book_component.dart';
 
 class MyBookPage extends StatelessWidget {
@@ -12,6 +15,9 @@ class MyBookPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration.zero, () {
+      Get.find<BookStoreController>().getMyBook();
+    });
     return Scaffold(
         appBar: AppBar(
           leading: InkWell(
@@ -37,9 +43,9 @@ class MyBookPage extends StatelessWidget {
           color: AppColors.primaryBackground,
           child: CustomScrollView(
             slivers: [
-              SliverToBoxAdapter(
-                  child: StorePoularBookComponent()
-              ),
+              // SliverToBoxAdapter(
+              //     child: StorePoularBookComponent()
+              // ),
             ],
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:biddabari_new/features/BookStore/data/models/BookResponse.dart';
+import 'package:biddabari_new/features/BookStore/data/models/MyBookResponse.dart';
 
 import '../../../../core/config/Strings/api_endpoint.dart';
 import '../../../../core/error/exceptions.dart';
@@ -9,6 +10,9 @@ abstract class BookStoreRemoteSource {
   Future<BookResponse?> getPopularBok();
   Future<SingleBookResponse?>getBookDetails(String id);
   Future<BookResponse?> getStoreBok();
+  Future<MyBookResponse?> getMyBook();
+
+
 
 
 }
@@ -45,6 +49,17 @@ class BookStoreRemoteSourceImpl implements BookStoreRemoteSource {
     try{
       final result =await apiMethod.get(url: ApiEndpoint.STORE_BOOK_DETAILS+"$id",showResult: true,isBasic: true,duration: 30);
       return SingleBookResponse.fromJson(result!);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<MyBookResponse?> getMyBook()async {
+    // TODO: implement getMyBook
+    try{
+      final result =await apiMethod.get(url: ApiEndpoint.MY_BOOK_LIST,showResult: true,isBasic: false,duration: 30);
+      return MyBookResponse.fromJson(result!);
     }catch (e) {
       throw ServerException(e.toString());
     }

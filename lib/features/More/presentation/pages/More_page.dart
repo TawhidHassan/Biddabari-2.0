@@ -105,7 +105,7 @@ class MorePage extends StatelessWidget {
 
             MoreOtptionCard(
               onTap: (){
-                context.pushNamed(Routes.changePasswordPage);
+                context.pushNamed(Routes.forgetPasswordPage);
               },
               title: "Change Password",
               icon: Assets.icons.people.path,
@@ -139,12 +139,12 @@ class MorePage extends StatelessWidget {
             ),
 
             MoreOtptionCard(
-              title: "Exam",
+              title: "My Exam",
               icon: Assets.icons.exam.path,
             ),
 
             MoreOtptionCard(
-              title: "Free Class & Exam",
+              title: "My Free Class & Exam",
               icon: Assets.icons.freeCourse.path,
             ),
 
@@ -152,7 +152,7 @@ class MorePage extends StatelessWidget {
               onTap: (){
                 context.pushNamed(Routes.myBookPage);
               },
-              title: "Book",
+              title: "My Book",
               icon: Assets.icons.book.path,
             ),
 
@@ -192,6 +192,9 @@ class MorePage extends StatelessWidget {
             ),
 
             MoreOtptionCard(
+              onTap: (){
+                context.pushNamed(Routes.photoGallaryListPage);
+              },
               title: "Photo gallary",
               icon: Assets.icons.photo.path,
             ),

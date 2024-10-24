@@ -14,6 +14,8 @@ import 'package:biddabari_new/features/Login/presentation/pages/otp_page.dart';
 import 'package:biddabari_new/features/More/presentation/pages/More_page.dart';
 import 'package:biddabari_new/features/Notice/data/models/Notice/Notice.dart';
 import 'package:biddabari_new/features/Notice/presentation/pages/Notice_page.dart';
+import 'package:biddabari_new/features/PhotoGallary/data/models/Gallary/Gallary.dart';
+import 'package:biddabari_new/features/PhotoGallary/presentation/pages/gallery_details_page.dart';
 import 'package:biddabari_new/features/Teacher/presentation/pages/all_teacher_page.dart';
 import 'package:biddabari_new/features/dwonloads/presentation/pages/dwonloads_page.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +29,7 @@ import '../../features/BookStore/presentation/pages/book_details.dart';
 import '../../features/BookStore/presentation/pages/my_book_page.dart';
 import '../../features/Error/presentation/error_page.dart';
 import '../../features/Home/presentation/pages/Home_page.dart';
+import '../../features/Job/data/models/job_model.dart';
 import '../../features/Job/presentation/pages/Job_details_page.dart';
 import '../../features/Login/presentation/pages/Login_page.dart';
 import '../../features/Login/presentation/pages/change_password_page.dart';
@@ -38,6 +41,7 @@ import '../../features/Main/presentation/pages/Main_page.dart';
 import '../../features/More/presentation/pages/order/order_page.dart';
 import '../../features/Notice/presentation/pages/notice_details_page.dart';
 import '../../features/NotificationApp/presentation/pages/NotificationApp_page.dart';
+import '../../features/PhotoGallary/presentation/pages/PhotoGallary_page.dart';
 import '../../features/SaveIteam/presentation/pages/SaveIteam_page.dart';
 import '../../features/Splash/presentation/pages/Splash_page.dart';
 import '../../features/Splash/presentation/pages/onbording_page.dart';
@@ -101,6 +105,25 @@ class AppRouter {
             child: CheckoutPage(),
           ),
           routes: []
+      ),
+      GoRoute(
+          name: Routes.photoGallaryListPage,
+          path: Routes.photoGallaryListPagePath,
+          pageBuilder: (context, state) =>  NoTransitionPage(
+            child: PhotoGallaryPage(),
+          ),
+          routes: [
+            GoRoute(
+                name: Routes.photoGallaryDetailsPage,
+                path: Routes.photoGallaryDetailsPagePath,
+                pageBuilder: (context, state) =>  NoTransitionPage(
+                  child: GallaryDetailsPage(
+                    gallary: state.extra as Gallary,
+                  ),
+                ),
+                routes: []
+            ),
+          ]
       ),
 
       GoRoute(
@@ -288,7 +311,7 @@ class AppRouter {
                   name: Routes.jobDetailsPage,
                   path: Routes.jobDetailsPagePath,
                   pageBuilder: (context, state) =>  NoTransitionPage(
-                    child: JobDetailsPage(),
+                    child: JobDetailsPage(job:state.extra as JobModel),
                   ),
                   routes: []
               ),

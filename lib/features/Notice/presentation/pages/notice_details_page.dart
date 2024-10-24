@@ -7,6 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/common/widgets/Button/custom_button.dart';
+import '../../../../core/common/widgets/Image/full_image.dart';
 import '../../../../core/common/widgets/card/course_card.dart';
 import '../../../../core/common/widgets/container/discount_badge.dart';
 import '../../../../core/common/widgets/loading/loading_widget.dart';
@@ -126,46 +127,4 @@ class NoticeDetailsPage extends StatelessWidget {
   }
 }
 
-class ImageFullScreen extends StatelessWidget {
-  final String? image;
-  const ImageFullScreen({super.key,  this.image});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(Icons.keyboard_arrow_left)),
-        title: Text("Preview"),
-      ),
-      body: InteractiveViewer(
-        child: CachedNetworkImage(
-          imageUrl: image??"",
-          errorWidget: (context, url, error){
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: Image.asset("assets/images/biddabari-logo.png"),
-            );
-          },
-          placeholder: (context, url) =>
-              CircularProgressIndicator(),
-          imageBuilder: (context, image) =>
-              Container(
-                height: 1.0.sh,
-                width: 1.0.sw,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: image,
-                        fit: BoxFit.fill
-                    )
-                ),
-              ),
-        ),
-      ),
-
-    );
-  }
-}

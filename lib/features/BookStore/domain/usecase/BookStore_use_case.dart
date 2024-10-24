@@ -1,5 +1,6 @@
 
 import 'package:biddabari_new/features/BookStore/data/models/BookResponse.dart';
+import 'package:biddabari_new/features/BookStore/data/models/MyBookResponse.dart';
 import 'package:fpdart/fpdart.dart';
 import '../../../../core/error/failures.dart';
 import '../../data/models/SingleBookResponse.dart';
@@ -30,12 +31,19 @@ BookStoreUseCase({this.bookStoreRepository});
   // TODO: implement call
   return bookStoreRepository!.getStoreBok();
   }
+  @override
+  Future<Either<Failure, MyBookResponse>> getMyBook() {
+  // TODO: implement call
+  return bookStoreRepository!.getMyBook();
+  }
 
   @override
   Future<Either<Failure, SingleBookResponse>> getBookDetails(String id) {
   // TODO: implement call
   return bookStoreRepository!.getBookDetails(id);
   }
+
+
 
 
 

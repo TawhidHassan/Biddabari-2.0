@@ -35,6 +35,7 @@ class ApiEndpoint {
   static  String TOP_BOOK_LIST= 'app-home-products'.addBaseURl;
   static  String STORE_BOOK_LIST= 'all-products'.addBaseURl;
   static  String STORE_BOOK_DETAILS= "product-details/".addBaseURl;
+  static  String MY_BOOK_LIST= "student/my-products".addBaseURl;
 
 
   ///teacher
@@ -47,6 +48,12 @@ class ApiEndpoint {
 
   static  String BLOG_LIST= 'all-blogs?page='.addBaseURl;
   static  String BLOG_DETAILS= 'blog-details/'.addBaseURl;
+
+  static  String PHOTO_GALLERY_LIST= 'all-gallery-images'.addBaseURl;
+  static  String PHOTO_GALLERY_DETAILS= 'gallery-images/'.addBaseURl;
+
+
+  static  String JOB_LIST= 'all-job-circulars'.addBaseURl;
 
 
 

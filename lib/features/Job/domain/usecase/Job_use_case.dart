@@ -1,4 +1,5 @@
 
+import 'package:biddabari_new/features/Job/data/models/JobResponse.dart';
 import 'package:biddabari_new/features/Job/data/models/job_model.dart';
 import 'package:fpdart/fpdart.dart';
 import '../../../../core/error/failures.dart';
@@ -15,12 +16,16 @@ JobUseCase({this.jobRepository});
     throw UnimplementedError();
     }
 
-//
-// @override
-// Future<Either<Failure, LoginResponseModel>> call(GetLoginParams params) {
-// // TODO: implement call
-// return loginRepository!.login(params.email!,params.deviceToken!, params.password!, params.isPG!);
-// }
+    @override
+    Future<Either<Failure, JobResponse>> getJobs() {
+    // TODO: implement call
+      return jobRepository!.getJobs();
+
+    }
+
+
+
+
 
 }
 

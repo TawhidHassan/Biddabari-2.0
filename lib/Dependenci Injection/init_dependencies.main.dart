@@ -17,6 +17,8 @@ Future<void> initDependencies() async {
   _initDwonloads();
   _initNotice();
   _initBlog();
+  _initPhotoGallary();
+  _initJob();
 
 
 
@@ -323,6 +325,44 @@ void _initBlog(){
     ..registerFactory(
           () => BlogUseCase(
          blogRepository:   serviceLocator(),
+      ),
+    );
+}
+void _initPhotoGallary(){
+  /// Datasource
+  serviceLocator
+    ..registerFactory<PhotoGallaryRemoteSource>(
+          () => PhotoGallaryRemoteSourceImpl(apiMethod: serviceLocator(),
+      ),
+    )/// Repository
+    ..registerFactory<PhotoGallaryRepository>(
+          () => PhotoGallaryRepositoryImpl(
+          connectionChecker:  serviceLocator(),
+          remoteSource:  serviceLocator()
+      ),
+    )/// Usecases
+    ..registerFactory(
+          () => PhotoGallaryUseCase(
+         photoGallaryRepository:   serviceLocator(),
+      ),
+    );
+}
+void _initJob(){
+  /// Datasource
+  serviceLocator
+    ..registerFactory<JobRemoteSource>(
+          () => JobRemoteSourceImpl(apiMethod: serviceLocator(),
+      ),
+    )/// Repository
+    ..registerFactory<JobRepository>(
+          () => JobRepositoryImpl(
+          connectionChecker:  serviceLocator(),
+          remoteSource:  serviceLocator()
+      ),
+    )/// Usecases
+    ..registerFactory(
+          () => JobUseCase(
+         jobRepository:   serviceLocator(),
       ),
     );
 }
