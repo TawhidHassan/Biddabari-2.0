@@ -3,6 +3,7 @@ import 'package:biddabari_new/features/AllCourse/presentation/controller/AllCour
 import 'package:biddabari_new/features/BookStore/presentation/controller/BookStore_controller.dart';
 import 'package:biddabari_new/features/Checkout/presentation/controller/Checkout_controller.dart';
 import 'package:biddabari_new/features/ClassRoom/presentation/controller/ClassRoom_controller.dart';
+import 'package:biddabari_new/features/Exam/presentation/controller/Exam_controller.dart';
 import 'package:biddabari_new/features/Job/presentation/controller/Job_controller.dart';
 import 'package:biddabari_new/features/More/presentation/controller/More_controller.dart';
 import 'package:biddabari_new/features/Notice/presentation/controller/Notice_controller.dart';
@@ -52,6 +53,7 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.lazyPut(() => NoticeController(noticeUseCase: serviceLocator()));
   Get.lazyPut(() => PhotoGallaryController(photoGallaryUseCase:  serviceLocator()));
   Get.lazyPut(() => JobController(jobUseCase:  serviceLocator()));
+  Get.lazyPut(() => ExamController(examUseCase:  serviceLocator()));
 
 
 

@@ -19,6 +19,7 @@ Future<void> initDependencies() async {
   _initBlog();
   _initPhotoGallary();
   _initJob();
+  _initExam();
 
 
 
@@ -363,6 +364,25 @@ void _initJob(){
     ..registerFactory(
           () => JobUseCase(
          jobRepository:   serviceLocator(),
+      ),
+    );
+}
+void _initExam(){
+  /// Datasource
+  serviceLocator
+    ..registerFactory<ExamRemoteSource>(
+          () => ExamRemoteSourceImpl(apiMethod: serviceLocator(),
+      ),
+    )/// Repository
+    ..registerFactory<ExamRepository>(
+          () => ExamRepositoryImpl(
+          connectionChecker:  serviceLocator(),
+          remoteSource:  serviceLocator()
+      ),
+    )/// Usecases
+    ..registerFactory(
+          () => ExamUseCase(
+         examRepository:   serviceLocator(),
       ),
     );
 }

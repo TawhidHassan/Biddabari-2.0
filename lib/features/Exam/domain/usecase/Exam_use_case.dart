@@ -1,6 +1,7 @@
 
 import 'package:fpdart/fpdart.dart';
 import '../../../../core/error/failures.dart';
+import '../../data/models/BatchExam/BatchExamResponse.dart';
 import '../../data/models/Exam.dart';
 import '../repositories/Exam_repository.dart';
 import '../../../../core/usecase/usecase.dart';
@@ -15,12 +16,14 @@ ExamUseCase({this.examRepository});
     throw UnimplementedError();
     }
 
-//
-// @override
-// Future<Either<Failure, LoginResponseModel>> call(GetLoginParams params) {
-// // TODO: implement call
-// return loginRepository!.login(params.email!,params.deviceToken!, params.password!, params.isPG!);
-// }
+    @override
+    Future<Either<Failure, BatchExamResponse>> getAllExam( ) {
+    // TODO: implement call
+     return examRepository!.getAllExam();
+    }
+
+
+
 
 }
 

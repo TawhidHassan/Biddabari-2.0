@@ -1,3 +1,4 @@
+import 'package:biddabari_new/core/common/widgets/empty/empty_widget.dart';
 import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
 import 'package:biddabari_new/core/config/color/app_colors.dart';
 import 'package:biddabari_new/core/utils/system_util.dart';
@@ -33,12 +34,11 @@ class AllCourseComponent extends StatelessWidget {
             child:controller.allCourseLoading.value?LoadingWidget():
             Column(
               children: [
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                        'পপুলার বুকস ',
+                        'All Course',
                         style: boldText(16, color: Color(0xFF202244))
                     ),
                   ],
@@ -66,6 +66,8 @@ class AllCourseComponent extends StatelessWidget {
                 ),
                 SizedBox(height: 24,),
                 controller.allCourseResponse.value==null?SizedBox():
+                controller.allCourseResponse.value!.courseCategories![controller.selectedcategory.value].courses!.isEmpty?
+                    EmptyWidget(title: "There has no course",height: 200,):
                 GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,

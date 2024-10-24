@@ -21,7 +21,7 @@ class Routes {
 
 
   static const String forgetPasswordPage = 'forgetPasswordPage';
-  static const String forgetPasswordPagePath = 'forgetPasswordPage';
+  static const String forgetPasswordPagePath = '/forgetPasswordPage';
 
   static const String otpPage = 'otpPage';
   static const String otpPagePath = 'otpPage';
@@ -31,7 +31,7 @@ class Routes {
   static const String setPasswordPagePath = 'setPasswordPage';
 
   static const String newPasswordPage = 'newPasswordPage';
-  static const String newPasswordPagePath = 'newPasswordPage';
+  static const String newPasswordPagePath = '/newPasswordPage';
 
   static const String changePasswordPage = 'changePasswordPage';
   static const String changePasswordPagePath = '/changePasswordPage';

@@ -127,6 +127,20 @@ class AppRouter {
       ),
 
       GoRoute(
+        name: Routes.forgetPasswordPage,
+        path: Routes.forgetPasswordPagePath,
+        pageBuilder: (context, state) =>  NoTransitionPage(
+          child: ForgetPasswordPage(),
+        ),
+      ),
+      GoRoute(
+        name: Routes.newPasswordPage,
+        path: Routes.newPasswordPagePath,
+        pageBuilder: (context, state) =>  NoTransitionPage(
+          child: SetNewPasswordPage(),
+        ),
+      ),
+      GoRoute(
         name: Routes.loginPage,
         path: Routes.loginPagePath,
         pageBuilder: (context, state) =>  NoTransitionPage(
@@ -150,20 +164,7 @@ class AppRouter {
             child: LoginPasswordPage(),
            ),
           ),
-          GoRoute(
-            name: Routes.forgetPasswordPage,
-            path: Routes.forgetPasswordPagePath,
-            pageBuilder: (context, state) =>  NoTransitionPage(
-            child: ForgetPasswordPage(),
-           ),
-          ),
-          GoRoute(
-            name: Routes.newPasswordPage,
-            path: Routes.newPasswordPagePath,
-            pageBuilder: (context, state) =>  NoTransitionPage(
-            child: SetNewPasswordPage(),
-           ),
-          ),
+
 
           GoRoute(
             name: Routes.otpPage,

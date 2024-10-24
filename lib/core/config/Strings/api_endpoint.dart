@@ -56,6 +56,9 @@ class ApiEndpoint {
   static  String JOB_LIST= 'all-job-circulars'.addBaseURl;
 
 
+  static  String BATCH_EXAM_LIST= 'all-exams'.addBaseURl;
+
+
 
 
 }
