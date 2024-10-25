@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:biddabari_new/core/common/data/user/UserRresponse.dart';
+import 'package:biddabari_new/features/Login/data/models/Auth/LoginResponse.dart';
 
 import '../../../../core/config/Strings/api_endpoint.dart';
 import '../../../../core/error/exceptions.dart';
@@ -6,6 +9,8 @@ import '../../../../core/network/api_services.dart';
 
 abstract class ProfileRemoteSource {
   Future<UserRresponse?> getProfile();
+
+  Future<LoginResponse?> updateUser({File? iamge, required String userName, required String firstName, required String lastName, required String email, required String mobile, required String selectGender, required String selectDob});
 
 }
 
@@ -25,20 +30,26 @@ class ProfileRemoteSourceImpl implements ProfileRemoteSource {
     }
   }
 
-// @override
-// Future<LoginResponseModel?> login(String email,String deviceToken, String pass, bool isPg)async {
-//
-//   Map<String, dynamic> data = {
-//   "email":email,
-//   "password":pass,
-//   "isPG":isPg,
-//   "mobileToken":deviceToken
-//   };
-//   try{
-//     final result =await apiMethod.post(url: ApiEndpoint.LOGIN,body: data,showResult: true,isBasic: true,duration: 30);
-//     return LoginResponseModel.fromJson(result);
-//   }catch (e) {
-//     throw ServerException(e.toString());
-//   }
-// }
+  @override
+  Future<LoginResponse?> updateUser({File? iamge, required String userName, required String firstName, required String lastName, required String email, required String mobile, required String selectGender, required String selectDob})async {
+    // TODO: implement updateUser
+    Map<String, String> data = {
+      'name': userName??"",
+      'email': email??"",
+      'mobile': mobile??"",
+      'first_name': firstName??'',
+      'last_name': lastName??"",
+      'gender': selectGender??"",
+      'dob': selectDob??''
+    };
+  try{
+    final result =await apiMethod.multipartMultiFile(url: ApiEndpoint.UPDATE_USER_PROFILE,body: data,showResult: true,isBasic: false, pathList: [iamge==null?"":iamge!.path], fieldList: ["image"]);
+    return LoginResponse.fromJson(result!);
+  }catch (e) {
+    throw ServerException(e.toString());
+  }
+
+  }
+
+
 }

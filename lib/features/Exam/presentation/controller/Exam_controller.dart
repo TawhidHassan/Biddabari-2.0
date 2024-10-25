@@ -41,6 +41,7 @@ class ExamController extends GetxController implements GetxService{
       batchExamResponse.value=r;
       batchExamResponse.value!.examCategories!.insert(
           0, ExamCategorie(name: "All", id: 0));
+      selectedExamcategory.value=0;
     });
 
     examLoading.value = false;

@@ -34,7 +34,7 @@ import '../../features/Job/presentation/pages/Job_details_page.dart';
 import '../../features/Login/presentation/pages/Login_page.dart';
 import '../../features/Login/presentation/pages/change_password_page.dart';
 import '../../features/Login/presentation/pages/login_password_page.dart';
-import '../../features/Login/presentation/pages/profile_edit_page.dart';
+import '../../features/profile/presentation/pages/profile_edit_page.dart';
 import '../../features/Login/presentation/pages/set_new_password_page.dart';
 import '../../features/Login/presentation/pages/set_password_page.dart';
 import '../../features/Main/presentation/pages/Main_page.dart';

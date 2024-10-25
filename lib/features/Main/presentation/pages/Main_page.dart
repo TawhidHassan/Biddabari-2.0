@@ -10,6 +10,7 @@ import 'package:motion_tab_bar/MotionTabBarController.dart';
 import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/config/util/style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
+import '../../../Home/presentation/controller/Home_controller.dart';
 
 class MainPage extends StatefulWidget {
 
@@ -52,6 +53,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         // Get.find<HomeController>().requestPermission(context);
         // // Get.find<HomeController>().showpopUp(context);
         // Get.find<AuthController>().onInit();
+        Get.find<HomeController>().getSlider();
         Get.find<ProfileController>().getProfile(context,false);
 
       });

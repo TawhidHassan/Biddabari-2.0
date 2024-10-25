@@ -18,9 +18,6 @@ class HomeSliderComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration.zero, () {
-      Get.find<HomeController>().getSlider();
-    });
     return GetBuilder<HomeController>(
       assignId: true,
       builder: (controller) {

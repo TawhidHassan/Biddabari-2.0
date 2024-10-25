@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:biddabari_new/core/common/data/user/UserRresponse.dart';
 
 import 'package:biddabari_new/core/error/failures.dart';
+import 'package:biddabari_new/features/Login/data/models/Auth/LoginResponse.dart';
 
 import 'package:fpdart/src/either.dart';
 
@@ -34,6 +37,35 @@ ProfileRepositoryImpl({required this.remoteSource,required this.connectionChecke
   }on ServerException catch(e){
     return left(Failure(e.message));
   }
+  }
+
+  @override
+  Future<Either<Failure, LoginResponse>> updateUser({File? iamge, required String userName, required String firstName, required String lastName, required String email, required String mobile, required String selectGender, required String selectDob})async {
+    // TODO: implement updateUser
+    try{
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure("no internet connection!!"));
+      }else{
+        final data = await remoteSource.updateUser(
+            iamge: iamge,
+            userName:userName,
+            firstName:firstName,
+            lastName:lastName,
+            email:email,
+            mobile:mobile,
+            selectGender:selectGender,
+            selectDob:selectDob
+        );
+        if(data!.success==null){
+          return left(Failure(data!.message??""));
+        }else{
+          return right(data);
+        }
+        // return right(episodes!.results!);
+      }
+    }on ServerException catch(e){
+      return left(Failure(e.message));
+    }
   }
 
 

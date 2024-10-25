@@ -1,8 +1,13 @@
+import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
+import 'package:biddabari_new/core/config/Strings/api_endpoint.dart';
 import 'package:biddabari_new/core/config/util/text_style.dart';
 import 'package:biddabari_new/core/routes/route_path.dart';
 import 'package:biddabari_new/features/More/presentation/widget/more_otption_card.dart';
+import 'package:biddabari_new/features/profile/presentation/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 
@@ -14,17 +19,17 @@ class MorePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    appBar: AppBar(
-      leading: InkWell(
-        onTap: () {
-          context.pop();
-        },
-        child: Padding(
-            padding: EdgeInsets.all(18),
-            child: Assets.icons.backArrow.svg()),
+      appBar: AppBar(
+        leading: InkWell(
+          onTap: () {
+            context.pop();
+          },
+          child: Padding(
+              padding: EdgeInsets.all(18),
+              child: Assets.icons.backArrow.svg()),
+        ),
+        title: Text('Profile '),
       ),
-      title: Text('Profile '),
-     ),
       body: Container(
         height: 1.0.sh,
         width: 1.0.sw,
@@ -32,63 +37,76 @@ class MorePage extends StatelessWidget {
         child: ListView(
           children: [
             SizedBox(height: 12,),
-            Container(
-              height: 200,
-              width: 1.0.sw,
-              child: Center(
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  alignment: AlignmentDirectional.topCenter,
-                  children: [
-
-                    Container(
-                      height: 139,
-                      width: 1.0.sw,
-                      padding: EdgeInsets.only(bottom: 12),
-                      decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
-                        shadows: [
-                          BoxShadow(
-                            color: Color(0x26A8A4A4),
-                            blurRadius: 15,
-                            offset: Offset(0, 8),
-                            spreadRadius: 0,
-                          )
-                        ],
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
+            GetBuilder<ProfileController>(
+              assignId: true,
+              builder: (profileController) {
+                return Obx(() {
+                  return profileController.circuler.value?
+                  LoadingWidget()
+                  :Container(
+                    height: 200,
+                    width: 1.0.sw,
+                    child: Center(
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        alignment: AlignmentDirectional.topCenter,
                         children: [
-                          Text("Mary Jones",style: boldText(21),),
-                          Text("hernandex.redial@gmail.ac.in",style: boldText(13,color: Color(0xff545454)),),
+
+                          Container(
+                            height: 139,
+                            width: 1.0.sw,
+                            padding: EdgeInsets.only(bottom: 12),
+                            decoration: ShapeDecoration(
+                              color: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(7)),
+                              shadows: [
+                                BoxShadow(
+                                  color: Color(0x26A8A4A4),
+                                  blurRadius: 15,
+                                  offset: Offset(0, 8),
+                                  spreadRadius: 0,
+                                )
+                              ],
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(profileController.profileResponse!.value!.user!.name??"", style: boldText(21),),
+                                Text(profileController.profileResponse!.value!.user!.mobile??'',
+                                  style: boldText(
+                                      13, color: Color(0xff545454)),),
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                            top: -30,
+                            child: CircleAvatar(
+                              backgroundColor: Colors.black,
+                              backgroundImage: NetworkImage(ApiEndpoint.imageBaseUrl+profileController.profileResponse.value!.student!.image??""),
+                              radius: 50,
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                    Positioned(
-                      top: -30,
-                      child: CircleAvatar(
-                        backgroundColor: Colors.black,
-                        radius: 50,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                  );
+                });
+              },
             ),
             SizedBox(height: 12,),
 
 
-           MoreOtptionCard(
-             onTap: (){
-               context.pushNamed(Routes.myCoursePage);
-             },
+            MoreOtptionCard(
+              onTap: () {
+                context.pushNamed(Routes.myCoursePage);
+              },
               title: "My Course",
               icon: Assets.icons.people.path,
-           ),
+            ),
 
             MoreOtptionCard(
-              onTap: (){
+              onTap: () {
                 context.pushNamed(Routes.myOrderPage);
               },
               title: "My Order",
@@ -96,7 +114,7 @@ class MorePage extends StatelessWidget {
             ),
 
             MoreOtptionCard(
-              onTap: (){
+              onTap: () {
                 context.pushNamed(Routes.myDwonloadsPage);
               },
               title: "My Downloads",
@@ -104,7 +122,7 @@ class MorePage extends StatelessWidget {
             ),
 
             MoreOtptionCard(
-              onTap: (){
+              onTap: () {
                 context.pushNamed(Routes.forgetPasswordPage);
               },
               title: "Change Password",
@@ -118,7 +136,7 @@ class MorePage extends StatelessWidget {
             SizedBox(height: 32,),
 
             MoreOtptionCard(
-              onTap: (){
+              onTap: () {
                 context.pushNamed(Routes.profileEditPage);
               },
               title: "Edit Profile",
@@ -126,7 +144,7 @@ class MorePage extends StatelessWidget {
             ),
 
             MoreOtptionCard(
-              onTap: (){
+              onTap: () {
                 context.pushNamed(Routes.noticePage);
               },
               title: "Notices",
@@ -149,7 +167,7 @@ class MorePage extends StatelessWidget {
             ),
 
             MoreOtptionCard(
-              onTap: (){
+              onTap: () {
                 context.pushNamed(Routes.myBookPage);
               },
               title: "My Book",
@@ -162,21 +180,21 @@ class MorePage extends StatelessWidget {
             ),
 
             MoreOtptionCard(
-              onTap: (){
+              onTap: () {
                 context.pushNamed(Routes.jobPage);
               },
               title: "Job Circular",
               icon: Assets.icons.job.path,
             ),
             MoreOtptionCard(
-              onTap: (){
+              onTap: () {
                 context.pushNamed(Routes.blogPage);
               },
               title: "Blog",
               icon: Assets.icons.blog.path,
             ),
             MoreOtptionCard(
-              onTap: (){
+              onTap: () {
                 context.pushNamed(Routes.saveIteamPage);
               },
               title: "Save Item",
@@ -184,7 +202,7 @@ class MorePage extends StatelessWidget {
             ),
 
             MoreOtptionCard(
-              onTap: (){
+              onTap: () {
                 context.pushNamed(Routes.allTeacherPage);
               },
               title: "Teachers",
@@ -192,7 +210,7 @@ class MorePage extends StatelessWidget {
             ),
 
             MoreOtptionCard(
-              onTap: (){
+              onTap: () {
                 context.pushNamed(Routes.photoGallaryListPage);
               },
               title: "Photo gallary",
@@ -201,7 +219,7 @@ class MorePage extends StatelessWidget {
 
 
             MoreOtptionCard(
-              onTap: (){
+              onTap: () {
                 context.pushNamed(Routes.bookCartPage);
               },
               title: "Book cart",
@@ -214,20 +232,15 @@ class MorePage extends StatelessWidget {
             ),
 
             MoreOtptionCard(
-              onTap: ()async{
+              onTap: () async {
                 var users = await Hive.openBox('users');
                 users.clear().then((value) {
-                 context.goNamed(Routes.loginPage);
+                  context.goNamed(Routes.loginPage);
                 });
-
               },
               title: "Logout",
               icon: Assets.icons.logout.path,
             ),
-
-
-
-
 
 
           ],

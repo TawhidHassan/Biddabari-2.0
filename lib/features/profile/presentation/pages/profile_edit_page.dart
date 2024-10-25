@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
 import 'package:biddabari_new/core/config/color/app_colors.dart';
 import 'package:biddabari_new/core/config/util/text_style.dart';
 import 'package:biddabari_new/features/Login/presentation/controller/Login_controller.dart';
+import 'package:biddabari_new/features/profile/presentation/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/services.dart';
@@ -10,9 +13,11 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/common/widgets/Button/elevated_button.dart';
 import '../../../../core/common/widgets/text field/text_field.dart';
+import '../../../../core/config/Strings/api_endpoint.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/utils/system_util.dart';
-
+import 'package:bottom_picker/bottom_picker.dart';
+import 'package:bottom_picker/resources/arrays.dart';
 class ProfileEditPage extends StatelessWidget {
   const ProfileEditPage({super.key});
 
@@ -30,7 +35,7 @@ class ProfileEditPage extends StatelessWidget {
         ),
         title: Text("Profile Edit"),
       ),
-      body: GetBuilder<LoginController>(
+      body: GetBuilder<ProfileController>(
         assignId: true,
         builder: (controller) {
           return Obx(() {
@@ -44,7 +49,7 @@ class ProfileEditPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Form(
-                      key: controller.registerFormKey,
+                      key: controller.profileFormKey,
                       child: Column(
                         children: [
                           Container(
@@ -76,16 +81,49 @@ class ProfileEditPage extends StatelessWidget {
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        Text("Mary Jones",style: boldText(21),),
-                                        Text("hernandex.redial@gmail.ac.in",style: boldText(13,color: Color(0xff545454)),),
+                                        Text(controller.profileResponse.value!.user!.name??"",style: boldText(21),),
+                                        Text(controller.profileResponse.value!.user!.mobile??'',style: boldText(13,color: Color(0xff545454)),),
                                       ],
                                     ),
                                   ),
                                   Positioned(
                                     top: -30,
-                                    child: CircleAvatar(
+                                    child:
+
+                                    controller.filePath.value==""?
+                                    controller.profileResponse.value!.student==null||
+                                        controller.profileResponse.value!.student!.image==null?
+                                    CircleAvatar(
                                       backgroundColor: Colors.black,
                                       radius: 50,
+                                    )
+                                   :
+                                    CircleAvatar(
+                                      backgroundColor: Colors.black,
+                                      backgroundImage: NetworkImage(ApiEndpoint.imageBaseUrl+controller.profileResponse.value!.student!.image??""),
+                                      radius: 50,
+                                    ):
+                                    CircleAvatar(
+                                      backgroundColor: Colors.black,
+                                      backgroundImage: FileImage(File(controller.filePath.value)),
+                                      radius: 50,
+                                    )
+                                  ),
+                                  Positioned(
+                                    top: 20,
+                                    left:0.5.sw,
+                                    child: InkWell(
+                                      onTap: (){
+                                        controller.filepic();
+                                      },
+                                      child: CircleAvatar(
+                                        backgroundColor:AppColors.primaryColor,
+                                        child: Icon(
+                                          Icons.photo_camera,
+                                          color: Colors.white,
+                                        ),
+                                        radius: 20,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -129,7 +167,7 @@ class ProfileEditPage extends StatelessWidget {
                                 ),
                                 SizedBox(height: 8,),
                                 CustomTextField(
-                                  textEditingController: controller.userNameController,
+                                  textEditingController: controller.lastNameController,
                                   inputFormatters: [],
                                   validator: (text) {
                                     if (text!.isEmpty) {
@@ -151,19 +189,39 @@ class ProfileEditPage extends StatelessWidget {
                                   style: boldText(14),
                                 ),
                                 SizedBox(height: 8,),
-                                CustomTextField(
-                                  textEditingController: controller.userNameController,
-                                  inputFormatters: [],
-                                  validator: (text) {
-                                    if (text!.isEmpty) {
-                                      return "Please enter your name";
-                                    }
+                                InkWell(
+                                  onTap: (){
+                                    BottomPicker.date(
+                                        pickerTitle:  Text("Set your Birthday"),
+                                        buttonSingleColor: AppColors.primaryColor,
+                                        buttonContent:Text("Select",style: boldText(14,color: Colors.white),),
+
+                                        onSubmit: (index) {
+                                          controller.selectDob.value=index.toString().split(" ").first;
+                                        },
+                                        bottomPickerTheme:  BottomPickerTheme.orange,
+                                    ).show(context);
                                   },
-                                  hintText: "Enter your name",
-                                  isPrefixIcon: true,
-                                  icon: Padding(
-                                    padding: const EdgeInsets.all(14.0),
-                                    child: Icon(Icons.person_outline),
+                                  child: Container(
+                                    height: 60,
+                                    width: 1.0.sw,
+                                    margin: EdgeInsets.symmetric(horizontal: 0,),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            color: Color(0XFFF1EDFC))),
+                                    child: Container(
+                                        margin: EdgeInsets.only(left: 12,top: 0),
+                                        child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Icon(Icons.calendar_month),
+                                            SizedBox(width: 12,),
+                                            Text(controller.selectDob.value==""?"Date Of Birth":controller.selectDob.value,style: mediumText(14,color: AppColors.textClorColor),),
+                                          ],
+                                        )
+                                    ),
                                   ),
                                 ),
                                 SizedBox(height: 16,),
@@ -173,31 +231,65 @@ class ProfileEditPage extends StatelessWidget {
                                   style: boldText(14),
                                 ),
                                 SizedBox(height: 8,),
-                                CustomTextField(
-                                  textEditingController: controller.userNameController,
-                                  inputFormatters: [],
-                                  validator: (text) {
-                                    if (text!.isEmpty) {
-                                      return "Please enter your name";
-                                    }
-                                  },
-                                  hintText: "Enter your name",
-                                  isPrefixIcon: true,
-                                  icon: Padding(
-                                    padding: const EdgeInsets.all(14.0),
-                                    child: Icon(Icons.person_outline),
+                                Container(
+                                  height: 60,
+                                  margin: EdgeInsets.symmetric(horizontal: 0,),
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                          color: Color(0XFFF1EDFC))),
+                                  child: Padding(
+                                      padding: const EdgeInsets.only(right: 5.0),
+                                      child: DropdownButtonHideUnderline(
+                                          child: Padding(
+                                            padding:
+                                            const EdgeInsets.only(
+                                                left: 12.0, right: 5),
+                                            child: DropdownButton<String>(
+                                              isExpanded: true,
+                                              items: [
+                                                // Add a default null item
+                                                const DropdownMenuItem<String>(
+                                                  value: null,
+                                                  child: Text("Select Gender"),
+                                                ),
+                                                // Add other items
+                                                ...["male","female"].map((e) {
+                                                  return DropdownMenuItem<String>(
+                                                    value: e,
+                                                    child: Row(
+                                                      children: [
+                                                        Icon(Icons.person),
+                                                        SizedBox(width: 12,),
+                                                        Text(e.toUpperCase()),
+                                                      ],
+                                                    ),
+                                                  );
+                                                }),
+                                              ],
+                                              value:  controller.selectGender
+                                                  .value!=""
+                                                  ? controller.selectGender.value
+                                                  : null,
+                                              onChanged: (val) {
+                                                controller.selectGender.value = val!;
+                                              },
+                                            ),
+                                          ))
                                   ),
                                 ),
                                 SizedBox(height: 16,),
 
 
                                 Text(
-                                  'Gender',
+                                  'Mobile Number',
                                   style: boldText(14),
                                 ),
                                 SizedBox(height: 8,),
                                 CustomTextField(
-                                  textEditingController: controller.userNameController,
+                                  textEditingController: controller.mobileController,
+                                  readOnly: true,
                                   inputFormatters: [],
                                   validator: (text) {
                                     if (text!.isEmpty) {
@@ -208,7 +300,7 @@ class ProfileEditPage extends StatelessWidget {
                                   isPrefixIcon: true,
                                   icon: Padding(
                                     padding: const EdgeInsets.all(14.0),
-                                    child: Icon(Icons.person_outline),
+                                    child: Icon(Icons.phone),
                                   ),
                                 ),
                                 SizedBox(height: 16,),
@@ -219,7 +311,7 @@ class ProfileEditPage extends StatelessWidget {
                                 ),
                                 SizedBox(height: 8,),
                                 CustomTextField(
-                                  textEditingController: controller.userNameController,
+                                  textEditingController: controller.emailController,
                                   inputFormatters: [],
                                   validator: (text) {
                                     if (text!.isEmpty) {
@@ -230,7 +322,7 @@ class ProfileEditPage extends StatelessWidget {
                                   isPrefixIcon: true,
                                   icon: Padding(
                                     padding: const EdgeInsets.all(14.0),
-                                    child: Icon(Icons.person_outline),
+                                    child: Icon(Icons.email_outlined),
                                   ),
                                 ),
                                 SizedBox(height: 16,),
@@ -241,11 +333,11 @@ class ProfileEditPage extends StatelessWidget {
 
                                 CustomElevatedButton(
                                   onPressed: () {
-                                    if(controller.registerFormKey.currentState!.validate()){
-
+                                    if(controller.profileFormKey.currentState!.validate()){
+                                      controller.updateUser(context: context);
                                     }
                                   },
-                                  titleText: 'Update',
+                                  titleText: 'Update Profile',
                                   titleSize: 14,
                                   titleColor: Colors.white,
                                   buttonColor: AppColors.primaryColor,

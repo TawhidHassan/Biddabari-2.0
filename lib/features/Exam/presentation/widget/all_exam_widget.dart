@@ -55,7 +55,7 @@ class AllExamComponent extends StatelessWidget {
                               controller.selectExamCat(controller.batchExamResponse.value!.examCategories![index].id,controller.batchExamResponse.value!.examCategories![index]);
                             },
                             child: HorizontalCategoryCard(
-                              active:  controller.examCategorieData.value!.id==controller.batchExamResponse.value!.examCategories![index].id,
+                              active:  controller.selectedExamcategory.value==controller.batchExamResponse.value!.examCategories![index].id,
                               title: controller.batchExamResponse.value!.examCategories![index].name??"",
                             ),
                           ),

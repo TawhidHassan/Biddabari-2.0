@@ -409,7 +409,7 @@ class ApiMethod {
 
         // CustomSnackBar.error(
         //     jsonDecode(response.body)['message']['error'].toString());
-        return null;
+        return jsonDecode(jsonData.body);
       }
     } on SocketException {
       log.e('🐞🐞🐞 Error Alert on Socket Exception 🐞🐞🐞');

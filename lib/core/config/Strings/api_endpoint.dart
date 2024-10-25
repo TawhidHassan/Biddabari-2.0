@@ -17,6 +17,7 @@ class ApiEndpoint {
   static  String FORGET_PASSWORD_CHANGE= 'verify-pass-reset-otp'.addBaseURl;
 
   static  String GET_USER_PROFILE= 'app-get-user-info'.addBaseURl;
+  static  String UPDATE_USER_PROFILE= 'student/profile-update'.addBaseURl;
 
   ///Slider
   static  String SLIDER_GET= 'app-home-slider-courses'.addBaseURl;

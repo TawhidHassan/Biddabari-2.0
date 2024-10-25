@@ -1,8 +1,8 @@
 
 import 'dart:io';
-
 import 'package:biddabari_new/core/common/data/user/UserRresponse.dart';
 import 'package:biddabari_new/core/routes/route_path.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -10,9 +10,9 @@ import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import '../../../../Dependenci Injection/init_dependencies.dart';
 import '../../../../core/LocalDataBase/localdata.dart';
+
 import '../../domain/usecase/profile_use_case.dart';
 import 'package:flutter/material.dart';
-
 class ProfileController extends GetxController implements GetxService{
  final ProfileUseCase? profileUseCase;
   ProfileController({ this.profileUseCase });
@@ -38,6 +38,8 @@ class ProfileController extends GetxController implements GetxService{
  final selectGender = "".obs;
  final selectDob = "".obs;
  File? file;
+ final profileFormKey = GlobalKey<FormState>();
+
 
  @override
  void onInit() {
@@ -55,6 +57,19 @@ class ProfileController extends GetxController implements GetxService{
   super.onInit();
  }
 
+ Future<File?> filepic()async{
+  FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
+  if (result != null) {
+   filePath.value="";
+   File filer = File(result.files.single.path!);
+   filePath.value=result.files.single.path!;
+   file=File(filePath.value);
+  } else {
+   // User canceled the picker
+  }
+ }
+
+
  void getToken() async {
   var tokenx = await serviceLocator<DBHelper>().getData();
   if (tokenx.get('deviceToken') != null) {
@@ -68,9 +83,6 @@ class ProfileController extends GetxController implements GetxService{
 
 
  Rx<UserRresponse?>  profileResponse=Rx<UserRresponse?>(null);
-
-
-
 
 
  final circuler=false.obs;
@@ -87,29 +99,29 @@ class ProfileController extends GetxController implements GetxService{
        textColor: Colors.white,
        fontSize: 16.0
    );
-  },(onRight){
-   profileResponse.value=onRight;
-   emailController.text=onRight.student!.email??"";
-   mobileController.text=onRight.student!.mobile??"";
-   userNameController.text=onRight.user!.name??"";
-   fisrtNameController.text=onRight.student!.firstName??"";
-   lastNameController.text=onRight.student!.lastName??"";
-   selectGender.value=onRight.student!.gender??"";
-   selectDob.value=onRight.student!.dob??"";
+  },(r) async {
+   profileResponse.value=r;
+   emailController.text=r.student!.email??"";
+   mobileController.text=r.student!.mobile??"";
+   userNameController.text=r.user!.name??"";
+   fisrtNameController.text=r.student!.firstName??"";
+   lastNameController.text=r.student!.lastName??"";
+   selectGender.value=r.student!.gender??"";
+   selectDob.value=r.student!.dob??"";
+   await localBd.UserUpdata(
+       email: r.user!.email,name: r.user!.name,
+       mobile: r.user!.mobile
+   );
    if(isCheckout!){
 
    }else{
-    device_token.value!=onRight.user!.device_token?
+    device_token.value!=r.user!.device_token?
     _showMyDialog(context) :SizedBox();
    }
   });
   circuler.value=false;
   return profileResponse.value;
  }
-
-
-
-
 
  Future<void> _showMyDialog(BuildContext context) async {
   return showDialog<void>(
@@ -185,5 +197,47 @@ class ProfileController extends GetxController implements GetxService{
    },
   );
  }
+
+
+
+ Future updateUser({required BuildContext context})async {
+  circuler.value=true;
+  var res= await profileUseCase?.updateUser(
+      iamge: file,
+      userName:userNameController.text,
+      firstName:userNameController.text,
+      lastName:lastNameController.text,
+      email:emailController.text,
+      mobile:mobileController.text,
+      selectGender:selectGender.value,
+      selectDob:selectDob.value
+   );
+
+    res!.fold((onLeft){
+     Fluttertoast.showToast(
+         msg: onLeft.message,
+         toastLength: Toast.LENGTH_SHORT,
+         gravity: ToastGravity.BOTTOM,
+         timeInSecForIosWeb: 2,
+         backgroundColor: Colors.red,
+         textColor: Colors.white,
+         fontSize: 16.0
+     );
+     circuler.value=false;
+    },(onRight){
+     getProfile(context,false);
+     Fluttertoast.showToast(
+         msg: "Update your profile",
+         toastLength: Toast.LENGTH_SHORT,
+         gravity: ToastGravity.BOTTOM,
+         timeInSecForIosWeb: 2,
+         backgroundColor: Colors.green,
+         textColor: Colors.white,
+         fontSize: 16.0
+     );
+    });
+ }
+
+
 }
 
