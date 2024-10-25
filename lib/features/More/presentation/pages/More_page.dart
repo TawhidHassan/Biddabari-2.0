@@ -102,7 +102,7 @@ class MorePage extends StatelessWidget {
                 context.pushNamed(Routes.myCoursePage);
               },
               title: "My Course",
-              icon: Assets.icons.people.path,
+              icon: Assets.icons.course.path,
             ),
 
             MoreOtptionCard(
@@ -110,7 +110,7 @@ class MorePage extends StatelessWidget {
                 context.pushNamed(Routes.myOrderPage);
               },
               title: "My Order",
-              icon: Assets.icons.people.path,
+              icon: Assets.icons.freeCourse.path,
             ),
 
             MoreOtptionCard(
@@ -118,7 +118,7 @@ class MorePage extends StatelessWidget {
                 context.pushNamed(Routes.myDwonloadsPage);
               },
               title: "My Downloads",
-              icon: Assets.icons.people.path,
+              icon: Assets.icons.review.path,
             ),
 
             MoreOtptionCard(
@@ -151,20 +151,13 @@ class MorePage extends StatelessWidget {
               icon: Assets.icons.notice.path,
             ),
 
-            MoreOtptionCard(
-              title: "Course",
-              icon: Assets.icons.course.path,
-            ),
+
 
             MoreOtptionCard(
               title: "My Exam",
               icon: Assets.icons.exam.path,
             ),
 
-            MoreOtptionCard(
-              title: "My Free Class & Exam",
-              icon: Assets.icons.freeCourse.path,
-            ),
 
             MoreOtptionCard(
               onTap: () {
@@ -174,10 +167,7 @@ class MorePage extends StatelessWidget {
               icon: Assets.icons.book.path,
             ),
 
-            MoreOtptionCard(
-              title: "Review",
-              icon: Assets.icons.review.path,
-            ),
+
 
             MoreOtptionCard(
               onTap: () {
