@@ -7,10 +7,10 @@ part of 'MyExam.dart';
 // **************************************************************************
 
 MyExam _$MyExamFromJson(Map<String, dynamic> json) => MyExam(
-      json['id'] as int?,
-      json['user_id'] as int?,
-      json['parent_model_id'] as int?,
-      json['batch_exam_subscription_id'] as int?,
+      (json['id'] as num?)?.toInt(),
+      (json['user_id'] as num?)?.toInt(),
+      (json['parent_model_id'] as num?)?.toInt(),
+      (json['batch_exam_subscription_id'] as num?)?.toInt(),
       json['ordered_for'] as String?,
       json['title'] as String?,
       json['status'],

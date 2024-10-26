@@ -7,7 +7,7 @@ part of 'MasterExam.dart';
 // **************************************************************************
 
 MasterExam _$MasterExamFromJson(Map<String, dynamic> json) => MasterExam(
-      json['id'] as int?,
+      (json['id'] as num?)?.toInt(),
       json['title'] as String?,
       json['slug'] as String?,
       json['sub_title'] as String?,
@@ -15,18 +15,18 @@ MasterExam _$MasterExamFromJson(Map<String, dynamic> json) => MasterExam(
       json['banner'] as String?,
       json['description'] as String?,
       json['featured_video_url'] as String?,
-      json['package_duration_in_days'] as int?,
-      json['discount_type'] as int?,
+      (json['package_duration_in_days'] as num?)?.toInt(),
+      (json['discount_type'] as num?)?.toInt(),
       json['discount_amount'],
       json['discount_start_date'],
       json['discount_start_date_timestamp'],
       json['discount_end_date'],
       json['discount_end_date_timestamp'],
-      json['is_paid'] as int?,
-      json['is_featured'] as int?,
-      json['is_approved'] as int?,
-      json['status'] as int?,
-      json['is_master_exam'] as int?,
+      (json['is_paid'] as num?)?.toInt(),
+      (json['is_featured'] as num?)?.toInt(),
+      (json['is_approved'] as num?)?.toInt(),
+      (json['status'] as num?)?.toInt(),
+      (json['is_master_exam'] as num?)?.toInt(),
       json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),

@@ -100,7 +100,7 @@ class MyCourseCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style:mediumText(11,color: AppColors.orange400),
                         ),
-                        Assets.icons.done.image()
+                        Assets.icons.donePng.image()
                       ],
                     ),
                     SizedBox(height: 4,),

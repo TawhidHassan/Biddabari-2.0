@@ -23,6 +23,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/Star.svg
   SvgGenImage get star => const SvgGenImage('assets/icons/Star.svg');
 
+  /// File path: assets/icons/Users.svg
+  SvgGenImage get users => const SvgGenImage('assets/icons/Users.svg');
+
   /// File path: assets/icons/alarm.svg
   SvgGenImage get alarm => const SvgGenImage('assets/icons/alarm.svg');
 
@@ -70,11 +73,26 @@ class $AssetsIconsGen {
   SvgGenImage get classRoomInactive =>
       const SvgGenImage('assets/icons/classRoom_inactive.svg');
 
+  /// File path: assets/icons/clock.svg
+  SvgGenImage get clock => const SvgGenImage('assets/icons/clock.svg');
+
   /// File path: assets/icons/course.svg
   SvgGenImage get course => const SvgGenImage('assets/icons/course.svg');
 
+  /// File path: assets/icons/cup.svg
+  SvgGenImage get cup => const SvgGenImage('assets/icons/cup.svg');
+
+  /// File path: assets/icons/doller.svg
+  SvgGenImage get doller => const SvgGenImage('assets/icons/doller.svg');
+
   /// File path: assets/icons/done.png
-  AssetGenImage get done => const AssetGenImage('assets/icons/done.png');
+  AssetGenImage get donePng => const AssetGenImage('assets/icons/done.png');
+
+  /// File path: assets/icons/done.svg
+  SvgGenImage get doneSvg => const SvgGenImage('assets/icons/done.svg');
+
+  /// File path: assets/icons/dwonload.svg
+  SvgGenImage get dwonload => const SvgGenImage('assets/icons/dwonload.svg');
 
   /// File path: assets/icons/email.svg
   SvgGenImage get email => const SvgGenImage('assets/icons/email.svg');
@@ -120,14 +138,24 @@ class $AssetsIconsGen {
   /// File path: assets/icons/job.svg
   SvgGenImage get job => const SvgGenImage('assets/icons/job.svg');
 
+  /// File path: assets/icons/laguage.svg
+  SvgGenImage get laguage => const SvgGenImage('assets/icons/laguage.svg');
+
   /// File path: assets/icons/language.svg
   SvgGenImage get language => const SvgGenImage('assets/icons/language.svg');
+
+  /// File path: assets/icons/level.svg
+  SvgGenImage get level => const SvgGenImage('assets/icons/level.svg');
 
   /// File path: assets/icons/logout.svg
   SvgGenImage get logout => const SvgGenImage('assets/icons/logout.svg');
 
   /// File path: assets/icons/notice.svg
   SvgGenImage get notice => const SvgGenImage('assets/icons/notice.svg');
+
+  /// File path: assets/icons/online_course.svg
+  SvgGenImage get onlineCourse =>
+      const SvgGenImage('assets/icons/online_course.svg');
 
   /// File path: assets/icons/people.svg
   SvgGenImage get people => const SvgGenImage('assets/icons/people.svg');
@@ -149,12 +177,23 @@ class $AssetsIconsGen {
   /// File path: assets/icons/search.svg
   SvgGenImage get search => const SvgGenImage('assets/icons/search.svg');
 
+  /// File path: assets/icons/subtitle.svg
+  SvgGenImage get subtitle => const SvgGenImage('assets/icons/subtitle.svg');
+
   /// File path: assets/icons/teacher.svg
   SvgGenImage get teacher => const SvgGenImage('assets/icons/teacher.svg');
+
+  /// File path: assets/icons/tv.svg
+  SvgGenImage get tv => const SvgGenImage('assets/icons/tv.svg');
+
+  /// File path: assets/icons/video_camera.svg
+  SvgGenImage get videoCamera =>
+      const SvgGenImage('assets/icons/video_camera.svg');
 
   /// List of all assets
   List<dynamic> get values => [
         star,
+        users,
         alarm,
         allCourse,
         allCourseInactive,
@@ -169,8 +208,13 @@ class $AssetsIconsGen {
         categoryTwo,
         classRom,
         classRoomInactive,
+        clock,
         course,
-        done,
+        cup,
+        doller,
+        donePng,
+        doneSvg,
+        dwonload,
         email,
         exam,
         exam2,
@@ -184,16 +228,22 @@ class $AssetsIconsGen {
         home,
         homeInactive,
         job,
+        laguage,
         language,
+        level,
         logout,
         notice,
+        onlineCourse,
         people,
         photo,
         review,
         saveGreenSvg,
         saveGreenSvg_,
         search,
-        teacher
+        subtitle,
+        teacher,
+        tv,
+        videoCamera
       ];
 }
 

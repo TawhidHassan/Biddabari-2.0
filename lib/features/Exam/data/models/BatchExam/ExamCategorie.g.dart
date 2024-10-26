@@ -8,14 +8,14 @@ part of 'ExamCategorie.dart';
 
 ExamCategorie _$ExamCategorieFromJson(Map<String, dynamic> json) =>
     ExamCategorie(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
-      parentId: json['parent_id'] as int?,
+      parentId: (json['parent_id'] as num?)?.toInt(),
       note: json['note'] as String?,
       image: json['image'] as String?,
       slug: json['slug'] as String?,
-      order: json['order'] as int?,
-      status: json['status'] as int?,
+      order: (json['order'] as num?)?.toInt(),
+      status: (json['status'] as num?)?.toInt(),
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),

@@ -63,6 +63,10 @@ class Routes {
   static const String categoryCoursePage = 'categoryCoursePage';
   static const String categoryCoursePagePath = 'categoryCoursePage';
 
+
+  static const String detailsCoursePage = 'detailsCoursePage';
+  static const String detailsCoursePagePath = '/detailsCoursePage';
+
   static const String examPage = 'examPage';
   static const String examPagePath = '/examPage';
 

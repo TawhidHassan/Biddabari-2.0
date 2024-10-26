@@ -22,6 +22,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../Dependenci Injection/init_dependencies.dart';
+import '../../features/AllCourse/data/models/course/Course.dart';
+import '../../features/AllCourse/presentation/pages/course_details_page.dart';
 import '../../features/Blog/data/models/Blog/Blog.dart';
 import '../../features/Blog/presentation/pages/blog_details_page.dart';
 import '../../features/BookStore/presentation/pages/book_cart.dart';
@@ -243,6 +245,17 @@ class AppRouter {
           path: Routes.myCoursePagePath,
           pageBuilder: (context, state) =>  NoTransitionPage(
             child: MyCoursePage(),
+          ),
+          routes: []
+      ),
+
+      GoRoute(
+          name: Routes.detailsCoursePage,
+          path: Routes.detailsCoursePagePath,
+          pageBuilder: (context, state) =>  NoTransitionPage(
+            child: CourseDetailsPage(
+                course:state.extra as Course
+            ),
           ),
           routes: []
       ),

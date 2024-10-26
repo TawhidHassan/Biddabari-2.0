@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../config/util/text_style.dart';
 import '../../../custom_assets/assets.gen.dart';
+import '../../../routes/route_path.dart';
 
 class CourseCard extends StatelessWidget {
 final Course? course;
@@ -24,6 +26,8 @@ final Course? course;
         //   "name":name,
         //   "slug":slug
         // });
+
+        context.pushNamed(Routes.detailsCoursePage,extra: course);
       },
       child: Container(
         decoration: ShapeDecoration(

@@ -20,7 +20,9 @@ class AllCourseController extends GetxController implements GetxService{
   final allCourseLoading=false.obs;
   final deatilsCourseLoading=false.obs;
   final myCourseLoading=false.obs;
+  final isCurriculumSelected=false.obs;
   final selectedcategory = 0.obs;
+  final selectDescription = 0.obs;
   final catetegoryList=["Courses","Mentors"].obs;
   Rx<CourseResponse?>  runingCourseResponse=Rx<CourseResponse?>(null);
   Rx<AllCourseResponse?> allCourseResponse = Rx<AllCourseResponse?>(null);
@@ -122,8 +124,6 @@ class AllCourseController extends GetxController implements GetxService{
     deatilsCourseLoading.value=false;
   }
 
-
-
   Future getMyCourse() async{
     myCourseLoading.value=true;
     myCourseResponse.value=null;
@@ -145,6 +145,7 @@ class AllCourseController extends GetxController implements GetxService{
     });
     myCourseLoading.value=false;
   }
+
 
 
 

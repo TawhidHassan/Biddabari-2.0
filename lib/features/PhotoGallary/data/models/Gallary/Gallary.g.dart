@@ -7,11 +7,11 @@ part of 'Gallary.dart';
 // **************************************************************************
 
 Gallary _$GallaryFromJson(Map<String, dynamic> json) => Gallary(
-      json['id'] as int?,
+      (json['id'] as num?)?.toInt(),
       json['title'] as String?,
       json['sub_title'] as String?,
       json['banner'] as String?,
-      json['gallery_id'] as int?,
+      (json['gallery_id'] as num?)?.toInt(),
       json['image_url'] as String?,
       (json['gallery_images'] as List<dynamic>?)
           ?.map((e) => Gallary.fromJson(e as Map<String, dynamic>))

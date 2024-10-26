@@ -40,7 +40,7 @@ class DBHelper{
 
     }else{
       print("hive "+users.get('token'));
-      Logger().w("hive ${users.get("image")}");
+      // Logger().w("hive ${users.get("image")}");
     }
     return users;
   }
