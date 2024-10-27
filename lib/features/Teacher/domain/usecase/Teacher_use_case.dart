@@ -3,6 +3,7 @@ import 'package:biddabari_new/features/Teacher/data/models/Teacher/TeacherRespon
 import 'package:fpdart/fpdart.dart';
 import '../../../../core/error/failures.dart';
 import '../../data/models/Teacher/Teacher.dart';
+import '../../data/models/Teacher/TeacherDetailsResponse.dart';
 import '../entities/Teacher.dart';
 import '../repositories/Teacher_repository.dart';
 import '../../../../core/usecase/usecase.dart';
@@ -27,6 +28,16 @@ TeacherUseCase({this.teacherRepository});
     page: page,
   );
   }
+
+  @override
+  Future<Either<Failure, TeacherDetailsResponse>> getTeacherDetails({required int id}) {
+  // TODO: implement call
+  return teacherRepository!.getTeacherDetails(
+    id: id,
+  );
+  }
+
+
 
 }
 

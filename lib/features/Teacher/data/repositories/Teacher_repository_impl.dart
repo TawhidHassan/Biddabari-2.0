@@ -1,4 +1,5 @@
 import 'package:biddabari_new/core/error/failures.dart';
+import 'package:biddabari_new/features/Teacher/data/models/Teacher/TeacherDetailsResponse.dart';
 
 import 'package:biddabari_new/features/Teacher/data/models/Teacher/TeacherResponse.dart';
 
@@ -37,6 +38,28 @@ TeacherRepositoryImpl({required this.remoteSource,required this.connectionChecke
   }on ServerException catch(e){
     return left(Failure(e.message));
   }
+  }
+
+  @override
+  Future<Either<Failure, TeacherDetailsResponse>> getTeacherDetails({required int id})async {
+    // TODO: implement getTeacherDetails
+    try{
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure("no internet connection!!"));
+      }else{
+        final data = await remoteSource.getTeacherDetails(
+          id:id
+        );
+        if(data!.teacher==null){
+          return left(Failure("Somethings get wrong"));
+        }else{
+          return right(data);
+        }
+        // return right(episodes!.results!);
+      }
+    }on ServerException catch(e){
+      return left(Failure(e.message));
+    }
   }
 
 }

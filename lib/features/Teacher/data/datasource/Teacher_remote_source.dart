@@ -1,3 +1,4 @@
+import 'package:biddabari_new/features/Teacher/data/models/Teacher/TeacherDetailsResponse.dart';
 import 'package:biddabari_new/features/Teacher/data/models/Teacher/TeacherResponse.dart';
 
 import '../../../../core/config/Strings/api_endpoint.dart';
@@ -6,6 +7,9 @@ import '../../../../core/network/api_services.dart';
 
 abstract class TeacherRemoteSource {
   Future<TeacherResponse?> getAllTeacher({required int limit, required String page});
+  Future<TeacherDetailsResponse?> getTeacherDetails({required int id});
+
+
 }
 
 
@@ -22,6 +26,17 @@ class TeacherRemoteSourceImpl implements TeacherRemoteSource {
   }catch (e) {
     throw ServerException(e.toString());
   }
+  }
+
+  @override
+  Future<TeacherDetailsResponse?> getTeacherDetails({required int id}) async{
+    // TODO: implement getTeacherDetails
+    try{
+      final result =await apiMethod.get(url: ApiEndpoint.TEACHER_DETAILS+"$id",showResult: true,isBasic: true,duration: 30);
+      return TeacherDetailsResponse.fromJson(result!);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
   }
 
 // @override

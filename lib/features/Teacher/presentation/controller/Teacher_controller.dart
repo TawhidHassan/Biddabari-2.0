@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import '../../../../core/common/data/user/User.dart';
+import '../../data/models/Teacher/TeacherDetailsResponse.dart';
 import '../../data/models/Teacher/TeacherResponse.dart';
 import '../../domain/usecase/Teacher_use_case.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class TeacherController extends GetxController implements GetxService{
 
 
   final teacherCircle = false.obs;
+  final teacherAboutClick = true.obs;
   List<User> teacherList = [];
 
   Rx<TeacherResponse?> teacherResponse = Rx<TeacherResponse?>(null);
@@ -24,6 +26,7 @@ class TeacherController extends GetxController implements GetxService{
   int teacherListLength = 10;
   int teacherPage = 1;
   final teacherPagingCirculer = false.obs;
+  final teacherDetailsLoading = false.obs;
 
 
   addTeacherItems() async {
@@ -99,6 +102,32 @@ class TeacherController extends GetxController implements GetxService{
     });
     teacherPagingCirculer.value = false;
     teacherCircle.value = false;
+  }
+
+
+
+  Rx<TeacherDetailsResponse?> teacherDetailsResponse = Rx<TeacherDetailsResponse?>(null);
+
+  Future getTeacherDetails(int id) async{
+    teacherDetailsLoading.value = true;
+    var rs=await teacherUseCase!.getTeacherDetails(
+     id:id
+    );
+    teacherDetailsLoading.value = false;
+    rs.fold((l){
+      Fluttertoast.showToast(
+          msg: l.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    }, (r){
+      teacherDetailsResponse.value=r;
+    });
+
   }
 
 

@@ -41,6 +41,7 @@ class ApiEndpoint {
 
   ///teacher
   static  String TEACHER_LIST= 'all-instructors?page='.addBaseURl;
+  static  String TEACHER_DETAILS= 'instructor-details/'.addBaseURl;
 
 
   static  String ORDER_LIST= 'student/my-orders'.addBaseURl;

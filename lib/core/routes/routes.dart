@@ -16,6 +16,7 @@ import 'package:biddabari_new/features/Notice/data/models/Notice/Notice.dart';
 import 'package:biddabari_new/features/Notice/presentation/pages/Notice_page.dart';
 import 'package:biddabari_new/features/PhotoGallary/data/models/Gallary/Gallary.dart';
 import 'package:biddabari_new/features/PhotoGallary/presentation/pages/gallery_details_page.dart';
+import 'package:biddabari_new/features/Teacher/data/models/Teacher/Teacher.dart';
 import 'package:biddabari_new/features/Teacher/presentation/pages/all_teacher_page.dart';
 import 'package:biddabari_new/features/dwonloads/presentation/pages/dwonloads_page.dart';
 import 'package:flutter/material.dart';
@@ -199,8 +200,8 @@ class AppRouter {
       GoRoute(
           name: Routes.teacherDetailsPage,
           path: Routes.teacherDetailsPagePath,
-          pageBuilder: (context, state) => const NoTransitionPage(
-            child: TeacherDetailsPage(),
+          pageBuilder: (context, state) =>  NoTransitionPage(
+            child: TeacherDetailsPage(teacherId: state.extra as int,),
           ),
           routes: []
       ),

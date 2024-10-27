@@ -19,7 +19,7 @@ class TeacherCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        context.pushNamed(Routes.teacherDetailsPage);
+        context.pushNamed(Routes.teacherDetailsPage,extra: teacher!.id);
       },
       child: Container(
         width: 160,
