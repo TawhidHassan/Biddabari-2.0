@@ -34,6 +34,7 @@ import '../../features/BookStore/presentation/pages/book_cart.dart';
 import '../../features/BookStore/presentation/pages/book_details.dart';
 import '../../features/BookStore/presentation/pages/my_book_page.dart';
 import '../../features/CourseProgress/presentation/pages/CourseProgress_page.dart';
+import '../../features/CourseProgress/presentation/pages/course show/assignment_page.dart';
 import '../../features/CourseProgress/presentation/pages/course show/note_content.dart';
 import '../../features/CourseProgress/presentation/pages/course show/pdf_content_list.dart';
 import '../../features/Error/presentation/error_page.dart';
@@ -299,6 +300,17 @@ class AppRouter {
                       pageBuilder: (context, state){
                         return NoTransitionPage(
                           child: PdfContentPage(
+                            courseSectionContent: state.extra as CourseSectionContent,
+                          ),
+                        );
+                      },
+                  ),
+                  GoRoute(
+                      name: Routes.assismentContentPage,
+                      path: Routes.assismentContentPagePath,
+                      pageBuilder: (context, state){
+                        return NoTransitionPage(
+                          child: AssignmentContentPage(
                             courseSectionContent: state.extra as CourseSectionContent,
                           ),
                         );

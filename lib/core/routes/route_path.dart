@@ -104,6 +104,9 @@ class Routes {
   static const String pdfContentPage = 'pdfContentPage';
   static const String pdfContentPagePath = 'pdfContentPage';
 
+  static const String assismentContentPage = 'assismentContentPage';
+  static const String assismentContentPagePath = 'assismentContentPage';
+
   static const String myOrderPage = 'myOrderPage';
   static const String myOrderPagePath = '/myOrderPage';
 

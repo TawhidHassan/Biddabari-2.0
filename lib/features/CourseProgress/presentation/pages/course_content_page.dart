@@ -66,6 +66,27 @@ class CourseContentListPage extends StatelessWidget {
                           context.pushNamed(Routes.pdfContentPage,extra: courseSection!.course_section_contents![index]
                           );
                         }
+                        else if(courseSection!.course_section_contents![index].contentType=="live"){
+                          context.pushNamed(Routes.noteContentPage,extra: {
+                            "courseSectionContent":courseSection!.course_section_contents![index],
+                            "isive":true,
+                            "isLink":false
+                          },
+                          );
+
+                        }
+                        else if(courseSection!.course_section_contents![index].contentType=="link"){
+                          context.pushNamed(Routes.noteContentPage,extra: {
+                            "courseSectionContent":courseSection!.course_section_contents![index],
+                            "isive":false,
+                            "isLink":true
+                          },
+                          );
+                        }
+                        else if(courseSection!.course_section_contents![index].contentType=="assignment"){
+                          context.pushNamed(Routes.assismentContentPage,extra:courseSection!.course_section_contents![index]);
+
+                        }
                       },
                       title: courseSection!.course_section_contents![index].title??"",
                       subTitle: courseSection!.course_section_contents![index].contentType??"",
