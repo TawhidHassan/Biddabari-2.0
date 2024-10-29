@@ -7,14 +7,14 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'AddressLocal.g.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: 0)
 class AddressLocal extends HiveObject{
 
-  @HiveField(6)
+  @HiveField(1)
   String? name;
-  @HiveField(7)
+  @HiveField(2)
   String? number;
-  @HiveField(8)
+  @HiveField(3)
   String? address;
 
 

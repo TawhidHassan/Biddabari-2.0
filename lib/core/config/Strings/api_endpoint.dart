@@ -32,6 +32,11 @@ class ApiEndpoint {
   static  String CLASSROM_MY_CLASS_LIST= 'student/today-classes'.addBaseURl;
   static  String CLASSROM_MTODAY_EXAM_LIST= 'student/today-exams'.addBaseURl;
 
+  static  String COURSE_CONTENT_LIST= 'student/course-contents/'.addBaseURl;
+  static  String ASSIGMENT_SCRIPT_GET= 'student/show-pdf/'.addBaseURl;
+  static  String ASSIGMENT_SCRIPT_TAKEN_OR_NOT= 'exist-assignment-status/'.addBaseURl;
+  static  String ASSIGMENT_SUBMIT= 'student/upload-assignment-files'.addBaseURl;
+
   ///book
   static  String TOP_BOOK_LIST= 'app-home-products'.addBaseURl;
   static  String STORE_BOOK_LIST= 'all-products'.addBaseURl;
@@ -59,6 +64,7 @@ class ApiEndpoint {
 
 
   static  String BATCH_EXAM_LIST= 'all-exams'.addBaseURl;
+  static  String BATCH_EXAM_DETAILS= 'category-exams/'.addBaseURl;
 
 
 

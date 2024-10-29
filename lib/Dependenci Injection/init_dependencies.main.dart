@@ -20,6 +20,7 @@ Future<void> initDependencies() async {
   _initPhotoGallary();
   _initJob();
   _initExam();
+  _initCourseProgress();
 
 
 
@@ -43,6 +44,10 @@ Future<void> initDependencies() async {
   serviceLocator.registerFactory<DBHelper>(
     () => DBHelper(),
   );
+  serviceLocator.registerFactory<HiveService>(
+    () => HiveService(),
+  );
+
 
   ///Api client
   serviceLocator.registerFactory<ApiMethod>(
@@ -383,6 +388,26 @@ void _initExam(){
     ..registerFactory(
           () => ExamUseCase(
          examRepository:   serviceLocator(),
+      ),
+    );
+}
+
+void _initCourseProgress(){
+  /// Datasource
+  serviceLocator
+    ..registerFactory<CourseProgressRemoteSource>(
+          () => CourseProgressRemoteSourceImpl(apiMethod: serviceLocator(),
+      ),
+    )/// Repository
+    ..registerFactory<CourseProgressRepository>(
+          () => CourseProgressRepositoryImpl(
+          connectionChecker:  serviceLocator(),
+          remoteSource:  serviceLocator()
+      ),
+    )/// Usecases
+    ..registerFactory(
+          () => CourseProgressUseCase(
+         courseProgressRepository: serviceLocator(),
       ),
     );
 }

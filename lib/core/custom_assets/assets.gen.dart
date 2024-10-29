@@ -76,6 +76,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/clock.svg
   SvgGenImage get clock => const SvgGenImage('assets/icons/clock.svg');
 
+  /// File path: assets/icons/content.svg
+  SvgGenImage get content => const SvgGenImage('assets/icons/content.svg');
+
   /// File path: assets/icons/course.svg
   SvgGenImage get course => const SvgGenImage('assets/icons/course.svg');
 
@@ -93,6 +96,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/dwonload.svg
   SvgGenImage get dwonload => const SvgGenImage('assets/icons/dwonload.svg');
+
+  /// File path: assets/icons/dwonload2.svg
+  SvgGenImage get dwonload2 => const SvgGenImage('assets/icons/dwonload2.svg');
 
   /// File path: assets/icons/email.svg
   SvgGenImage get email => const SvgGenImage('assets/icons/email.svg');
@@ -209,12 +215,14 @@ class $AssetsIconsGen {
         classRom,
         classRoomInactive,
         clock,
+        content,
         course,
         cup,
         doller,
         donePng,
         doneSvg,
         dwonload,
+        dwonload2,
         email,
         exam,
         exam2,

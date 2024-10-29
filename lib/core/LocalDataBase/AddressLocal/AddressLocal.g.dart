@@ -8,7 +8,7 @@ part of 'AddressLocal.dart';
 
 class AddressLocalAdapter extends TypeAdapter<AddressLocal> {
   @override
-  final int typeId = 1;
+  final int typeId = 0;
 
   @override
   AddressLocal read(BinaryReader reader) {
@@ -17,9 +17,9 @@ class AddressLocalAdapter extends TypeAdapter<AddressLocal> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return AddressLocal(
-      name: fields[6] as String?,
-      number: fields[7] as String?,
-      address: fields[8] as String?,
+      name: fields[1] as String?,
+      number: fields[2] as String?,
+      address: fields[3] as String?,
     );
   }
 
@@ -27,11 +27,11 @@ class AddressLocalAdapter extends TypeAdapter<AddressLocal> {
   void write(BinaryWriter writer, AddressLocal obj) {
     writer
       ..writeByte(3)
-      ..writeByte(6)
+      ..writeByte(1)
       ..write(obj.name)
-      ..writeByte(7)
+      ..writeByte(2)
       ..write(obj.number)
-      ..writeByte(8)
+      ..writeByte(3)
       ..write(obj.address);
   }
 

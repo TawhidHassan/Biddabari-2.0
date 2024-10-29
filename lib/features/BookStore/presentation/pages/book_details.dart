@@ -13,6 +13,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../core/common/widgets/Button/bottom_checkout_section.dart';
 import '../../../../core/common/widgets/Button/custom_button.dart';
 import '../../../../core/common/widgets/Button/elevated_button.dart';
 import '../../../../core/common/widgets/container/discount_badge.dart';
@@ -284,111 +285,30 @@ class BookDetailsPage extends StatelessWidget {
               ),
             ),
 
-            bottomSheet: Container(
-              height: 138,
-              width: 1.0.sw,
-              color: Colors.white,
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-              child:controller.storeBookLoading.value?LoadingWidget(): Column(
+            floatingActionButton: Container(
+              margin: EdgeInsets.only(bottom: 80),
+              padding: EdgeInsets.symmetric(horizontal: 6,vertical: 4),
+              width: 150,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                border: Border.all(color: AppColors.primaryColor),
+                color: Colors.white
+              ),
+              child: Row(
                 children: [
-
-                  Row(
-                    children: [
-                      Text(
-                        '${200.000.toStringAsFixed(2)} BDT',
-                        style: boldText(16, color: AppColors.primaryColor),
-                      ),
-
-                      const SizedBox(width: 10),
-
-                      // regular price
-                      Text(
-                        '100BDT',
-                        style: TextStyle(
-                            fontSize: 9,
-                            color: Color(0xFFA9A9A9),
-                            decoration: TextDecoration.lineThrough
-                        ),
-
-                      ),
-
-                      const SizedBox(width: 10),
-                      DiscountBadge(
-                        textSize: 9,
-                        text: '56% off',
-                        backgroundColor: Color(0xFfFFEEE8),
-                        foregroundColor: Color(0xffEB6A20),
-                        radius: 0,
-                      ),
-
-                    ],
+                  CircleAvatar(
+                    backgroundColor: AppColors.primaryColor,
+                    child: Icon(Icons.add,color: Colors.white,),
                   ),
-
-                  SizedBox(height: 6,),
-                  Row(
-                    children: [
-                      Assets.icons.alarm.svg(),
-                      SizedBox(width: 8,),
-                      Text(
-                        '2 days left at this price!',
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFC71720),
-
-                        ),
-
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 12,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: CustomButton(
-                          color: AppColors.kPrimaryColorx,
-                          onTap: () {},
-                          title: "Add to Cart",
-                          borderRadius: 50,
-                          textColor: AppColors.kPrimaryColorx,
-                          textSize: 14.sp,
-                          height: 35.h,
-                          isBorder: true,
-
-
-                        ),
-                      ),
-
-                      SizedBox(width: 12,),
-                      CustomElevatedButton(
-                        onPressed: () {
-                          context.pushNamed(Routes.checkOutPage);
-                        },
-                        titleText: 'এখনই কিনুন ',
-                        titleSize: 14,
-                        buttonHeight: 30.h,
-                        titleColor: Colors.white,
-                        buttonColor: AppColors.primaryColor,
-                        borderRdius: 100.r,
-                        buttonMarginLeft: 52,
-                        iconRight: Container(
-                          width: 36,
-                          height: 36,
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          decoration: ShapeDecoration(
-                            color: Colors.white,
-                            shape: OvalBorder(),
-                          ),
-                          child: Icon(Icons.arrow_forward_ios_sharp,
-                            color: AppColors.primaryColor,),
-                        ),
-                      ),
-
-                    ],
-                  )
+                  SizedBox(width: 12,),
+                  Text("Add To Cart",style: boldText(14,),)
                 ],
               ),
+            ),
+            bottomSheet: BottomCheckoutSection(
+              action: (){
+                context.pushNamed(Routes.checkOutPage);
+              },
             ),
           );
         });

@@ -92,6 +92,18 @@ class Routes {
   static const String myCoursePage = 'myCoursePage';
   static const String myCoursePagePath = '/myCoursePage';
 
+  static const String courseContentPage = 'courseContentPage';
+  static const String courseContentPagePath = '/courseContentPage';
+
+  static const String courseContentListPage = 'courseContentListPage';
+  static const String courseContentListPagePath = 'courseContentListPage';
+
+  static const String noteContentPage = 'noteContentPage';
+  static const String noteContentPagePath = 'noteContentPage';
+
+  static const String pdfContentPage = 'pdfContentPage';
+  static const String pdfContentPagePath = 'pdfContentPage';
+
   static const String myOrderPage = 'myOrderPage';
   static const String myOrderPagePath = '/myOrderPage';
 

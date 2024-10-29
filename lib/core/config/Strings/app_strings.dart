@@ -44,5 +44,10 @@ class AppStrings {
   static const String Episodes = 'Episodes';
   static const String Locations = 'Locations';
 
+
+  static const String ADDRESS_BOX = 'addressLocal';
+
+
+
 // common
 }

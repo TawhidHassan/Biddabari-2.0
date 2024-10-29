@@ -90,6 +90,8 @@ dependencies:
   #permision
   permission_handler: ^10.2.0
 
+  flutter_downloader: ^1.11.8
+
   #create widget in pdf
   #  flutter_to_pdf: ^0.2.1
 

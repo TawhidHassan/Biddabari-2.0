@@ -7,6 +7,7 @@ import 'package:biddabari_new/features/BookStore/data/models/book/Book.dart';
 import 'package:biddabari_new/features/BookStore/presentation/pages/BookStore_page.dart';
 import 'package:biddabari_new/features/Checkout/presentation/pages/Checkout_page.dart';
 import 'package:biddabari_new/features/ClassRoom/presentation/pages/ClassRoom_page.dart';
+import 'package:biddabari_new/features/CourseProgress/presentation/pages/course_content_page.dart';
 import 'package:biddabari_new/features/Exam/presentation/pages/Exam_page.dart';
 import 'package:biddabari_new/features/Job/presentation/pages/Job_page.dart';
 import 'package:biddabari_new/features/Login/presentation/pages/forget_password_page.dart';
@@ -24,12 +25,17 @@ import 'package:go_router/go_router.dart';
 
 import '../../Dependenci Injection/init_dependencies.dart';
 import '../../features/AllCourse/data/models/course/Course.dart';
+import '../../features/AllCourse/data/models/courseSection/CourseSection.dart';
+import '../../features/AllCourse/data/models/courseSectionContent/CourseSectionContent.dart';
 import '../../features/AllCourse/presentation/pages/course_details_page.dart';
 import '../../features/Blog/data/models/Blog/Blog.dart';
 import '../../features/Blog/presentation/pages/blog_details_page.dart';
 import '../../features/BookStore/presentation/pages/book_cart.dart';
 import '../../features/BookStore/presentation/pages/book_details.dart';
 import '../../features/BookStore/presentation/pages/my_book_page.dart';
+import '../../features/CourseProgress/presentation/pages/CourseProgress_page.dart';
+import '../../features/CourseProgress/presentation/pages/course show/note_content.dart';
+import '../../features/CourseProgress/presentation/pages/course show/pdf_content_list.dart';
 import '../../features/Error/presentation/error_page.dart';
 import '../../features/Home/presentation/pages/Home_page.dart';
 import '../../features/Job/data/models/job_model.dart';
@@ -248,6 +254,60 @@ class AppRouter {
             child: MyCoursePage(),
           ),
           routes: []
+      ),
+      GoRoute(
+          name: Routes.courseContentPage,
+          path: Routes.courseContentPagePath,
+          pageBuilder: (context, state){
+            final Map data=state.extra as Map;
+           return NoTransitionPage(
+              child: CourseProgressPage(
+                name: data["name"],
+                id: data["id"],
+              ),
+            );
+          },
+          routes: [
+            GoRoute(
+                name: Routes.courseContentListPage,
+                path: Routes.courseContentListPagePath,
+                pageBuilder: (context, state){
+                  return NoTransitionPage(
+                    child: CourseContentListPage(
+                     courseSection: state.extra as CourseSection,
+                    ),
+                  );
+                },
+                routes: [
+                  GoRoute(
+                      name: Routes.noteContentPage,
+                      path: Routes.noteContentPagePath,
+                      pageBuilder: (context, state){
+                        final Map data=state.extra as Map;
+                        return NoTransitionPage(
+                          child: NoteContentPage(
+                            courseSectionContent: data["courseSectionContent"],
+                            isive: data["isive"],
+                            isLink: data["isLink"],
+                          ),
+                        );
+                      },
+                  ),
+                  GoRoute(
+                      name: Routes.pdfContentPage,
+                      path: Routes.pdfContentPagePath,
+                      pageBuilder: (context, state){
+                        return NoTransitionPage(
+                          child: PdfContentPage(
+                            courseSectionContent: state.extra as CourseSectionContent,
+                          ),
+                        );
+                      },
+                  ),
+
+                ]
+            ),
+          ]
       ),
 
       GoRoute(

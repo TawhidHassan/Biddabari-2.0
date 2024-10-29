@@ -1,7 +1,9 @@
 import 'package:biddabari_new/core/config/Strings/api_endpoint.dart';
+import 'package:biddabari_new/core/routes/route_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/common/widgets/container/discount_badge.dart';
 import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/config/util/text_style.dart';
@@ -16,7 +18,10 @@ class ClassRoomCourse extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.pushNamed(context, '/course_content');
+        context.pushNamed(Routes.courseContentPage,extra: {
+          "name":courseOrder!.course!.title!.toString(),
+          "id":courseOrder!.course!.id.toString(),
+        });
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 8.0),

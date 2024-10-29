@@ -1,4 +1,5 @@
 
+import 'package:biddabari_new/features/Exam/data/models/BatchExam/ExamDetailsResponse.dart';
 import 'package:fpdart/fpdart.dart';
 import '../../../../core/error/failures.dart';
 import '../../data/models/BatchExam/BatchExamResponse.dart';
@@ -21,6 +22,12 @@ ExamUseCase({this.examRepository});
     // TODO: implement call
      return examRepository!.getAllExam();
     }
+    @override
+    Future<Either<Failure, ExamDetailsResponse>> getExamDetails(int id ) {
+    // TODO: implement call
+     return examRepository!.getExamDetails(id);
+    }
+
 
 
 

@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:http/http.dart' as Http;
 
 import 'package:firebase_core/firebase_core.dart';
@@ -17,10 +18,13 @@ import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 import 'Dependenci Injection/getx Injection/getx_dependenci_injection.dart';
 import 'Dependenci Injection/init_dependencies.dart';
+import 'core/LocalDataBase/AddressLocal/AddressLocal.dart';
 import 'core/Location/location_config.dart';
+import 'core/config/Strings/app_strings.dart';
 import 'core/config/color/app_colors.dart';
 import 'core/config/theme/app_themes.dart';
 import 'core/routes/routes.dart';
+import 'core/service/hive_service.dart';
 import 'core/utils/system_util.dart';
 
 
@@ -54,11 +58,16 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
 
+  await FlutterDownloader.initialize(
+      debug: true, // optional: set to false to disable printing logs to console (default: true)
+      ignoreSsl: true // option: set to false to disable working with http links (default: false)
+  );
+
+
   ///dp path
   var databasePath = await getApplicationDocumentsDirectory();
   Hive.init(databasePath.path);
   Box? box= await Hive.openBox('users');
-
 
   ///status bar style
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -71,7 +80,8 @@ void main() async {
   await init();
   await initDependencies();
 
-
+  serviceLocator<HiveService>().init();
+  registerHiveAdapters();
 
   ///firbase and notification
   ///Firebase init
@@ -194,4 +204,11 @@ class MyHttpOverrides extends HttpOverrides {
       ..badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
   }
+}
+
+void registerHiveAdapters() async{
+  Hive.registerAdapter(AddressLocalAdapter());
+
+
+  await serviceLocator<HiveService>().openBox<AddressLocal>(AppStrings.ADDRESS_BOX);
 }

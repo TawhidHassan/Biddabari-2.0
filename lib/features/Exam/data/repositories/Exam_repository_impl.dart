@@ -1,4 +1,5 @@
 import 'package:biddabari_new/core/error/failures.dart';
+import 'package:biddabari_new/features/Exam/data/models/BatchExam/ExamDetailsResponse.dart';
 
 import 'package:fpdart/fpdart.dart';
 
@@ -35,6 +36,26 @@ ExamRepositoryImpl({required this.remoteSource,required this.connectionChecker})
   }on ServerException catch(e){
     return left(Failure(e.message));
   }
+  }
+
+  @override
+  Future<Either<Failure, ExamDetailsResponse>> getExamDetails(int id)async {
+    // TODO: implement getExamDetails
+    try{
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure("no internet connection!!"));
+      }else{
+        final data = await remoteSource.getExamDetails(id);
+        if(data!.exam==null){
+          return left(Failure("Something wrong"));
+        }else{
+          return right(data);
+        }
+        // return right(episodes!.results!);
+      }
+    }on ServerException catch(e){
+      return left(Failure(e.message));
+    }
   }
 
 
