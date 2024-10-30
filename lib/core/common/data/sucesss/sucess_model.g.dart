@@ -9,6 +9,7 @@ part of 'sucess_model.dart';
 SucessModel _$SucessModelFromJson(Map<String, dynamic> json) => SucessModel(
       json['status'] as String?,
       json['message'] as String?,
+      json['success'] as String?,
       json['photo'] as String?,
       json['time'] as String?,
       json['taskCompleted'] as num?,
@@ -20,6 +21,7 @@ Map<String, dynamic> _$SucessModelToJson(SucessModel instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
+      'success': instance.success,
       'photo': instance.photo,
       'time': instance.time,
       'taskCompleted': instance.taskCompleted,

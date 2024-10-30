@@ -62,9 +62,15 @@ class CourseContentListPage extends StatelessWidget {
                            },
                           );
                         }
-                        else if(courseSection!.course_section_contents![index].contentType=="pdf"){
-                          context.pushNamed(Routes.pdfContentPage,extra: courseSection!.course_section_contents![index]
+                        else  if(courseSection!.course_section_contents![index].contentType=="video"){
+                          context.pushNamed(Routes.videoContentPage,extra: {
+                            "courseSectionContent":courseSection!.course_section_contents![index],
+                            "isCourseExam":true
+                          },
                           );
+                        }
+                        else if(courseSection!.course_section_contents![index].contentType=="pdf"){
+                          context.pushNamed(Routes.pdfContentPage,extra: courseSection!.course_section_contents![index]);
                         }
                         else if(courseSection!.course_section_contents![index].contentType=="live"){
                           context.pushNamed(Routes.noteContentPage,extra: {

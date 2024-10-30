@@ -15,6 +15,7 @@ import '../../../../core/config/Strings/app_strings.dart';
 import '../../../../core/service/hive_service.dart';
 import '../../../AllCourse/data/models/course/CourseDetailsResponse.dart';
 import '../../../Exam/data/models/Question/QuestionResponse.dart';
+import '../../data/models/Comment/CommentResponse.dart';
 import '../../domain/usecase/CourseProgress_use_case.dart';
 import 'package:flutter/material.dart';
 
@@ -26,11 +27,16 @@ class CourseProgressController extends GetxController implements GetxService{
  Rx<CourseDetailsResponse?>  courseContentDetails=Rx<CourseDetailsResponse?>(null);
  Rx<QuestionResponse?>  assigmentScriptResponse=Rx<QuestionResponse?>(null);
 
+ TextEditingController commentTextController = TextEditingController();
+
  final circuler=false.obs;
+ final playOneline=false.obs;
  final examSubmitCirculer=false.obs;
  final downloadCirculer=false.obs;
  final dwonloadsatart=false.obs;
  final videoFullScrren=false.obs;
+ final downloadProgress=0.obs;
+ final downloadId="".obs;
 
  final cartList = <AddressLocal>[].obs;
 
@@ -70,26 +76,21 @@ class CourseProgressController extends GetxController implements GetxService{
   }
  }
 
- // Future saveAdress(String name, String number, String address) async{
- //
- //  await serviceLocator<DBHelper>().checkAddressItem(number).then((value)async{
- //   if(value.isEmpty){
- //    await serviceLocator<DBHelper>()!.addAddress(number,name,address).then((value) {
- //     print(value);
- //     if (value == "Successfully add to local") {
- //      // Get.find<CartController>().onInit();
- //
- //      update();
- //      // Get.snackbar("Successfully", "You Address Save On Device",backgroundColor: Colors.green);
- //     }
- //     else {
- //      // Get.snackbar("failed", value,backgroundColor: Colors.redAccent);
- //     }
- //    });
- //   }
- //  });
- //
- // }
+
+ void updatePrgress(int message,String id) {
+  downloadProgress.value = message;
+  downloadId.value = id;
+  if (message == 100) {
+   /*Get.snackbar(
+          "Successfully Downloaded The video", "Now You Can Play This",
+          colorText: Colors.white,
+          backgroundColor: Colors.green,
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8));*/
+   downloadCirculer.value = false;
+  }
+  update();
+ }
+
 
  void addAddress(AddressLocal? address, {void Function()? success}) async {
   if (address != null) {
@@ -194,6 +195,49 @@ class CourseProgressController extends GetxController implements GetxService{
    });
    examSubmitCirculer.value = false;
 
+  }
+
+
+ Rx<CommentResponse?> comments = Rx<CommentResponse?>(null);
+ final commentCircle=false.obs;
+ Future getComments(String id, String type)async {
+  commentCircle.value=true;
+  var rs= await courseProgressUseCase!.getComments(id,type);
+  rs.fold((l){
+   Fluttertoast.showToast(
+       msg: l.message,
+       toastLength: Toast.LENGTH_SHORT,
+       gravity: ToastGravity.BOTTOM,
+       timeInSecForIosWeb: 2,
+       backgroundColor: Colors.red,
+       textColor: Colors.white,
+       fontSize: 16.0
+   );
+  }, (r){
+   comments.value=r;
+  });
+  commentCircle.value = false;
+ }
+
+  Future commentsSubmitFun(String id, String comment, String type)async {
+   commentCircle.value=true;
+   var rs= await courseProgressUseCase!.commentsSubmitFun(id,comment,type);
+   rs.fold((l){
+    Fluttertoast.showToast(
+        msg: l.message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 2,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+   }, (r){
+    commentTextController.text="";
+    Get.snackbar("Successfully", "Add comment",backgroundColor: Colors.green);
+    getComments(id,type);
+   });
+   commentCircle.value = false;
   }
 
 }

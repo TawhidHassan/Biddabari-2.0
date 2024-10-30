@@ -37,6 +37,7 @@ import '../../features/CourseProgress/presentation/pages/CourseProgress_page.dar
 import '../../features/CourseProgress/presentation/pages/course show/assignment_page.dart';
 import '../../features/CourseProgress/presentation/pages/course show/note_content.dart';
 import '../../features/CourseProgress/presentation/pages/course show/pdf_content_list.dart';
+import '../../features/CourseProgress/presentation/pages/course show/video_content.dart';
 import '../../features/Error/presentation/error_page.dart';
 import '../../features/Home/presentation/pages/Home_page.dart';
 import '../../features/Job/data/models/job_model.dart';
@@ -312,6 +313,19 @@ class AppRouter {
                         return NoTransitionPage(
                           child: AssignmentContentPage(
                             courseSectionContent: state.extra as CourseSectionContent,
+                          ),
+                        );
+                      },
+                  ),
+                  GoRoute(
+                      name: Routes.videoContentPage,
+                      path: Routes.videoContentPagePath,
+                      pageBuilder: (context, state){
+                        final Map data=state.extra as Map;
+                        return NoTransitionPage(
+                          child: VideoContent(
+                            isCourseExam: data["isCourseExam"],
+                            courseSectionContent: data["courseSectionContent"] ,
                           ),
                         );
                       },

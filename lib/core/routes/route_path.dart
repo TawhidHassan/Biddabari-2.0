@@ -107,6 +107,9 @@ class Routes {
   static const String assismentContentPage = 'assismentContentPage';
   static const String assismentContentPagePath = 'assismentContentPage';
 
+  static const String videoContentPage = 'videoContentPage';
+  static const String videoContentPagePath = 'videoContentPage';
+
   static const String myOrderPage = 'myOrderPage';
   static const String myOrderPagePath = '/myOrderPage';
 

@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:biddabari_new/core/common/data/sucesss/sucess_model.dart';
 import 'package:biddabari_new/core/error/failures.dart';
 
 import 'package:biddabari_new/features/AllCourse/data/models/course/CourseDetailsResponse.dart';
+import 'package:biddabari_new/features/CourseProgress/data/models/Comment/CommentResponse.dart';
 import 'package:biddabari_new/features/Exam/data/models/Question/QuestionResponse.dart';
 
 import 'package:fpdart/src/either.dart';
@@ -88,6 +90,46 @@ CourseProgressRepositoryImpl({required this.remoteSource,required this.connectio
       }else{
         final data = await remoteSource.submitAssisgment(id,file);
         if(data!.error!=null){
+          return left(Failure("Some things wrong"));
+        }else{
+          return right(data);
+        }
+        // return right(episodes!.results!);
+      }
+    }on ServerException catch(e){
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, CommentResponse>> getComments(String id, String type)async {
+    // TODO: implement getComments
+    try{
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure("no internet connection!!"));
+      }else{
+        final data = await remoteSource.getComments(id,type);
+        if(data!.comments==null){
+          return left(Failure("Some things wrong"));
+        }else{
+          return right(data);
+        }
+        // return right(episodes!.results!);
+      }
+    }on ServerException catch(e){
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, SucessModel>> commentsSubmitFun(String id, String comment, String type)async {
+    // TODO: implement commentsSubmitFun
+    try{
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure("no internet connection!!"));
+      }else{
+        final data = await remoteSource.commentsSubmitFun(id,comment,type);
+        if(data!.success!='Comment submitted successfully.'){
           return left(Failure("Some things wrong"));
         }else{
           return right(data);

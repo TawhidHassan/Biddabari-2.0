@@ -67,6 +67,10 @@ class ApiEndpoint {
   static  String BATCH_EXAM_DETAILS= 'category-exams/'.addBaseURl;
 
 
+  static  String GET_CONTENT_COMMENT= 'get-comments'.addBaseURl;
+  static  String SUBMIT_CONTENT_COMMENT= 'new-comment'.addBaseURl;
+
+
 
 
 }

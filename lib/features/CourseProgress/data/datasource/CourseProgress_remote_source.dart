@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:biddabari_new/core/common/data/sucesss/sucess_model.dart';
 import 'package:biddabari_new/features/AllCourse/data/models/course/CourseDetailsResponse.dart';
+import 'package:biddabari_new/features/CourseProgress/data/models/Comment/CommentResponse.dart';
 import 'package:biddabari_new/features/Exam/data/models/Question/QuestionResponse.dart';
 
 import '../../../../core/config/Strings/api_endpoint.dart';
@@ -12,6 +14,12 @@ Future<CourseDetailsResponse?> getCourseContent(String? id);
 Future<QuestionResponse?> getAssigmentScript(num? id);
 Future<QuestionResponse?> getAssigmentTakenOrNot(int? id);
 Future<QuestionResponse?>submitAssisgment(num? id, List<String> file);
+Future<CommentResponse?>getComments (String id, String type);
+Future<SucessModel?> commentsSubmitFun(String id, String comment, String type);
+
+
+
+
 
 
 }
@@ -60,11 +68,44 @@ class CourseProgressRemoteSourceImpl implements CourseProgressRemoteSource {
       'course_content_id': id.toString()
     };
   try{
-    final result =await apiMethod.multipartMultiFile(url: ApiEndpoint.ASSIGMENT_SUBMIT,body: data,showResult: true,isBasic: true, pathList: file, fieldList: ["files[]"]);
+    final result =await apiMethod.multipartMultiFile(url: ApiEndpoint.ASSIGMENT_SUBMIT,body: data,showResult: true,isBasic: false, pathList: file, fieldList: ["files[]"]);
     return QuestionResponse.fromJson(result!);
   }catch (e) {
     throw ServerException(e.toString());
   }
+  }
+
+  @override
+  Future<CommentResponse?> getComments(String id, String type)async{
+    // TODO: implement getComments
+    try{
+      final result =await apiMethod.get(url: ApiEndpoint.GET_CONTENT_COMMENT+"/$id/$type",showResult: true,isBasic: false,duration: 30);
+      return CommentResponse.fromJson(result);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<SucessModel?> commentsSubmitFun(String id, String comment, String type)async {
+    // TODO: implement commentsSubmitFun
+    Map<String, String> data =
+    type=="course_content"?
+    {
+      "message": comment,
+      "type": type,
+      "parent_model_id": id,
+    }:{
+      "message": comment,
+      "type": type,
+      "parent_model_id": id,
+    };
+    try{
+      final result =await apiMethod.post(url: ApiEndpoint.SUBMIT_CONTENT_COMMENT,body: data,showResult: true,isBasic: false,);
+      return SucessModel.fromJson(result!);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
   }
 
 }

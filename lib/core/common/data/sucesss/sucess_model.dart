@@ -10,6 +10,7 @@ class SucessModel  {
 
   String? status;
   String? message;
+  String? success;
   String? photo;
   String? time;
   num? taskCompleted;
@@ -18,7 +19,7 @@ class SucessModel  {
 
 
 
-  SucessModel(this.status, this.message, this.photo, this.time,
+  SucessModel(this.status, this.message,this.success, this.photo, this.time,
       this.taskCompleted, this.taskOngoing, this.taskRejection);
 
   factory SucessModel.fromJson(Map<String, dynamic> json) => _$SucessModelFromJson(json);
