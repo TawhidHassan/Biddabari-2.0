@@ -9,6 +9,7 @@ import 'package:biddabari_new/features/Checkout/presentation/pages/Checkout_page
 import 'package:biddabari_new/features/ClassRoom/presentation/pages/ClassRoom_page.dart';
 import 'package:biddabari_new/features/CourseProgress/presentation/pages/course_content_page.dart';
 import 'package:biddabari_new/features/Exam/presentation/pages/Exam_page.dart';
+import 'package:biddabari_new/features/Exam/presentation/pages/exam_details_page.dart';
 import 'package:biddabari_new/features/Job/presentation/pages/Job_page.dart';
 import 'package:biddabari_new/features/Login/presentation/pages/forget_password_page.dart';
 import 'package:biddabari_new/features/Login/presentation/pages/otp_page.dart';
@@ -35,9 +36,11 @@ import '../../features/BookStore/presentation/pages/book_details.dart';
 import '../../features/BookStore/presentation/pages/my_book_page.dart';
 import '../../features/CourseProgress/presentation/pages/CourseProgress_page.dart';
 import '../../features/CourseProgress/presentation/pages/course show/assignment_page.dart';
+import '../../features/CourseProgress/presentation/pages/course show/exam_content.dart';
 import '../../features/CourseProgress/presentation/pages/course show/note_content.dart';
 import '../../features/CourseProgress/presentation/pages/course show/pdf_content_list.dart';
 import '../../features/CourseProgress/presentation/pages/course show/video_content.dart';
+import '../../features/CourseProgress/presentation/pages/course show/writen_exam_content.dart';
 import '../../features/Error/presentation/error_page.dart';
 import '../../features/Home/presentation/pages/Home_page.dart';
 import '../../features/Job/data/models/job_model.dart';
@@ -344,6 +347,48 @@ class AppRouter {
                 course:state.extra as Course
             ),
           ),
+          routes: []
+      ),
+      GoRoute(
+          name: Routes.examContentPage,
+          path: Routes.examContentPagePath,
+          pageBuilder: (context, state){
+            final Map data=state.extra as Map;
+            return NoTransitionPage(
+              child: ExamContentPage(
+                  courseSectionContent:data['courseSectionContent'],
+                  isCourseExam:data['isCourseExam']
+              ),
+            );
+          },
+          routes: []
+      ),
+      GoRoute(
+          name: Routes.writtenExamContentPage,
+          path: Routes.writtenExamContentPagePath,
+          pageBuilder: (context, state){
+            final Map data=state.extra as Map;
+            return NoTransitionPage(
+              child: WritenExamContentPage(
+                  courseSectionContent:data['courseSectionContent'],
+                  isCourseExam:data['isCourseExam']
+              ),
+            );
+          },
+          routes: []
+      ),
+      GoRoute(
+          name: Routes.examDetailsPage,
+          path: Routes.examDetailsPagePath,
+          pageBuilder: (context, state) {
+            final Map data=state.extra as Map;
+            return NoTransitionPage(
+              child: ExamDetailsPage(
+                id: data["id"],
+                enrolle: data["enrolle"],
+              ),
+            );
+          },
           routes: []
       ),
       GoRoute(

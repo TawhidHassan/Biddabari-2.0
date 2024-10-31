@@ -54,6 +54,10 @@ Future<Either<Failure, SucessModel>>  commentsSubmitFun(String id, String commen
   return courseProgressRepository!.commentsSubmitFun(id,comment,type);
 }
 
+ Future<Either<Failure, QuestionResponse>> getExamQuestions(String id, int hasExam, bool isCourseExam)async {
+   return courseProgressRepository!.getExamQuestions(id,hasExam,isCourseExam);
+ }
+
 
 
 

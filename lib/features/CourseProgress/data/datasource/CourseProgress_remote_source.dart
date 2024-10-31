@@ -17,6 +17,8 @@ Future<QuestionResponse?>submitAssisgment(num? id, List<String> file);
 Future<CommentResponse?>getComments (String id, String type);
 Future<SucessModel?> commentsSubmitFun(String id, String comment, String type);
 
+Future<QuestionResponse?>getExamQuestions(String id, int hasExam, bool isCourseExam);
+
 
 
 
@@ -103,6 +105,23 @@ class CourseProgressRemoteSourceImpl implements CourseProgressRemoteSource {
     try{
       final result =await apiMethod.post(url: ApiEndpoint.SUBMIT_CONTENT_COMMENT,body: data,showResult: true,isBasic: false,);
       return SucessModel.fromJson(result!);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<QuestionResponse?> getExamQuestions(String id, int hasExam, bool isCourseExam)async {
+    // TODO: implement getExamQuestions
+    try{
+      if(hasExam==1){
+        final result =await apiMethod.get(url: ApiEndpoint.START_CLASS_EXAM+"/$id",showResult: true,isBasic: false,duration: 30);
+        return QuestionResponse.fromJson(result);
+      }else{
+        final result =await apiMethod.get(url:isCourseExam? ApiEndpoint.START_COURSE_EXAM+"/$id": ApiEndpoint.START_BATCH_EXAM+"/$id",showResult: true,isBasic: false,duration: 30);
+        return QuestionResponse.fromJson(result);
+      }
+
     }catch (e) {
       throw ServerException(e.toString());
     }

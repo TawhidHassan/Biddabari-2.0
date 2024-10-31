@@ -70,6 +70,9 @@ class Routes {
   static const String examPage = 'examPage';
   static const String examPagePath = '/examPage';
 
+  static const String examDetailsPage = 'examDetailsPage';
+  static const String examDetailsPagePath = '/examDetailsPage';
+
   static const String bookStorePage = 'bookStorePage';
   static const String bookStorePagePath = '/bookStorePage';
 
@@ -109,6 +112,12 @@ class Routes {
 
   static const String videoContentPage = 'videoContentPage';
   static const String videoContentPagePath = 'videoContentPage';
+
+  static const String examContentPage = 'examContentPage';
+  static const String examContentPagePath = '/examContentPage';
+
+  static const String writtenExamContentPage = 'writtenExamContentPage';
+  static const String writtenExamContentPagePath = '/writtenExamContentPage';
 
   static const String myOrderPage = 'myOrderPage';
   static const String myOrderPagePath = '/myOrderPage';

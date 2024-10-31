@@ -70,6 +70,10 @@ class ApiEndpoint {
   static  String GET_CONTENT_COMMENT= 'get-comments'.addBaseURl;
   static  String SUBMIT_CONTENT_COMMENT= 'new-comment'.addBaseURl;
 
+  static  String START_CLASS_EXAM= 'start-class-exam'.addBaseURl;
+  static  String START_COURSE_EXAM= 'start-course-exam'.addBaseURl;
+  static  String START_BATCH_EXAM= 'start-batch-exam'.addBaseURl;
+
 
 
 

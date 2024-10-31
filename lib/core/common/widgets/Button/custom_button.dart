@@ -37,14 +37,21 @@ class CustomButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(borderRadius??8),
             gradient:isBorder!?null: LinearGradient(
               colors: [
-                Color(0xffFFB199),
-               Color(0xffFF0844)
+                Color(0xffAA076B),
+               Color(0xff61045F)
               ],
               begin:  Alignment.topRight,
               end: Alignment.topLeft,
             ),
-            border: Border.all(color: AppColors.kPrimaryColorx)
-
+            border: Border.all(color: AppColors.kPrimaryColorx),
+            boxShadow: [
+              BoxShadow(
+                color: Color(0x26A8A4A4),
+                blurRadius: 15,
+                offset: Offset(0, 8),
+                spreadRadius: 0,
+              )
+            ],
           ),
         child: Center(
           child: child ??  Text(title ?? 'text',

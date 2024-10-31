@@ -93,6 +93,20 @@ class CourseContentListPage extends StatelessWidget {
                           context.pushNamed(Routes.assismentContentPage,extra:courseSection!.course_section_contents![index]);
 
                         }
+                        else if(courseSection!.course_section_contents![index].contentType=="exam"){
+                          context.pushNamed(Routes.examContentPage,extra:{
+                            "courseSectionContent":courseSection!.course_section_contents![index],
+                            "isCourseExam":true
+                          });
+
+                        }
+                        else if(courseSection!.course_section_contents![index].contentType=="written_exam"){
+                          context.pushNamed(Routes.writtenExamContentPage,extra:{
+                            "courseSectionContent":courseSection!.course_section_contents![index],
+                            "isCourseExam":true
+                          });
+
+                        }
                       },
                       title: courseSection!.course_section_contents![index].title??"",
                       subTitle: courseSection!.course_section_contents![index].contentType??"",

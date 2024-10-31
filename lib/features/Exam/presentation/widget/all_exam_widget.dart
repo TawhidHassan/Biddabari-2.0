@@ -31,7 +31,6 @@ class AllExamComponent extends StatelessWidget {
             child:controller.examLoading.value?LoadingWidget():
             Column(
               children: [
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

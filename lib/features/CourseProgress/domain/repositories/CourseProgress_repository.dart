@@ -20,6 +20,8 @@ abstract class CourseProgressRepository {
 
   Future<Either<Failure, SucessModel>> commentsSubmitFun(String id, String comment, String type);
 
+  Future<Either<Failure, QuestionResponse>> getExamQuestions(String id, int hasExam, bool isCourseExam);
+
 // Future<Either<Failure, LoginResponseModel>> login(String email);
 
 }

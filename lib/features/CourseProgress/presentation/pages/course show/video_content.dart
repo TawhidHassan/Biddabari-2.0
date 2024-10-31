@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
 
+import 'package:biddabari_new/core/common/widgets/container/discount_badge.dart';
 import 'package:biddabari_new/core/config/color/app_colors.dart';
 import 'package:biddabari_new/features/CourseProgress/presentation/pages/course%20show/youtube.dart';
 import 'package:flutter/material.dart';
@@ -281,7 +282,6 @@ class _VideoContentState extends State<VideoContent> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Course Content"),
-                    Text(widget.courseSectionContent!.title ?? "",style:semiBoldText(12),),
                   ],
                 ),
 
@@ -358,183 +358,168 @@ class _VideoContentState extends State<VideoContent> {
               body: Container(
                   height: 1.0.sh,
                   width: 1.0.sw,
-                  color: controller.videoFullScrren.value?Colors.black:Colors.white,
+                  color: controller.videoFullScrren.value?Colors.black:AppColors.primaryBackground,
                   padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
                   child: !readyToGo ? Center(child: LoadingWidget(),) :
                   Obx(() {
                     return ListView(
                       shrinkWrap: true,
                       children: [
-                        controllerx.playOneline.value == true ?
-                        YoutubeXpoPlayer(
-                          controller: controller,
-                          youtubeController: youtubeController,
-                        )
-                            :
-                        controller.downloadCirculer.value ?
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            LoadingWidget(),
-                            LinearProgressIndicator(
-                              color: AppColors.kPrimaryColorx,
-                              value: controller.downloadProgress.value / 100,
-                            ),
-                            Text("Download progress: " +
-                                controller.downloadProgress.value.toString() +
-                                "%",
-                              style: boldText(16, color: AppColors.kPrimaryColorx),
-                            ),
-                            SizedBox(height: 12,),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                GestureDetector(
-                                  child:
-                                  Icon(Icons.close, size: 26, color: Colors.red),
-                                  onTap: () {
-                                    controller.downloadCirculer.value = false;
-                                    controller.downloadProgress.value = 0;
-                                    controller.update();
-                                    var index = downloadsListMaps.indexWhere((
-                                        element) =>
-                                    element.id == controller.downloadId.value);
-                                    Logger().w(index);
-                                    downloadsListMaps.removeAt(index);
-                                    FlutterDownloader.remove(
-                                        taskId: controller.downloadId.value);
-                                    youtubeController = YoutubePlayerController(
-                                      initialVideoId: widget.courseSectionContent!.videoLink.toString().split("v=")[1],
-                                      flags: YoutubePlayerFlags(
-                                        autoPlay: false,
-                                        mute: false,
-                                      ),
-                                    );
-                                    setState(() {
-
-                                    });
-                                  },
-                                )
-                              ],
-                            )
-                          ],
-                        )
-                            :
-                        downloadsListMaps
-                            .where((element) =>
-                        element.filename ==
-                            widget.courseSectionContent!.id.toString())
-                            .isNotEmpty ?
-                        downloadsListMaps
-                            .where((element) =>
-                        element.filename ==
-                            widget.courseSectionContent!.id.toString())
-                            .first
-                            .status != 3 ?
-                        Column(
-                          children: [
-                            Text("Do you want to continue download?"),
-                            GestureDetector(
-                              child: Icon(Icons.play_arrow,
-                                  size: 24, color: Colors.blue),
-                              onTap: () {
-                                controller.downloadCirculer.value = true;
-                                controller.downloadProgress.value = 0;
-                                controller.update();
-                                FlutterDownloader.retry(taskId: downloadsListMaps
-                                    .where((element) =>
-                                element.filename ==
-                                    widget.courseSectionContent!.id.toString())
-                                    .first
-                                    .id!).then(
-                                      (newTaskID) =>
-                                      changeTaskID(downloadsListMaps
+                        Container(
+                          margin: EdgeInsets.all(0),
+                          padding: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12)
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              controllerx.playOneline.value == true ?
+                              YoutubeXpoPlayer(
+                                controller: controller,
+                                youtubeController: youtubeController,
+                              )
+                                  :
+                              controller.downloadCirculer.value ?
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  LoadingWidget(),
+                                  LinearProgressIndicator(
+                                    color: AppColors.kPrimaryColorx,
+                                    value: controller.downloadProgress.value / 100,
+                                  ),
+                                  Text("Download progress: " +
+                                      controller.downloadProgress.value.toString() +
+                                      "%",
+                                    style: boldText(16, color: AppColors.kPrimaryColorx),
+                                  ),
+                                  SizedBox(height: 12,),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      GestureDetector(
+                                        child:
+                                        Icon(Icons.close, size: 26, color: Colors.red),
+                                        onTap: () {
+                                          controller.downloadCirculer.value = false;
+                                          controller.downloadProgress.value = 0;
+                                          controller.update();
+                                          var index = downloadsListMaps.indexWhere((
+                                              element) =>
+                                          element.id == controller.downloadId.value);
+                                          Logger().w(index);
+                                          downloadsListMaps.removeAt(index);
+                                          FlutterDownloader.remove(
+                                              taskId: controller.downloadId.value);
+                                          youtubeController = YoutubePlayerController(
+                                            initialVideoId: widget.courseSectionContent!.videoLink.toString().split("v=")[1],
+                                            flags: YoutubePlayerFlags(
+                                              autoPlay: false,
+                                              mute: false,
+                                            ),
+                                          );
+                                          setState(() {
+                              
+                                          });
+                                        },
+                                      )
+                                    ],
+                                  )
+                                ],
+                              )
+                                  :
+                              downloadsListMaps.where((element) => element.filename == widget.courseSectionContent!.id.toString()).isNotEmpty ?
+                              downloadsListMaps.where((element) =>
+                              element.filename == widget.courseSectionContent!.id.toString()).first.status != 3 ?
+                              Column(
+                                children: [
+                                  Text("Do you want to continue download?"),
+                                  GestureDetector(
+                                    child: Icon(Icons.play_arrow,
+                                        size: 24, color: Colors.blue),
+                                    onTap: () {
+                                      controller.downloadCirculer.value = true;
+                                      controller.downloadProgress.value = 0;
+                                      controller.update();
+                                      FlutterDownloader.retry(taskId: downloadsListMaps
                                           .where((element) =>
                                       element.filename ==
-                                          widget.courseSectionContent!.id
-                                              .toString())
+                                          widget.courseSectionContent!.id.toString())
                                           .first
-                                          .id!, newTaskID!),
-                                );
-                              },
-                            ),
-                            SizedBox(height: 16,),
-                            GestureDetector(
-                              child:
-                              Icon(Icons.close, size: 24, color: Colors.red),
-                              onTap: () {
-                                controller.downloadCirculer.value = false;
-                                controller.downloadProgress.value = 0;
-                                controller.update();
-                                var index = downloadsListMaps.indexWhere((
-                                    element) =>
-                                element.filename ==
-                                    widget.courseSectionContent!.id.toString());
-                                // Logger().w(index);
-                                downloadsListMaps.removeAt(index);
-                                FlutterDownloader.remove(taskId: downloadsListMaps
-                                    .where((element) =>
-                                element.filename ==
-                                    widget.courseSectionContent!.id.toString())
-                                    .first
-                                    .id!);
-                              },
-                            )
-                          ],
-                        )
-                            :
-                        Column(
-                          children: [
-                            controllerPod.isInitialised
-                                ?
-                            PodVideoPlayer(
-                            controller: controllerPod)
-                            :
-                            SizedBox(
-                                height: 80,
-                                width: 80,
-                                child: CircularProgressIndicator())
-                          ],
-                        )
-                            :
+                                          .id!).then(
+                                            (newTaskID) =>
+                                            changeTaskID(downloadsListMaps
+                                                .where((element) =>
+                                            element.filename ==
+                                                widget.courseSectionContent!.id
+                                                    .toString())
+                                                .first
+                                                .id!, newTaskID!),
+                                      );
+                                    },
+                                  ),
+                                  SizedBox(height: 16,),
+                                  GestureDetector(
+                                    child:
+                                    Icon(Icons.close, size: 24, color: Colors.red),
+                                    onTap: () {
+                                      controller.downloadCirculer.value = false;
+                                      controller.downloadProgress.value = 0;
+                                      controller.update();
+                                      var index = downloadsListMaps.indexWhere((
+                                          element) =>
+                                      element.filename ==
+                                          widget.courseSectionContent!.id.toString());
+                                      // Logger().w(index);
+                                      downloadsListMaps.removeAt(index);
+                                      FlutterDownloader.remove(taskId: downloadsListMaps
+                                          .where((element) =>
+                                      element.filename ==
+                                          widget.courseSectionContent!.id.toString())
+                                          .first
+                                          .id!);
+                                    },
+                                  )
+                                ],
+                              )
+                                  :
+                              Column(
+                                children: [
+                                  controllerPod.isInitialised
+                                      ?
+                                  PodVideoPlayer(
+                                  controller: controllerPod)
+                                  :
+                                  SizedBox(
+                                      height: 80,
+                                      width: 80,
+                                      child: CircularProgressIndicator())
+                                ],
+                              )
+                                  :
+                              
+                              YoutubeXpoPlayer(
+                                controller: controller,
+                                youtubeController: youtubeController,
+                              ),
+                              
 
-                        YoutubeXpoPlayer(
-                          controller: controller,
-                          youtubeController: youtubeController,
+                              SizedBox(height: 12,),
+                              DiscountBadge(
+                                text: "Most Recent",
+                                backgroundColor:AppColors.orange400,
+                                foregroundColor: Colors.white,
+                              ),
+                              SizedBox(height: 6,),
+                              Text(widget.courseSectionContent!.title ?? "",style:boldText(16),),
+                            ],
+                          ),
                         ),
-                        // SizedBox(
-                        //   height:MediaQuery.of(context).orientation == Orientation.landscape?350:200,
-                        //   child: YoutubePlayerBuilder(
-                        //     onEnterFullScreen: (){
-                        //       controller.videoFullScrren.value=true;
-                        //     },
-                        //     onExitFullScreen: (){
-                        //       controller.videoFullScrren.value=false;
-                        //     },
-                        //     player: YoutubePlayer(
-                        //       thumbnail: SizedBox(),
-                        //       showVideoProgressIndicator: true,
-                        //       progressColors: ProgressBarColors(
-                        //           backgroundColor: kPrimaryColorx.withOpacity(
-                        //               0.40),
-                        //           bufferedColor: kPrimaryColorx,
-                        //           playedColor: kPrimaryColorx,
-                        //           handleColor: kPrimaryColorx),
-                        //       controller: _controller!,
-                        //     ),
-                        //     builder: (context, player) {
-                        //       return ListView(
-                        //         shrinkWrap: true,
-                        //         children: [
-                        //           player,
-                        //           SizedBox(),
-                        //         ],
-                        //       );
-                        //     },
-                        //   ),
-                        // ),
+                  
                         SizedBox(height: 16,),
                         widget.courseSectionContent!.hasClassXm!=0&&widget.courseSectionContent!.classXmStatus!="0"?
                         CustomButton(

@@ -20,7 +20,11 @@ class ExamCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // context.pushNamed(Routes.Exa,extra:exam );
+        context.pushNamed(Routes.examDetailsPage,extra:{
+          "id":exam!.id,
+          "enrolle":"false"
+          }
+        );
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 10.0),

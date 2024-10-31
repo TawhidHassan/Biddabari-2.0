@@ -141,6 +141,26 @@ CourseProgressRepositoryImpl({required this.remoteSource,required this.connectio
     }
   }
 
+  @override
+  Future<Either<Failure, QuestionResponse>> getExamQuestions(String id, int hasExam, bool isCourseExam)async {
+    // TODO: implement getExamQuestions
+    try{
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure("no internet connection!!"));
+      }else{
+        final data = await remoteSource.getExamQuestions(id,hasExam,isCourseExam);
+        if(data==null){
+          return left(Failure("Some things wrong"));
+        }else{
+          return right(data);
+        }
+        // return right(episodes!.results!);
+      }
+    }on ServerException catch(e){
+      return left(Failure(e.message));
+    }
+  }
+
 
 // @override
 }

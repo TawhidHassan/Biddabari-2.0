@@ -10,6 +10,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:quiver/async.dart';
 import '../../../../core/LocalDataBase/AddressLocal/AddressLocal.dart';
 import '../../../../core/config/Strings/app_strings.dart';
 import '../../../../core/service/hive_service.dart';
@@ -26,8 +27,11 @@ class CourseProgressController extends GetxController implements GetxService{
 
  Rx<CourseDetailsResponse?>  courseContentDetails=Rx<CourseDetailsResponse?>(null);
  Rx<QuestionResponse?>  assigmentScriptResponse=Rx<QuestionResponse?>(null);
+ Rx<QuestionResponse?>  questionResponse=Rx<QuestionResponse?>(null);
 
  TextEditingController commentTextController = TextEditingController();
+
+ CountdownTimer? countDownTimer;
 
  final circuler=false.obs;
  final playOneline=false.obs;
@@ -37,6 +41,7 @@ class CourseProgressController extends GetxController implements GetxService{
  final videoFullScrren=false.obs;
  final downloadProgress=0.obs;
  final downloadId="".obs;
+ final examCirculer=false.obs;
 
  final cartList = <AddressLocal>[].obs;
 
@@ -238,6 +243,32 @@ class CourseProgressController extends GetxController implements GetxService{
     getComments(id,type);
    });
    commentCircle.value = false;
+  }
+
+  Future getExamQuestions(String id, int hasExam, bool isCourseExam)async {
+   examCirculer.value=true;
+   questionResponse.value=null;
+   var rs= await courseProgressUseCase!.getExamQuestions(id,hasExam,isCourseExam);
+   examCirculer.value=false;
+   rs.fold((l){
+    Fluttertoast.showToast(
+        msg: l.message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 2,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+   }, (r){
+    questionResponse.value=r;
+    if(countDownTimer!=null){
+     if(countDownTimer!.isRunning){
+      countDownTimer!.cancel();
+     }
+    }
+   });
+
   }
 
 }

@@ -19,7 +19,7 @@ class ExamController extends GetxController implements GetxService{
   final examLoading=false.obs;
   final selectedcategory = 0.obs;
   final selectedExamcategory = 0.obs;
-
+  final isCurriculumSelected=false.obs;
   void selectExamCat(num? id, ExamCategorie? examCategorie) {
     selectedExamcategory.value = id!.toInt();
     examCategorieData.value = examCategorie;
