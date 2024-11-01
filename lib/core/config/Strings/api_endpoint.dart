@@ -75,6 +75,9 @@ class ApiEndpoint {
   static  String START_BATCH_EXAM= 'start-batch-exam'.addBaseURl;
 
 
+  static  String ORDER_COURSE= 'place-course-order/'.addBaseURl;
+
+
 
 
 }

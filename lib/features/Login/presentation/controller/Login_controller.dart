@@ -223,6 +223,44 @@ class LoginController extends GetxController implements GetxService{
     return loginResponse.value;
   }
 
+  Future<LoginResponse?>loginWithoutPassword({BuildContext? context,String? mobile,  String? password, String? name})async {
+    circuler.value=true;
+    var res=await loginUseCase!.login(mobile: emailController.text,password:passwordController.text,name: "");
+    res.fold((onLeft){
+      Fluttertoast.showToast(
+          msg: onLeft.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    },(r) async {
+      loginResponse.value=r;
+      await localBd.storeTokenUserdata(
+          deviceToken:r.user!.device_token!,id:r.user!.id.toString(),email: r.user!.email,token: r.auth_token,name: r.user!.name,
+          mobile: r.user!.mobile,image: r.user!.profile_photo_url
+      );
+
+      Fluttertoast.showToast(
+          msg: "Login Successfully",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+      Get.find<ProfileController>().getProfile(context!,false);
+      Get.find<HomeController>().getUserData(context);
+      context.goNamed(Routes.mainPage);
+
+    });
+    circuler.value=false;
+    return loginResponse.value;
+  }
+
 
   Future<LoginResponse?> signUp(BuildContext context)  async{
     circuler.value=true;

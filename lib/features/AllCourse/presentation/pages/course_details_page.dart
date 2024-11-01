@@ -20,6 +20,7 @@ import '../../../../core/common/widgets/container/discount_badge.dart';
 import '../../../../core/common/widgets/text/expandeable_text.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/routes/route_path.dart';
+import '../../../../core/service/discount_calculate.dart';
 import '../widget/course_details_idecator.dart';
 import '../widget/course_instector.dart';
 import '../widget/curriculum_component.dart';
@@ -161,6 +162,13 @@ class CourseDetailsPage extends StatelessWidget {
                                                               0.0, 0.0, bounds.width, bounds.height),
                                                         ),
                                                     child: Text(
+                                                      controller.detailsCategoryResponse.value!
+                                                          .course!.discount_amount!=null?
+                                                      '৳ ${(controller.detailsCategoryResponse.value!.course!
+                                                          .price! -
+                                                          controller.detailsCategoryResponse.value!
+                                                              .course!.discount_amount!).toString()}'
+                                                          :
                                                       '৳ ${controller.detailsCategoryResponse.value!.course!.price??''}',
                                                       style: boldText(20,color: AppColors.whiteColor),
                                                       textAlign: TextAlign.right,
@@ -214,7 +222,9 @@ class CourseDetailsPage extends StatelessWidget {
 
                                               // offer
                                               DiscountBadge(
-                                                text: '12% Off',
+                                                text: '${calculateDiscountPercentage(controller.detailsCategoryResponse.value!.course!
+                                                    .price!.toDouble() , controller.detailsCategoryResponse.value!
+                                                        .course!.discount_amount!.toDouble())}% Off',
                                                 textSize: 13,
                                               )
                                             ],
@@ -501,8 +511,24 @@ class CourseDetailsPage extends StatelessWidget {
             bottomSheet: BottomCheckoutSection(
               loading: controller.deatilsCourseLoading.value,
               action: (){
-                context.pushNamed(Routes.checkOutPage);
+                context.pushNamed(Routes.checkOutPage,extra: {
+                  "type":"course",
+                  "course":controller.detailsCategoryResponse.value!.course!
+                });
               },
+              dayslLeft: "0",
+              offerAvilable: true,
+              mainPrice: controller.detailsCategoryResponse.value!.course!.price!.toString(),
+              totalPrice:  controller.detailsCategoryResponse.value!
+                  .course!.discount_amount!=null?
+              (controller.detailsCategoryResponse.value!.course!
+                  .price!.toDouble() - controller.detailsCategoryResponse.value!
+                  .course!.discount_amount!.toDouble()).toString()
+                  :
+              controller.detailsCategoryResponse.value!.course!.price!.toString(),
+              discountPercent: '${calculateDiscountPercentage(controller.detailsCategoryResponse.value!.course!
+                  .price!.toDouble() , controller.detailsCategoryResponse.value!
+                  .course!.discount_amount!.toDouble())}',
             )
           );
         });

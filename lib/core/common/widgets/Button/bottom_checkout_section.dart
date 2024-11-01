@@ -48,7 +48,7 @@ class BottomCheckoutSection extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      '${200.000.toStringAsFixed(2)} BDT',
+                      '$totalPrice BDT',
                       style: boldText(14, color: AppColors.primaryColor),
                     ),
 
@@ -56,7 +56,7 @@ class BottomCheckoutSection extends StatelessWidget {
 
                     // regular price
                     Text(
-                      '100BDT',
+                      '$mainPrice BDT',
                       style: TextStyle(
                           fontSize: 9,
                           color: Color(0xFFA9A9A9),
@@ -68,7 +68,7 @@ class BottomCheckoutSection extends StatelessWidget {
                     const SizedBox(width: 10),
                     DiscountBadge(
                       textSize: 9,
-                      text: '56% off',
+                      text: '$discountPercent% off',
                       backgroundColor: Color(0xFfFFEEE8),
                       foregroundColor: Color(0xffEB6A20),
                       radius: 0,
@@ -84,7 +84,7 @@ class BottomCheckoutSection extends StatelessWidget {
                     Assets.icons.alarm.svg(),
                     SizedBox(width: 8,),
                     Text(
-                      '2 days left at this price!',
+                      '$dayslLeft days left at this price!',
                       style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
@@ -100,7 +100,7 @@ class BottomCheckoutSection extends StatelessWidget {
           ),
           SizedBox(width: 24,),
           Expanded(
-            flex: 5,
+            flex: 4,
             child: CustomElevatedButton(
               onPressed: action!,
               titleText: 'এখনই কিনুন ',

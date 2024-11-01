@@ -1,375 +1,362 @@
 import 'dart:ffi';
 
+import 'package:biddabari_new/Dependenci%20Injection/init_dependencies.dart';
+import 'package:biddabari_new/core/LocalDataBase/localdata.dart';
+import 'package:biddabari_new/features/AllCourse/data/models/course/Course.dart';
 import 'package:biddabari_new/features/Checkout/presentation/controller/Checkout_controller.dart';
+import 'package:biddabari_new/features/Login/presentation/controller/Login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/common/widgets/Button/bottom_checkout_section.dart';
 import '../../../../core/common/widgets/Button/elevated_button.dart';
 import '../../../../core/common/widgets/container/discount_badge.dart';
+import '../../../../core/common/widgets/loading/loading_widget.dart';
 import '../../../../core/common/widgets/text field/text_field.dart';
 import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/config/util/text_style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/routes/route_path.dart';
+import '../../../../core/service/discount_calculate.dart';
+import '../../../../core/utils/system_util.dart';
+import '../../../Login/data/models/Auth/LoginResponse.dart';
 import '../../../Login/presentation/widget/payment_option_card.dart';
 import '../widget/payment_summery_item.dart';
+import 'package:flutter/services.dart';
 
 class CheckoutPage extends StatelessWidget {
-  const CheckoutPage({super.key});
+  final Course? course;
+  final String? type;
+
+  const CheckoutPage({super.key, this.course, this.type});
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration.zero, () {
+      Get.find<CheckoutController>().onInit();
+      Get.find<CheckoutController>().circuler.value=false;
+
+    });
     return GetBuilder<CheckoutController>(
       assignId: true,
       builder: (controller) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text("Check out"),
-            leading: InkWell(
-              onTap: () {
-                context.pop();
-              },
-              child: Padding(
-                  padding: EdgeInsets.all(18),
-                  child: Assets.icons.backArrow.svg()),
-            ),
-          ),
-          body: SingleChildScrollView(
-            child: Container(
-              height: 1.0.sh,
-              width: 1.0.sw,
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("48th BCS Foundation To Advance Live Batch",
-                    style: boldText(18),),
-                  SizedBox(height: 6,),
-                  Text(
-                    'NTRCA বা শিক্ষক নিবন্ধন (কলেজ, স্কুল, স্কুল পর্যায়-২) প্রিলি. পরীক্ষায় পাশ করতে বিগত বিসিএস এবং গত ৫-১০ বছরের নন-ক্যাডার পরীক্ষাযর বাছাইকৃত প্রশ্নগুলো পড়ে মনে রাখতে পারলেই পাশ হয়ে যায়। তবে, বিসিএস সহ',
-                    style: regularText(10, color: Color(0xFF777777)),
-                  ),
-                  SizedBox(height: 6,),
-                  DiscountBadge(
-                    text: 'Duration 5 Days',
-                    backgroundColor: Color(0xFf167F71),
-                    foregroundColor: Colors.white,
-                    radius: 4,
-                  ),
-                  SizedBox(height: 6,),
-                  Row(
-                    children: [
-                      RatingBar.builder(
-                        initialRating: 3,
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        allowHalfRating: true,
-                        itemCount: 5,
-                        itemSize: 16,
-                        itemPadding: EdgeInsets.symmetric(
-                            horizontal: 0.0),
-                        itemBuilder: (context, _) =>
-                            Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                            ),
-                        onRatingUpdate: (rating) {
-                          print(rating);
-                        },
-                      ),
-                      SizedBox(width: 6,),
-                      Text(
-                        '(1 customer review)',
-                        style: regularText(10, color: Color(0xFF777777)),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 6,),
-                  Container(
-                    width: 1.0.sw,
-                    padding: EdgeInsets.symmetric(horizontal: 12),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12)
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("CheckOut Summary", style: boldText(16),),
-                        SizedBox(height: 18,),
-
-                        Text(
-                          'Your Name',
-                          style: semiBoldText(14),
-                        ),
-                        SizedBox(height: 8,),
-                        CustomTextField(
-                          inputFormatters: [
-                          ],
-                          validator: (text) {
-                            if (text!.isEmpty) {
-                              return "Please enter your name";
-                            }
-                          },
-                          hintText: "Enter your name",
-                          isPrefixIcon: false,
-                          paddingLeft: 16,
-
-                        ),
-                        const SizedBox(height: 5),
-                        // note
-                        Text(
-                          "আপনার এই নাম এ কোর্সটি রেজিস্টার করা হবে",
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: AppColors.primaryColor,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-
-
-                        SizedBox(height: 18,),
-                        Text(
-                          'Phone No.',
-                          style: semiBoldText(14),
-                        ),
-                        SizedBox(height: 8,),
-                        CustomTextField(
-                          inputFormatters: [
-                          ],
-                          validator: (text) {
-                            if (text!.isEmpty) {
-                              return "Please enter your name";
-                            }
-                          },
-                          hintText: "Enter your name",
-                          isPrefixIcon: false,
-                          paddingLeft: 16,
-
-                        ),
-                        const SizedBox(height: 5),
-                        // note
-                        Text(
-                          "এই নাম্বারটি হবে আপনার রেজিস্ট্রেশন নম্বর ",
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: AppColors.primaryColor,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-
-
-                        SizedBox(height: 18,),
-                        Text(
-                          'Confirm Phone No.',
-                          style: semiBoldText(14),
-                        ),
-                        SizedBox(height: 8,),
-                        CustomTextField(
-                          inputFormatters: [
-                          ],
-                          validator: (text) {
-                            if (text!.isEmpty) {
-                              return "Please enter your name";
-                            }
-                          },
-                          hintText: "Enter your name",
-                          isPrefixIcon: false,
-                          paddingLeft: 16,
-
-                        ),
-                        const SizedBox(height: 5),
-                        // note
-                        Text(
-                          "এই নাম্বারটি হবে আপনার রেজিস্ট্রেশন নম্বর ",
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: AppColors.primaryColor,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-
-
-                        const SizedBox(height: 20),
-
-                        // bkash method
-                        GestureDetector(
-                          onTap: () {
-                            controller.selectBkashMethod();
-                            controller.paymentMethod.value = 'bkash';
-                          },
-                          child: PaymentOptionCard(
-                            title: 'বিকাশ পেমেন্ট মেথড',
-                            color: controller.isBkashMethodSelected
-                                ? AppColors.primaryColor
-                                : Colors.grey,
-                            icon: Icons.payment,
-                          ),
-                        ),
-
-                        const SizedBox(height: 15),
-
-                        // Other payment method
-                        GestureDetector(
-                          onTap: () {
-                            controller.selectOtherMethod();
-                            controller.paymentMethod.value = 'others';
-                          },
-                          child: PaymentOptionCard(
-                            title: 'অন্যান্য পেমেন্ট মেথড',
-                            color: controller.isOtherMethodSelected
-                                ? AppColors.primaryColor
-                                : Colors.grey,
-                            icon: Icons.payment,
-                          ),
-                        ),
-
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 24),
-                  Text("Payment Summary", style: boldText(16),),
-                  SizedBox(height: 18,),
-                  Card(
-                    color: AppColors.whiteColor,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-
-                          PaymentSummeryItem(
-                            item: 'Sub Total',
-                            amount: 8999,
-                          ),
-
-                          const SizedBox(height: 10),
-
-                          PaymentSummeryItem(
-                            item: 'Fee & Delivery',
-                            amount: 120,
-                          ),
-
-                          const Divider(
-                            height: 25,
-                            thickness: 0.3,
-                            color: Colors.black54,
-                          ),
-
-                          PaymentSummeryItem(
-                            item: 'Total',
-                            amount: 8999,
-                            isBold: true,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-
-                ],
+        return Obx(() {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text("Check out"),
+              leading: InkWell(
+                onTap: () {
+                  context.pop();
+                },
+                child: Padding(
+                    padding: EdgeInsets.all(18),
+                    child: Assets.icons.backArrow.svg()),
               ),
             ),
-          ),
-          bottomSheet: Container(
-            height: 85,
-            width: 1.0.sw,
-            color: Colors.white,
-            padding: EdgeInsets.symmetric(horizontal: 12,vertical: 12),
-            child: Row(
-              children: [
-
-                Column(
+            body: SingleChildScrollView(
+              child: Container(
+                height: 1.0.sh,
+                width: 1.0.sw,
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    type == "course" ?
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Text(course!.title ?? '',
+                          style: boldText(18),),
+                        SizedBox(height: 6,),
                         Text(
-                          '${200.000.toStringAsFixed(2)} BDT',
-                          style: boldText(16,color: AppColors.primaryColor),
+                          course!.title ?? '',
+                          style: regularText(10, color: Color(0xFF777777)),
                         ),
-
-                        const SizedBox(width: 10),
-
-                        // regular price
-                        Text(
-                          '100BDT',
-                          style: TextStyle(
-                              fontSize: 9,
-                              color: Color(0xFFA9A9A9),
-                              decoration:TextDecoration.lineThrough
-                          ),
-
-                        ),
-
-                        const SizedBox(width: 10),
+                        SizedBox(height: 6,),
                         DiscountBadge(
-                          textSize: 9,
-                          text:'56% off',
-                          backgroundColor: Color(0xFfFFEEE8),
-                          foregroundColor:  Color(0xffEB6A20),
-                          radius: 0,
+                          text: 'Duration 5 Days',
+                          backgroundColor: Color(0xFf167F71),
+                          foregroundColor: Colors.white,
+                          radius: 4,
                         ),
-
+                        SizedBox(height: 6,),
+                        Row(
+                          children: [
+                            RatingBar.builder(
+                              initialRating: 3,
+                              minRating: 1,
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              itemCount: 5,
+                              itemSize: 16,
+                              itemPadding: EdgeInsets.symmetric(
+                                  horizontal: 0.0),
+                              itemBuilder: (context, _) =>
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                              onRatingUpdate: (rating) {
+                                print(rating);
+                              },
+                            ),
+                            SizedBox(width: 6,),
+                            Text(
+                              '(1 customer review)',
+                              style: regularText(10, color: Color(0xFF777777)),
+                            ),
+                          ],
+                        ),
                       ],
+                    ) : SizedBox(),
+
+
+                    SizedBox(height: 16,),
+                    Container(
+                      width: 1.0.sw,
+                      padding: EdgeInsets.symmetric(horizontal: 12),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12)
+                      ),
+                      child: Form(
+                        key: controller.loginGlobalkey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("CheckOut Summary", style: boldText(16),),
+                            SizedBox(height: 18,),
+
+                            Text(
+                              'Your Name',
+                              style: semiBoldText(14),
+                            ),
+                            SizedBox(height: 8,),
+                            CustomTextField(
+                              textEditingController: controller
+                                  .nameTextController,
+                              inputFormatters: [
+                              ],
+                              validator: (text) {
+                                if (text!.isEmpty) {
+                                  return "Please enter your name";
+                                }
+                              },
+                              hintText: "Enter your name",
+                              isPrefixIcon: false,
+                              paddingLeft: 16,
+
+                            ),
+                            const SizedBox(height: 5),
+                            // note
+                            Text(
+                              "আপনার এই নাম এ কোর্সটি রেজিস্টার করা হবে",
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: AppColors.primaryColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+
+
+                            SizedBox(height: 18,),
+                            Text(
+                              'Phone No.',
+                              style: semiBoldText(14),
+                            ),
+                            SizedBox(height: 8,),
+                            CustomTextField(
+                              textEditingController: controller
+                                  .mobileTextController,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r"[0-9]")),
+                                CustomTextInputFormatter(),
+                                // FilteringTextInputFormatter.allow(RegExp(r'^01[7835]\d*')),
+                                LengthLimitingTextInputFormatter(11),
+                              ],
+                              validator: (text) {
+                                if (text!.isEmpty) {
+                                  return "Please enter your phone";
+                                }
+                              },
+                              hintText: "Enter your phone",
+                              isPrefixIcon: false,
+                              paddingLeft: 16,
+
+                            ),
+                            const SizedBox(height: 5),
+                            // note
+                            Text(
+                              "এই নাম্বারটি হবে আপনার রেজিস্ট্রেশন নম্বর ",
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: AppColors.primaryColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+
+
+                            SizedBox(height: 18,),
+                            Text(
+                              'Confirm Phone No.',
+                              style: semiBoldText(14),
+                            ),
+                            SizedBox(height: 8,),
+                            CustomTextField(
+                              textEditingController: controller
+                                  .mobileConfirmTextController,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r"[0-9]")),
+                                CustomTextInputFormatter(),
+                                // FilteringTextInputFormatter.allow(RegExp(r'^01[7835]\d*')),
+                                LengthLimitingTextInputFormatter(11),
+                              ],
+                              validator: (text) {
+                                if (text!.isEmpty) {
+                                  return "Please enter your phone";
+                                }
+                              },
+                              hintText: "Enter your phone",
+                              isPrefixIcon: false,
+                              paddingLeft: 16,
+
+                            ),
+                            const SizedBox(height: 5),
+                            // note
+                            Text(
+                              "এই নাম্বারটি হবে আপনার রেজিস্ট্রেশন নম্বর ",
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: AppColors.primaryColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+
+
+                            const SizedBox(height: 20),
+
+                            // bkash method
+                            GestureDetector(
+                              onTap: () {
+                                controller.paymentType.value = "বিকাশ";
+                              },
+                              child: PaymentOptionCard(
+                                title: 'বিকাশ পেমেন্ট মেথড',
+                                color: controller.paymentType.value == "বিকাশ"
+                                    ? AppColors.primaryColor
+                                    : Colors.grey,
+                                icon: Icons.payment,
+                              ),
+                            ),
+
+                            const SizedBox(height: 15),
+
+                            // Other payment method
+                            GestureDetector(
+                              onTap: () {
+                                controller.paymentType.value = "ডিজিটাল";
+                              },
+                              child: PaymentOptionCard(
+                                title: 'অন্যান্য পেমেন্ট মেথড',
+                                color: controller.paymentType.value == "ডিজিটাল"
+                                    ? AppColors.primaryColor
+                                    : Colors.grey,
+                                icon: Icons.payment,
+                              ),
+                            ),
+
+                          ],
+                        ),
+                      ),
                     ),
 
-                    SizedBox(height: 6,),
-                    Row(
-                      children: [
-                        Assets.icons.alarm.svg(),
-                        SizedBox(width: 8,),
-                        Text(
-                          '2 days left at this price!',
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFFC71720),
+                    const SizedBox(height: 24),
+                    Text("Payment Summary", style: boldText(16),),
+                    SizedBox(height: 18,),
+                    Card(
+                      color: AppColors.whiteColor,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
 
-                          ),
+                            PaymentSummeryItem(
+                              item: 'Sub Total',
+                              amount: course!.discount_amount != null ?
+                              (course!.price!.toDouble() - course!.discount_amount!.toDouble()).toString()
+                                  :
+                              course!.price!.toString(),
+                            ),
 
+                            const SizedBox(height: 10),
+
+                            PaymentSummeryItem(
+                              item: 'Fee & Delivery',
+                              amount: "0.0",
+                            ),
+
+                            const Divider(
+                              height: 25,
+                              thickness: 0.3,
+                              color: Colors.black54,
+                            ),
+
+                            PaymentSummeryItem(
+                              item: 'Total',
+                              amount: course!.discount_amount != null ?
+                              (course!.price!.toDouble() - course!.discount_amount!.toDouble()).toString()
+                                  :
+                              course!.price!.toString(),
+                              isBold: true,
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                    SizedBox(height: 12,),
+                    const SizedBox(height: 20),
+
                   ],
                 ),
-                SizedBox(width: 14,),
-                Expanded(
-                  child: CustomElevatedButton(
-                    onPressed: () {
-                      context.pushNamed(Routes.checkOutPage);
-                    },
-                    titleText: 'এখনই কিনুন ',
-                    titleSize: 14,
-                    buttonHeight: 30.h,
-                    titleColor: Colors.white,
-                    buttonColor: AppColors.primaryColor,
-                    borderRdius: 100.r,
-                    buttonMarginLeft: 52,
-                    iconRight: Container(
-                      width: 36,
-                      height: 36,
-                      margin: EdgeInsets.symmetric(horizontal: 10),
-                      decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: OvalBorder(),
-                      ),
-                      child: Icon(Icons.arrow_forward_ios_sharp,
-                        color: AppColors.primaryColor,),
-                    ),
-                  ),
-                ),
-
-              ],
+              ),
             ),
-          ),
-        );
+            bottomSheet:controller.circuler.value?SizedBox(
+                height: 100,
+                width: 1.0.sw,
+                child: LoadingWidget()):
+            BottomCheckoutSection(
+              loading: false,
+              action: () {
+                if (controller.loginGlobalkey.currentState!.validate()) {
+                  controller.circuler.value=true;
+                  controller.login(context, "course",course).then((onValue){
+
+                  });
+                }
+              },
+              dayslLeft: "0",
+              offerAvilable: true,
+              mainPrice: course!.price!.toString(),
+              totalPrice: course!.discount_amount != null ?
+              (course!.price!.toDouble() - course!.discount_amount!.toDouble()).toString()
+                  :
+              course!.price!.toString(),
+              discountPercent: '${calculateDiscountPercentage(course!
+                  .price!.toDouble(), course!.discount_amount!.toDouble())}',
+            ),
+          );
+        });
       },
     );
   }
+
+
+
 }

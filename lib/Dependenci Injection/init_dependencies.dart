@@ -8,6 +8,7 @@ import '../core/Location/location_config.dart';
 import '../core/network/api_services.dart';
 import '../core/network/connection_checker.dart';
 import '../core/service/hive_service.dart';
+import '../core/service/ssl.dart';
 import '../features/AllCourse/data/datasource/AllCourse_remote_source.dart';
 import '../features/AllCourse/data/repositories/AllCourse_repository_impl.dart';
 import '../features/AllCourse/domain/repositories/AllCourse_repository.dart';

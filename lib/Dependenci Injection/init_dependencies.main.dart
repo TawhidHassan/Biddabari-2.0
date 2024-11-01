@@ -35,10 +35,9 @@ Future<void> initDependencies() async {
     ),
   );
 
-  ///db
-  // serviceLocator.registerFactory<LocationConfig>(
-  //   () => LocationConfig(),
-  // );
+  serviceLocator.registerFactory<SslConfig>(
+    () => SslConfig(),
+  );
 
   ///db
   serviceLocator.registerFactory<DBHelper>(

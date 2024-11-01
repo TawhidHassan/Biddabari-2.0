@@ -5,7 +5,7 @@ import '../../../../core/common/widgets/text/rating_text.dart';
 
 class PaymentSummeryItem extends StatelessWidget {
   final String item;
-  final double amount;
+  final String? amount;
   final bool isBold;
 
   PaymentSummeryItem({
@@ -27,7 +27,7 @@ class PaymentSummeryItem extends StatelessWidget {
           color: isBold ? Colors.black : Colors.black54,
         ),
         RatingText(
-          text: '\$${amount}',
+          text: '${amount}',
           fontSize: 15,
           fontWeight: isBold ? FontWeight.bold : FontWeight.w500,
           color: isBold ? Colors.black : Colors.black54,

@@ -115,9 +115,15 @@ class AppRouter {
       GoRoute(
           name: Routes.checkOutPage,
           path: Routes.checkOutPagePath,
-          pageBuilder: (context, state) =>  NoTransitionPage(
-            child: CheckoutPage(),
-          ),
+          pageBuilder: (context, state) {
+            final Map data=state.extra as Map;
+            return NoTransitionPage(
+              child: CheckoutPage(
+                course: data["course"],
+                type: data["type"],
+              ),
+            );
+          },
           routes: []
       ),
       GoRoute(

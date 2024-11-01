@@ -1,6 +1,7 @@
 
 import 'package:fpdart/fpdart.dart';
 import '../../../../core/error/failures.dart';
+import '../../../Login/data/models/Auth/LoginResponse.dart';
 import '../entities/Checkout.dart';
 import '../repositories/Checkout_repository.dart';
 import '../../../../core/usecase/usecase.dart';
@@ -15,12 +16,17 @@ CheckoutUseCase({this.checkoutRepository});
     throw UnimplementedError();
     }
 
-//
-// @override
-// Future<Either<Failure, LoginResponseModel>> call(GetLoginParams params) {
-// // TODO: implement call
-// return loginRepository!.login(params.email!,params.deviceToken!, params.password!, params.isPG!);
-// }
+Future<Either<Failure, LoginResponse>>orderCourse({String? type, num? id, required String payment_method, String? trnxId, String? total_amount, String? coupon_code})async {
+  return checkoutRepository!.orderCourse(
+    type: type,
+    id: id,
+    payment_method:  payment_method,
+    trnxId: trnxId,
+    total_amount: total_amount,
+    coupon_code: coupon_code,
+  );
+}
+
 
 }
 
