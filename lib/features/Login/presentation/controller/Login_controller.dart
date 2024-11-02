@@ -1,6 +1,7 @@
 
 import 'package:biddabari_new/Dependenci%20Injection/init_dependencies.dart';
 import 'package:biddabari_new/core/config/color/app_colors.dart';
+import 'package:biddabari_new/features/Checkout/presentation/controller/Checkout_controller.dart';
 import 'package:biddabari_new/features/Login/data/models/Auth/LoginResponse.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -225,7 +226,7 @@ class LoginController extends GetxController implements GetxService{
 
   Future<LoginResponse?>loginWithoutPassword({BuildContext? context,String? mobile,  String? password, String? name})async {
     circuler.value=true;
-    var res=await loginUseCase!.login(mobile: emailController.text,password:passwordController.text,name: "");
+    var res=await loginUseCase!.login(mobile: mobile,password:"",name: name);
     res.fold((onLeft){
       Fluttertoast.showToast(
           msg: onLeft.message,
@@ -236,6 +237,7 @@ class LoginController extends GetxController implements GetxService{
           textColor: Colors.white,
           fontSize: 16.0
       );
+      Get.find<CheckoutController>().circuler.value=false;
     },(r) async {
       loginResponse.value=r;
       await localBd.storeTokenUserdata(
@@ -252,9 +254,8 @@ class LoginController extends GetxController implements GetxService{
           textColor: Colors.white,
           fontSize: 16.0
       );
-      Get.find<ProfileController>().getProfile(context!,false);
+      Get.find<ProfileController>().getProfile(context!,true);
       Get.find<HomeController>().getUserData(context);
-      context.goNamed(Routes.mainPage);
 
     });
     circuler.value=false;

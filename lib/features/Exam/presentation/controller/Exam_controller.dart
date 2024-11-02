@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import '../../data/models/BatchExam/BatchExamResponse.dart';
 import '../../data/models/BatchExam/ExamCategorie.dart';
 import '../../data/models/BatchExam/ExamDetailsResponse.dart';
+import '../../data/models/BatchExam/MyExamResponse.dart';
+import '../../data/models/Exam.dart';
 import '../../domain/usecase/Exam_use_case.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +17,7 @@ class ExamController extends GetxController implements GetxService{
   Rx<BatchExamResponse?> batchExamResponse = Rx<BatchExamResponse?>(null);
   Rx<ExamCategorie?> examCategorieData = Rx<ExamCategorie?>(null);
   Rx<ExamDetailsResponse?> examDetailsResponse = Rx<ExamDetailsResponse?>(null);
+  Rx<MyExamResponse?> myExamReponse = Rx<MyExamResponse?>(null);
 
   final examLoading=false.obs;
   final selectedcategory = 0.obs;
@@ -24,6 +27,25 @@ class ExamController extends GetxController implements GetxService{
     selectedExamcategory.value = id!.toInt();
     examCategorieData.value = examCategorie;
     update();
+  }
+
+  final selectedExamIndex= 10000.obs;
+  Rx<Exam?> packageSelected = Rx<Exam?>(null);
+
+  void selectExamPackage(int? index, Exam? exam) {
+    if(index==selectedExamIndex.value){
+      selectedExamIndex.value=10000;
+      packageSelected.value=null;
+      update();
+      print("unselect");
+    }else{
+      selectedExamIndex.value=index!;
+      packageSelected.value=exam;
+      print("select");
+      update();
+    }
+
+
   }
 
 
@@ -66,6 +88,27 @@ class ExamController extends GetxController implements GetxService{
       );
     }, (r){
       examDetailsResponse.value=r;
+
+    });
+
+    examLoading.value = false;
+  }
+
+  Future getMyExam()async {
+    examLoading.value = true;
+    var rs= await examUseCase!.getMyExam();
+    rs.fold((l){
+      Fluttertoast.showToast(
+          msg: l.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    }, (r){
+      myExamReponse.value=r;
 
     });
 

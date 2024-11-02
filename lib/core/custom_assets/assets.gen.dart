@@ -26,6 +26,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/Users.svg
   SvgGenImage get users => const SvgGenImage('assets/icons/Users.svg');
 
+  /// File path: assets/icons/affiliate.svg
+  SvgGenImage get affiliate => const SvgGenImage('assets/icons/affiliate.svg');
+
   /// File path: assets/icons/alarm.svg
   SvgGenImage get alarm => const SvgGenImage('assets/icons/alarm.svg');
 
@@ -200,6 +203,7 @@ class $AssetsIconsGen {
   List<dynamic> get values => [
         star,
         users,
+        affiliate,
         alarm,
         allCourse,
         allCourseInactive,

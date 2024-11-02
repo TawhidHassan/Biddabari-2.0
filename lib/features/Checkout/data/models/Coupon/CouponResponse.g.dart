@@ -13,7 +13,7 @@ CouponResponse _$CouponResponseFromJson(Map<String, dynamic> json) =>
       coupon: json['coupon'] == null
           ? null
           : Coupon.fromJson(json['coupon'] as Map<String, dynamic>),
-      currentTotal: json['currentTotal'] as int?,
+      currentTotal: (json['currentTotal'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$CouponResponseToJson(CouponResponse instance) =>

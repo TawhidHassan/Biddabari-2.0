@@ -24,6 +24,8 @@ import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/routes/route_path.dart';
 import '../../../../core/service/discount_calculate.dart';
 import '../../../../core/utils/system_util.dart';
+import '../../../BookStore/data/models/book/Book.dart';
+import '../../../Exam/data/models/Exam.dart';
 import '../../../Login/data/models/Auth/LoginResponse.dart';
 import '../../../Login/presentation/widget/payment_option_card.dart';
 import '../widget/payment_summery_item.dart';
@@ -31,14 +33,18 @@ import 'package:flutter/services.dart';
 
 class CheckoutPage extends StatelessWidget {
   final Course? course;
+  final Exam? exam;
+  final Exam? parentExam;
+  final Book? book;
   final String? type;
 
-  const CheckoutPage({super.key, this.course, this.type});
+  const CheckoutPage({super.key, this.course, this.type, this.exam, this.parentExam, this.book});
 
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration.zero, () {
       Get.find<CheckoutController>().onInit();
+      Get.find<CheckoutController>().getDeliveryAddress();
       Get.find<CheckoutController>().circuler.value=false;
 
     });
@@ -113,7 +119,104 @@ class CheckoutPage extends StatelessWidget {
                           ],
                         ),
                       ],
-                    ) : SizedBox(),
+                    ) :
+                    type == "exam" ?
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(exam!.packageTitle ?? '',
+                          style: boldText(18),),
+                        SizedBox(height: 6,),
+                        Text(
+                          exam!.packageTitle ?? '',
+                          style: regularText(10, color: Color(0xFF777777)),
+                        ),
+                        SizedBox(height: 6,),
+                        DiscountBadge(
+                          text: 'Duration 5 Days',
+                          backgroundColor: Color(0xFf167F71),
+                          foregroundColor: Colors.white,
+                          radius: 4,
+                        ),
+                        SizedBox(height: 6,),
+                        Row(
+                          children: [
+                            RatingBar.builder(
+                              initialRating: 3,
+                              minRating: 1,
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              itemCount: 5,
+                              itemSize: 16,
+                              itemPadding: EdgeInsets.symmetric(
+                                  horizontal: 0.0),
+                              itemBuilder: (context, _) =>
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                              onRatingUpdate: (rating) {
+                                print(rating);
+                              },
+                            ),
+                            SizedBox(width: 6,),
+                            Text(
+                              '(1 customer review)',
+                              style: regularText(10, color: Color(0xFF777777)),
+                            ),
+                          ],
+                        ),
+                      ],
+                    )
+                        :
+                    type == "product" ?
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(book!.title ?? '',
+                          style: boldText(18),),
+                        SizedBox(height: 6,),
+                        Text(
+                          book!.title ?? '',
+                          style: regularText(10, color: Color(0xFF777777)),
+                        ),
+                        SizedBox(height: 6,),
+                        DiscountBadge(
+                          text: 'Duration 5 Days',
+                          backgroundColor: Color(0xFf167F71),
+                          foregroundColor: Colors.white,
+                          radius: 4,
+                        ),
+                        SizedBox(height: 6,),
+                        Row(
+                          children: [
+                            RatingBar.builder(
+                              initialRating: 3,
+                              minRating: 1,
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              itemCount: 5,
+                              itemSize: 16,
+                              itemPadding: EdgeInsets.symmetric(
+                                  horizontal: 0.0),
+                              itemBuilder: (context, _) =>
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                              onRatingUpdate: (rating) {
+                                print(rating);
+                              },
+                            ),
+                            SizedBox(width: 6,),
+                            Text(
+                              '(1 customer review)',
+                              style: regularText(10, color: Color(0xFF777777)),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ):SizedBox(),
 
 
                     SizedBox(height: 16,),
@@ -284,7 +387,9 @@ class CheckoutPage extends StatelessWidget {
                       color: AppColors.whiteColor,
                       child: Padding(
                         padding: const EdgeInsets.all(10),
-                        child: Column(
+                        child:
+                        type=="course"?
+                        Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
 
@@ -318,7 +423,46 @@ class CheckoutPage extends StatelessWidget {
                               isBold: true,
                             ),
                           ],
-                        ),
+                        )
+                        :
+                        type=="exam"?
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+
+                            PaymentSummeryItem(
+                              item: 'Sub Total',
+                              amount: exam!.discountAmount != null ?
+                              (exam!.price!.toDouble() - exam!.discountAmount!.toDouble()).toString()
+                                  :
+                              exam!.price!.toString(),
+                            ),
+
+                            const SizedBox(height: 10),
+
+                            PaymentSummeryItem(
+                              item: 'Fee & Delivery',
+                              amount: "0.0",
+                            ),
+
+                            const Divider(
+                              height: 25,
+                              thickness: 0.3,
+                              color: Colors.black54,
+                            ),
+
+                            PaymentSummeryItem(
+                              item: 'Total',
+                              amount: exam!.discountAmount != null ?
+                              (exam!.price!.toDouble() - exam!.discountAmount!.toDouble()).toString()
+                                  :
+                              exam!.price!.toString(),
+                              isBold: true,
+                            ),
+                          ],
+                        )
+                        :
+                        SizedBox()
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -331,12 +475,13 @@ class CheckoutPage extends StatelessWidget {
                 height: 100,
                 width: 1.0.sw,
                 child: LoadingWidget()):
-            BottomCheckoutSection(
+                type=="course"?
+              BottomCheckoutSection(
               loading: false,
               action: () {
                 if (controller.loginGlobalkey.currentState!.validate()) {
                   controller.circuler.value=true;
-                  controller.login(context, "course",course).then((onValue){
+                  controller.login(context, "course",course,exam,parentExam,book).then((onValue){
 
                   });
                 }
@@ -350,7 +495,50 @@ class CheckoutPage extends StatelessWidget {
               course!.price!.toString(),
               discountPercent: '${calculateDiscountPercentage(course!
                   .price!.toDouble(), course!.discount_amount!.toDouble())}',
-            ),
+            ):
+                type=="exam"?
+                BottomCheckoutSection(
+                  loading: false,
+                  action: () {
+                    if (controller.loginGlobalkey.currentState!.validate()) {
+                      controller.circuler.value=true;
+                      controller.login(context, "batch_exam",course,exam!,parentExam,book).then((onValue){
+
+                      });
+                    }
+                  },
+                  dayslLeft: "0",
+                  offerAvilable: true,
+                  mainPrice: exam!.price!.toString(),
+                  totalPrice: exam!.discountAmount != null ?
+                  (exam!.price!.toDouble() - exam!.discountAmount!.toDouble()).toString()
+                      :
+                  exam!.price!.toString(),
+                  discountPercent: '${calculateDiscountPercentage(exam!
+                      .price!.toDouble(), exam!.discountAmount!.toDouble())}',
+                ):
+                type == "product" ?
+                BottomCheckoutSection(
+                  loading: false,
+                  action: () {
+                    if (controller.loginGlobalkey.currentState!.validate()) {
+                      controller.circuler.value=true;
+                      controller.login(context, "product",course,exam,parentExam,book).then((onValue){
+
+                      });
+                    }
+                  },
+                  dayslLeft: "0",
+                  offerAvilable: true,
+                  mainPrice: book!.price!.toString(),
+                  totalPrice: book!.discount_amount != null ?
+                  (double.parse(book!.price??"0.0") - double.parse(book!.discount_amount??"0.0")).toString()
+                      :
+                  book!.price!.toString(),
+                  discountPercent: '${calculateDiscountPercentage(
+                     double.parse(book!.price??"0.0"), double.parse(book!.discount_amount??"0.0"))}',
+                ):
+                SizedBox(),
           );
         });
       },

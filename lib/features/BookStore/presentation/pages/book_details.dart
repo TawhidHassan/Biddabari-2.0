@@ -21,6 +21,7 @@ import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/extentions/service.dart';
 import '../../../../core/routes/route_path.dart';
+import '../../../../core/service/discount_calculate.dart';
 import '../../data/models/book/Book.dart';
 import '../widget/book_info.dart';
 
@@ -307,8 +308,28 @@ class BookDetailsPage extends StatelessWidget {
             ),
             bottomSheet: BottomCheckoutSection(
               action: (){
-                context.pushNamed(Routes.checkOutPage);
+                context.pushNamed(Routes.checkOutPage,extra: {
+                  "type":"product",
+                  "course":null,
+                  "exam":null,
+                  "parentExam":null,
+                  "book":controller.bookSingelResponse.value!.product!,
+                });
               },
+
+              dayslLeft: controller.bookSingelResponse.value!.product!.discount_end_date??'',
+              offerAvilable: true,
+              mainPrice: controller.bookSingelResponse.value!.product!.price!.toString(),
+              totalPrice:  controller.bookSingelResponse.value!.product!.discount_amount!=null?
+              (double.parse(controller.bookSingelResponse.value!.product!
+                  .price??"0.0") - double.parse(controller.bookSingelResponse.value!.product!
+                  .discount_amount??"0.0")).toString()
+                  :
+              controller.bookSingelResponse.value!.product!.price!.toString(),
+              discountPercent: '${calculateDiscountPercentage(double.parse(controller.bookSingelResponse.value!.product!
+                  .price??"0.0") , double.parse(controller.bookSingelResponse.value!.product!
+                  .discount_amount??"0.0"))}',
+              loading: controller.storeBookLoading.value,
             ),
           );
         });

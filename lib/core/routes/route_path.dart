@@ -67,6 +67,9 @@ class Routes {
   static const String detailsCoursePage = 'detailsCoursePage';
   static const String detailsCoursePagePath = '/detailsCoursePage';
 
+  static const String myExamPage = 'myExamPage';
+  static const String myExamPagePath = '/myExamPage';
+
   static const String examPage = 'examPage';
   static const String examPagePath = '/examPage';
 

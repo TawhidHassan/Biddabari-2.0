@@ -7,12 +7,12 @@ part of 'Coupon.dart';
 // **************************************************************************
 
 Coupon _$CouponFromJson(Map<String, dynamic> json) => Coupon(
-      id: json['id'] as int?,
-      courseId: json['course_id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      courseId: (json['course_id'] as num?)?.toInt(),
       code: json['code'] as String?,
       type: json['type'] as String?,
-      percentageValue: json['percentage_value'] as int?,
-      discountAmount: json['discount_amount'] as int?,
+      percentageValue: (json['percentage_value'] as num?)?.toInt(),
+      discountAmount: (json['discount_amount'] as num?)?.toInt(),
       flatDiscount: json['flat_discount'],
       note: json['note'],
       expireDateTime: json['expire_date_time'] as String?,

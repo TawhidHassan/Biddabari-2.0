@@ -1,5 +1,6 @@
 import 'package:biddabari_new/Dependenci%20Injection/init_dependencies.dart';
 import 'package:biddabari_new/core/LocalDataBase/localdata.dart';
+import 'package:biddabari_new/features/BookStore/data/models/book/Book.dart';
 import 'package:biddabari_new/features/Checkout/presentation/controller/Checkout_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sslcommerz/model/SSLCCustomerInfoInitializer.dart';
@@ -19,7 +20,7 @@ import '../routes/route_path.dart';
 
 class SslConfig{
 
-  Future<void> sslCommerzGeneralCall({String?coupon_code,String?type,num? id,double? ammount, String? tranId,int? invoiceId,BuildContext? context,  String? examId}) async {
+  Future<void> sslCommerzGeneralCall({Book? book,String?coupon_code,String?type,num? id,double? ammount, String? tranId,int? invoiceId,BuildContext? context,  String? examId}) async {
     var tokenx = await serviceLocator<DBHelper>().getData();
     Sslcommerz? sslcommerz;
 
@@ -34,36 +35,36 @@ class SslConfig{
       //   discountTotalAmmount+=(bookListx[i].discount!.toDouble())*bookListx[i].quantity!.toDouble();
       //
       // }
-      //
+
       // bookTotalAmmount=(bookxTotalAmmount-discountTotalAmmount)+deliveryCharge;
-      // // Logger().w(bookTotalAmmount);
-      // sslcommerz = Sslcommerz(
-      //   initializer: SSLCommerzInitialization(
-      //     //Use the ipn if you have valid one, or it will fail the transaction.
-      //     ipn_url: "https://biddabari.com",
-      //     multi_card_name: "",
-      //     currency: SSLCurrencyType.BDT,
-      //     product_category: "Education",
-      //     // sdkType:  SSLCSdkType.TESTBOX,
-      //     sdkType:   SSLCSdkType.LIVE,
-      //     // store_id: "learn654f12aa5010e",
-      //     store_id: "biddabarilive",
-      //     // store_passwd: "learn654f12aa5010e@ssl",
-      //     store_passwd: "624D6821D9D8194897",
-      //     total_amount: bookTotalAmmount,
-      //     tran_id: tranId!,
-      //   ),
-      // ).addCustomerInfoInitializer(
-      //     customerInfoInitializer: SSLCCustomerInfoInitializer(
-      //         customerState: "Dhaka",
-      //         customerName: tokenx.get('name'),
-      //         customerEmail: "mobilepurchess@gmail.com",
-      //         customerAddress1: "Dhaka",
-      //         customerCity: "Dhaka",
-      //         customerPostCode: "101",
-      //         customerCountry: "Bangladesh",
-      //         customerPhone: tokenx.get('mobile'))
-      // );
+      // Logger().w(bookTotalAmmount);
+      sslcommerz = Sslcommerz(
+        initializer: SSLCommerzInitialization(
+          //Use the ipn if you have valid one, or it will fail the transaction.
+          ipn_url: "https://biddabari.com",
+          multi_card_name: "",
+          currency: SSLCurrencyType.BDT,
+          product_category: "Education",
+          sdkType:  SSLCSdkType.TESTBOX,
+          // sdkType:   SSLCSdkType.LIVE,
+          store_id: "learn654f12aa5010e",
+          // store_id: "biddabarilive",
+          store_passwd: "learn654f12aa5010e@ssl",
+          // store_passwd: "624D6821D9D8194897",
+          total_amount: ammount!,
+          tran_id: tranId!,
+        ),
+      ).addCustomerInfoInitializer(
+          customerInfoInitializer: SSLCCustomerInfoInitializer(
+              customerState: "Dhaka",
+              customerName: tokenx.get('name'),
+              customerEmail: "mobilepurchess@gmail.com",
+              customerAddress1: "Dhaka",
+              customerCity: "Dhaka",
+              customerPostCode: "101",
+              customerCountry: "Bangladesh",
+              customerPhone: tokenx.get('mobile'))
+      );
     }
     else{
       sslcommerz = Sslcommerz(
@@ -73,12 +74,12 @@ class SslConfig{
           multi_card_name: "",
           currency: SSLCurrencyType.BDT,
           product_category: "Education",
-          // sdkType:  SSLCSdkType.TESTBOX,
-          sdkType:   SSLCSdkType.LIVE,
-          // store_id: "learn654f12aa5010e",
-          store_id: "biddabarilive",
-          // store_passwd: "learn654f12aa5010e@ssl",
-          store_passwd: "624D6821D9D8194897",
+          sdkType:  SSLCSdkType.TESTBOX,
+          // sdkType:   SSLCSdkType.LIVE,
+          store_id: "learn654f12aa5010e",
+          // store_id: "biddabarilive",
+          store_passwd: "learn654f12aa5010e@ssl",
+          // store_passwd: "624D6821D9D8194897",
           total_amount: ammount!,
           tran_id: tranId!,
         ),
@@ -154,22 +155,22 @@ class SslConfig{
 
         ///Exam Purchs
         if(type=="batch_exam"){
-          // Get.find<CourseController>().orderOnelinePaymentExam(context: context,
-          //     type: type,id:id!,Examid: examId!,
-          //     trnxId: result.bankTranId!,ammount: result.amount.toString()).then((value) {
-          //   if (value!.message == "Sorry. You already enrolled this course.") {
-          //     context!.goNamed(Routes.mainPage);
-          //     Get.snackbar(
-          //         "Failed", value.message!, backgroundColor: Colors.redAccent,
-          //         colorText: Colors.white);
-          //   } else {
-          //     Get.snackbar(
-          //         "Congratulation", value.success!, backgroundColor: Colors.green,
-          //         colorText: Colors.white);
-          //
-          //     context!.goNamed(Routes.mainPage);
-          //   }
-          // });
+          Get.find<CheckoutController>().orderOnelinePaymentExam(context: context,
+              type: type,id:id!,Examid: examId!,
+              trnxId: result.bankTranId!,ammount: result.amount.toString()).then((value) {
+            if (value!.message == "Sorry. You already enrolled this course.") {
+              context!.goNamed(Routes.mainPage);
+              Get.snackbar(
+                  "Failed", value.message!, backgroundColor: Colors.redAccent,
+                  colorText: Colors.white);
+            } else {
+              Get.snackbar(
+                  "Congratulation", value.success!, backgroundColor: Colors.green,
+                  colorText: Colors.white);
+
+              context!.goNamed(Routes.mainPage);
+            }
+          });
         }
         else if(type=="course"){
           ///Course
@@ -196,22 +197,22 @@ class SslConfig{
         }
         else if(type=="product"){
 
-          // Get.find<BookController>().orderOnelinePyamnetBook(context: context,type: "product",trnxId: tranId).then((value){
-          //   if (value!.success == "Product orders submitted successfully.") {
-          //     Get.snackbar(
-          //         "Congratulation", value.success!, backgroundColor: Colors.green,
-          //         colorText: Colors.white);
-          //     Get.find<BookController>().localDataGet?.clearCartCourse().then((value) {
-          //       Get.find<HomeController>().selectedIndex.value = 0;
-          //       Navigator.pushNamedAndRemoveUntil(
-          //         context!, MAIN_PAGE, (route) => false,);
-          //       // grand_total.value=grand_total.value+total_vat.value.toDouble()+sub_total.value.toDouble();
-          //     });
-          //
-          //   } else {
-          //     Get.snackbar("Failed", value.success!, backgroundColor: Colors.redAccent, colorText: Colors.white);
-          //   }
-          // });
+          Get.find<CheckoutController>().orderOnelinePyamnetBook(book:book,context: context,type: "product",trnxId: tranId).then((value){
+            if (value!.success == "Product orders submitted successfully.") {
+              Get.snackbar(
+                  "Congratulation", value.success!, backgroundColor: Colors.green,
+                  colorText: Colors.white);
+              // Get.find<BookController>().localDataGet?.clearCartCourse().then((value) {
+              //   // Get.find<HomeController>().selectedIndex.value = 0;
+              //   context!.goNamed(Routes.mainPage);
+              //   // grand_total.value=grand_total.value+total_vat.value.toDouble()+sub_total.value.toDouble();
+              // });
+              context!.goNamed(Routes.mainPage);
+
+            } else {
+              Get.snackbar("Failed", value.success!, backgroundColor: Colors.redAccent, colorText: Colors.white);
+            }
+          });
         }
         // Navigator.pushReplacementNamed(context!,MAIN_PAGE);
       }

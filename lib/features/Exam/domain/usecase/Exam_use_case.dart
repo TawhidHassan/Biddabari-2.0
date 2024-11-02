@@ -3,6 +3,7 @@ import 'package:biddabari_new/features/Exam/data/models/BatchExam/ExamDetailsRes
 import 'package:fpdart/fpdart.dart';
 import '../../../../core/error/failures.dart';
 import '../../data/models/BatchExam/BatchExamResponse.dart';
+import '../../data/models/BatchExam/MyExamResponse.dart';
 import '../../data/models/Exam.dart';
 import '../repositories/Exam_repository.dart';
 import '../../../../core/usecase/usecase.dart';
@@ -27,6 +28,14 @@ ExamUseCase({this.examRepository});
     // TODO: implement call
      return examRepository!.getExamDetails(id);
     }
+
+    @override
+    Future<Either<Failure, MyExamResponse>> getMyExam( ) {
+    // TODO: implement call
+     return examRepository!.getMyExam();
+    }
+
+
 
 
 

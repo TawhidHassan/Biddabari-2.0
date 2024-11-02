@@ -14,9 +14,9 @@ import 'elevated_button.dart';
 
 class BottomCheckoutSection extends StatelessWidget {
   final bool? loading,offerAvilable;
-  final String? totalPrice,mainPrice,discountPercent,dayslLeft;
+  final String? totalPrice,mainPrice,discountPercent,dayslLeft,buttonText;
   final Callback? action;
-  const BottomCheckoutSection({super.key, this.loading=false, this.offerAvilable, this.totalPrice, this.mainPrice, this.discountPercent, this.dayslLeft, this.action});
+  const BottomCheckoutSection({super.key, this.loading=false, this.offerAvilable, this.totalPrice, this.mainPrice, this.discountPercent, this.dayslLeft, this.action, this.buttonText="এখনই কিনুন "});
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +103,7 @@ class BottomCheckoutSection extends StatelessWidget {
             flex: 4,
             child: CustomElevatedButton(
               onPressed: action!,
-              titleText: 'এখনই কিনুন ',
+              titleText: buttonText??"",
               titleSize: 14,
               buttonHeight: 30.h,
               titleColor: Colors.white,

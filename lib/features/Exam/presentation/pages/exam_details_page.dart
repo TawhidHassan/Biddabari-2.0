@@ -17,8 +17,10 @@ import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/config/util/text_style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/routes/route_path.dart';
+import '../../../../core/service/discount_calculate.dart';
 import '../../../AllCourse/presentation/widget/course_details_idecator.dart';
 import '../../../AllCourse/presentation/widget/review_component.dart';
+import '../widget/exam_pacakage.dart';
 
 class ExamDetailsPage extends StatelessWidget {
   final int? id;
@@ -415,6 +417,55 @@ class ExamDetailsPage extends StatelessWidget {
                         ],
                       ),
                     ):SizedBox(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment
+                                .spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 16,
+                                    width: 5,
+                                    color: AppColors.kPrimaryColorx,
+                                  ),
+                                  SizedBox(width: 6,),
+                                  Text("Select Packages", style: semiBoldText(16,),)
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 4,),
+                          GridView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 12.0,
+                              mainAxisSpacing: 12.0,
+                              childAspectRatio: 5.5 / 8,
+                            ),
+                            itemCount: controller.examDetailsResponse.value!
+                                .exam!.batchExamSubscriptions!.length,
+                            itemBuilder: (context, indexx) {
+                              return ExamPackageCard(
+                                index: indexx,
+                                controller: controller,
+                                image: controller.examDetailsResponse.value!
+                                    .exam!.banner ?? "",
+                                exam: controller.examDetailsResponse.value!
+                                    .exam!.batchExamSubscriptions![indexx],
+                              );
+                            },
+                          ),
+                          SizedBox(height: 65,),
+                        ],
+                      ),
+                    ),
 
                     const SizedBox(height: 120),
 
@@ -423,10 +474,42 @@ class ExamDetailsPage extends StatelessWidget {
               ),
             ),
 
-              bottomSheet: BottomCheckoutSection(
+              bottomSheet:controller.packageSelected.value==null?
+              BottomCheckoutSection(
+                buttonText: "Select Package",
+                dayslLeft: "0",
+                totalPrice: "0.0",
+                mainPrice: "0.0",
+                discountPercent: "0.0",
                 loading: controller.examLoading.value,
                 action: (){
-                  context.pushNamed(Routes.checkOutPage);
+                  // context.pushNamed(Routes.checkOutPage);
+                },
+
+              )
+                  :
+              BottomCheckoutSection(
+                dayslLeft: controller.packageSelected.value!.discountEndDate!,
+                offerAvilable: true,
+                mainPrice: controller.packageSelected.value!.price!.toString(),
+                totalPrice:  controller.packageSelected.value!
+                    .discountAmount!=null?
+                (controller.packageSelected.value!
+                    .price!.toDouble() - controller.packageSelected.value!
+                    .discountAmount!.toDouble()).toString()
+                    :
+                controller.packageSelected.value!.price!.toString(),
+                discountPercent: '${calculateDiscountPercentage(controller.packageSelected.value!
+                    .price!.toDouble() , controller.packageSelected.value!
+                    .discountAmount!.toDouble())}',
+                loading: controller.examLoading.value,
+                action: (){
+                  context.pushNamed(Routes.checkOutPage,extra: {
+                    "type":"exam",
+                    "course":null,
+                    "exam":controller.packageSelected.value!,
+                    "parentExam":controller.examDetailsResponse.value!.exam!
+                  });
                 },
               )
 

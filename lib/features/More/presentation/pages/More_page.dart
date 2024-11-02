@@ -236,6 +236,9 @@ class MorePage extends StatelessWidget {
 
 
                   MoreOtptionCard(
+                    onTap: (){
+                      context.pushNamed(Routes.myExamPage);
+                    },
                     title: "My Exam",
                     icon: Assets.icons.exam.path,
                   ),
@@ -266,14 +269,14 @@ class MorePage extends StatelessWidget {
                     icon: Assets.icons.blog.path,
                   ),
 
-                  homeController.userName.value == "" ? SizedBox() :
-                  MoreOtptionCard(
-                    onTap: () {
-                      context.pushNamed(Routes.saveIteamPage);
-                    },
-                    title: "Save Item",
-                    icon: Assets.icons.saveGreenSvg.path,
-                  ),
+                  // homeController.userName.value == "" ? SizedBox() :
+                  // MoreOtptionCard(
+                  //   onTap: () {
+                  //     context.pushNamed(Routes.saveIteamPage);
+                  //   },
+                  //   title: "Save Item",
+                  //   icon: Assets.icons.saveGreenSvg.path,
+                  // ),
 
                   MoreOtptionCard(
                     onTap: () {
@@ -291,15 +294,24 @@ class MorePage extends StatelessWidget {
                     icon: Assets.icons.photo.path,
                   ),
 
-
                   homeController.userName.value == "" ? SizedBox() :
                   MoreOtptionCard(
                     onTap: () {
-                      context.pushNamed(Routes.bookCartPage);
+                      // context.pushNamed(Routes.photoGallaryListPage);
                     },
-                    title: "Book cart",
-                    icon: Assets.icons.bookCart.path,
+                    title: "My Affiliation",
+                    icon: Assets.icons.affiliate.path,
                   ),
+
+
+                  // homeController.userName.value == "" ? SizedBox() :
+                  // MoreOtptionCard(
+                  //   onTap: () {
+                  //     context.pushNamed(Routes.bookCartPage);
+                  //   },
+                  //   title: "Book cart",
+                  //   icon: Assets.icons.bookCart.path,
+                  // ),
 
                   MoreOtptionCard(
                     title: "Language",

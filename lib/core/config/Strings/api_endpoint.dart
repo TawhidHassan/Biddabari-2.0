@@ -65,6 +65,7 @@ class ApiEndpoint {
 
   static  String BATCH_EXAM_LIST= 'all-exams'.addBaseURl;
   static  String BATCH_EXAM_DETAILS= 'category-exams/'.addBaseURl;
+  static  String MY_BATCH_EXAM= 'student/my-exams'.addBaseURl;
 
 
   static  String GET_CONTENT_COMMENT= 'get-comments'.addBaseURl;
@@ -76,6 +77,10 @@ class ApiEndpoint {
 
 
   static  String ORDER_COURSE= 'place-course-order/'.addBaseURl;
+  static  String ORDER_EXAM= 'student/order-exam/'.addBaseURl;
+  static  String ORDER_BOOK= 'place-app-product-order/'.addBaseURl;
+
+  static  String DELIVERY_CHARGE= "get-delivery-charge-for-app".addBaseURl;
 
 
 
