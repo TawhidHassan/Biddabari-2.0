@@ -31,7 +31,7 @@ CheckoutRepositoryImpl({required this.remoteSource,required this.connectionCheck
         total_amount: total_amount,
         coupon_code: coupon_code,
       );
-      if(data!.error!=null){
+      if(data!.message=="Sorry. You already enrolled this course."){
         return left(Failure(data.message!));
       }else{
         return right(data);

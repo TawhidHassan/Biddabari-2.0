@@ -1,8 +1,11 @@
+import 'package:biddabari_new/core/common/widgets/Button/bottom_checkout_section.dart';
 import 'package:biddabari_new/core/config/color/app_colors.dart';
+import 'package:biddabari_new/core/routes/route_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
@@ -26,11 +29,11 @@ class ExamContentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Future.delayed(Duration.zero,(){
-    //   Get.find<CourseProgressController>().getExamQuestions(
-    //       courseSectionContent!.id.toString(),
-    //       courseSectionContent!.hasClassXm!.toInt(), isCourseExam!);
-    // });
+    Future.delayed(Duration.zero,(){
+      Get.find<CourseProgressController>().getExamQuestions(
+          courseSectionContent!.id.toString(),
+          courseSectionContent!.hasClassXm!.toInt(), isCourseExam!);
+    });
     return GetBuilder<CourseProgressController>(
       assignId: true,
       builder: (controller) {
@@ -48,7 +51,7 @@ class ExamContentPage extends StatelessWidget {
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Course Content"),
+                  Text("Exam Content"),
                 ],
               ),
 
@@ -220,6 +223,13 @@ class ExamContentPage extends StatelessWidget {
                       //   "isCourseExam": isCourseExam,
                       //   "iswriitenExam": false
                       // });
+
+                      context.pushNamed(Routes.givenExamPage,extra:{
+                        "id": courseSectionContent!.id.toString(),
+                          "hasExam": courseSectionContent!.hasClassXm,
+                          "isCourseExam": isCourseExam,
+                          "iswriitenExam": false
+                      });
                     },
                   ) : Container(
                     width: 1.0.sw,

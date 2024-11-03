@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:biddabari_new/core/common/data/sucesss/sucess_model.dart';
 import 'package:biddabari_new/features/AllCourse/data/models/course/CourseDetailsResponse.dart';
 import 'package:biddabari_new/features/AllCourse/presentation/widget/course_details_idecator.dart';
+import 'package:biddabari_new/features/Exam/data/models/Question/QuestionSaveResponse.dart';
+import 'package:biddabari_new/features/Login/data/models/Auth/LoginResponse.dart';
 import 'package:fpdart/fpdart.dart';
 import '../../../../core/error/failures.dart';
 import '../../../Exam/data/models/Question/QuestionResponse.dart';
@@ -57,6 +59,26 @@ Future<Either<Failure, SucessModel>>  commentsSubmitFun(String id, String commen
  Future<Either<Failure, QuestionResponse>> getExamQuestions(String id, int hasExam, bool isCourseExam)async {
    return courseProgressRepository!.getExamQuestions(id,hasExam,isCourseExam);
  }
+
+ Future<Either<Failure, QuestionSaveResponse>> getMyFavoraiteQuestion(String? id)async {
+   return courseProgressRepository!.getMyFavoraiteQuestion(id);
+ }
+
+ Future<Either<Failure, QuestionResponse>> submitExam(List<File> fileList, bool hasExam, String? id, int minute, String token, Map<String, String> questionsMain, File? file, bool courseExam)async {
+   return courseProgressRepository!.submitExam(fileList,hasExam,id,minute,token,questionsMain, file,courseExam);
+ }
+
+Future<Either<Failure, LoginResponse>> saveQues(int? id, String userId)async {
+  return courseProgressRepository!.saveQues(id,userId);
+
+}
+
+Future<Either<Failure, LoginResponse>> removeQues(int? id, String userId)async {
+  return courseProgressRepository!.removeQues(id,userId);
+}
+
+
+
 
 
 

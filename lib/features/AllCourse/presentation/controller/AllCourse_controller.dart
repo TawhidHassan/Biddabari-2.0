@@ -20,7 +20,7 @@ class AllCourseController extends GetxController implements GetxService{
   final allCourseLoading=false.obs;
   final deatilsCourseLoading=false.obs;
   final myCourseLoading=false.obs;
-  final isCurriculumSelected=false.obs;
+  final isCurriculumSelected=true.obs;
   final selectedcategory = 0.obs;
   final selectDescription = 0.obs;
   final catetegoryList=["Courses","Mentors"].obs;

@@ -1,9 +1,11 @@
 
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:biddabari_new/Dependenci%20Injection/init_dependencies.dart';
 import 'package:biddabari_new/core/LocalDataBase/localdata.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:file_picker/file_picker.dart';
@@ -16,6 +18,7 @@ import '../../../../core/config/Strings/app_strings.dart';
 import '../../../../core/service/hive_service.dart';
 import '../../../AllCourse/data/models/course/CourseDetailsResponse.dart';
 import '../../../Exam/data/models/Question/QuestionResponse.dart';
+import '../../../Exam/data/models/Question/QuestionSaveResponse.dart';
 import '../../data/models/Comment/CommentResponse.dart';
 import '../../domain/usecase/CourseProgress_use_case.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +36,7 @@ class CourseProgressController extends GetxController implements GetxService{
 
  CountdownTimer? countDownTimer;
 
+ final currentTime=0.obs;
  final circuler=false.obs;
  final playOneline=false.obs;
  final examSubmitCirculer=false.obs;
@@ -270,6 +274,185 @@ class CourseProgressController extends GetxController implements GetxService{
    });
 
   }
+
+ Rx<QuestionSaveResponse?>  questionSaveResponse=Rx<QuestionSaveResponse?>(null);
+ final saveQuesCirculer=false.obs;
+
+ Future saveQues(int? id)async {
+  saveQuesCirculer.value=true;
+
+  await serviceLocator<DBHelper>().getUserId().then((onValue)async{
+   var rs= await courseProgressUseCase!.saveQues(id,onValue);
+   saveQuesCirculer.value=false;
+   rs.fold((l){
+    Fluttertoast.showToast(
+        msg: l.message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 2,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+
+   }, (r){
+    Fluttertoast.showToast(
+        msg: "Added this question in favorite section",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 2,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+    getMyFavoraiteQuestion();
+   });
+  });
+
+
+
+ }
+ Future removeQues(int? id)async {
+  saveQuesCirculer.value=true;
+  await serviceLocator<DBHelper>().getUserId().then((onValue)async{
+   var rs= await courseProgressUseCase!.removeQues(id,onValue);
+   saveQuesCirculer.value=false;
+   rs.fold((l){
+    Fluttertoast.showToast(
+        msg: l.message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 2,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+
+   }, (r){
+    Fluttertoast.showToast(
+        msg: "Added this question in favorite section",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 2,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+    getMyFavoraiteQuestion();
+   });
+  });
+
+
+ }
+
+
+  Future getMyFavoraiteQuestion()async {
+   saveQuesCirculer.value=true;
+   questionSaveResponse.value=null;
+   await serviceLocator<DBHelper>().getUserId().then((onValue)async{
+    var rs= await courseProgressUseCase!.getMyFavoraiteQuestion(onValue);
+    saveQuesCirculer.value=false;
+    rs.fold((l){
+     Fluttertoast.showToast(
+         msg: l.message,
+         toastLength: Toast.LENGTH_SHORT,
+         gravity: ToastGravity.BOTTOM,
+         timeInSecForIosWeb: 2,
+         backgroundColor: Colors.red,
+         textColor: Colors.white,
+         fontSize: 16.0
+     );
+    }, (r){
+     questionSaveResponse.value=r;
+    });
+   });
+  }
+
+ void startTimer(int _start,String id,BuildContext context,bool hasExam,bool courseExam) {
+  // Logger().w(_start);
+  var startx=Duration(minutes: _start).inSeconds;
+  countDownTimer =  CountdownTimer(
+   Duration(seconds: startx),
+   Duration(seconds: 1),
+  );
+  var sub = countDownTimer!.listen(null);
+  sub.onData((duration) {
+   currentTime.value = startx - duration.elapsed.inSeconds;
+
+   print(currentTime.value);
+  });
+
+  sub.onDone(() {
+   sub.cancel();
+   if(currentTime.value==0){
+    submitExam(id,context,hasExam,courseExam);
+   }
+
+  });
+ }
+
+
+
+
+ Future submitExam(String? id, BuildContext context,bool? hasExam,bool courseExam) async{
+  Map<String, String> questionsMain = {};
+  Logger().w(hasExam!?questionResponse.value!.exam!.questionStores!.length:questionResponse.value!.exam!.questionStoresClassExam!.length);
+  for(var i=0;i<(hasExam?questionResponse.value!.exam!.questionStores!.length:questionResponse.value!.exam!.questionStoresClassExam!.length);i++){
+   if(hasExam){
+    if(questionResponse.value!.exam!.questionStores![i].answer!=null){
+     Map<String, String> questions = {};
+     questions["answer"] =  questionResponse.value!.exam!.questionStores![i].answer??"";
+     // questions["answer"] =  questionResponse.value!.exam!.questionStores[i].question_options![0].optionTitle!;
+     questionsMain.addAll({
+      'question[${questionResponse.value!.exam!.questionStores![i].id.toString()}][answer]': questionResponse.value!.exam!.questionStores![i].answer??"",
+     });
+     // questionsMain[questionResponse.value!.exam!.questionStores![i].id.toString()]=questions;
+    }
+   }else{
+    if(questionResponse.value!.exam!.questionStoresClassExam![i].answer!=null){
+     Map<String, String> questions = {};
+     questions["answer"] =  questionResponse.value!.exam!.questionStoresClassExam![i].answer??"";
+     // questions["answer"] =  questionResponse.value!.exam!.questionStores[i].question_options![0].optionTitle!;
+     questionsMain.addAll({
+      'question[${questionResponse.value!.exam!.questionStoresClassExam![i].id.toString()}][answer]': questionResponse.value!.exam!.questionStoresClassExam![i].answer??"",
+     });
+     // questionsMain[questionResponse.value!.exam!.questionStoresClassExam![i].id.toString()]=questions;
+    }
+   }
+
+  }
+
+  var token= await serviceLocator<DBHelper>().getToken();
+  var minute=Duration(seconds: currentTime.value).inMinutes;
+  log(questionsMain.toString(),name: "xx");
+  questionsMain.addAll({
+   "_token": token,
+   "required_time": minute.toString(),
+  });
+  examSubmitCirculer.value=true;
+  var rs= await courseProgressUseCase!.submitExam(fileList.value,hasExam,id,minute,token,questionsMain, file,courseExam);
+  examSubmitCirculer.value=false;
+  rs.fold((l){
+   Fluttertoast.showToast(
+       msg: l.message,
+       toastLength: Toast.LENGTH_SHORT,
+       gravity: ToastGravity.BOTTOM,
+       timeInSecForIosWeb: 2,
+       backgroundColor: Colors.red,
+       textColor: Colors.white,
+       fontSize: 16.0
+   );
+  }, (r){
+   Get.snackbar("Successfully", "Congratulation your exam submit",backgroundColor: Colors.green);
+   context.pop();
+   Get.find<CourseProgressController>().getExamQuestions(id.toString(), hasExam?0:1, courseExam);
+  });
+  }
+
+ void optionSelect() {
+  update();
+ }
+
 
 }
 

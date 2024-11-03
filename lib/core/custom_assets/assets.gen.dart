@@ -272,6 +272,17 @@ class $AssetsImagesGen {
   /// File path: assets/images/empty.svg
   SvgGenImage get empty => const SvgGenImage('assets/images/empty.svg');
 
+  /// File path: assets/images/exam_bg.png
+  AssetGenImage get examBg => const AssetGenImage('assets/images/exam_bg.png');
+
+  /// File path: assets/images/exam_image.png
+  AssetGenImage get examImagePng =>
+      const AssetGenImage('assets/images/exam_image.png');
+
+  /// File path: assets/images/exam_image.svg
+  SvgGenImage get examImageSvg =>
+      const SvgGenImage('assets/images/exam_image.svg');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
@@ -312,6 +323,9 @@ class $AssetsImagesGen {
         biddabariWhite,
         course,
         empty,
+        examBg,
+        examImagePng,
+        examImageSvg,
         logo,
         onboarding1,
         onboarding2,

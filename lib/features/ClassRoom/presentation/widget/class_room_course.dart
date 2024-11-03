@@ -36,7 +36,7 @@ class ClassRoomCourse extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: CachedNetworkImage(
-                    imageUrl: ApiEndpoint.imageBaseUrl +courseOrder!.course!.banner.toString(),
+                    imageUrl:courseOrder!.course==null?"": ApiEndpoint.imageBaseUrl +courseOrder!.course!.banner.toString(),
                     placeholder: (context, url) => CircularProgressIndicator(),
                     errorWidget: (context, url, error){
                       return Padding(
@@ -102,7 +102,7 @@ class ClassRoomCourse extends StatelessWidget {
                       ),
                       const SizedBox(height: 6),
                       // title
-                      Text(courseOrder!.course!.title??"",
+                      Text(courseOrder!.course==null?"":courseOrder!.course!.title??"",
                         maxLines: 2,
                         style: semiBoldText(16),),
 

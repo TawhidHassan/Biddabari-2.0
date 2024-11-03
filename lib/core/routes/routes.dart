@@ -42,6 +42,7 @@ import '../../features/CourseProgress/presentation/pages/course show/pdf_content
 import '../../features/CourseProgress/presentation/pages/course show/video_content.dart';
 import '../../features/CourseProgress/presentation/pages/course show/writen_exam_content.dart';
 import '../../features/Error/presentation/error_page.dart';
+import '../../features/Exam/presentation/pages/given_exam_page.dart';
 import '../../features/Exam/presentation/pages/my_exam_page.dart';
 import '../../features/Home/presentation/pages/Home_page.dart';
 import '../../features/Job/data/models/job_model.dart';
@@ -239,6 +240,23 @@ class AppRouter {
                 pageBuilder: (context, state) =>  NoTransitionPage(
                   child: BookDetailsPage( book: state.extra as Book,),
                 ),
+                routes: []
+            ),
+
+      GoRoute(
+                name: Routes.givenExamPage,
+                path: Routes.givenExamPagePath,
+                pageBuilder: (context, state) {
+                  final Map data=state.extra as Map;
+                  return NoTransitionPage(
+                    child: GivenExamPage(
+                      id: data['id'],
+                      hasExam: data['hasExam'],
+                      isCourseExam:data['isCourseExam'] ,
+                      iswriitenExam:data['iswriitenExam'],
+                    ),
+                  );
+                },
                 routes: []
             ),
 

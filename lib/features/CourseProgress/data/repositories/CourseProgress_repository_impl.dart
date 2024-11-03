@@ -6,6 +6,8 @@ import 'package:biddabari_new/core/error/failures.dart';
 import 'package:biddabari_new/features/AllCourse/data/models/course/CourseDetailsResponse.dart';
 import 'package:biddabari_new/features/CourseProgress/data/models/Comment/CommentResponse.dart';
 import 'package:biddabari_new/features/Exam/data/models/Question/QuestionResponse.dart';
+import 'package:biddabari_new/features/Exam/data/models/Question/QuestionSaveResponse.dart';
+import 'package:biddabari_new/features/Login/data/models/Auth/LoginResponse.dart';
 
 import 'package:fpdart/src/either.dart';
 
@@ -151,6 +153,86 @@ CourseProgressRepositoryImpl({required this.remoteSource,required this.connectio
         final data = await remoteSource.getExamQuestions(id,hasExam,isCourseExam);
         if(data==null){
           return left(Failure("Some things wrong"));
+        }else{
+          return right(data);
+        }
+        // return right(episodes!.results!);
+      }
+    }on ServerException catch(e){
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, QuestionSaveResponse>> getMyFavoraiteQuestion(String? id)async {
+    // TODO: implement getMyFavoraiteQuestion
+    try{
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure("no internet connection!!"));
+      }else{
+        final data = await remoteSource.getMyFavoraiteQuestion(id);
+        if(data==null){
+          return left(Failure("Some things wrong"));
+        }else{
+          return right(data);
+        }
+        // return right(episodes!.results!);
+      }
+    }on ServerException catch(e){
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, QuestionResponse>> submitExam(List<File> fileList, bool hasExam, String? id, int minute, String token, Map<String, String> questionsMain, File? file, bool courseExam)async {
+    // TODO: implement submitExam
+    try{
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure("no internet connection!!"));
+      }else{
+        final data = await remoteSource.submitExam(fileList,hasExam,id,minute,token,questionsMain, file,courseExam);
+        if(data.error!=null){
+          return left(Failure(data.error!));
+        }else{
+          return right(data);
+        }
+        // return right(episodes!.results!);
+      }
+    }on ServerException catch(e){
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, LoginResponse>> removeQues(int? id, String userId)async {
+    // TODO: implement removeQues
+    try{
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure("no internet connection!!"));
+      }else{
+        final data = await remoteSource.removeQues(id,userId);
+        if(data.success!="Favourite Question Saved Successfully."){
+          return left(Failure(data.error!));
+        }else{
+          return right(data);
+        }
+        // return right(episodes!.results!);
+      }
+    }on ServerException catch(e){
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, LoginResponse>> saveQues(int? id, String userId)async {
+    // TODO: implement saveQues
+    try{
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure("no internet connection!!"));
+      }else{
+        final data = await remoteSource.saveQues(id,userId);
+        if(data.success!="Favourite Question Saved Successfully."){
+          return left(Failure(data.error!));
         }else{
           return right(data);
         }

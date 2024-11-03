@@ -25,7 +25,7 @@ class AllCourseCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // context.pushNamed(Routes.bookDetailsPage,extra:course );
+        context.pushNamed(Routes.detailsCoursePage,extra: course);
       },
       child: Container(
         decoration: ShapeDecoration(

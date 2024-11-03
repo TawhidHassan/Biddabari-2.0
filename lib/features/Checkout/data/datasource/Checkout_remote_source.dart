@@ -37,7 +37,7 @@ class CheckoutRemoteSourceImpl implements CheckoutRemoteSource {
       'coupon_code':coupon_code??""
     };
     try{
-      final result =await apiMethod.post(url: ApiEndpoint.ORDER_COURSE+"0d",body: data,showResult: true,isBasic: false,duration: 30);
+      final result =await apiMethod.post(url: ApiEndpoint.ORDER_COURSE+"$id",body: data,showResult: true,isBasic: false,duration: 30);
       return LoginResponse.fromJson(result!);
     }catch (e) {
       throw ServerException(e.toString());

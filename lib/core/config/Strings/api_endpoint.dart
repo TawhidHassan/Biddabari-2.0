@@ -83,6 +83,18 @@ class ApiEndpoint {
   static  String DELIVERY_CHARGE= "get-delivery-charge-for-app".addBaseURl;
 
 
+  static  String FAVORAITE_QUESTION_LIST= "get-favourite-questions/".addBaseURl;
+
+
+  static  String COURSE_EXAM_RESULT_SUBMIT= "student/get-course-exam-result/".addBaseURl;
+  static  String COURSE_BATCH_EXAM_RESULT_SUBMIT= "student/get-batch-exam-result/".addBaseURl;
+  static  String COURSE_CLASS_EXAM_RESULT_SUBMIT= "student/get-course-class-exam-result/".addBaseURl;
+
+
+  static  String SAVE_QUESTION= "favourite-question/".addBaseURl;
+  static  String REMOVE_QUESTION= "delete-favourite-question/".addBaseURl;
+
+
 
 
 }

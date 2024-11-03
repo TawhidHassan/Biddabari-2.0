@@ -227,9 +227,6 @@ class CheckoutController extends GetxController implements GetxService{
                    }
                  });
                }
-
-
-
              }
            }on PaymentException catch (e) {
              isLoading.value=false;
@@ -304,6 +301,7 @@ class CheckoutController extends GetxController implements GetxService{
          textColor: Colors.white,
          fontSize: 16.0
      );
+     context!.goNamed(Routes.mainPage);
    },(onRight){
      circuler.value = false;
      orderResponseCourse.value=onRight;

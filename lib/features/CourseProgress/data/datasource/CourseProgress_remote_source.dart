@@ -4,6 +4,8 @@ import 'package:biddabari_new/core/common/data/sucesss/sucess_model.dart';
 import 'package:biddabari_new/features/AllCourse/data/models/course/CourseDetailsResponse.dart';
 import 'package:biddabari_new/features/CourseProgress/data/models/Comment/CommentResponse.dart';
 import 'package:biddabari_new/features/Exam/data/models/Question/QuestionResponse.dart';
+import 'package:biddabari_new/features/Exam/data/models/Question/QuestionSaveResponse.dart';
+import 'package:biddabari_new/features/Login/data/models/Auth/LoginResponse.dart';
 
 import '../../../../core/config/Strings/api_endpoint.dart';
 import '../../../../core/error/exceptions.dart';
@@ -18,6 +20,17 @@ Future<CommentResponse?>getComments (String id, String type);
 Future<SucessModel?> commentsSubmitFun(String id, String comment, String type);
 
 Future<QuestionResponse?>getExamQuestions(String id, int hasExam, bool isCourseExam);
+Future<QuestionSaveResponse?>getMyFavoraiteQuestion(String? id);
+
+Future<QuestionResponse> submitExam(List<File> fileList, bool hasExam, String? id, int minute, String token, Map<String, String> questionsMain, File? file, bool courseExam);
+
+Future<LoginResponse> saveQues(int? id, String userId);
+Future<LoginResponse> removeQues(int? id, String userId);
+
+
+
+
+
 
 
 
@@ -122,6 +135,61 @@ class CourseProgressRemoteSourceImpl implements CourseProgressRemoteSource {
         return QuestionResponse.fromJson(result);
       }
 
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<QuestionSaveResponse?> getMyFavoraiteQuestion(String? id) async{
+    // TODO: implement getMyFavoraiteQuestion
+    try{
+        final result =await apiMethod.get(url:ApiEndpoint.FAVORAITE_QUESTION_LIST+"$id",showResult: true,isBasic: false,duration: 30);
+        return QuestionSaveResponse.fromJson(result);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<QuestionResponse> submitExam(List<File> fileList, bool hasExam, String? id, int minute, String token, Map<String, String> questionsMain, File? file, bool courseExam)async {
+    // TODO: implement submitExam
+    List<String> fileListPath=<String>[];
+    fileList.forEach((element) {
+      fileListPath.add(element.path);
+    });
+
+    try{
+      final result =await apiMethod.multipartMultiFile(
+          url:hasExam!? courseExam? ApiEndpoint.COURSE_EXAM_RESULT_SUBMIT+"$id":
+          ApiEndpoint.COURSE_BATCH_EXAM_RESULT_SUBMIT+"$id":
+          ApiEndpoint.COURSE_CLASS_EXAM_RESULT_SUBMIT+"$id",
+
+          body: questionsMain,showResult: true,isBasic: false, pathList: fileListPath, fieldList:fileListPath.isEmpty?[]: ["ans_files[]"]);
+      return QuestionResponse.fromJson(result!);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<LoginResponse> removeQues(int? id, String userId)async {
+    // TODO: implement removeQues
+
+    try{
+      final result =await apiMethod.get(url: ApiEndpoint.REMOVE_QUESTION+"$userId/$id",showResult: true,isBasic: false,);
+      return LoginResponse.fromJson(result!);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<LoginResponse> saveQues(int? id, String userId)async {
+    // TODO: implement saveQues
+    try{
+      final result =await apiMethod.get(url: ApiEndpoint.SAVE_QUESTION+"$userId/$id",showResult: true,isBasic: false,);
+      return LoginResponse.fromJson(result!);
     }catch (e) {
       throw ServerException(e.toString());
     }

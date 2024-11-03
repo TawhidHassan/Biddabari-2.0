@@ -1,3 +1,4 @@
+import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
 import 'package:biddabari_new/core/config/color/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,6 +12,7 @@ class CustomButton extends StatelessWidget {
   final double? width;
   final double? borderRadius;
   final bool? isBorder;
+  final bool? loading;
   final Color? textColor;
   final double? textSize;
   final VoidCallback? onTap;
@@ -21,6 +23,7 @@ class CustomButton extends StatelessWidget {
       this.textColor,
       this.onTap,
       this.height,
+      this.loading=false,
       this.width,
       this.borderRadius,
       this.textSize,
@@ -54,7 +57,7 @@ class CustomButton extends StatelessWidget {
             ],
           ),
         child: Center(
-          child: child ??  Text(title ?? 'text',
+          child:loading!?LoadingWidget(): child ??  Text(title ?? 'text',
                   style: PoppinsMedium.copyWith(
                       fontSize: textSize ?? 16,
                       color: textColor),
