@@ -8,6 +8,7 @@ import '../../data/models/BatchExam/ExamCategorie.dart';
 import '../../data/models/BatchExam/ExamDetailsResponse.dart';
 import '../../data/models/BatchExam/MyExamResponse.dart';
 import '../../data/models/Exam.dart';
+import '../../data/models/ExamResponse.dart';
 import '../../data/models/Question/QuestionResponse.dart';
 import '../../data/models/Question/QuestionSaveResponse.dart';
 import '../../domain/usecase/Exam_use_case.dart';
@@ -142,6 +143,30 @@ class ExamController extends GetxController implements GetxService{
         questionSaveResponse.value=r;
       });
     });
+  }
+
+  final rankingCirculer=false.obs;
+  Rx<ExamResponse?>  examResponse=Rx<ExamResponse?>(null);
+  Future getCourseExamRanking(String? id, bool? isCourseExam) async{
+    rankingCirculer.value=true;
+    var rs= await examUseCase!.getCourseExamRanking(id,isCourseExam);
+    rankingCirculer.value=false;
+    rs.fold((l){
+      Fluttertoast.showToast(
+          msg: l.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    }, (r){
+      examResponse.value=r;
+    });
+
+
+
   }
 
 

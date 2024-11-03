@@ -1,5 +1,6 @@
 
 import 'package:biddabari_new/features/Exam/data/models/BatchExam/ExamDetailsResponse.dart';
+import 'package:biddabari_new/features/Exam/data/models/ExamResponse.dart';
 import 'package:biddabari_new/features/Exam/data/models/Question/QuestionResponse.dart';
 
 import '../../../../core/config/Strings/api_endpoint.dart';
@@ -16,6 +17,9 @@ Future<ExamDetailsResponse?>getExamDetails(int id);
 Future<MyExamResponse?>getMyExam();
 Future<QuestionSaveResponse?> getMyFavoraiteQuestion(String id);
 Future<QuestionResponse?> getExamAnswer({String? id, bool? isCourseExam, bool? isClassExam});
+Future<ExamResponse?> getCourseExamRanking({String? id, bool? isCourseExam});
+
+
 
 
 
@@ -84,6 +88,19 @@ class ExamRemoteSourceImpl implements ExamRemoteSource {
           ApiEndpoint.ANSWER_BATCH_EXAM+"$id",
           showResult: true,isBasic: false,duration: 30);
       return QuestionResponse.fromJson(result);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<ExamResponse?> getCourseExamRanking({String? id, bool? isCourseExam})async {
+    // TODO: implement getCourseExamRanking
+    try{
+      final result =await apiMethod.get(url:
+          isCourseExam!? ApiEndpoint.RANK_COURSE_EXAM+"$id":ApiEndpoint.RANK_COURSE_EXAM+"$id",
+          showResult: true,isBasic: false,duration: 30);
+      return ExamResponse.fromJson(result);
     }catch (e) {
       throw ServerException(e.toString());
     }

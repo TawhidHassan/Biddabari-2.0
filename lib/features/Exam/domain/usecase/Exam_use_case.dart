@@ -5,6 +5,7 @@ import '../../../../core/error/failures.dart';
 import '../../data/models/BatchExam/BatchExamResponse.dart';
 import '../../data/models/BatchExam/MyExamResponse.dart';
 import '../../data/models/Exam.dart';
+import '../../data/models/ExamResponse.dart';
 import '../../data/models/Question/QuestionResponse.dart';
 import '../../data/models/Question/QuestionSaveResponse.dart';
 import '../repositories/Exam_repository.dart';
@@ -46,6 +47,11 @@ Future<Either<Failure, QuestionSaveResponse>> getMyFavoraiteQuestion(String id)a
 Future<Either<Failure, QuestionResponse>> getExamAnswer({String? id, bool? isCourseExam, bool? isClassExam})async {
   return examRepository!.getExamAnswer(id: id,isCourseExam: isCourseExam,isClassExam: isClassExam);
 }
+@override
+Future<Either<Failure, ExamResponse>> getCourseExamRanking(String? id, bool? isCourseExam)async {
+  return examRepository!.getCourseExamRanking(id: id,isCourseExam: isCourseExam);
+}
+
 
 
 

@@ -172,6 +172,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/photo.svg
   SvgGenImage get photo => const SvgGenImage('assets/icons/photo.svg');
 
+  /// File path: assets/icons/rank_qus.svg
+  SvgGenImage get rankQus => const SvgGenImage('assets/icons/rank_qus.svg');
+
   /// File path: assets/icons/review.svg
   SvgGenImage get review => const SvgGenImage('assets/icons/review.svg');
 
@@ -185,6 +188,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/search.svg
   SvgGenImage get search => const SvgGenImage('assets/icons/search.svg');
+
+  /// File path: assets/icons/stop_watch.svg
+  SvgGenImage get stopWatch => const SvgGenImage('assets/icons/stop_watch.svg');
 
   /// File path: assets/icons/subtitle.svg
   SvgGenImage get subtitle => const SvgGenImage('assets/icons/subtitle.svg');
@@ -248,10 +254,12 @@ class $AssetsIconsGen {
         onlineCourse,
         people,
         photo,
+        rankQus,
         review,
         saveGreenSvg,
         saveGreenSvg_,
         search,
+        stopWatch,
         subtitle,
         teacher,
         tv,
@@ -283,6 +291,9 @@ class $AssetsImagesGen {
   SvgGenImage get examImageSvg =>
       const SvgGenImage('assets/images/exam_image.svg');
 
+  /// File path: assets/images/fram.png
+  AssetGenImage get fram => const AssetGenImage('assets/images/fram.png');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
@@ -300,6 +311,13 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/pana.png
   AssetGenImage get pana => const AssetGenImage('assets/images/pana.png');
+
+  /// File path: assets/images/posiution_image.png
+  AssetGenImage get posiutionImage =>
+      const AssetGenImage('assets/images/posiution_image.png');
+
+  /// File path: assets/images/rank_bg.png
+  AssetGenImage get rankBg => const AssetGenImage('assets/images/rank_bg.png');
 
   /// File path: assets/images/slider.png
   AssetGenImage get slider => const AssetGenImage('assets/images/slider.png');
@@ -326,11 +344,14 @@ class $AssetsImagesGen {
         examBg,
         examImagePng,
         examImageSvg,
+        fram,
         logo,
         onboarding1,
         onboarding2,
         onboarding3,
         pana,
+        posiutionImage,
+        rankBg,
         slider,
         splash,
         teacher,

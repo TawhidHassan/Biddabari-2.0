@@ -90,6 +90,8 @@ class ApiEndpoint {
   static  String ANSWER_CLASS_EXAM= "student/show-class-exam-answers/".addBaseURl;
   static  String ANSWER_COURSE_EXAM= "student/show-course-exam-answers/".addBaseURl;
   static  String ANSWER_BATCH_EXAM= "student/show-batch-exam-answers/".addBaseURl;
+  static  String RANK_COURSE_EXAM= "show-course-exam-ranking/".addBaseURl;
+  static  String RANK_BATCH_EXAM= "show-batch-exam-ranking/".addBaseURl;
 
 
   static  String COURSE_EXAM_RESULT_SUBMIT= "student/get-course-exam-result/".addBaseURl;

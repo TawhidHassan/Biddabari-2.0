@@ -1,5 +1,6 @@
 import 'package:biddabari_new/core/error/failures.dart';
 import 'package:biddabari_new/features/Exam/data/models/BatchExam/ExamDetailsResponse.dart';
+import 'package:biddabari_new/features/Exam/data/models/ExamResponse.dart';
 import 'package:biddabari_new/features/Exam/data/models/Question/QuestionResponse.dart';
 import 'package:biddabari_new/features/Exam/data/models/Question/QuestionSaveResponse.dart';
 
@@ -111,6 +112,26 @@ ExamRepositoryImpl({required this.remoteSource,required this.connectionChecker})
         final data = await remoteSource.getExamAnswer(
             id: id,isCourseExam: isCourseExam,isClassExam: isClassExam
         );
+        if(data==null){
+          return left(Failure("Something wrong"));
+        }else{
+          return right(data);
+        }
+        // return right(episodes!.results!);
+      }
+    }on ServerException catch(e){
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ExamResponse>> getCourseExamRanking({String? id, bool? isCourseExam})async {
+    // TODO: implement getCourseExamRanking
+    try{
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure("no internet connection!!"));
+      }else{
+        final data = await remoteSource.getCourseExamRanking(id:id,isCourseExam:isCourseExam);
         if(data==null){
           return left(Failure("Something wrong"));
         }else{

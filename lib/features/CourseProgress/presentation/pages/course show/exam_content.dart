@@ -204,6 +204,11 @@ class ExamContentPage extends StatelessWidget {
                             //   "id": courseSectionContent!.id.toString(),
                             //   "isCourseExam":isCourseExam
                             // });
+
+                            context.pushNamed(Routes.rankExamPage,extra: {
+                              "id": courseSectionContent!.id.toString(),
+                              "isCourseExam":isCourseExam
+                            });
                           },
                         ),
                       ),

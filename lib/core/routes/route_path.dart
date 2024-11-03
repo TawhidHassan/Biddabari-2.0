@@ -192,6 +192,10 @@ class Routes {
   static const String answerExamPagePath = '/answerExamPage';
 
 
+  static const String rankExamPage = 'rankExamPage';
+  static const String rankExamPagePath = '/rankExamPage';
+
+
   static const String ErrorPage = 'errorPage';
   static const String ErrorPagePath = '/errorPage';
 

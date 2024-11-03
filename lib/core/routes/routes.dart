@@ -42,6 +42,7 @@ import '../../features/CourseProgress/presentation/pages/course show/pdf_content
 import '../../features/CourseProgress/presentation/pages/course show/video_content.dart';
 import '../../features/CourseProgress/presentation/pages/course show/writen_exam_content.dart';
 import '../../features/Error/presentation/error_page.dart';
+import '../../features/Exam/presentation/pages/exam_rank_page.dart';
 import '../../features/Exam/presentation/pages/given_exam_page.dart';
 import '../../features/Exam/presentation/pages/my_exam_page.dart';
 import '../../features/Exam/presentation/pages/see_answer_page.dart';
@@ -272,6 +273,21 @@ class AppRouter {
               isClassExam:data['isClassExam'] ,
               isCourseExam:data['isCourseExam'] ,
               iswriitenExam:data['iswriitenExam'],
+            ),
+          );
+        },
+        routes: []
+      ),
+
+      GoRoute(
+        name: Routes.rankExamPage,
+        path: Routes.rankExamPagePath,
+        pageBuilder: (context, state) {
+          final Map data=state.extra as Map;
+          return NoTransitionPage(
+            child: ExamRankingPage(
+              id: data['id'],
+              isCourseExam:data['isCourseExam'] ,
             ),
           );
         },
