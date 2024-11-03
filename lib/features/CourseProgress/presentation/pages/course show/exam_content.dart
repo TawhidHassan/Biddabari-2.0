@@ -175,6 +175,13 @@ class ExamContentPage extends StatelessWidget {
                             //   "hasClassXm":courseSectionContent!.hasClassXm!.toInt(),
                             //   "isClassExam":false
                             // });
+                            context.pushNamed(Routes.answerExamPage,extra: {
+                                "id": courseSectionContent!.id.toString(),
+                                "isCourseExam": isCourseExam,
+                                "iswriitenExam": false,
+                                "hasClassXm":courseSectionContent!.hasClassXm!.toInt(),
+                                "isClassExam":false
+                            });
                           },
                         ),
                       ),
@@ -264,6 +271,13 @@ class ExamContentPage extends StatelessWidget {
                             //   "hasClassXm":courseSectionContent!.hasClassXm!.toInt(),
                             //   "isClassExam":false
                             // });
+                            context.pushNamed(Routes.answerExamPage,extra: {
+                                "id": courseSectionContent!.id.toString(),
+                                "isCourseExam": isCourseExam,
+                                "iswriitenExam": false,
+                                "hasClassXm":courseSectionContent!.hasClassXm!.toInt(),
+                                "isClassExam":false
+                            });
                           },
                         ),
                       ),
@@ -285,6 +299,12 @@ class ExamContentPage extends StatelessWidget {
                       //   "isCourseExam": isCourseExam,
                       //   "iswriitenExam": false
                       // });
+                      context.pushNamed(Routes.givenExamPage,extra:{
+                          "id": courseSectionContent!.id.toString(),
+                          "hasExam": courseSectionContent!.hasClassXm,
+                          "isCourseExam": isCourseExam,
+                          "iswriitenExam": false
+                      });
                     },
                   ),
 

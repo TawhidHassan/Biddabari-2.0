@@ -188,6 +188,9 @@ class Routes {
   static const String givenExamPage = 'givenExamPage';
   static const String givenExamPagePath = '/givenExamPage';
 
+  static const String answerExamPage = 'answerExamPage';
+  static const String answerExamPagePath = '/answerExamPage';
+
 
   static const String ErrorPage = 'errorPage';
   static const String ErrorPagePath = '/errorPage';

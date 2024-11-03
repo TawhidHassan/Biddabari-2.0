@@ -84,6 +84,12 @@ class ApiEndpoint {
 
 
   static  String FAVORAITE_QUESTION_LIST= "get-favourite-questions/".addBaseURl;
+  static  String ANSWER_QUESTION_LIST= "get-favourite-questions/".addBaseURl;
+
+
+  static  String ANSWER_CLASS_EXAM= "student/show-class-exam-answers/".addBaseURl;
+  static  String ANSWER_COURSE_EXAM= "student/show-course-exam-answers/".addBaseURl;
+  static  String ANSWER_BATCH_EXAM= "student/show-batch-exam-answers/".addBaseURl;
 
 
   static  String COURSE_EXAM_RESULT_SUBMIT= "student/get-course-exam-result/".addBaseURl;

@@ -77,6 +77,10 @@ Future<Either<Failure, LoginResponse>> removeQues(int? id, String userId)async {
   return courseProgressRepository!.removeQues(id,userId);
 }
 
+@override
+Future<Either<Failure, QuestionResponse>> getExamAnswer({String? id, bool? isCourseExam, bool? isClassExam})async {
+  return courseProgressRepository!.getExamAnswer(id: id,isCourseExam: isCourseExam,isClassExam: isClassExam);
+}
 
 
 

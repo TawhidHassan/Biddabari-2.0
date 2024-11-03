@@ -1,11 +1,15 @@
 
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import '../../../../Dependenci Injection/init_dependencies.dart';
+import '../../../../core/LocalDataBase/localdata.dart';
 import '../../data/models/BatchExam/BatchExamResponse.dart';
 import '../../data/models/BatchExam/ExamCategorie.dart';
 import '../../data/models/BatchExam/ExamDetailsResponse.dart';
 import '../../data/models/BatchExam/MyExamResponse.dart';
 import '../../data/models/Exam.dart';
+import '../../data/models/Question/QuestionResponse.dart';
+import '../../data/models/Question/QuestionSaveResponse.dart';
 import '../../domain/usecase/Exam_use_case.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +22,10 @@ class ExamController extends GetxController implements GetxService{
   Rx<ExamCategorie?> examCategorieData = Rx<ExamCategorie?>(null);
   Rx<ExamDetailsResponse?> examDetailsResponse = Rx<ExamDetailsResponse?>(null);
   Rx<MyExamResponse?> myExamReponse = Rx<MyExamResponse?>(null);
+  Rx<QuestionResponse?>  questionResponse=Rx<QuestionResponse?>(null);
+  Rx<QuestionSaveResponse?>  questionSaveResponse=Rx<QuestionSaveResponse?>(null);
 
+  final saveQuesCirculer=false.obs;
   final examLoading=false.obs;
   final selectedcategory = 0.obs;
   final selectedExamcategory = 0.obs;
@@ -113,6 +120,28 @@ class ExamController extends GetxController implements GetxService{
     });
 
     examLoading.value = false;
+  }
+
+  Future getMyFavoraiteQuestion()async {
+    saveQuesCirculer.value=true;
+    questionSaveResponse.value=null;
+    await serviceLocator<DBHelper>().getUserId().then((onValue)async{
+      var rs= await examUseCase!.getMyFavoraiteQuestion(onValue);
+      saveQuesCirculer.value=false;
+      rs.fold((l){
+        Fluttertoast.showToast(
+            msg: l.message,
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 2,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
+      }, (r){
+        questionSaveResponse.value=r;
+      });
+    });
   }
 
 

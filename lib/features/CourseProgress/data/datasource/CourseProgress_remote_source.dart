@@ -27,6 +27,8 @@ Future<QuestionResponse> submitExam(List<File> fileList, bool hasExam, String? i
 Future<LoginResponse> saveQues(int? id, String userId);
 Future<LoginResponse> removeQues(int? id, String userId);
 
+Future<QuestionResponse?> getExamAnswer({String? id, bool? isCourseExam, bool? isClassExam});
+
 
 
 
@@ -164,7 +166,6 @@ class CourseProgressRemoteSourceImpl implements CourseProgressRemoteSource {
           url:hasExam!? courseExam? ApiEndpoint.COURSE_EXAM_RESULT_SUBMIT+"$id":
           ApiEndpoint.COURSE_BATCH_EXAM_RESULT_SUBMIT+"$id":
           ApiEndpoint.COURSE_CLASS_EXAM_RESULT_SUBMIT+"$id",
-
           body: questionsMain,showResult: true,isBasic: false, pathList: fileListPath, fieldList:fileListPath.isEmpty?[]: ["ans_files[]"]);
       return QuestionResponse.fromJson(result!);
     }catch (e) {
@@ -194,5 +195,25 @@ class CourseProgressRemoteSourceImpl implements CourseProgressRemoteSource {
       throw ServerException(e.toString());
     }
   }
+
+    @override
+    Future<QuestionResponse?> getExamAnswer({String? id, bool? isCourseExam, bool? isClassExam})async {
+      // TODO: implement getExamAnswer
+      try{
+        final result =await apiMethod.get(url:
+        isClassExam!?
+        ApiEndpoint.ANSWER_CLASS_EXAM+"$id"
+            :
+        isCourseExam!?
+        ApiEndpoint.ANSWER_COURSE_EXAM+"$id"
+            :
+        ApiEndpoint.ANSWER_BATCH_EXAM+"$id",
+            showResult: true,isBasic: false,duration: 30);
+        return QuestionResponse.fromJson(result);
+      }catch (e) {
+        throw ServerException(e.toString());
+      }
+    }
+
 
 }

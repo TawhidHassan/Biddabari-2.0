@@ -44,6 +44,7 @@ import '../../features/CourseProgress/presentation/pages/course show/writen_exam
 import '../../features/Error/presentation/error_page.dart';
 import '../../features/Exam/presentation/pages/given_exam_page.dart';
 import '../../features/Exam/presentation/pages/my_exam_page.dart';
+import '../../features/Exam/presentation/pages/see_answer_page.dart';
 import '../../features/Home/presentation/pages/Home_page.dart';
 import '../../features/Job/data/models/job_model.dart';
 import '../../features/Job/presentation/pages/Job_details_page.dart';
@@ -244,21 +245,38 @@ class AppRouter {
             ),
 
       GoRoute(
-                name: Routes.givenExamPage,
-                path: Routes.givenExamPagePath,
-                pageBuilder: (context, state) {
-                  final Map data=state.extra as Map;
-                  return NoTransitionPage(
-                    child: GivenExamPage(
-                      id: data['id'],
-                      hasExam: data['hasExam'],
-                      isCourseExam:data['isCourseExam'] ,
-                      iswriitenExam:data['iswriitenExam'],
-                    ),
-                  );
-                },
-                routes: []
+        name: Routes.givenExamPage,
+        path: Routes.givenExamPagePath,
+        pageBuilder: (context, state) {
+          final Map data=state.extra as Map;
+          return NoTransitionPage(
+            child: GivenExamPage(
+              id: data['id'],
+              hasExam: data['hasExam'],
+              isCourseExam:data['isCourseExam'] ,
+              iswriitenExam:data['iswriitenExam'],
             ),
+          );
+        },
+        routes: []
+      ),
+      GoRoute(
+        name: Routes.answerExamPage,
+        path: Routes.answerExamPagePath,
+        pageBuilder: (context, state) {
+          final Map data=state.extra as Map;
+          return NoTransitionPage(
+            child: SeeAnswerPage(
+              id: data['id'],
+              hasClassXm: data['hasClassXm'],
+              isClassExam:data['isClassExam'] ,
+              isCourseExam:data['isCourseExam'] ,
+              iswriitenExam:data['iswriitenExam'],
+            ),
+          );
+        },
+        routes: []
+      ),
 
 
       GoRoute(

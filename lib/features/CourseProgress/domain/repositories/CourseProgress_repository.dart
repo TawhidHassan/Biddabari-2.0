@@ -32,6 +32,8 @@ abstract class CourseProgressRepository {
 
   Future<Either<Failure, LoginResponse>> removeQues(int? id, String userId);
 
+  Future<Either<Failure, QuestionResponse>> getExamAnswer({String? id, bool? isCourseExam, bool? isClassExam});
+
 // Future<Either<Failure, LoginResponseModel>> login(String email);
 
 }

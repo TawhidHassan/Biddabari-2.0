@@ -454,5 +454,31 @@ class CourseProgressController extends GetxController implements GetxService{
  }
 
 
+
+ Future getExamAnswer({String? id, bool? isCourseExam, bool? isClassExam})async {
+  circuler.value=true;
+  questionResponse.value=null;
+
+
+
+  var rs= await courseProgressUseCase!.getExamAnswer(id: id,isCourseExam: isCourseExam,isClassExam: isClassExam);
+  circuler.value=false;
+  rs.fold((l){
+   Fluttertoast.showToast(
+       msg: l.message,
+       toastLength: Toast.LENGTH_SHORT,
+       gravity: ToastGravity.BOTTOM,
+       timeInSecForIosWeb: 2,
+       backgroundColor: Colors.red,
+       textColor: Colors.white,
+       fontSize: 16.0
+   );
+  }, (r){
+   questionResponse.value=r;
+  });
+
+ }
+
+
 }
 

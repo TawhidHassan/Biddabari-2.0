@@ -43,7 +43,7 @@ class _QuestionCardState extends State<QuestionCard> {
       margin: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
       decoration: BoxDecoration(
-          color:widget.question!.question_options!.where((element) => element.myAns==element.isCorrect).isNotEmpty? Colors.white:Colors.transparent,
+          color:widget.question!.question_options!.where((element) => element.myAns==element.isCorrect).isNotEmpty? Colors.yellowAccent.withAlpha(16):Colors.transparent,
           border: Border.all(
               color: (widget.question!.isfixed == null || widget.question!.isfixed == false)
                   ? AppColors.primarySlate100
