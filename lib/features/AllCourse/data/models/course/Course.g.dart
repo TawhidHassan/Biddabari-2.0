@@ -28,6 +28,7 @@ Course _$CourseFromJson(Map<String, dynamic> json) => Course(
       json['discount_end_date'] as String?,
       json['admission_last_date'] as String?,
       json['order_status'] as String?,
+      json['video_link'] as String?,
       (json['teachers'] as List<dynamic>?)
           ?.map((e) => Teacher.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -58,6 +59,7 @@ Map<String, dynamic> _$CourseToJson(Course instance) => <String, dynamic>{
       'discount_end_date': instance.discount_end_date,
       'admission_last_date': instance.admission_last_date,
       'order_status': instance.order_status,
+      'video_link': instance.video_link,
       'teachers': instance.teachers,
       'course_sections': instance.course_sections,
     };

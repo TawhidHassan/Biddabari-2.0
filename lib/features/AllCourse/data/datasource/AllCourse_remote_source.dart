@@ -15,6 +15,10 @@ Future<AllCourseResponse?> getAllCourse();
 Future<CourseCategoryResponse?> getCategoryCourse(String? slug);
 Future<CourseDetailsResponse?> detailsCourse(String? id);
 Future<CourseOrderResponse?> getMyCourse();
+Future<CourseCategoryResponse?> getFreeService();
+Future<CourseCategoryResponse?>  getFreeServiceContent(String? slug);
+
+
 
 }
 
@@ -73,6 +77,28 @@ class AllCourseRemoteSourceImpl implements AllCourseRemoteSource {
     try{
       final result =await apiMethod.get(url: ApiEndpoint.MY_COURSE,showResult: true,isBasic: false,duration: 30);
       return CourseOrderResponse.fromJson(result!);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<CourseCategoryResponse?> getFreeService()async {
+    // TODO: implement getFreeService
+    try{
+      final result =await apiMethod.get(url: ApiEndpoint.FREE_SERVICE,showResult: true,isBasic: false,duration: 30);
+      return CourseCategoryResponse.fromJson(result!);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<CourseCategoryResponse?> getFreeServiceContent(String? slug)async {
+    // TODO: implement getFreeService
+    try{
+      final result =await apiMethod.get(url: ApiEndpoint.FREE_SERVICE_CONTENT+"$slug",showResult: true,isBasic: false,duration: 30);
+      return CourseCategoryResponse.fromJson(result!);
     }catch (e) {
       throw ServerException(e.toString());
     }

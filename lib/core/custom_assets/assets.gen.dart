@@ -294,6 +294,14 @@ class $AssetsImagesGen {
   /// File path: assets/images/fram.png
   AssetGenImage get fram => const AssetGenImage('assets/images/fram.png');
 
+  /// File path: assets/images/free-class.png
+  AssetGenImage get freeClass =>
+      const AssetGenImage('assets/images/free-class.png');
+
+  /// File path: assets/images/free_exam.png
+  AssetGenImage get freeExam =>
+      const AssetGenImage('assets/images/free_exam.png');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
@@ -345,6 +353,8 @@ class $AssetsImagesGen {
         examImagePng,
         examImageSvg,
         fram,
+        freeClass,
+        freeExam,
         logo,
         onboarding1,
         onboarding2,

@@ -34,6 +34,7 @@ class Course{
   String? discount_end_date;
   String? admission_last_date;
   String? order_status;
+  String? video_link;
   List<Teacher>?teachers;
   List<CourseSection>?course_sections;
 
@@ -60,6 +61,7 @@ class Course{
       this.discount_end_date,
       this.admission_last_date,
       this.order_status,
+      this.video_link,
       this.teachers,
       this.course_sections);
 

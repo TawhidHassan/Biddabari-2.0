@@ -103,18 +103,17 @@ final Course? course;
                 ,
               ),
             ),
-            SizedBox(height: 8,),
             Expanded(
               flex: 1,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                padding: const EdgeInsets.only(left: 10.0,right: 10,bottom: 6),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       course!.title??"",
-                      style:boldText(16,color: AppColors.textClorColor),
+                      style:boldText(16.sp,color: AppColors.textClorColor),
                       textAlign: TextAlign.start,
                       maxLines: 2, // Set a limit for lines
                       overflow: TextOverflow.ellipsis,
@@ -126,7 +125,7 @@ final Course? course;
                       direction: Axis.horizontal,
                       allowHalfRating: true,
                       itemCount: 5,
-                      itemSize: 12,
+                      itemSize: 12.sp,
                       itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
                       itemBuilder: (context, _) => Icon(
                         Icons.star,
@@ -149,7 +148,7 @@ final Course? course;
                               '৳ ${course!.price!}',
                               style: TextStyle(
                                 color: Color(0xFFC71720),
-                                fontSize: 10,
+                                fontSize: 8.sp,
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w600,
                                 decoration: TextDecoration.lineThrough,
@@ -160,7 +159,7 @@ final Course? course;
                               '৳ ${(course!.price!-course!.discount_amount!)}',
                               style: TextStyle(
                                 color: Color(0xFF191919),
-                                fontSize: 16,
+                                fontSize: 14.sp,
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w700,
                               ),
@@ -169,7 +168,7 @@ final Course? course;
                               '৳ ${course!.price!}',
                               style: TextStyle(
                                 color: Color(0xFF191919),
-                                fontSize: 16,
+                                fontSize: 14.sp,
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w700,
                               ),
@@ -187,7 +186,7 @@ final Course? course;
                                 'View Details',
                                 style: TextStyle(
                                   color: Color(0xFFEB6A20),
-                                  fontSize: 10,
+                                  fontSize: 8.sp,
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -230,7 +229,7 @@ final Course? course;
                 ),
               ),
             ),
-            SizedBox(height: 8,),
+
           ],
         ),
       ),

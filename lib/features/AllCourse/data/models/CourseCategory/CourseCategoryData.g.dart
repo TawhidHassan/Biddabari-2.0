@@ -8,17 +8,29 @@ part of 'CourseCategoryData.dart';
 
 CourseCategoryData _$CourseCategoryDataFromJson(Map<String, dynamic> json) =>
     CourseCategoryData(
-      id: json['id'] as num?,
-      name: json['name'] as String?,
-      parentId: json['parentId'] as String?,
-      image: json['image'] as String?,
-      icon: json['icon'] as String?,
-      slug: json['slug'] as String?,
-      status: json['status'] as String?,
-      courses: (json['courses'] as List<dynamic>?)
+      json['id'] as num?,
+      json['category_id'] as num?,
+      json['section_content_id'] as num?,
+      json['exam_id'] as num?,
+      json['type'] as String?,
+      json['name'] as String?,
+      json['parentId'] as String?,
+      json['image'] as String?,
+      json['second_image'] as String?,
+      json['thumbnail'] as String?,
+      json['icon'] as String?,
+      json['slug'] as String?,
+      json['status'] as String?,
+      json['category_video'] == null
+          ? null
+          : Course.fromJson(json['category_video'] as Map<String, dynamic>),
+      json['category_exam'] == null
+          ? null
+          : Course.fromJson(json['category_exam'] as Map<String, dynamic>),
+      (json['courses'] as List<dynamic>?)
           ?.map((e) => Course.fromJson(e as Map<String, dynamic>))
           .toList(),
-      course_categories: (json['course_categories'] as List<dynamic>?)
+      (json['course_categories'] as List<dynamic>?)
           ?.map((e) => SubCategory.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -26,12 +38,20 @@ CourseCategoryData _$CourseCategoryDataFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$CourseCategoryDataToJson(CourseCategoryData instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'category_id': instance.category_id,
+      'section_content_id': instance.section_content_id,
+      'exam_id': instance.exam_id,
+      'type': instance.type,
       'name': instance.name,
       'parentId': instance.parentId,
       'image': instance.image,
+      'thumbnail': instance.thumbnail,
+      'second_image': instance.second_image,
       'icon': instance.icon,
       'slug': instance.slug,
       'status': instance.status,
+      'category_video': instance.category_video,
+      'category_exam': instance.category_exam,
       'courses': instance.courses,
       'course_categories': instance.course_categories,
     };

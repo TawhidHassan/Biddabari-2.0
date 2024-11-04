@@ -13,26 +13,42 @@ part 'CourseCategoryData.g.dart';
 class CourseCategoryData{
 
   num? id;
+  num? category_id;
+  num? section_content_id;
+  num? exam_id;
+  String? type;
   String? name;
   String? parentId;
   String? image;
+  String? second_image;
+  String? thumbnail;
   String? icon;
   String? slug;
   String? status;
+  Course? category_video;
+  Course? category_exam;
   List<Course>? courses;
   List<SubCategory>? course_categories;
 
 
   CourseCategoryData(
-      {this.id,
+      this.id,
+      this.category_id,
+      this.section_content_id,
+      this.exam_id,
+      this.type,
       this.name,
       this.parentId,
       this.image,
+      this.second_image,
+      this.thumbnail,
       this.icon,
       this.slug,
       this.status,
+      this.category_video,
+      this.category_exam,
       this.courses,
-      this.course_categories});
+      this.course_categories);
 
   factory CourseCategoryData.fromJson(Map<String,dynamic>json)=>
       _$CourseCategoryDataFromJson(json);

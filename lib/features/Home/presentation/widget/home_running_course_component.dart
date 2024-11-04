@@ -8,6 +8,7 @@ import '../../../../core/config/util/text_style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/common/widgets/card/category_card.dart';
 import '../../../../core/common/widgets/card/course_card.dart';
+import '../../../../core/utils/system_util.dart';
 
 class HomeRunningCourseComponent extends StatelessWidget {
   const HomeRunningCourseComponent({super.key});
@@ -57,7 +58,7 @@ class HomeRunningCourseComponent extends StatelessWidget {
                       crossAxisCount: 2,
                       crossAxisSpacing: 12.0,
                       mainAxisSpacing: 12.0,
-                      childAspectRatio: 3 / 4
+                    childAspectRatio: SystemUtil.getChildAspectRatio(context),
                   ),
                   itemCount: controller.runingCourseResponse.value!.courses!.length,
                   itemBuilder: (context, index) {

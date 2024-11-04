@@ -44,6 +44,13 @@ AllCourseUseCase({this.allCourseRepository});
       return allCourseRepository!.getMyCourse();
   }
 
+  Future<Either<Failure, CourseCategoryResponse>>getFreeService()async {
+      return allCourseRepository!.getFreeService();
+  }
+  Future<Either<Failure, CourseCategoryResponse>>getFreeServiceContent(String? slug)async {
+      return allCourseRepository!.getFreeServiceContent(slug);
+  }
+
 
 
 

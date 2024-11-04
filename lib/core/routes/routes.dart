@@ -1,6 +1,8 @@
 import 'package:biddabari_new/core/common/data/Category/Categorie.dart';
 import 'package:biddabari_new/features/AllCourse/presentation/pages/AllCourse_page.dart';
 import 'package:biddabari_new/features/AllCourse/presentation/pages/category_course_page.dart';
+import 'package:biddabari_new/features/AllCourse/presentation/pages/free%20service/free_exam_page.dart';
+import 'package:biddabari_new/features/AllCourse/presentation/pages/free%20service/free_video_page.dart';
 import 'package:biddabari_new/features/AllCourse/presentation/pages/my_course_page.dart';
 import 'package:biddabari_new/features/Blog/presentation/pages/Blog_page.dart';
 import 'package:biddabari_new/features/BookStore/data/models/book/Book.dart';
@@ -25,10 +27,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../Dependenci Injection/init_dependencies.dart';
+import '../../features/AllCourse/data/models/CourseCategory/CourseCategoryResponse.dart';
 import '../../features/AllCourse/data/models/course/Course.dart';
 import '../../features/AllCourse/data/models/courseSection/CourseSection.dart';
 import '../../features/AllCourse/data/models/courseSectionContent/CourseSectionContent.dart';
 import '../../features/AllCourse/presentation/pages/course_details_page.dart';
+import '../../features/AllCourse/presentation/pages/free service/free_class_exam_page.dart';
+import '../../features/AllCourse/presentation/pages/free service/free_service_page.dart';
 import '../../features/Blog/data/models/Blog/Blog.dart';
 import '../../features/Blog/presentation/pages/blog_details_page.dart';
 import '../../features/BookStore/presentation/pages/book_cart.dart';
@@ -120,6 +125,45 @@ class AppRouter {
         name: Routes.myExamPage,
         path: Routes.myExamPagePath,
         builder: (context, state) => MyExamPage(),
+      ),
+
+      GoRoute(
+          name: Routes.freeCourseContentPage,
+          path: Routes.freeCourseContentPagePath,
+          pageBuilder: (context, state) =>  NoTransitionPage(
+            child: FreeClassExamPage(
+              slug:state.extra as String?,
+            ),
+          ),
+          routes: [
+            GoRoute(
+                name: Routes.freeVideoPage,
+                path: Routes.freeVideoPagePath,
+                pageBuilder: (context, state) =>  NoTransitionPage(
+                  child: FreeVideoPage(
+                    courseCategoryResponse:state.extra as CourseCategoryResponse?,
+                  ),
+                ),
+                routes: [
+
+
+                ]
+            ),
+            GoRoute(
+                name: Routes.freeExamPage,
+                path: Routes.freeExamPagePath,
+                pageBuilder: (context, state) =>  NoTransitionPage(
+                  child: FreeExamPage(
+                    courseCategoryResponse:state.extra as CourseCategoryResponse?,
+                  ),
+                ),
+                routes: [
+
+
+                ]
+            ),
+
+          ]
       ),
 
       GoRoute(
@@ -666,7 +710,7 @@ class AppRouter {
                 name: Routes.freeCoursePage,
                 path: Routes.freeCoursePagePath,
                 pageBuilder: (context, state) =>  NoTransitionPage(
-                  child: AllCoursePage(),
+                  child: FreeServicePage(),
                 ),
                 routes: [
 

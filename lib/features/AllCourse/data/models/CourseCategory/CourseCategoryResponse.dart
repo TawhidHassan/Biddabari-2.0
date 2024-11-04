@@ -10,9 +10,12 @@ part 'CourseCategoryResponse.g.dart';
 class CourseCategoryResponse{
 
   CourseCategoryData? courseCategory;
+  List<CourseCategoryData>? courseCategories;
+  List<CourseCategoryData>? free_class_videos;
+  List<CourseCategoryData>? free_exams;
 
 
-  CourseCategoryResponse(this.courseCategory);
+  CourseCategoryResponse(this.courseCategory,this.courseCategories);
 
   factory CourseCategoryResponse.fromJson(Map<String,dynamic>json)=>
       _$CourseCategoryResponseFromJson(json);

@@ -17,6 +17,9 @@ abstract class AllCourseRepository {
 
   Future<Either<Failure, CourseOrderResponse>> getMyCourse();
 
+  Future<Either<Failure, CourseCategoryResponse>> getFreeService();
+  Future<Either<Failure, CourseCategoryResponse>>getFreeServiceContent(String? slug);
+
 
 
 }

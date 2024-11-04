@@ -3,7 +3,7 @@ import '/core/extentions/custom_extentions.dart';
 class ApiEndpoint {
   ///staging
   // static const String mainDomain = "https://biddabari.online";
-  static const String mainDomain = "https://Api.biddabari.com";
+  static const String mainDomain = "https://api.biddabari.com";
   static const String baseUrl = "$mainDomain/api/v1/";
   static const String imageBaseUrl = "https://biddabari-bucket.obs.as-south-208.rcloud.reddotdigitalit.com/";
 
@@ -101,6 +101,10 @@ class ApiEndpoint {
 
   static  String SAVE_QUESTION= "favourite-question/".addBaseURl;
   static  String REMOVE_QUESTION= "delete-favourite-question/".addBaseURl;
+
+
+  static  String FREE_SERVICE= "free-service/".addBaseURl;
+  static  String FREE_SERVICE_CONTENT= "free-service/".addBaseURl;
 
 
 

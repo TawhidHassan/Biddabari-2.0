@@ -92,6 +92,15 @@ class Routes {
   static const String freeCoursePage = 'freeCoursePage';
   static const String freeCoursePagePath = '/freeCoursePage';
 
+  static const String freeCourseContentPage = 'freeCourseContentPage';
+  static const String freeCourseContentPagePath = '/freeCourseContentPage';
+
+  static const String freeVideoPage = 'freeVideoPage';
+  static const String freeVideoPagePath = 'freeVideoPage';
+
+  static const String freeExamPage = 'freeExamPage';
+  static const String freeExamPagePath = 'freeExamPage';
+
   static const String classRoomPage = 'classRoomPage';
   static const String classRoomPagePath = '/classRoomPage';
 

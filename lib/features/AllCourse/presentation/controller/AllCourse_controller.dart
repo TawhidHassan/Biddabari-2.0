@@ -147,6 +147,54 @@ class AllCourseController extends GetxController implements GetxService{
   }
 
 
+  Rx<CourseCategoryResponse?>? freeServiceResponse=Rx<CourseCategoryResponse?>(null);
+  Rx<CourseCategoryResponse?>? freeServiceContentResponse=Rx<CourseCategoryResponse?>(null);
+ final freeLoding=false.obs;
+  Future getFreeService()async {
+    freeLoding.value=true;
+    var rs= await allCourseUseCase!.getFreeService();
+    rs.fold((l){
+      Fluttertoast.showToast(
+          msg: l.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    }, (r){
+      freeServiceResponse!.value=r;
+
+      ///"pending", "start", "continue", "stop"
+    });
+    freeLoding.value=false;
+  }
+
+  Future getFreeServiceContent(String? slug)async {
+    freeLoding.value=true;
+    var rs= await allCourseUseCase!.getFreeServiceContent(slug);
+    rs.fold((l){
+      Fluttertoast.showToast(
+          msg: l.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    }, (r){
+      freeServiceContentResponse!.value=r;
+
+      ///"pending", "start", "continue", "stop"
+    });
+    freeLoding.value=false;
+  }
+
+
+
+
 
 
 
