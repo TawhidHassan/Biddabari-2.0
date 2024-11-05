@@ -109,7 +109,7 @@ class CourseSectionContent{
   @JsonKey(name: "exam_total_subject")
   dynamic examTotalSubject;
   @JsonKey(name: "written_exam_duration_in_minutes")
-  num? writtenExamDurationInMinutes;
+  dynamic? writtenExamDurationInMinutes;
   @JsonKey(name: "written_total_questions")
   dynamic writtenTotalQuestions;
   @JsonKey(name: "written_description")

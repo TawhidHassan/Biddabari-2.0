@@ -21,6 +21,10 @@ abstract class ExamRepository {
 
   Future<Either<Failure, ExamResponse>> getCourseExamRanking({String? id, bool? isCourseExam});
 
+  Future<Either<Failure, MyExamResponse>> getMyExamSection({int? id});
+
+  Future<Either<Failure, MyExamResponse>> getMasterExam({int? id});
+
 // Future<Either<Failure, LoginResponseModel>> login(String email);
 
 }

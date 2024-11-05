@@ -51,6 +51,19 @@ Future<Either<Failure, QuestionResponse>> getExamAnswer({String? id, bool? isCou
 Future<Either<Failure, ExamResponse>> getCourseExamRanking(String? id, bool? isCourseExam)async {
   return examRepository!.getCourseExamRanking(id: id,isCourseExam: isCourseExam);
 }
+@override
+Future<Either<Failure, MyExamResponse>> getMyExamSection(int? id)async {
+  return examRepository!.getMyExamSection(id: id);
+}
+
+@override
+Future<Either<Failure, MyExamResponse>> getMasterExam(int? id)async {
+  return examRepository!.getMasterExam(id: id);
+}
+
+
+
+
 
 
 

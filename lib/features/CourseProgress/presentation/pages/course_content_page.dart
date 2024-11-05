@@ -54,7 +54,16 @@ class CourseContentListPage extends StatelessWidget {
                     },
                     child:CourseContentCard(
                       onTap: (){
-                        if(courseSection!.course_section_contents![index].contentType=="note"){
+
+                        if(courseSection!.course_section_contents![index].hasClassXm!=0&&
+                            courseSection!.course_section_contents![index].classXmStatus=="0"){
+                          context.pushNamed(Routes.classExamPage,extra: {
+                            "courseSectionContent":courseSection!.course_section_contents![index],
+                            "isCourseExam":true
+                          },
+                          );
+                        }
+                        else if(courseSection!.course_section_contents![index].contentType=="note"){
                           context.pushNamed(Routes.noteContentPage,extra: {
                             "courseSectionContent":courseSection!.course_section_contents![index],
                             "isive":false,

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import '../../../../../core/common/widgets/Button/custom_button.dart';
 import '../../../../../core/common/widgets/loading/loading_widget.dart';
 import '../../../../../core/config/color/app_colors.dart';
 import '../../../../../core/config/util/text_style.dart';
 import '../../../../../core/custom_assets/assets.gen.dart';
+import '../../../../../core/routes/route_path.dart';
 import '../../../../AllCourse/data/models/courseSectionContent/CourseSectionContent.dart';
 import '../../controller/CourseProgress_controller.dart';
 import '../../widget/exam_context_card.dart';
@@ -166,6 +168,14 @@ class WritenExamContentPage extends StatelessWidget {
                             //   'iswriitenExam': true,
                             //   "hasClassXm":courseSectionContent!.hasClassXm!.toInt()
                             // });
+
+                            context.pushNamed(Routes.answerExamPage,extra: {
+                              "id": courseSectionContent!.id.toString(),
+                              "isCourseExam": isCourseExam,
+                              "iswriitenExam": false,
+                              "hasClassXm":courseSectionContent!.hasClassXm!.toInt(),
+                              "isClassExam":false
+                            });
                           },
                         ),
                       ),
@@ -184,6 +194,10 @@ class WritenExamContentPage extends StatelessWidget {
                             //   "id": courseSectionContent!.id.toString(),
                             //   "isCourseExam":isCourseExam
                             // });
+                            context.pushNamed(Routes.rankExamPage,extra: {
+                                "id": courseSectionContent!.id.toString(),
+                                "isCourseExam":isCourseExam
+                            });
                           },
                         ),
                       ),
@@ -207,6 +221,12 @@ class WritenExamContentPage extends StatelessWidget {
                         //   "isCourseExam": isCourseExam,
                         //   "iswriitenExam": true
                         // });
+                        context.pushNamed(Routes.givenExamPage,extra:{
+                            "id": courseSectionContent!.id.toString(),
+                            "hasExam": courseSectionContent!.hasClassXm,
+                            "isCourseExam": isCourseExam,
+                            "iswriitenExam": true
+                        });
                       }
 
                   ) : SizedBox(),

@@ -21,6 +21,7 @@ Future<void> initDependencies() async {
   _initJob();
   _initExam();
   _initCourseProgress();
+  _initAffiliation();
 
 
 
@@ -407,6 +408,25 @@ void _initCourseProgress(){
     ..registerFactory(
           () => CourseProgressUseCase(
          courseProgressRepository: serviceLocator(),
+      ),
+    );
+}
+void _initAffiliation(){
+  /// Datasource
+  serviceLocator
+    ..registerFactory<AffiliationRemoteSource>(
+          () => AffiliationRemoteSourceImpl(apiMethod: serviceLocator(),
+      ),
+    )/// Repository
+    ..registerFactory<AffiliationRepository>(
+          () => AffiliationRepositoryImpl(
+          connectionChecker:  serviceLocator(),
+          remoteSource:  serviceLocator()
+      ),
+    )/// Usecases
+    ..registerFactory(
+          () => AffiliationUseCase(
+         affiliationRepository: serviceLocator(),
       ),
     );
 }

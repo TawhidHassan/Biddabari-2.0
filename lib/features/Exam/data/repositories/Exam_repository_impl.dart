@@ -144,5 +144,45 @@ ExamRepositoryImpl({required this.remoteSource,required this.connectionChecker})
     }
   }
 
+  @override
+  Future<Either<Failure, MyExamResponse>> getMyExamSection({int? id})async {
+    // TODO: implement getMyExamSection
+    try{
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure("no internet connection!!"));
+      }else{
+        final data = await remoteSource.getMyExamSection(id:id);
+        if(data==null){
+          return left(Failure("Something wrong"));
+        }else{
+          return right(data);
+        }
+        // return right(episodes!.results!);
+      }
+    }on ServerException catch(e){
+      return left(Failure(e.message));
+    }
+  }
+ @override
+  Future<Either<Failure, MyExamResponse>> getMasterExam({int? id})async {
+    // TODO: implement getMyExamSection
+    try{
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure("no internet connection!!"));
+      }else{
+        final data = await remoteSource.getMasterExam(id:id);
+        if(data==null){
+          return left(Failure("Something wrong"));
+        }else{
+          return right(data);
+        }
+        // return right(episodes!.results!);
+      }
+    }on ServerException catch(e){
+      return left(Failure(e.message));
+    }
+  }
+
+
 
 }

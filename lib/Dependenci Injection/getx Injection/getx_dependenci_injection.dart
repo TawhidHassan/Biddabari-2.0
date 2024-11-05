@@ -17,6 +17,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../core/service/hive_service.dart';
+import '../../features/Affiliation/presentation/controller/Affiliation_controller.dart';
 import '../../features/Blog/presentation/controller/Blog_controller.dart';
 import '../../features/Home/presentation/controller/Home_controller.dart';
 import '../../features/Login/presentation/controller/Login_controller.dart';
@@ -57,6 +58,7 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.lazyPut(() => JobController(jobUseCase:  serviceLocator()));
   Get.lazyPut(() => ExamController(examUseCase:  serviceLocator()));
   Get.lazyPut(() => CourseProgressController(courseProgressUseCase:  serviceLocator()));
+  Get.lazyPut(() => AffiliationController(affiliationUseCase:  serviceLocator()));
 
 
 

@@ -25,12 +25,16 @@ class ExamController extends GetxController implements GetxService{
   Rx<MyExamResponse?> myExamReponse = Rx<MyExamResponse?>(null);
   Rx<QuestionResponse?>  questionResponse=Rx<QuestionResponse?>(null);
   Rx<QuestionSaveResponse?>  questionSaveResponse=Rx<QuestionSaveResponse?>(null);
+  Rx<MyExamResponse?> myExamSectionReponse = Rx<MyExamResponse?>(null);
+  Rx<MyExamResponse?> masterExamReponse = Rx<MyExamResponse?>(null);
+
 
   final saveQuesCirculer=false.obs;
   final examLoading=false.obs;
   final selectedcategory = 0.obs;
   final selectedExamcategory = 0.obs;
   final isCurriculumSelected=false.obs;
+  final circuler=false.obs;
   void selectExamCat(num? id, ExamCategorie? examCategorie) {
     selectedExamcategory.value = id!.toInt();
     examCategorieData.value = examCategorie;
@@ -169,6 +173,46 @@ class ExamController extends GetxController implements GetxService{
 
   }
 
+
+  Future getMyExamSection(int? id) async{
+    circuler.value = true;
+    var rs= await examUseCase!.getMyExamSection(id!);
+    circuler.value = false;
+    rs.fold((l){
+      Fluttertoast.showToast(
+          msg: l.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    }, (r){
+      myExamSectionReponse.value=r;
+    });
+
+  }
+
+  Future getMasterExam(int? id) async{
+    circuler.value = true;
+    var rs= await examUseCase!.getMasterExam(id!);
+    circuler.value = false;
+    rs.fold((l){
+      Fluttertoast.showToast(
+          msg: l.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    }, (r){
+      masterExamReponse.value=r;
+    });
+
+  }
 
 }
 

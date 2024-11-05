@@ -66,6 +66,8 @@ class ApiEndpoint {
   static  String BATCH_EXAM_LIST= 'all-exams'.addBaseURl;
   static  String BATCH_EXAM_DETAILS= 'category-exams/'.addBaseURl;
   static  String MY_BATCH_EXAM= 'student/my-exams'.addBaseURl;
+  static  String MY_BATCH_SECTION_LIST= 'student/batch-exam-contents/'.addBaseURl;
+  static  String GET_MASTER_EXAM= 'get-all-batch-exams'.addBaseURl;
 
 
   static  String GET_CONTENT_COMMENT= 'get-comments'.addBaseURl;
@@ -105,6 +107,9 @@ class ApiEndpoint {
 
   static  String FREE_SERVICE= "free-service/".addBaseURl;
   static  String FREE_SERVICE_CONTENT= "free-service/".addBaseURl;
+
+  static  String AFFILIATION_GET= "student/my-affiliation".addBaseURl;
+  static  String AFFILIATION_CREATE= "student/generate-user-affiliate-code".addBaseURl;
 
 
 

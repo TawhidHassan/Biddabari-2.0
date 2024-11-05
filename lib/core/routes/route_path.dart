@@ -70,6 +70,21 @@ class Routes {
   static const String myExamPage = 'myExamPage';
   static const String myExamPagePath = '/myExamPage';
 
+  static const String myExamSectionPage = 'myExamSectionPage';
+  static const String myExamSectionPagePath = '/myExamSectionPage';
+
+  static const String masterExamPage = 'masterExamPage';
+  static const String masterExamPagePath = '/masterExamPage';
+
+  static const String classExamPage = 'classExamPage';
+  static const String classExamPagePath = '/classExamPage';
+
+  static const String myExamContentPage = 'myExamContentPage';
+  static const String myExamContentPagePath = '/myExamContentPage';
+
+  static const String affiliationPage = 'affiliationPage';
+  static const String affiliationPagePath = '/affiliationPage';
+
   static const String examPage = 'examPage';
   static const String examPagePath = '/examPage';
 

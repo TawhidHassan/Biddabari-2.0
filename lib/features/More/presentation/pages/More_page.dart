@@ -79,7 +79,9 @@ class MorePage extends StatelessWidget {
                                       )
                                     ],
                                   ),
-                                  child: Column(
+                                  child: profileController.profileResponse!
+                                      .value!
+                                      .user==null?SizedBox(): Column(
                                     mainAxisAlignment: MainAxisAlignment
                                         .end,
                                     children: [
@@ -99,7 +101,10 @@ class MorePage extends StatelessWidget {
                                 ),
                                 Positioned(
                                   top: -30,
-                                  child: CircleAvatar(
+                                  child: profileController.profileResponse!
+                                      .value!
+                                      .student==null?SizedBox():
+                                  CircleAvatar(
                                     backgroundColor: Colors.black,
                                     backgroundImage: NetworkImage(
                                         ApiEndpoint.imageBaseUrl +
@@ -297,7 +302,7 @@ class MorePage extends StatelessWidget {
                   homeController.userName.value == "" ? SizedBox() :
                   MoreOtptionCard(
                     onTap: () {
-                      // context.pushNamed(Routes.photoGallaryListPage);
+                      context.pushNamed(Routes.affiliationPage);
                     },
                     title: "My Affiliation",
                     icon: Assets.icons.affiliate.path,

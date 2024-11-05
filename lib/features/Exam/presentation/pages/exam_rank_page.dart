@@ -31,6 +31,14 @@ class ExamRankingPage extends StatelessWidget {
     });
     return Scaffold(
       appBar: AppBar(
+        leading: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Padding(
+                padding: EdgeInsets.all(18),
+                child: Assets.icons.backArrow.svg())
+        ),
         title: Text("Exam Ranking "),
       ),
       body: Container(

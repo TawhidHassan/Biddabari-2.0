@@ -63,7 +63,7 @@ CourseSectionContent _$CourseSectionContentFromJson(
           json['exam_result_publish_time_timestamp'],
       examTotalSubject: json['exam_total_subject'],
       writtenExamDurationInMinutes:
-          json['written_exam_duration_in_minutes'] as num?,
+          json['written_exam_duration_in_minutes'],
       writtenTotalQuestions: json['written_total_questions'],
       writtenDescription: json['written_description'],
       writtenIsStrict: json['written_is_strict'],

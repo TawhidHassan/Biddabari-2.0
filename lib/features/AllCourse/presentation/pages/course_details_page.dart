@@ -77,7 +77,16 @@ class CourseDetailsPage extends StatelessWidget {
                           errorWidget: (context, url, error){
                             return Padding(
                               padding: const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Image.asset("assets/images/biddabari-logo.png"),
+                              child:  Container(
+                                height: 300,
+                                width: 1.0.sw,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: Assets.images.course.provider(),
+                                        fit: BoxFit.fill
+                                    )
+                                ),
+                              ),
                             );
                           },
                           placeholder: (context, url) =>

@@ -27,6 +27,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../Dependenci Injection/init_dependencies.dart';
+import '../../features/Affiliation/presentation/pages/Affiliation_page.dart';
 import '../../features/AllCourse/data/models/CourseCategory/CourseCategoryResponse.dart';
 import '../../features/AllCourse/data/models/course/Course.dart';
 import '../../features/AllCourse/data/models/courseSection/CourseSection.dart';
@@ -41,12 +42,17 @@ import '../../features/BookStore/presentation/pages/book_details.dart';
 import '../../features/BookStore/presentation/pages/my_book_page.dart';
 import '../../features/CourseProgress/presentation/pages/CourseProgress_page.dart';
 import '../../features/CourseProgress/presentation/pages/course show/assignment_page.dart';
+import '../../features/CourseProgress/presentation/pages/course show/course_class_exam.dart';
 import '../../features/CourseProgress/presentation/pages/course show/exam_content.dart';
 import '../../features/CourseProgress/presentation/pages/course show/note_content.dart';
 import '../../features/CourseProgress/presentation/pages/course show/pdf_content_list.dart';
 import '../../features/CourseProgress/presentation/pages/course show/video_content.dart';
 import '../../features/CourseProgress/presentation/pages/course show/writen_exam_content.dart';
 import '../../features/Error/presentation/error_page.dart';
+import '../../features/Exam/data/models/BatchExam/BatchExamSection.dart';
+import '../../features/Exam/presentation/pages/exam content/batch_exam_content_list.dart';
+import '../../features/Exam/presentation/pages/exam content/batch_exam_section_page.dart';
+import '../../features/Exam/presentation/pages/exam content/master_exams_page.dart';
 import '../../features/Exam/presentation/pages/exam_rank_page.dart';
 import '../../features/Exam/presentation/pages/given_exam_page.dart';
 import '../../features/Exam/presentation/pages/my_exam_page.dart';
@@ -125,6 +131,44 @@ class AppRouter {
         name: Routes.myExamPage,
         path: Routes.myExamPagePath,
         builder: (context, state) => MyExamPage(),
+      ),
+
+
+      GoRoute(
+        name: Routes.myExamSectionPage,
+        path: Routes.myExamSectionPagePath,
+        builder: (context, state) => BatchExamSectionPage(id: state.extra as String,),
+      ),
+
+      GoRoute(
+        name: Routes.masterExamPage,
+        path: Routes.masterExamPagePath,
+        builder: (context, state) => MasterExamsPage(id: state.extra as String,),
+      ),
+
+      GoRoute(
+        name: Routes.myExamContentPage,
+        path: Routes.myExamContentPagePath,
+        builder: (context, state) => BatchExamContentListPage(batchExamSection: state.extra as BatchExamSection?,),
+      ),
+
+      GoRoute(
+        name: Routes.classExamPage,
+        path: Routes.classExamPagePath,
+        builder: (context, state) {
+          final Map data=state.extra as Map;
+          return CourseClassExam(
+            isCourseExam: data['isCourseExam'],
+            courseSectionContent: data['courseSectionContent'],
+          );
+        },
+      ),
+
+
+      GoRoute(
+        name: Routes.affiliationPage,
+        path: Routes.affiliationPagePath,
+        builder: (context, state) => AffiliationPage(),
       ),
 
       GoRoute(

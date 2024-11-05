@@ -27,7 +27,21 @@ class MyExamCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // context.pushNamed(Routes.bookDetailsPage,extra:course );
+
+        if(exam!.orderStatus=="pending"){
+          Get.snackbar("Wait", "Wait for admin approve",backgroundColor: Colors.orange,colorText: Colors.white,margin: EdgeInsets.all(24),padding: EdgeInsets.symmetric(horizontal: 24,vertical: 6),borderRadius: 6);
+        }else{
+          print(exam!.batch_exam!.is_master_exam!.toInt());
+          if(exam!.batch_exam!.is_master_exam==1){
+            context.pushNamed(Routes.masterExamPage,extra:exam!.batch_exam!.id.toString() );
+          }else{
+            context.pushNamed(Routes.myExamSectionPage,extra:exam!.batch_exam!.id.toString() );
+            // Navigator.pushNamed(context, BATCH_EXAM_SECTION_PAGE,arguments: {
+            //   "id":exam!.batch_exam!.id.toString()
+            // });
+          }
+
+        }
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 12),

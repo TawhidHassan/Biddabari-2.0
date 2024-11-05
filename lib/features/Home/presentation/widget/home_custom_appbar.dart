@@ -102,9 +102,8 @@ class HomeCustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                               },
                               child: CachedNetworkImage(
                                   imageUrl: ApiEndpoint.imageBaseUrl +
-                                      logic.profileResponse.value!
-                                          .student!
-                                          .image.toString(),
+                                      (logic.profileResponse.value!
+                                          .student==null?"":  logic.profileResponse.value!.student!.image.toString()),
                                   // imageUrl: ApiEndpoint.imageBaseUrl+controller.response.value!.myProfile!.image!,
                                   imageBuilder: (context,
                                       imageProvider) =>

@@ -18,6 +18,12 @@ Future<MyExamResponse?>getMyExam();
 Future<QuestionSaveResponse?> getMyFavoraiteQuestion(String id);
 Future<QuestionResponse?> getExamAnswer({String? id, bool? isCourseExam, bool? isClassExam});
 Future<ExamResponse?> getCourseExamRanking({String? id, bool? isCourseExam});
+Future<MyExamResponse?> getMyExamSection({int? id});
+Future<MyExamResponse?> getMasterExam({int? id});
+
+
+
+
 
 
 
@@ -101,6 +107,29 @@ class ExamRemoteSourceImpl implements ExamRemoteSource {
           isCourseExam!? ApiEndpoint.RANK_COURSE_EXAM+"$id":ApiEndpoint.RANK_COURSE_EXAM+"$id",
           showResult: true,isBasic: false,duration: 30);
       return ExamResponse.fromJson(result);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<MyExamResponse?> getMyExamSection({int? id})async {
+    // TODO: implement getMyExamSection
+    try{
+      final result =await apiMethod.get(url: ApiEndpoint.MY_BATCH_SECTION_LIST+"$id",
+          showResult: true,isBasic: false,duration: 30);
+      return MyExamResponse.fromJson(result);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+  @override
+  Future<MyExamResponse?> getMasterExam({int? id})async {
+    // TODO: implement getMyExamSection
+    try{
+      final result =await apiMethod.get(url: ApiEndpoint.MY_BATCH_SECTION_LIST+"$id",
+          showResult: true,isBasic: false,duration: 30);
+      return MyExamResponse.fromJson(result);
     }catch (e) {
       throw ServerException(e.toString());
     }
