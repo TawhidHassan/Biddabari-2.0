@@ -76,6 +76,7 @@ import '../../features/SaveIteam/presentation/pages/SaveIteam_page.dart';
 import '../../features/Splash/presentation/pages/Splash_page.dart';
 import '../../features/Splash/presentation/pages/onbording_page.dart';
 import '../../features/Teacher/presentation/pages/teacher_details_page.dart';
+import '../../features/search/presentation/pages/search_page.dart';
 import '../LocalDataBase/localdata.dart';
 import '/core/routes/route_path.dart';
 
@@ -181,6 +182,14 @@ class AppRouter {
         name: Routes.affiliationPage,
         path: Routes.affiliationPagePath,
         builder: (context, state) => AffiliationPage(),
+      ),
+
+       GoRoute(
+        name: Routes.searchPage,
+        path: Routes.searchPagePath,
+        builder: (context, state) => SearchPage(
+          type: state.extra as String,
+        ),
       ),
 
       GoRoute(

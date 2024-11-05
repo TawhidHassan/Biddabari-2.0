@@ -22,6 +22,7 @@ Future<void> initDependencies() async {
   _initExam();
   _initCourseProgress();
   _initAffiliation();
+  _initSearch();
 
 
 
@@ -427,6 +428,25 @@ void _initAffiliation(){
     ..registerFactory(
           () => AffiliationUseCase(
          affiliationRepository: serviceLocator(),
+      ),
+    );
+}
+void _initSearch(){
+  /// Datasource
+  serviceLocator
+    ..registerFactory<SearchRemoteSource>(
+          () => SearchRemoteSourceImpl(apiMethod: serviceLocator(),
+      ),
+    )/// Repository
+    ..registerFactory<SearchRepository>(
+          () => SearchRepositoryImpl(
+          connectionChecker:  serviceLocator(),
+          remoteSource:  serviceLocator()
+      ),
+    )/// Usecases
+    ..registerFactory(
+          () => SearchUseCase(
+         searchRepository: serviceLocator(),
       ),
     );
 }

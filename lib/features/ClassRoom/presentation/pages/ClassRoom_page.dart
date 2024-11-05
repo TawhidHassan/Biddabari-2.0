@@ -19,6 +19,7 @@ import '../../../../core/routes/route_path.dart';
 import 'ajker_class.dart';
 import 'ajker_exam.dart';
 import 'class_my_course.dart';
+import 'package:flutter/services.dart';
 
 class ClassRoomPage extends StatelessWidget {
   const ClassRoomPage({super.key});
@@ -30,6 +31,21 @@ class ClassRoomPage extends StatelessWidget {
     });
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle(
+          // Status bar color
+          statusBarColor: AppColors.whiteColor,
+          // Status bar brightness (optional)
+          statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+          statusBarBrightness: Brightness.dark, // For iOS (dark icons)
+        ),
+        leading: InkWell(
+          onTap: () {
+            context.goNamed(Routes.mainPage);
+          },
+          child: Padding(
+              padding: EdgeInsets.all(18),
+              child: Assets.icons.backArrow.svg()),
+        ),
         backgroundColor: AppColors.whiteColor,
         title: Text('Dashboard'),
       ),

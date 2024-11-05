@@ -222,6 +222,9 @@ class Routes {
   static const String rankExamPage = 'rankExamPage';
   static const String rankExamPagePath = '/rankExamPage';
 
+  static const String searchPage = 'searchPage';
+  static const String searchPagePath = '/searchPage';
+
 
   static const String ErrorPage = 'errorPage';
   static const String ErrorPagePath = '/errorPage';

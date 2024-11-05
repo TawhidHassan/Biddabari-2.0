@@ -13,6 +13,7 @@ import 'package:biddabari_new/features/PhotoGallary/presentation/controller/Phot
 import 'package:biddabari_new/features/Teacher/presentation/controller/Teacher_controller.dart';
 import 'package:biddabari_new/features/dwonloads/presentation/controller/dwonloads_controller.dart';
 import 'package:biddabari_new/features/profile/presentation/controller/profile_controller.dart';
+import 'package:biddabari_new/features/search/presentation/controller/search_controller.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -59,6 +60,7 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.lazyPut(() => ExamController(examUseCase:  serviceLocator()));
   Get.lazyPut(() => CourseProgressController(courseProgressUseCase:  serviceLocator()));
   Get.lazyPut(() => AffiliationController(affiliationUseCase:  serviceLocator()));
+  Get.lazyPut(() => SearchControllerX(searchUseCase:  serviceLocator()));
 
 
 

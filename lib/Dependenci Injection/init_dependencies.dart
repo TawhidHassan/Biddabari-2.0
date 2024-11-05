@@ -85,6 +85,10 @@ import '../features/profile/data/datasource/profile_remote_source.dart';
 import '../features/profile/data/repositories/profile_repository_impl.dart';
 import '../features/profile/domain/repositories/profile_repository.dart';
 import '../features/profile/domain/usecase/profile_use_case.dart';
+import '../features/search/data/datasource/search_remote_source.dart';
+import '../features/search/data/repositories/search_repository_impl.dart';
+import '../features/search/domain/repositories/search_repository.dart';
+import '../features/search/domain/usecase/search_use_case.dart';
 
 
 

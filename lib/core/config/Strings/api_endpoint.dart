@@ -112,6 +112,9 @@ class ApiEndpoint {
   static  String AFFILIATION_CREATE= "student/generate-user-affiliate-code".addBaseURl;
 
 
+  static  String SEARCH_ALL= "search-content-home".addBaseURl;
+
+
 
 
 }

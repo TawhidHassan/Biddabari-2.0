@@ -8,8 +8,10 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/custom_assets/assets.gen.dart';
+import '../../../../../core/routes/route_path.dart';
 import '../../../../../core/utils/system_util.dart';
 import '../../widget/free_service_category_card.dart';
+import 'package:flutter/services.dart';
 
 class FreeServicePage extends StatelessWidget {
   const FreeServicePage({super.key});
@@ -23,7 +25,7 @@ class FreeServicePage extends StatelessWidget {
       appBar: AppBar(
         leading: InkWell(
           onTap: () {
-            context.pop();
+            context.goNamed(Routes.mainPage);
           },
           child: Padding(
               padding: EdgeInsets.all(18),

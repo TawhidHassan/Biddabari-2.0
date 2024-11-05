@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/common/widgets/text field/search_bar.dart';
 import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
+import '../../../../core/routes/route_path.dart';
 import '../../../Home/presentation/widget/home_slider_component.dart';
 import '../widget/popular_book_component.dart';
 
@@ -16,7 +18,7 @@ class BookStorePage extends StatelessWidget {
         appBar: AppBar(
           leading: InkWell(
             onTap: () {
-              context.pop();
+              context.goNamed(Routes.mainPage);
             },
             child: Padding(
                 padding: EdgeInsets.all(18),
@@ -27,9 +29,34 @@ class BookStorePage extends StatelessWidget {
       body:  NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return [
-            SliverToBoxAdapter(child: SizedBox(height: 28.h,)),
-            ///search bar
-            ///home slider top part
+            SliverToBoxAdapter(child: SizedBox(height: 12.h,)),
+            SliverToBoxAdapter(child:  Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Search(
+                readOnly: true,
+                onTap: (){
+                  print("object");
+                  context.pushNamed(Routes.searchPage,extra: "Product");
+                },
+                suffixIcon: Container(
+                  width: 31,
+                  height: 31,
+                  padding: EdgeInsets.all(8),
+                  margin: EdgeInsets.all(8),
+                  decoration: ShapeDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment(1.00, -0.02),
+                      end: Alignment(-1, 0.02),
+                      colors: [Color(0xFFAA076B), Color(0xFF61045F)],
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                  ),
+                  child: Assets.icons.filter.svg(),
+                ),
+              ),
+            ),),
+            SliverToBoxAdapter(child: SizedBox(height: 12.h,)),
             SliverToBoxAdapter(
                 child: HomeSliderComponent()
             ),
