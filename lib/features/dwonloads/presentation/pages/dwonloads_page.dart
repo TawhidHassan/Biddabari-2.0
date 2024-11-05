@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/common/widgets/container/horizontal_category.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../More/presentation/widget/more_otption_card.dart';
+import 'dwonloaded paged/dwonloded_pdf_page.dart';
 
 class DwonloadsPage extends StatelessWidget {
   const DwonloadsPage({super.key});
@@ -24,7 +25,7 @@ class DwonloadsPage extends StatelessWidget {
               padding: EdgeInsets.all(18),
               child: Assets.icons.backArrow.svg()),
         ),
-        title: Text('My Dwonloads'),
+        title: Text('My Downloads'),
       ),
       body: GetBuilder<DwonloadsController>(
         assignId: true,
@@ -41,8 +42,15 @@ class DwonloadsPage extends StatelessWidget {
                     child: Row(
                       children: controller.catetegoryList.value.map((cat) {
                         return Expanded(
-                          child: HorizontalCategoryCard(
-                            title: cat,
+                          child: InkWell(
+                            onTap: (){
+                              controller.selectCat.value=cat;
+                            },
+                            child: HorizontalCategoryCard(
+                              height: 38,
+                              active: controller.selectCat.value==cat,
+                              title: cat,
+                            ),
                           ),
                         );
                       }).toList(),
@@ -51,17 +59,7 @@ class DwonloadsPage extends StatelessWidget {
 
                   Expanded(
                     flex: 9,
-                    child: ListView.builder(
-                      itemCount: 12,
-                        itemBuilder: (context,index){
-                          return MoreOtptionCard(
-                            height: 70,
-                            textSize: 14,
-                            title: "How to use Biddabari App- Video",
-                            icon: Assets.icons.people.path,
-                          );
-                        }
-                    ),
+                    child:controller.selectCat.value=="Pdf"? DwonlodedPdfPage():SizedBox(),
                   )
                 ],
               ),

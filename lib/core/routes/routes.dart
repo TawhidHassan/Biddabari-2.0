@@ -63,6 +63,7 @@ import '../../features/Job/presentation/pages/Job_details_page.dart';
 import '../../features/Login/presentation/pages/Login_page.dart';
 import '../../features/Login/presentation/pages/change_password_page.dart';
 import '../../features/Login/presentation/pages/login_password_page.dart';
+import '../../features/dwonloads/presentation/pages/dwonloaded paged/dwonloded_pdf_show.dart';
 import '../../features/profile/presentation/pages/profile_edit_page.dart';
 import '../../features/Login/presentation/pages/set_new_password_page.dart';
 import '../../features/Login/presentation/pages/set_password_page.dart';
@@ -160,6 +161,17 @@ class AppRouter {
           return CourseClassExam(
             isCourseExam: data['isCourseExam'],
             courseSectionContent: data['courseSectionContent'],
+          );
+        },
+      ),
+
+      GoRoute(
+        name: Routes.dwonloadedPdfShowPage,
+        path: Routes.dwonloadedPdfShowPageath,
+        builder: (context, state) {
+          final Map data=state.extra as Map;
+          return DwonlodedPdfShowPage(
+           pdfUrl: data["pdfUrl"],
           );
         },
       ),

@@ -75,7 +75,9 @@ class _VideoContentState extends State<VideoContent> {
         mute: false,
       ),
     );
-
+    videoId = YoutubePlayer.convertUrlToId(
+        widget.courseSectionContent!.videoLink);
+    Logger().e(videoId);
     Future.delayed(Duration(seconds: 2), () {
       setState(() {
         readyToGo = true;
@@ -324,7 +326,7 @@ class _VideoContentState extends State<VideoContent> {
                         onTap: () async {
                           // final status = await Permission.storage.request();
                           youtubeController!.pause();
-                          controllerPod.pause();
+                          // controllerPod.pause();
                           // controllerPod.dispose();
                           controller.downloadCirculer.value = true;
                           controller.downloadProgress.value = 0;

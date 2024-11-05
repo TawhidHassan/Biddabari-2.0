@@ -85,6 +85,9 @@ class Routes {
   static const String affiliationPage = 'affiliationPage';
   static const String affiliationPagePath = '/affiliationPage';
 
+  static const String dwonloadedPdfShowPage = 'dwonloadedPdfShowPage';
+  static const String dwonloadedPdfShowPageath = '/dwonloadedPdfShowPage';
+
   static const String examPage = 'examPage';
   static const String examPagePath = '/examPage';
 
