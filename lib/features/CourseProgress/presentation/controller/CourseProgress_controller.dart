@@ -426,11 +426,11 @@ class CourseProgressController extends GetxController implements GetxService{
   var minute=Duration(seconds: currentTime.value).inMinutes;
   log(questionsMain.toString(),name: "xx");
   questionsMain.addAll({
-   "_token": token,
+   "_token": token??"",
    "required_time": minute.toString(),
   });
   examSubmitCirculer.value=true;
-  var rs= await courseProgressUseCase!.submitExam(fileList.value,hasExam,id,minute,token,questionsMain, file,courseExam);
+  var rs= await courseProgressUseCase!.submitExam(fileList.value,hasExam,id,minute,token??"",questionsMain, file,courseExam);
   examSubmitCirculer.value=false;
   rs.fold((l){
    Fluttertoast.showToast(

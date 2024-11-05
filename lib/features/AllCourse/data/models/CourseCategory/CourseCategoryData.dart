@@ -1,4 +1,5 @@
 // ignore_for_file: file_names
+import 'package:biddabari_new/features/Exam/data/models/Exam.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../../core/common/data/Category/subCategory/SubCategory.dart';
@@ -26,7 +27,7 @@ class CourseCategoryData{
   String? slug;
   String? status;
   Course? category_video;
-  Course? category_exam;
+  Exam? category_exam;
   List<Course>? courses;
   List<SubCategory>? course_categories;
 

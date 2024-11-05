@@ -44,7 +44,7 @@ class LoginController extends GetxController implements GetxService{
   final changePassFormKey = GlobalKey<FormState>();
   final forgetFormKey = GlobalKey<FormState>();
 
-  TextEditingController emailController = TextEditingController();
+  TextEditingController emailController = TextEditingController(text: "01");
   TextEditingController mobileController = TextEditingController();
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();

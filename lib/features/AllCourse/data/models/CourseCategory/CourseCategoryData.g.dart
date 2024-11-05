@@ -26,7 +26,7 @@ CourseCategoryData _$CourseCategoryDataFromJson(Map<String, dynamic> json) =>
           : Course.fromJson(json['category_video'] as Map<String, dynamic>),
       json['category_exam'] == null
           ? null
-          : Course.fromJson(json['category_exam'] as Map<String, dynamic>),
+          : Exam.fromJson(json['category_exam'] as Map<String, dynamic>),
       (json['courses'] as List<dynamic>?)
           ?.map((e) => Course.fromJson(e as Map<String, dynamic>))
           .toList(),

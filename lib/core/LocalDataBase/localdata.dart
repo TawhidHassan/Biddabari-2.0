@@ -21,7 +21,7 @@ class DBHelper{
     return users.get('token')!=null;
   }
 
-  Future<String> getToken() async{
+  Future<String?> getToken() async{
     var users= await Hive.box('users',);
     // Logger().e("dd");
     if(users.get('token')==null){

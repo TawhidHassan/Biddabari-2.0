@@ -27,7 +27,7 @@ class ClassRoomController extends GetxController implements GetxService{
   final token="".obs;
   Future getMyCourse() async {
     serviceLocator<DBHelper>().getToken().then((onValue){
-      token.value=onValue;
+      token.value=onValue??'';
     });
     myClassCourseLoading.value = true;
     var rs= await classRoomUseCase!.getMyCourse();

@@ -24,12 +24,12 @@ Map<String, String> basicHeaderInfo() {
 
 Future<Map<String, String>> bearerHeaderInfo() async {
   DBHelper dbHelper = serviceLocator();
-  final token=await dbHelper.getToken();
+  final String? token=await dbHelper.getToken();
   Logger().e("Bearer $token");
   return {
     HttpHeaders.acceptHeader: "application/json",
     HttpHeaders.contentTypeHeader: "application/json",
-    HttpHeaders.authorizationHeader: "Bearer $token",
+    HttpHeaders.authorizationHeader: "Bearer ${token??""}",
   };
 
 
