@@ -58,6 +58,7 @@ class ApiMethod {
       log.i('|📒📒📒|-----------------[[ GET ]] method response start -----------------|📒📒📒|');
 
       if (showResult) {
+        log.i("Url:=>"+url);
         log.i(response.body.toString());
       }
 
