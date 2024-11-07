@@ -576,7 +576,8 @@ class _VideoContentState extends State<VideoContent> {
 
           context.pop();
 
-        });
+        }
+        );
   }
 
 

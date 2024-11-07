@@ -28,6 +28,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../Dependenci Injection/init_dependencies.dart';
 import '../../features/Affiliation/presentation/pages/Affiliation_page.dart';
+import '../../features/AllCourse/data/models/CourseCategory/CourseCategoryData.dart';
 import '../../features/AllCourse/data/models/CourseCategory/CourseCategoryResponse.dart';
 import '../../features/AllCourse/data/models/course/Course.dart';
 import '../../features/AllCourse/data/models/courseSection/CourseSection.dart';
@@ -35,10 +36,12 @@ import '../../features/AllCourse/data/models/courseSectionContent/CourseSectionC
 import '../../features/AllCourse/presentation/pages/course_details_page.dart';
 import '../../features/AllCourse/presentation/pages/free service/free_class_exam_page.dart';
 import '../../features/AllCourse/presentation/pages/free service/free_service_page.dart';
+import '../../features/AllCourse/presentation/pages/free service/video_page.dart';
 import '../../features/Blog/data/models/Blog/Blog.dart';
 import '../../features/Blog/presentation/pages/blog_details_page.dart';
 import '../../features/BookStore/presentation/pages/book_cart.dart';
 import '../../features/BookStore/presentation/pages/book_details.dart';
+import '../../features/BookStore/presentation/pages/book_read_pdf.dart';
 import '../../features/BookStore/presentation/pages/my_book_page.dart';
 import '../../features/CourseProgress/presentation/pages/CourseProgress_page.dart';
 import '../../features/CourseProgress/presentation/pages/course show/assignment_page.dart';
@@ -210,8 +213,18 @@ class AppRouter {
                   ),
                 ),
                 routes: [
+                  GoRoute(
+                      name: Routes.freeCourseVideoPage,
+                      path: Routes.freeCourseVideoPagePath,
+                      pageBuilder: (context, state) =>  NoTransitionPage(
+                        child: VideoPageFreeCourse(
+                          courseCategoryData:state.extra as CourseCategoryData?,
+                        ),
+                      ),
+                      routes: [
 
-
+                      ]
+                  ),
                 ]
             ),
             GoRoute(
@@ -569,13 +582,26 @@ class AppRouter {
           routes: []
       ),
       GoRoute(
-                name: Routes.myBookPage,
-                path: Routes.myBookPagePath,
+        name: Routes.myBookPage,
+        path: Routes.myBookPagePath,
+        pageBuilder: (context, state) =>  NoTransitionPage(
+          child: MyBookPage(),
+        ),
+          routes: [
+            GoRoute(
+                name: Routes.myBookRedPage,
+                path: Routes.myBookRedPagePath,
                 pageBuilder: (context, state) =>  NoTransitionPage(
-                  child: MyBookPage(),
+                  child: BookReadPdf(
+                    book: state.extra as Book?,
+                  ),
                 ),
                 routes: []
             ),
+          ]
+            ),
+
+
       GoRoute(
                 name: Routes.bookCartPage,
                 path: Routes.bookCartPagePath,
@@ -778,6 +804,7 @@ class AppRouter {
                   child: FreeServicePage(),
                 ),
                 routes: [
+
 
                 ]
 

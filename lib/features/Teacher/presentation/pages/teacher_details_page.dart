@@ -57,7 +57,7 @@ class TeacherDetailsPage extends StatelessWidget {
                             placeholder: (context, url) => LoadingWidget(),
                             errorWidget: (context, url, error){
                               return CircleAvatar(
-                                backgroundImage: AssetImage("assets/images/biddabari-logo.png"),
+                                radius: 32,
                               );
                             },
                             imageBuilder: (context, image) =>  CircleAvatar(

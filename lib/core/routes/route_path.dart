@@ -100,6 +100,9 @@ class Routes {
   static const String myBookPage = 'myBookPage';
   static const String myBookPagePath = '/myBookPage';
 
+  static const String myBookRedPage = 'myBookRedPage';
+  static const String myBookRedPagePath = 'myBookRedPage';
+
 
   static const String bookCartPage = 'bookCartPage';
   static const String bookCartPagePath = '/bookCartPage';
@@ -115,6 +118,9 @@ class Routes {
 
   static const String freeVideoPage = 'freeVideoPage';
   static const String freeVideoPagePath = 'freeVideoPage';
+
+  static const String freeCourseVideoPage = 'freeCourseVideoPage';
+  static const String freeCourseVideoPagePath = 'freeCourseVideoPage';
 
   static const String freeExamPage = 'freeExamPage';
   static const String freeExamPagePath = 'freeExamPage';

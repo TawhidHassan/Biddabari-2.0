@@ -172,6 +172,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/photo.svg
   SvgGenImage get photo => const SvgGenImage('assets/icons/photo.svg');
 
+  /// File path: assets/icons/play.svg
+  SvgGenImage get play => const SvgGenImage('assets/icons/play.svg');
+
   /// File path: assets/icons/rank_qus.svg
   SvgGenImage get rankQus => const SvgGenImage('assets/icons/rank_qus.svg');
 
@@ -254,6 +257,7 @@ class $AssetsIconsGen {
         onlineCourse,
         people,
         photo,
+        play,
         rankQus,
         review,
         saveGreenSvg,

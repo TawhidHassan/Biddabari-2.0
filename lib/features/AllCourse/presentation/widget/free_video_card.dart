@@ -19,6 +19,7 @@ class FreeVideoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
+        context.pushNamed(Routes.freeCourseVideoPage,extra: course);
        },
       child: Container(
         decoration: BoxDecoration(
@@ -33,6 +34,8 @@ class FreeVideoCard extends StatelessWidget {
               placeholder: (context, url) => LoadingWidget(),
               errorWidget: (context, url, error){
                 return Container(
+                  height: 100,
+                  padding: EdgeInsets.all(18),
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: Assets.images.course.provider(),
@@ -40,10 +43,12 @@ class FreeVideoCard extends StatelessWidget {
                     ),
                     borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(5),),
                   ),
+                  child: Assets.icons.play.svg(),
                 );
               },
               imageBuilder: (context, image) =>
                   Container(
+                    padding: EdgeInsets.all(18),
                     height: 100,
                     decoration: BoxDecoration(
                       image: DecorationImage(
@@ -52,6 +57,7 @@ class FreeVideoCard extends StatelessWidget {
                       ),
                       borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(5),),
                     ),
+                    child: Assets.icons.play.svg(),
                   ),
             ),
             SizedBox(height: 12,),
@@ -68,9 +74,7 @@ class FreeVideoCard extends StatelessWidget {
                     foregroundColor: Colors.white,
                   ),
                   SizedBox(height: 8,),
-                  Text(course!.name??'',style: boldText(12),maxLines: 2,),
-                  SizedBox(height: 6,),
-                  Text("প্রতিযোগিতামূলক এই জব-মার্কেটে নিজের ক্যারিয়ারকে",style: mediumText(8,color: Color(0xFF777777)),maxLines: 2,)
+                  Text(course!.category_video!.title??'',style: boldText(12),maxLines: 2,),
                 ],
               ),
             )
