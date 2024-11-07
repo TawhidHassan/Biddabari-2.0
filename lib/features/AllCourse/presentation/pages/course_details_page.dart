@@ -71,37 +71,40 @@ class CourseDetailsPage extends StatelessWidget {
                       alignment: Alignment.center,
                       clipBehavior: Clip.none,
                       children: [
-                        CachedNetworkImage(
-                          imageUrl: ApiEndpoint.imageBaseUrl +
-                              controller.detailsCategoryResponse.value!.course!.banner.toString(),
-                          errorWidget: (context, url, error){
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10.0),
-                              child:  Container(
-                                height: 300,
-                                width: 1.0.sw,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: Assets.images.course.provider(),
-                                        fit: BoxFit.fill
-                                    )
+                        SizedBox(
+                          height: 300,
+                          child: CachedNetworkImage(
+                            imageUrl: ApiEndpoint.imageBaseUrl +
+                                controller.detailsCategoryResponse.value!.course!.banner.toString(),
+                            errorWidget: (context, url, error){
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                                child:  Container(
+                                  height: 300,
+                                  width: 1.0.sw,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: Assets.images.course.provider(),
+                                          fit: BoxFit.fill
+                                      )
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                          placeholder: (context, url) =>
-                              LoadingWidget(),
-                          imageBuilder: (context, image) =>
-                              Container(
-                                height: 300,
-                                width: 1.0.sw,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: image,
-                                        fit: BoxFit.fill
-                                    )
+                              );
+                            },
+                            placeholder: (context, url) =>
+                                LoadingWidget(),
+                            imageBuilder: (context, image) =>
+                                Container(
+                                  height: 300,
+                                  width: 1.0.sw,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: image,
+                                          fit: BoxFit.fill
+                                      )
+                                  ),
                                 ),
-                              ),
+                          ),
                         ),
                         Positioned(
                           top: 240,

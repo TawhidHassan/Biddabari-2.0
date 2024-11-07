@@ -49,7 +49,7 @@ class ExamPackageCard extends StatelessWidget {
               ),
             ),
             SizedBox(height: 6,),
-
+            exam!.packageTitle==null?Text(""):
             Text(exam!.packageTitle!.length>18?exam!.packageTitle!.substring(0,15)+"..":exam!.packageTitle ??"",style: boldText(16),),
             SizedBox(height: 6,),
             Text("Duration: "+exam!.packageDurationInDays.toString()+"Days",style: mediumText(12),),

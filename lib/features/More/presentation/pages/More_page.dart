@@ -110,8 +110,7 @@ class MorePage extends StatelessWidget {
                                         ApiEndpoint.imageBaseUrl +
                                             profileController
                                                 .profileResponse
-                                                .value!.student!.image ??
-                                            ""),
+                                                .value!.student!.image ?? ""),
                                     radius: 50,
                                   ),
                                 ),
