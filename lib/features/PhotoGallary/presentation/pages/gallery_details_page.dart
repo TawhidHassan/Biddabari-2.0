@@ -83,7 +83,7 @@ class GallaryDetailsPage extends StatelessWidget {
                                 borderRadius: BorderRadius.only(topRight: Radius.circular(4),topLeft: Radius.circular(4) ),
                                 image: DecorationImage(
                                     image: image,
-                                    fit: BoxFit.fill
+                                    fit: BoxFit.cover
                                 )
                             ),
                           ),

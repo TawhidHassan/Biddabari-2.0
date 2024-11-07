@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../custom_assets/assets.gen.dart';
 
 class ImageFullScreen extends StatelessWidget {
   final String? image;
@@ -12,9 +15,12 @@ class ImageFullScreen extends StatelessWidget {
       appBar: AppBar(
         leading: InkWell(
             onTap: () {
-              Navigator.pop(context);
+              context.pop();
             },
-            child: Icon(Icons.keyboard_arrow_left)),
+            child: Padding(
+                padding: EdgeInsets.all(18),
+                child: Assets.icons.backArrow.svg()),
+          ),
         title: Text("Preview"),
       ),
       body: InteractiveViewer(
@@ -35,7 +41,7 @@ class ImageFullScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: image,
-                        fit: BoxFit.fill
+                        fit: BoxFit.contain
                     )
                 ),
               ),
