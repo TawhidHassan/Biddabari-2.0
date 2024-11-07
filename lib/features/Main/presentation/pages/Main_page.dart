@@ -48,7 +48,6 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   @override
   void initState() {
     Future.delayed(Duration.zero,(){
-      Future.delayed(Duration.zero,(){
         Get.find<ProfileController>().onInit();
         // Get.find<HomeController>().requestPermission(context);
         // // Get.find<HomeController>().showpopUp(context);
@@ -56,7 +55,6 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         Get.find<HomeController>().getSlider();
         Get.find<ProfileController>().getProfile(context,false);
 
-      });
     });
     super.initState();
     _motionTabBarController = MotionTabBarController(
@@ -74,7 +72,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-
+    // Get.find<HomeController>().getSlider();
     return Scaffold(
         body: widget.navigationShell,
         bottomNavigationBar:

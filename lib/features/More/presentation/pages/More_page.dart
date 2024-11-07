@@ -155,12 +155,17 @@ class MorePage extends StatelessWidget {
                                         "You Will Find More Menu After",
                                         style: regularText(
                                             13, color: Colors.grey),),
-                                      Text(
-                                        'Login',
-                                        style: boldText(
-                                            16,
-                                            color: AppColors
-                                                .primaryColor),),
+                                      InkWell(
+                                        onTap: (){
+                                          context.pushNamed(Routes.loginPage);
+                                        },
+                                        child: Text(
+                                          'Login',
+                                          style: boldText(
+                                              16,
+                                              color: AppColors
+                                                  .primaryColor),),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -337,7 +342,7 @@ class MorePage extends StatelessWidget {
                     onTap: () async {
                       var users = await Hive.openBox('users');
                       users.clear().then((value) {
-                        context.goNamed(Routes.loginPage);
+                        context.pushNamed(Routes.loginPage);
                       });
                     },
                     title: "Logout",

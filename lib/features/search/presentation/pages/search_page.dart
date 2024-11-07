@@ -106,7 +106,7 @@ class SearchPage extends StatelessWidget {
                         );
                       }).toList(),
                     ),
-
+                    SizedBox(height: 16,),
                     controller.response.value!=null?
                     controller.selectCat.value=="Course"?
                     GridView.builder(

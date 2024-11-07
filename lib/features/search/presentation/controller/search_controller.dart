@@ -30,15 +30,7 @@ class SearchControllerX extends GetxController implements GetxService{
       );
     },(onRight){
       // otpResponse.value=onRight;
-      Fluttertoast.showToast(
-          msg: "Otp match",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 2,
-          backgroundColor: Colors.green,
-          textColor: Colors.white,
-          fontSize: 16.0
-      );
+      response.value=onRight;
       // context.pushNamed(Routes.setPasswordPage);
     });
     circle.value=false;
