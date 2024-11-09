@@ -66,6 +66,9 @@ class SearchPage extends StatelessWidget {
                       controller: controller.searchTextControlletr,
                       readOnly: false,
                       onTap: null,
+                      onSubmit: (text){
+                        controller.searchGet();
+                      },
                       suffixIcon: InkWell(
                         onTap: () {
                           controller.searchGet();

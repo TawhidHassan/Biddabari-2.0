@@ -68,6 +68,7 @@ class CheckoutPage extends StatelessWidget {
               child: Container(
                 height: 1.0.sh,
                 width: 1.0.sw,
+                margin: EdgeInsets.only(bottom: 120),
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -383,91 +384,95 @@ class CheckoutPage extends StatelessWidget {
                     const SizedBox(height: 24),
                     Text("Payment Summary", style: boldText(16),),
                     SizedBox(height: 18,),
-                    Card(
-                      color: AppColors.whiteColor,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child:
-                        type=="course"?
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-
-                            PaymentSummeryItem(
-                              item: 'Sub Total',
-                              amount: course!.discount_amount != null ?
-                              (course!.price!.toDouble() - course!.discount_amount!.toDouble()).toString()
-                                  :
-                              course!.price!.toString(),
-                            ),
-
-                            const SizedBox(height: 10),
-
-                            PaymentSummeryItem(
-                              item: 'Fee & Delivery',
-                              amount: "0.0",
-                            ),
-
-                            const Divider(
-                              height: 25,
-                              thickness: 0.3,
-                              color: Colors.black54,
-                            ),
-
-                            PaymentSummeryItem(
-                              item: 'Total',
-                              amount: course!.discount_amount != null ?
-                              (course!.price!.toDouble() - course!.discount_amount!.toDouble()).toString()
-                                  :
-                              course!.price!.toString(),
-                              isBold: true,
-                            ),
-                          ],
-                        )
-                        :
-                        type=="exam"?
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-
-                            PaymentSummeryItem(
-                              item: 'Sub Total',
-                              amount: exam!.discountAmount != null ?
-                              (exam!.price!.toDouble() - exam!.discountAmount!.toDouble()).toString()
-                                  :
-                              exam!.price!.toString(),
-                            ),
-
-                            const SizedBox(height: 10),
-
-                            PaymentSummeryItem(
-                              item: 'Fee & Delivery',
-                              amount: "0.0",
-                            ),
-
-                            const Divider(
-                              height: 25,
-                              thickness: 0.3,
-                              color: Colors.black54,
-                            ),
-
-                            PaymentSummeryItem(
-                              item: 'Total',
-                              amount: exam!.discountAmount != null ?
-                              (exam!.price!.toDouble() - exam!.discountAmount!.toDouble()).toString()
-                                  :
-                              exam!.price!.toString(),
-                              isBold: true,
-                            ),
-                          ],
-                        )
-                        :
-                        SizedBox()
+                    Container(
+                      padding: EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                          color: AppColors.whiteColor,
+                        borderRadius: BorderRadius.circular(12)
                       ),
+
+                      child: type=="course"?
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+
+                          PaymentSummeryItem(
+                            item: 'Sub Total',
+                            amount: course!.discount_amount != null ?
+                            (course!.price!.toDouble() - course!.discount_amount!.toDouble()).toString()
+                                :
+                            course!.price!.toString(),
+                          ),
+
+                          const SizedBox(height: 10),
+
+                          PaymentSummeryItem(
+                            item: 'Fee & Delivery',
+                            amount: "0.0",
+                          ),
+
+                          const Divider(
+                            height: 25,
+                            thickness: 0.3,
+                            color: Colors.black54,
+                          ),
+
+                          PaymentSummeryItem(
+                            item: 'Total',
+                            amount: course!.discount_amount != null ?
+                            (course!.price!.toDouble() - course!.discount_amount!.toDouble()).toString()
+                                :
+                            course!.price!.toString(),
+                            isBold: true,
+                          ),
+                        ],
+                      )
+                      :
+                      type=="exam"?
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+
+                          PaymentSummeryItem(
+                            item: 'Sub Total',
+                            amount: exam!.discountAmount != null ?
+                            (exam!.price!.toDouble() - exam!.discountAmount!.toDouble()).toString()
+                                :
+                            exam!.price!.toString(),
+                          ),
+
+                          const SizedBox(height: 10),
+
+                          PaymentSummeryItem(
+                            item: 'Fee & Delivery',
+                            amount: "0.0",
+                          ),
+
+                          const Divider(
+                            height: 25,
+                            thickness: 0.3,
+                            color: Colors.black54,
+                          ),
+
+                          PaymentSummeryItem(
+                            item: 'Total',
+                            amount: exam!.discountAmount != null ?
+                            (exam!.price!.toDouble() - exam!.discountAmount!.toDouble()).toString()
+                                :
+                            exam!.price!.toString(),
+                            isBold: true,
+                          ),
+                        ],
+                      )
+                      :
+                      SizedBox(),
                     ),
-                    const SizedBox(height: 20),
+
+
+
 
                   ],
+
                 ),
               ),
             ),

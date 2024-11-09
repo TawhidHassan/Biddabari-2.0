@@ -306,7 +306,8 @@ class BookDetailsPage extends StatelessWidget {
                 ],
               ),
             ),
-            bottomSheet: BottomCheckoutSection(
+            bottomSheet:controller.storeBookLoading.value?LoadingWidget():
+            BottomCheckoutSection(
               action: (){
                 context.pushNamed(Routes.checkOutPage,extra: {
                   "type":"product",

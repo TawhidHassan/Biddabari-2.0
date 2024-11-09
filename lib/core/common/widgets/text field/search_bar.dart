@@ -16,13 +16,14 @@ class Search extends StatelessWidget {
     this.borderColor = Colors.white,
     this.iconColor  =  Colors.white,
     this.menuColor = Colors.white,
-    this.onTap, this.suffixIcon, this.readOnly=false, this.controller
+    this.onTap,this.onSubmit, this.suffixIcon, this.readOnly=false, this.controller
   });
     final Color ? textColor ;
     final Color ? borderColor ;
     final Color ? iconColor ;
     final Color ? menuColor ;
     final VoidCallback ?onTap;
+    final void Function(String)? onSubmit;
   final Widget? suffixIcon;
   final bool? readOnly;
   final TextEditingController? controller;
@@ -35,6 +36,7 @@ class Search extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       shadowColor: AppColors.containerColor,
       child: TextFormField(
+        onFieldSubmitted:onSubmit ,
         onTap: onTap,
         controller: controller,
         style: TextStyle(

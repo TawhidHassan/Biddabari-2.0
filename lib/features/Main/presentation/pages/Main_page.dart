@@ -10,6 +10,7 @@ import 'package:motion_tab_bar/MotionTabBarController.dart';
 import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/config/util/style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
+import '../../../ClassRoom/presentation/controller/ClassRoom_controller.dart';
 import '../../../Home/presentation/controller/Home_controller.dart';
 
 class MainPage extends StatefulWidget {
@@ -24,9 +25,9 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin {
   void _goBranch(int index, BuildContext context) {
-    if (index == 3) {
+    if (index == 5) {
       Future.delayed(Duration.zero, () {
-        // Get.find<CartController>().onInit();
+        Get.find<ClassRoomController>().getMyCourse();
         // Get.find<CartController>().getCartData();
       });
     }

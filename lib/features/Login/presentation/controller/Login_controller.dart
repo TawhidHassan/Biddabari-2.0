@@ -10,6 +10,7 @@ import 'package:logger/logger.dart';
 import '../../../../core/Data/Location/location/location_model.dart';
 import '../../../../core/LocalDataBase/localdata.dart';
 import '../../../../core/routes/route_path.dart';
+import '../../../ClassRoom/presentation/controller/ClassRoom_controller.dart';
 import '../../../Home/presentation/controller/Home_controller.dart';
 import '../../../profile/presentation/controller/profile_controller.dart';
 import '../../data/models/Auth/ForgetPasswordResponse.dart';
@@ -216,6 +217,7 @@ class LoginController extends GetxController implements GetxService{
          fontSize: 16.0
      );
      Get.find<ProfileController>().getProfile(contex,false);
+     Get.find<ClassRoomController>().getMyCourse();
      Get.find<HomeController>().getUserData(contex);
      contex.goNamed(Routes.mainPage);
 
@@ -293,6 +295,7 @@ class LoginController extends GetxController implements GetxService{
           fontSize: 16.0
       );
       Get.find<ProfileController>().getProfile(context,false);
+      Get.find<ClassRoomController>().getMyCourse();
       Get.find<HomeController>().getUserData(context);
       context.goNamed(Routes.mainPage);
 

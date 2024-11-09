@@ -26,58 +26,72 @@ class FreeVideoCard extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(12)
         ),
-        child: ListView(
-          physics: NeverScrollableScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CachedNetworkImage(
-              imageUrl:ApiEndpoint.imageBaseUrl+course!.thumbnail!,
-              placeholder: (context, url) => LoadingWidget(),
-              errorWidget: (context, url, error){
-                return Container(
-                  height: 100,
-                  padding: EdgeInsets.all(18),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: Assets.images.course.provider(),
-                      fit: BoxFit.cover,
-                    ),
-                    borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(5),),
-                  ),
-                  child: Assets.icons.play.svg(),
-                );
-              },
-              imageBuilder: (context, image) =>
-                  Container(
-                    padding: EdgeInsets.all(18),
+            Expanded(
+              flex: 5,
+              child: CachedNetworkImage(
+                imageUrl:ApiEndpoint.imageBaseUrl+course!.thumbnail!,
+                placeholder: (context, url) => LoadingWidget(),
+                errorWidget: (context, url, error){
+                  return Container(
                     height: 100,
+                    width: double.infinity,
+                    padding: EdgeInsets.all(50),
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: image,
+                        image: Assets.images.course.provider(),
                         fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(5),),
                     ),
                     child: Assets.icons.play.svg(),
-                  ),
+                  );
+                },
+                imageBuilder: (context, image) =>
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.all(50),
+                      height: 100,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: image,
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(5),),
+                      ),
+                      child: Assets.icons.play.svg(),
+                    ),
+              ),
             ),
-            SizedBox(height: 12,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            Expanded(
+              flex: 3,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  DiscountBadge(
-                      text: "Most Recent",
-                      radius: 6,
-                    textSize: 8,
-                    backgroundColor: Color(0xFF167F71),
-                    foregroundColor: Colors.white,
+                  SizedBox(height: 12,),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        DiscountBadge(
+                            text: "Most Recent",
+                            radius: 6,
+                          textSize: 8,
+                          backgroundColor: Color(0xFF167F71),
+                          foregroundColor: Colors.white,
+                        ),
+                        SizedBox(height: 8,),
+                        Text(course!.category_video!.title??'',style: boldText(12),maxLines: 2,),
+                      ],
+                    ),
                   ),
-                  SizedBox(height: 8,),
-                  Text(course!.category_video!.title??'',style: boldText(12),maxLines: 2,),
+                  SizedBox(height: 12,),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

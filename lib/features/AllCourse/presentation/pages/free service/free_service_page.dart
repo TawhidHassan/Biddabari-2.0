@@ -48,7 +48,7 @@ class FreeServicePage extends StatelessWidget {
                     crossAxisCount: 2,
                     crossAxisSpacing: 12.0,
                     mainAxisSpacing: 12.0,
-                    childAspectRatio: 4/4
+                    childAspectRatio: SystemUtil.getChildAspectRatio(context)
                 ),
                 itemCount: controller.freeServiceResponse!.value!.courseCategories!.length,
                 itemBuilder: (context, index) {

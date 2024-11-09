@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../core/common/widgets/loading/loading_widget.dart';
 import '../../../../../core/custom_assets/assets.gen.dart';
+import '../../../../../core/utils/system_util.dart';
 import '../../../data/models/CourseCategory/CourseCategoryResponse.dart';
 import '../../controller/AllCourse_controller.dart';
 import '../../widget/free_video_card.dart';
@@ -38,7 +39,7 @@ class FreeVideoPage extends StatelessWidget {
               crossAxisCount: 2,
               crossAxisSpacing: 12.0,
               mainAxisSpacing: 12.0,
-              childAspectRatio: 4/4
+              childAspectRatio: SystemUtil.getChildAspectRatio(context)
           ),
           itemCount:courseCategoryResponse!.free_class_videos!.length,
           itemBuilder: (context, index) {

@@ -116,7 +116,7 @@ class ProfileController extends GetxController implements GetxService{
 
    }else{
     device_token.value!=r.user!.device_token?
-    _showMyDialog(context) :SizedBox();
+    _showMyDialog(context) :null;
    }
   });
   circuler.value=false;

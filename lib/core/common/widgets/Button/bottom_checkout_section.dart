@@ -55,8 +55,9 @@ class BottomCheckoutSection extends StatelessWidget {
                     const SizedBox(width: 10),
 
                     // regular price
+                    discountPercent=="0.0"?SizedBox():
                     Text(
-                      '$mainPrice BDT',
+                      '$mainPrice',
                       style: TextStyle(
                           fontSize: 9,
                           color: Color(0xFFA9A9A9),
@@ -66,9 +67,10 @@ class BottomCheckoutSection extends StatelessWidget {
                     ),
 
                     const SizedBox(width: 10),
+                    discountPercent=="0.0"?SizedBox():
                     DiscountBadge(
                       textSize: 9,
-                      text: '$discountPercent% off',
+                      text: '$discountPercent%',
                       backgroundColor: Color(0xFfFFEEE8),
                       foregroundColor: Color(0xffEB6A20),
                       radius: 0,
@@ -105,7 +107,7 @@ class BottomCheckoutSection extends StatelessWidget {
               onPressed: action!,
               titleText: buttonText??"",
               titleSize: 14,
-              buttonHeight: 30.h,
+              buttonHeight: 40,
               titleColor: Colors.white,
               buttonColor: AppColors.primaryColor,
               borderRdius: 100.r,
@@ -113,7 +115,7 @@ class BottomCheckoutSection extends StatelessWidget {
               iconRight: Container(
                 width: 36,
                 height: 36,
-                margin: EdgeInsets.symmetric(horizontal: 4),
+                margin: EdgeInsets.symmetric(horizontal: 0),
                 decoration: ShapeDecoration(
                   color: Colors.white,
                   shape: OvalBorder(),

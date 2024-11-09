@@ -3,6 +3,7 @@ import 'package:biddabari_new/core/config/color/app_colors.dart';
 import 'package:biddabari_new/core/config/util/text_style.dart';
 import 'package:biddabari_new/features/ClassRoom/presentation/controller/ClassRoom_controller.dart';
 import 'package:biddabari_new/features/Home/presentation/controller/Home_controller.dart';
+import 'package:biddabari_new/features/profile/presentation/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,6 +15,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/common/widgets/container/discount_badge.dart';
 import '../../../../core/common/widgets/container/horizontal_category.dart';
+import '../../../../core/config/Strings/api_endpoint.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/routes/route_path.dart';
 import 'ajker_class.dart';
@@ -86,85 +88,111 @@ class ClassRoomPage extends StatelessWidget {
                         child: Container(
                           padding: EdgeInsets.symmetric(vertical: 12),
                           color: Colors.white,
-                          child: Column(
-                            children: [
-                              Center(
-                                child: CircleAvatar(
-                                  radius: 62.r,
-                                  backgroundImage: Assets.images.teacher
-                                      .provider(),
-                                ),
-                              ),
-
-                              const SizedBox(height: 6),
-                              // name
-                              Text("Sifat", style: boldText(21),),
-                              Text("Graphic Designer At Google",
-                                style: boldText(13, color: Color(0xFF545454)),),
-
-                              const SizedBox(height: 18),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 32),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment
-                                      .spaceBetween,
+                          child: GetBuilder<ProfileController>(
+                            assignId: true,
+                            builder: (profileController) {
+                              return Obx(() {
+                                return profileController.circuler.value ?
+                                LoadingWidget()
+                                    :
+                                profileController.profileResponse!
+                                    .value!
+                                    .user==null?SizedBox():
+                                Column(
                                   children: [
-
-                                    // total course
-                                    Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          '12',
-                                          style: boldText(17),
-                                        ),
-                                        Text(
-                                          'Total Course',
-                                          style: semiBoldText(
-                                              12, color: Color(0xFF545454)),
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          '12',
-                                          style: boldText(17),
-                                        ),
-                                        Text(
-                                          'Completed',
-                                          style: semiBoldText(
-                                              12, color: Color(0xFF545454)),
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          '12',
-                                          style: boldText(17),
-                                        ),
-                                        Text(
-                                          'Ongoing',
-                                          style: semiBoldText(
-                                              12, color: Color(0xFF545454)),
-                                        ),
-                                      ],
+                                    Center(
+                                      child: CircleAvatar(
+                                        radius: 62.r,
+                                          backgroundImage: NetworkImage(
+                                              ApiEndpoint.imageBaseUrl +
+                                                  profileController
+                                                      .profileResponse
+                                                      .value!.student!.image ?? "")
+                                      ),
                                     ),
 
+                                    const SizedBox(height: 6),
+                                    // name
+                                    Text( profileController.profileResponse!
+                                        .value!
+                                        .user!.name ?? "", style: boldText(21),),
+                                    Text("Graphic Designer At Google",
+                                      style: boldText(
+                                          13, color: Color(0xFF545454)),),
 
-                                    // completed
+                                    const SizedBox(height: 18),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 32),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .spaceBetween,
+                                        children: [
+
+                                          // total course
+                                          Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text(
+                                                '12',
+                                                style: boldText(17),
+                                              ),
+                                              Text(
+                                                'Total Course',
+                                                style: semiBoldText(
+                                                    12,
+                                                    color: Color(
+                                                        0xFF545454)),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text(
+                                                '12',
+                                                style: boldText(17),
+                                              ),
+                                              Text(
+                                                'Completed',
+                                                style: semiBoldText(
+                                                    12,
+                                                    color: Color(
+                                                        0xFF545454)),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text(
+                                                '12',
+                                                style: boldText(17),
+                                              ),
+                                              Text(
+                                                'Ongoing',
+                                                style: semiBoldText(
+                                                    12,
+                                                    color: Color(
+                                                        0xFF545454)),
+                                              ),
+                                            ],
+                                          ),
+
+
+                                          // completed
+                                        ],
+                                      ),
+                                    ),
+
                                   ],
-                                ),
-                              ),
-
-                            ],
+                                );
+                              });
+                            },
                           ),
                         ),
                       ),
+
                       SliverToBoxAdapter(
                         child: Container(
                           padding: EdgeInsets.symmetric(horizontal: 16),
@@ -178,38 +206,47 @@ class ClassRoomPage extends StatelessWidget {
                                 SizedBox(
                                   height: 42,
                                   width: 1.0.sw,
-                                  child: Wrap(
-                                    direction: Axis.vertical,
-                                    alignment: WrapAlignment.spaceBetween,
-                                    runAlignment: WrapAlignment.spaceBetween,
+                                  child: Row(
+                                    // direction: Axis.vertical,
+                                    // alignment: WrapAlignment.spaceBetween,
+                                    // runAlignment: WrapAlignment.spaceBetween,
                                     children: [
-                                      InkWell(
-                                        onTap: () {
-                                          controller.onTapTab(0);
-                                        },
-                                        child: HorizontalCategoryCard(
-                                          height: 38,
-                                          active: controller.tabIndex.value ==
-                                              0,
-                                          title: "My Course",),
-                                      ), InkWell(
-                                        onTap: () {
-                                          controller.onTapTab(1);
-                                        },
-                                        child: HorizontalCategoryCard(
-                                          height: 38,
-                                          active: controller.tabIndex.value ==
-                                              1,
-                                          title: "Ajker Class",),
-                                      ), InkWell(
-                                        onTap: () {
-                                          controller.onTapTab(2);
-                                        },
-                                        child: HorizontalCategoryCard(
-                                          height: 38,
-                                          active: controller.tabIndex.value ==
-                                              2,
-                                          title: "Ajker Exam",),
+                                      Expanded(
+                                        child: InkWell(
+                                          onTap: () {
+                                            controller.onTapTab(0);
+                                          },
+                                          child: HorizontalCategoryCard(
+                                            height: 38,
+                                            active: controller.tabIndex.value ==
+                                                0,
+                                            title: "My Course",),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: InkWell(
+                                          onTap: () {
+                                            controller.onTapTab(1);
+                                          },
+                                          child: HorizontalCategoryCard(
+                                            height: 38,
+                                            active: controller.tabIndex.value ==
+                                                1,
+                                            title: "Ajker Class",),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: InkWell(
+                                          onTap: () {
+                                            controller.onTapTab(2);
+                                          },
+                                          child: HorizontalCategoryCard(
+                                            textSize: 12.sp,
+                                            height: 38,
+                                            active: controller.tabIndex.value ==
+                                                2,
+                                            title: "Ajker Exam",),
+                                        ),
                                       ),
                                     ],
                                   ),

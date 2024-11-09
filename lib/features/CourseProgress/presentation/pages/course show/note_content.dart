@@ -6,6 +6,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:logger/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../../core/config/color/app_colors.dart';
 import '../../../../../core/config/util/text_style.dart';
 import '../../../../../core/custom_assets/assets.gen.dart';
 import '../../../../AllCourse/data/models/courseSectionContent/CourseSectionContent.dart';
@@ -61,20 +62,53 @@ class NoteContentPage extends StatelessWidget {
               ],
             ):
             // Text(courseSectionContent!.liveLink??"")
-            Column(
-              children: [
-                InteractiveViewer(
-                  child: Html(
-                    data:courseSectionContent!.noteContent??"",
-                    onLinkTap: (url, _, __) async {
-                      if (await canLaunch(url!)) {
-                        await launch(
-                          url,
-                        );
-                      }
-                    },),
-                ),
-              ],
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                children: [
+                  Container(
+                    width: 1.0.sw,
+                    height: 80,
+                    padding: EdgeInsets.symmetric(horizontal: 12,vertical: 16),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(topRight: Radius.circular(12),topLeft: Radius.circular(12)),
+                        border: Border.all(color: AppColors.primarySlate300)
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(courseSectionContent!.contentType??"",style: boldText(14),),
+                        Text(courseSectionContent!.title??'',style: boldText(11,color: AppColors.primaryColor),),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      width: 1.0.sw,
+                      height: 1.0.sh,
+                      padding: EdgeInsets.symmetric(horizontal: 12,vertical: 12),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(bottomRight: Radius.circular(12),bottomLeft: Radius.circular(12)),
+
+                      ),
+                      child:  InteractiveViewer(
+                        child: Html(
+                          data:courseSectionContent!.noteContent??"",
+                          onLinkTap: (url, _, __) async {
+                            if (await canLaunch(url!)) {
+                              await launch(
+                                url,
+                              );
+                            }
+                          },),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             );
           },
         ),

@@ -10,7 +10,7 @@ class HorizontalCategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 33),
+      padding: EdgeInsets.symmetric(horizontal: 12),
       margin: EdgeInsets.only(right: 12),
       height: height!,
       decoration: ShapeDecoration(
