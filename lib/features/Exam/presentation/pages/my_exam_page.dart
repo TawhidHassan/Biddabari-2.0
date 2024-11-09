@@ -13,15 +13,28 @@ import '../../../../core/custom_assets/assets.gen.dart';
 import '../widget/my_exam_card.dart';
 
 
-class MyExamPage extends StatelessWidget {
+class MyExamPage extends StatefulWidget {
 
   const MyExamPage({super.key,});
 
   @override
-  Widget build(BuildContext context) {
+  State<MyExamPage> createState() => _MyExamPageState();
+}
+
+class _MyExamPageState extends State<MyExamPage> {
+
+  @override
+  void initState() {
     Future.delayed(Duration.zero, () {
       Get.find<ExamController>().getMyExam();
     });
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(

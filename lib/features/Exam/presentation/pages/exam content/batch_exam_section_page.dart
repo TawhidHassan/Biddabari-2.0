@@ -15,16 +15,27 @@ import '../../../../CourseProgress/presentation/widget/course_content_card.dart'
 
 
 
-class BatchExamSectionPage extends StatelessWidget {
+class BatchExamSectionPage extends StatefulWidget {
  final String? id;
   const BatchExamSectionPage({Key? key, this.id}) : super(key: key);
 
   @override
+  State<BatchExamSectionPage> createState() => _BatchExamSectionPageState();
+}
+
+class _BatchExamSectionPageState extends State<BatchExamSectionPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    Future.delayed(Duration.zero, () {
+      Get.find<ExamController>().getMyExamSection(int.parse(widget.id!));
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
 
-    Future.delayed(Duration.zero, () {
-      Get.find<ExamController>().getMyExamSection(int.parse(id!));
-    });
+
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(

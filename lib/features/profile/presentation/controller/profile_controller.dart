@@ -176,9 +176,11 @@ class ProfileController extends GetxController implements GetxService{
                 onPressed: () async {
                  Logger().w(device_token.value);
                  var users = await Hive.openBox('users');
-                 users.clear().then((value) {});
-                 context.pop();
-                 context.pushNamed(Routes.loginPage);
+                 users.clear().then((value) {
+                  context.pop();
+                  context.pushNamed(Routes.loginPage);
+                 });
+
                 },
                ),
               ),
