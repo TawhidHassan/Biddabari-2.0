@@ -57,6 +57,7 @@ import '../../features/Exam/presentation/pages/exam content/batch_exam_content_l
 import '../../features/Exam/presentation/pages/exam content/batch_exam_section_page.dart';
 import '../../features/Exam/presentation/pages/exam content/master_exams_page.dart';
 import '../../features/Exam/presentation/pages/exam_rank_page.dart';
+import '../../features/Exam/presentation/pages/favoraite_question_page.dart';
 import '../../features/Exam/presentation/pages/given_exam_page.dart';
 import '../../features/Exam/presentation/pages/my_exam_page.dart';
 import '../../features/Exam/presentation/pages/see_answer_page.dart';
@@ -145,6 +146,11 @@ class AppRouter {
         builder: (context, state) => BatchExamSectionPage(id: state.extra as String,),
       ),
 
+      GoRoute(
+        name: Routes.favoraiteQuestionPage,
+        path: Routes.favoraiteQuestionPagePath,
+        builder: (context, state) => FavoraiteQuestion(),
+      ),
       GoRoute(
         name: Routes.masterExamPage,
         path: Routes.masterExamPagePath,

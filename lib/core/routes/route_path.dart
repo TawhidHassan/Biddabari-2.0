@@ -88,6 +88,9 @@ class Routes {
   static const String dwonloadedPdfShowPage = 'dwonloadedPdfShowPage';
   static const String dwonloadedPdfShowPageath = '/dwonloadedPdfShowPage';
 
+  static const String favoraiteQuestionPage = 'favoraiteQuestionPage';
+  static const String favoraiteQuestionPagePath = '/favoraiteQuestionPage';
+
   static const String examPage = 'examPage';
   static const String examPagePath = '/examPage';
 

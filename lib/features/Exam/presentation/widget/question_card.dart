@@ -66,9 +66,7 @@ class _QuestionCardState extends State<QuestionCard> {
                         assignId: true,
                         builder: (logic) {
                           return Obx(() {
-                            return widget.controller!.saveQuesCirculer.value?Icon(
-                              widget.controller!.questionSaveResponse.value!.questions!.where((element) => element.question_store_id==widget.question!.id).isNotEmpty?
-                              Icons.favorite:Icons.favorite_outline, color: AppColors.primaryColor,):
+                            return widget.controller!.saveQuesCirculer.value?SizedBox(child: CircularProgressIndicator(),):
                             InkWell(
                                 onTap: () {
                                   if( widget.controller!.questionSaveResponse.value!.questions!.where((element) => element.question_store_id==widget.question!.id).isNotEmpty){

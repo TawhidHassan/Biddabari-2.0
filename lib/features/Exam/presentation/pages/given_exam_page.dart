@@ -255,7 +255,7 @@ class GivenExamPage extends StatelessWidget {
                                     hasExam==1?
                                     controller.questionResponse.value!.exam!.classExamDurationInMinutes!
                                         :
-                                    controller.questionResponse.value!.exam!.examDurationInMinutes!
+                                    controller.questionResponse.value!.exam!.examDurationInMinutes??1000
                                 ),
                               )
                             ],

@@ -262,6 +262,15 @@ class MorePage extends StatelessWidget {
                     icon: Assets.icons.book.path,
                   ),
 
+                  homeController.userName.value == "" ? SizedBox() :
+                  MoreOtptionCard(
+                    onTap: () {
+                      context.pushNamed(Routes.favoraiteQuestionPage);
+                    },
+                    title: "My Favorite Questions",
+                    icon: Assets.icons.rankQus.path,
+                  ),
+
 
                   MoreOtptionCard(
                     onTap: () {

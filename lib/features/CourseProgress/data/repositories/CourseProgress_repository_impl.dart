@@ -234,7 +234,7 @@ Future<Either<Failure, QuestionResponse>> getExamAnswer({String? id, bool? isCou
         return left(Failure("no internet connection!!"));
       }else{
         final data = await remoteSource.removeQues(id,userId);
-        if(data.success!="Favourite Question Saved Successfully."){
+        if(data.success!="Favourite Question deleted Successfully."){
           return left(Failure(data.error!));
         }else{
           return right(data);
