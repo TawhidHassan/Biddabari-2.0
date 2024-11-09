@@ -35,7 +35,7 @@ class Book{
 
 
   Book(
-      this.id,
+      {this.id,
       this.product_author_id,
       this.product_author,
       this.price,
@@ -55,7 +55,7 @@ class Book{
       this.is_featured,
       this.status,
       this.has_discount_validity,
-      this.order_status);
+      this.order_status});
 
   factory Book.fromJson(Map<String,dynamic>json)=>
       _$BookFromJson(json);

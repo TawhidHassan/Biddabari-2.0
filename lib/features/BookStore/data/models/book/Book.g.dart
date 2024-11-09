@@ -7,29 +7,29 @@ part of 'Book.dart';
 // **************************************************************************
 
 Book _$BookFromJson(Map<String, dynamic> json) => Book(
-      json['id'] as num?,
-      json['product_author_id'] as num?,
-      json['product_author'] == null
+      id: json['id'] as num?,
+      product_author_id: json['product_author_id'] as num?,
+      product_author: json['product_author'] == null
           ? null
           : User.fromJson(json['product_author'] as Map<String, dynamic>),
-      json['price'] as String?,
-      json['title'] as String?,
-      json['featured_pdf'] as String?,
-      json['pdf'] as String?,
-      json['image'] as String?,
-      json['slug'] as String?,
-      json['description'] as String?,
-      json['discount_amount'] as String?,
-      json['discount_start_date'] as String?,
-      json['discount_end_date'] as String?,
-      json['about'] as String?,
-      json['specification'] as String?,
-      json['other_details'] as String?,
-      json['stock_amount'] as num?,
-      json['is_featured'] as num?,
-      json['status'] as num?,
-      json['has_discount_validity'] as String?,
-      json['order_status'] as String?,
+      price: json['price'] as String?,
+      title: json['title'] as String?,
+      featured_pdf: json['featured_pdf'] as String?,
+      pdf: json['pdf'] as String?,
+      image: json['image'] as String?,
+      slug: json['slug'] as String?,
+      description: json['description'] as String?,
+      discount_amount: json['discount_amount'] as String?,
+      discount_start_date: json['discount_start_date'] as String?,
+      discount_end_date: json['discount_end_date'] as String?,
+      about: json['about'] as String?,
+      specification: json['specification'] as String?,
+      other_details: json['other_details'] as String?,
+      stock_amount: json['stock_amount'] as num?,
+      is_featured: json['is_featured'] as num?,
+      status: json['status'] as num?,
+      has_discount_validity: json['has_discount_validity'] as String?,
+      order_status: json['order_status'] as String?,
     );
 
 Map<String, dynamic> _$BookToJson(Book instance) => <String, dynamic>{

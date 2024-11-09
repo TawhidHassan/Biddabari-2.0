@@ -40,7 +40,7 @@ class Course{
 
 
   Course(
-      this.id,
+      {this.id,
       this.price,
       this.title,
       this.sub_title,
@@ -63,7 +63,7 @@ class Course{
       this.order_status,
       this.video_link,
       this.teachers,
-      this.course_sections);
+      this.course_sections});
 
   factory Course.fromJson(Map<String,dynamic>json)=>
       _$CourseFromJson(json);

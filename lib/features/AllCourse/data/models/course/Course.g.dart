@@ -7,32 +7,32 @@ part of 'Course.dart';
 // **************************************************************************
 
 Course _$CourseFromJson(Map<String, dynamic> json) => Course(
-      json['id'] as num?,
-      json['price'] as num?,
-      json['title'] as String?,
-      json['sub_title'] as String?,
-      json['banner'] as String?,
-      json['image'] as String?,
-      json['description'] as String?,
-      json['starting_date_time'] as String?,
-      json['ending_date_time'] as String?,
-      json['discount_type'] as num?,
-      json['discount_amount'] as num?,
-      json['total_video'] as num?,
-      json['total_class'],
-      json['total_note'] as num?,
-      json['total_exam'] as num?,
-      json['is_paid'] as num?,
-      json['status'] as num?,
-      json['discount_start_date'] as String?,
-      json['discount_end_date'] as String?,
-      json['admission_last_date'] as String?,
-      json['order_status'] as String?,
-      json['video_link'] as String?,
-      (json['teachers'] as List<dynamic>?)
+      id: json['id'] as num?,
+      price: json['price'] as num?,
+      title: json['title'] as String?,
+      sub_title: json['sub_title'] as String?,
+      banner: json['banner'] as String?,
+      image: json['image'] as String?,
+      description: json['description'] as String?,
+      starting_date_time: json['starting_date_time'] as String?,
+      ending_date_time: json['ending_date_time'] as String?,
+      discount_type: json['discount_type'] as num?,
+      discount_amount: json['discount_amount'] as num?,
+      total_video: json['total_video'] as num?,
+      total_class: json['total_class'],
+      total_note: json['total_note'] as num?,
+      total_exam: json['total_exam'] as num?,
+      is_paid: json['is_paid'] as num?,
+      status: json['status'] as num?,
+      discount_start_date: json['discount_start_date'] as String?,
+      discount_end_date: json['discount_end_date'] as String?,
+      admission_last_date: json['admission_last_date'] as String?,
+      order_status: json['order_status'] as String?,
+      video_link: json['video_link'] as String?,
+      teachers: (json['teachers'] as List<dynamic>?)
           ?.map((e) => Teacher.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['course_sections'] as List<dynamic>?)
+      course_sections: (json['course_sections'] as List<dynamic>?)
           ?.map((e) => CourseSection.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
