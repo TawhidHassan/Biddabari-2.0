@@ -13,7 +13,7 @@ Slider _$SliderFromJson(Map<String, dynamic> json) => Slider(
       json['link'] as String?,
       json['description'] as String?,
       json['content_type'] as String?,
-      json['parent_model_id'] as String?,
+      json['parent_model_id'] as int?,
     );
 
 Map<String, dynamic> _$SliderToJson(Slider instance) => <String, dynamic>{

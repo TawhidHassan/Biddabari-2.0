@@ -262,7 +262,6 @@ class GivenExamPage extends StatelessWidget {
                           ),
                         ),
                       ),
-
                       Expanded(
                           flex: 10,
                           child: Container(

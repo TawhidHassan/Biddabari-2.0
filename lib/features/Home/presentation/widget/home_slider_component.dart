@@ -55,7 +55,7 @@ class HomeSliderComponent extends StatelessWidget {
                                 //   "id":controller.sliderResponse.value!.sliderCourses![itemIndex].parent_model_id!
                                 // });
                                 context.pushNamed(Routes.bookDetailsPage,
-                                    extra:Book(id: num.parse(controller.sliderResponse.value!.sliderCourses![itemIndex].parent_model_id!))
+                                    extra:Book(id: num.parse(controller.sliderResponse.value!.sliderCourses![itemIndex].parent_model_id!.toString()))
                                 );
                               }
 

@@ -105,9 +105,7 @@ class ClassRoomPage extends StatelessWidget {
                                         radius: 62.r,
                                           backgroundImage: NetworkImage(
                                               ApiEndpoint.imageBaseUrl +
-                                                  profileController
-                                                      .profileResponse
-                                                      .value!.student!.image ?? "")
+                                                  profileController.profileResponse.value!.student!.image.toString())
                                       ),
                                     ),
 

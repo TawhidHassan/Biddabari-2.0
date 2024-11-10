@@ -14,7 +14,6 @@ import '../../../../CourseProgress/presentation/controller/CourseProgress_contro
 import '../../../../CourseProgress/presentation/widget/course_content_card.dart';
 import '../../../data/models/BatchExam/BatchExamSection.dart';
 
-
 class BatchExamContentListPage extends StatelessWidget {
   final BatchExamSection? batchExamSection;
   const BatchExamContentListPage({Key? key, this.batchExamSection}) : super(key: key);
