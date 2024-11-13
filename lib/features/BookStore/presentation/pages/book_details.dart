@@ -286,26 +286,26 @@ class BookDetailsPage extends StatelessWidget {
               ),
             ),
 
-            floatingActionButton: Container(
-              margin: EdgeInsets.only(bottom: 80),
-              padding: EdgeInsets.symmetric(horizontal: 6,vertical: 4),
-              width: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                border: Border.all(color: AppColors.primaryColor),
-                color: Colors.white
-              ),
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: AppColors.primaryColor,
-                    child: Icon(Icons.add,color: Colors.white,),
-                  ),
-                  SizedBox(width: 12,),
-                  Text("Add To Cart",style: boldText(14,),)
-                ],
-              ),
-            ),
+            // floatingActionButton: Container(
+            //   margin: EdgeInsets.only(bottom: 80),
+            //   padding: EdgeInsets.symmetric(horizontal: 6,vertical: 4),
+            //   width: 150,
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(50),
+            //     border: Border.all(color: AppColors.primaryColor),
+            //     color: Colors.white
+            //   ),
+            //   child: Row(
+            //     children: [
+            //       CircleAvatar(
+            //         backgroundColor: AppColors.primaryColor,
+            //         child: Icon(Icons.add,color: Colors.white,),
+            //       ),
+            //       SizedBox(width: 12,),
+            //       Text("Add To Cart",style: boldText(14,),)
+            //     ],
+            //   ),
+            // ),
             bottomSheet:controller.storeBookLoading.value?LoadingWidget():
             BottomCheckoutSection(
               action: (){

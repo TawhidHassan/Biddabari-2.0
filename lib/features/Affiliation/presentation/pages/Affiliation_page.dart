@@ -244,6 +244,7 @@ class AffiliationPage extends StatelessWidget {
                                 }
                               },
                               child: AffiliationCourseCard(
+                                response: controller.affilitaeResponse.value!,
                                 course: controller.affilitaeResponse.value!
                                     .courses![index],));
                         },

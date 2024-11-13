@@ -7,6 +7,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/common/widgets/container/discount_badge.dart';
 import '../../../../core/common/widgets/loading/loading_widget.dart';
@@ -51,13 +52,25 @@ class MyCourseCard extends StatelessWidget {
 
             // image
             Expanded(
-              flex: 3,
+              flex: 5,
               child: CachedNetworkImage(
                 imageUrl:ApiEndpoint.imageBaseUrl+course!.course!.banner!,
-                placeholder: (context, url) => LoadingWidget(),
+                placeholder: (context, url) => Skeletonizer(
+                  enabled: true,
+                  child: Container(
+                    height: 100,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: Assets.images.course.provider(),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                ),
                 errorWidget: (context, url, error){
                   return Container(
-                    height: 120,
+                    height: 100,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: Assets.images.course.provider(),
@@ -69,11 +82,11 @@ class MyCourseCard extends StatelessWidget {
                 },
                 imageBuilder: (context, image) =>
                     Container(
-                      height: 120,
+                      height: 100,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: image,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
                         borderRadius: BorderRadius.circular(5),
                       ),
@@ -87,12 +100,12 @@ class MyCourseCard extends StatelessWidget {
             Expanded(
               flex: 7,
               child: Padding(
-                padding: const EdgeInsets.only(right: 18,top: 12,bottom: 12),
+                padding: const EdgeInsets.only(right: 18,top: 0,bottom: 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-
+                    const SizedBox(height: 8),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -103,18 +116,18 @@ class MyCourseCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style:mediumText(11,color: AppColors.orange400),
                         ),
-                        Assets.icons.donePng.image()
+                        Assets.icons.donePng.image(height: 15)
                       ],
                     ),
                     SizedBox(height: 4,),
                     Text(
                       course!.course!.title??"",
                       textAlign: TextAlign.justify,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      // overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 15,
+                        fontSize: 12,
                       ),
                     ),
 
@@ -185,7 +198,7 @@ class MyCourseCard extends StatelessWidget {
 
                       ],
                     ),
-
+                    const SizedBox(height: 8),
                     // price
                   ],
                 ),

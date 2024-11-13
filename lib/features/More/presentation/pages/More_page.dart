@@ -202,7 +202,7 @@ class MorePage extends StatelessWidget {
                     icon: Assets.icons.freeCourse.path,
                   ),
 
-
+                  homeController.userName.value == "" ? SizedBox() :
                   MoreOtptionCard(
                     onTap: () {
                       context.pushNamed(Routes.myDwonloadsPage);
@@ -244,6 +244,7 @@ class MorePage extends StatelessWidget {
                   ),
 
 
+                  homeController.userName.value == "" ? SizedBox() :
                   MoreOtptionCard(
                     onTap: (){
                       context.pushNamed(Routes.myExamPage);
@@ -331,10 +332,10 @@ class MorePage extends StatelessWidget {
                   //   icon: Assets.icons.bookCart.path,
                   // ),
 
-                  MoreOtptionCard(
-                    title: "Language",
-                    icon: Assets.icons.language.path,
-                  ),
+                  // MoreOtptionCard(
+                  //   title: "Language",
+                  //   icon: Assets.icons.language.path,
+                  // ),
 
                   homeController.userName.value == "" ? MoreOtptionCard(
                     onTap: () async {

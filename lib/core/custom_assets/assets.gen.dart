@@ -278,6 +278,10 @@ class $AssetsImagesGen {
   AssetGenImage get authentication =>
       const AssetGenImage('assets/images/authentication.jpg');
 
+  /// File path: assets/images/biddabari-logo.png
+  AssetGenImage get biddabariLogo =>
+      const AssetGenImage('assets/images/biddabari-logo.png');
+
   /// File path: assets/images/biddabari_white.png
   AssetGenImage get biddabariWhite =>
       const AssetGenImage('assets/images/biddabari_white.png');
@@ -355,6 +359,7 @@ class $AssetsImagesGen {
   /// List of all assets
   List<dynamic> get values => [
         authentication,
+        biddabariLogo,
         biddabariWhite,
         course,
         empty,
@@ -391,12 +396,8 @@ class $AssetsLogoGen {
   /// File path: assets/logo/new1.png
   AssetGenImage get new1 => const AssetGenImage('assets/logo/new1.png');
 
-  /// File path: assets/logo/palki_logo.png
-  AssetGenImage get palkiLogo =>
-      const AssetGenImage('assets/logo/palki_logo.png');
-
   /// List of all assets
-  List<dynamic> get values => [facebook, google, new1, palkiLogo];
+  List<dynamic> get values => [facebook, google, new1];
 }
 
 class $AssetsLottieGen {

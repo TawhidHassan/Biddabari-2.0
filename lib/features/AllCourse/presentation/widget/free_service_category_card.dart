@@ -42,6 +42,7 @@ class FreeServiceCategoryCard extends StatelessWidget {
                 placeholder: (context, url) => Skeletonizer(
                   enabled: true,
                   child: Container(
+                    height: 100,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: Assets.images.course.provider(),
@@ -53,10 +54,11 @@ class FreeServiceCategoryCard extends StatelessWidget {
                 ),
                 errorWidget: (context, url, error){
                   return Container(
+                    height: 80,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: Assets.images.course.provider(),
-                        fit: BoxFit.cover,
+                        image: Assets.images.biddabariLogo.provider(),
+                        fit: BoxFit.contain,
                       ),
                       borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(5),),
                     ),

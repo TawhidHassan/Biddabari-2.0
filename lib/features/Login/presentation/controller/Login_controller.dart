@@ -247,15 +247,15 @@ class LoginController extends GetxController implements GetxService{
           mobile: r.user!.mobile,image: r.user!.profile_photo_url
       );
 
-      Fluttertoast.showToast(
-          msg: "Login Successfully",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 2,
-          backgroundColor: Colors.green,
-          textColor: Colors.white,
-          fontSize: 16.0
-      );
+      // Fluttertoast.showToast(
+      //     msg: "Login Successfully",
+      //     toastLength: Toast.LENGTH_SHORT,
+      //     gravity: ToastGravity.BOTTOM,
+      //     timeInSecForIosWeb: 2,
+      //     backgroundColor: Colors.green,
+      //     textColor: Colors.white,
+      //     fontSize: 16.0
+      // );
       Get.find<ProfileController>().getProfile(context!,true);
       Get.find<HomeController>().getUserData(context);
 

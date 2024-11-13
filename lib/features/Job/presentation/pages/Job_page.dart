@@ -16,6 +16,7 @@ import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/config/util/text_style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/routes/route_path.dart';
+import '../../../../core/utils/system_util.dart';
 
 class JobPage extends StatelessWidget {
   const JobPage({super.key});
@@ -47,7 +48,7 @@ class JobPage extends StatelessWidget {
               enabled: true,
               child: Container(
                 padding: EdgeInsets.all(16),
-                child: Column(
+                child: ListView(
                   children: [
                     Row(
                       children: [
@@ -172,7 +173,7 @@ class JobPage extends StatelessWidget {
               child: ListView(
                 children: [
                   Container(
-                    height: 44,
+                    height: 32,
                     width: 1.0.sw,
                     margin: EdgeInsets.symmetric(horizontal: 0, vertical: 12),
                     child: Center(
@@ -201,8 +202,8 @@ class JobPage extends StatelessWidget {
                         crossAxisCount: 2,
                         crossAxisSpacing: 12.0,
                         mainAxisSpacing: 12.0,
-                        childAspectRatio: 4 / 4,
-                        mainAxisExtent: 220
+                        childAspectRatio: SystemUtil.getChildAspectRatio(context),
+
                     ),
                     itemCount: controller.selectedJobcategory!.value!.circulars!.length,
                     itemBuilder: (context, index) {
@@ -310,7 +311,7 @@ class JobPage extends StatelessWidget {
                                       ),
                                       SizedBox(height: 4,),
                                       Text(
-                                        "titjdbhdbdubdudble",
+                                        controller.selectedJobcategory!.value!.circulars![index].jobTitle??'',
                                         style: boldText(
                                             16, color: AppColors.textClorColor),
                                         textAlign: TextAlign.start,

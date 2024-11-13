@@ -50,7 +50,7 @@ class DwonloadsPage extends StatelessWidget {
                             child: HorizontalCategoryCard(
                               height: 38,
                               active: controller.selectCat.value==cat,
-                              title: cat,
+                              title: cat.toUpperCase(),
                             ),
                           ),
                         );
@@ -61,9 +61,10 @@ class DwonloadsPage extends StatelessWidget {
                   Expanded(
                     flex: 9,
                     child:controller.selectCat.value=="Pdf"? DwonlodedPdfPage():Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        EmptyWidget(title: "There has no videos",),
+                        SizedBox(height: 200,),
+                        EmptyWidget(title: "There has no downloaded videos",),
                       ],
                     ),
                   )

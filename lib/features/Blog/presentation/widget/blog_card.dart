@@ -51,7 +51,7 @@ class BlogCard extends StatelessWidget {
 
             // image
             Expanded(
-              flex: 3,
+              flex: 4,
               child: CachedNetworkImage(
                 imageUrl:blog!.image!,
                 placeholder: (context, url) => Skeletonizer(
@@ -61,7 +61,7 @@ class BlogCard extends StatelessWidget {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: Assets.images.course.provider(),
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                       ),
                       borderRadius: BorderRadius.circular(5),
                     ),
@@ -85,7 +85,7 @@ class BlogCard extends StatelessWidget {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: image,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
                         borderRadius: BorderRadius.circular(5),
                       ),
@@ -104,6 +104,7 @@ class BlogCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     DiscountBadge(
+                      radius: 6,
                       textSize: 8,
                       text: blog!.blog_category!.name??"",
                       backgroundColor: Color(0xFFEB6A20)

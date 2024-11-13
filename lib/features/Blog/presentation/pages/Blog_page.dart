@@ -12,15 +12,27 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../widget/blog_card.dart';
 
-class BlogPage extends StatelessWidget {
+class BlogPage extends StatefulWidget {
   const BlogPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<BlogPage> createState() => _BlogPageState();
+}
+
+class _BlogPageState extends State<BlogPage> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
     Future.delayed(Duration.zero, () {
       Get.find<BlogController>().getBlog();
       Get.find<BlogController>().onInit();
     });
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -42,7 +54,7 @@ class BlogPage extends StatelessWidget {
               child: ShimerList(),
             ):
             Container(
-              height: 1.0.sw,
+              height: 1.0.sh,
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: ListView.builder(
                   controller: controller.controller,

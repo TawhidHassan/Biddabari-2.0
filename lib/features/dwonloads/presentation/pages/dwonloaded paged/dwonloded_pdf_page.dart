@@ -56,7 +56,12 @@ class _DwonlodedPdfPageState extends State<DwonlodedPdfPage> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 0),
       child: downloadsListMaps.isEmpty?
-      Center(child: EmptyWidget(title: "There has no downloaded pdf" ,)):
+      Column(
+        children: [
+          SizedBox(height: 200,),
+          Center(child: EmptyWidget(title: "There has no downloaded pdf" ,)),
+        ],
+      ):
       ListView.builder(
           itemCount: downloadsListMaps.length,
           itemBuilder: (context,index){
