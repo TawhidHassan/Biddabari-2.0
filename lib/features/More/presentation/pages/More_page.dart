@@ -350,7 +350,7 @@ class MorePage extends StatelessWidget {
                     onTap: () async {
                       var users = await Hive.openBox('users');
                       users.clear().then((value) {
-                        context.pushNamed(Routes.loginPage);
+                        context.goNamed(Routes.loginPage);
                       });
                     },
                     title: "Logout",

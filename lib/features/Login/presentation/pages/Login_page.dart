@@ -21,6 +21,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // automaticallyImplyLeading: true,
         leading: InkWell(
           onTap: () {
             context.pop();
@@ -81,6 +82,8 @@ class LoginPage extends StatelessWidget {
                                   validator: (text) {
                                     if (text!.isEmpty) {
                                       return "Please enter your phone number";
+                                    }else if(text.length < 11){
+                                      return "Please enter valid mobile number";
                                     }
                                   },
                                   hintText: "Enter your phone number",

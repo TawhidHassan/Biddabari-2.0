@@ -69,6 +69,7 @@ class ForgetPasswordPage extends StatelessWidget {
                                 textEditingController: controller.emailController,
                                 hintText: "Enter your mobile number",
                                 inputFormatters: [
+
                                   FilteringTextInputFormatter.allow(
                                       RegExp(r"[0-9]")),
                                   CustomTextInputFormatter(),
@@ -78,6 +79,8 @@ class ForgetPasswordPage extends StatelessWidget {
                                 validator: (text) {
                                   if(text!.isEmpty){
                                     return "Please enter your mobile number";
+                                  }else if(text.length < 11){
+                                    return "Please enter valid mobile number";
                                   }
                                 },
                                 isPrefixIcon: true,
