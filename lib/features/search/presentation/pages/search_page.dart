@@ -1,5 +1,6 @@
 import 'package:biddabari_new/core/common/widgets/Appbar/custom_appbar.dart';
 import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
+import 'package:biddabari_new/core/common/widgets/shimer%20component/shimer_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -58,7 +59,8 @@ class SearchPage extends StatelessWidget {
               width: 1.0.sw,
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: SingleChildScrollView(
-                child:controller.circle.value?LoadingWidget():
+                child:controller.circle.value?
+                ShimerGrid():
                 Column(
                   children: [
                     SizedBox(height: 16,),

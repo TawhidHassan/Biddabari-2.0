@@ -6,6 +6,7 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/common/widgets/container/horizontal_category.dart';
+import '../../../../core/common/widgets/empty/empty_widget.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../More/presentation/widget/more_otption_card.dart';
 import 'dwonloaded paged/dwonloded_pdf_page.dart';
@@ -59,7 +60,12 @@ class DwonloadsPage extends StatelessWidget {
 
                   Expanded(
                     flex: 9,
-                    child:controller.selectCat.value=="Pdf"? DwonlodedPdfPage():SizedBox(),
+                    child:controller.selectCat.value=="Pdf"? DwonlodedPdfPage():Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        EmptyWidget(title: "There has no videos",),
+                      ],
+                    ),
                   )
                 ],
               ),

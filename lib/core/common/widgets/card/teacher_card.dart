@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../config/color/app_colors.dart';
 import '../../../config/util/text_style.dart';
@@ -29,6 +30,14 @@ class TeacherCard extends StatelessWidget {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius
                   .circular(7)),
+          shadows: [
+            BoxShadow(
+              color: Color(0x266E6D6D),
+              blurRadius: 12,
+              offset: Offset(0, 6),
+              spreadRadius: 0,
+            )
+          ],
 
         ),
         child: Column(
@@ -50,8 +59,7 @@ class TeacherCard extends StatelessWidget {
                             topRight: Radius.circular(4),
                             topLeft: Radius.circular(4)),
                         image: DecorationImage(
-                            image: Assets.images.teacherBg
-                                .provider(),
+                            image: Assets.images.teacherBg.provider(),
                             fit: BoxFit.fill
                         )
                     ),
@@ -63,8 +71,11 @@ class TeacherCard extends StatelessWidget {
 
 
                     CachedNetworkImage(
-                      imageUrl:ApiEndpoint.imageBaseUrl+teacher!.image.toString(),
-                      placeholder: (context, url) => CircularProgressIndicator(),
+                      imageUrl:ApiEndpoint.imageBaseUrl+"${teacher?.image}",
+                      placeholder: (context, url) => Skeletonizer(
+                        enabled: true,
+                        child: Assets.images.teacher.image(height: 180),
+                      ),
                       errorWidget: (context, url, error){
                         return Assets.images.teacher.image(
                             height: 180);
@@ -97,14 +108,14 @@ class TeacherCard extends StatelessWidget {
                       children: [
 
                         Text(
-                          teacher!.firstName??'Name not found',
+                          "${teacher?.firstName}",
                           maxLines: 1,
                           style: boldText(16),
                         ),
                         SizedBox(height: 2,),
 
                         Text(
-                          teacher!.subject??'',
+                          "${teacher?.subject}",
                           maxLines: 1,
                           style: boldText(
                               12, color: Color(0xFF70747E)),

@@ -8,6 +8,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../config/util/text_style.dart';
 import '../../../custom_assets/assets.gen.dart';
@@ -15,7 +16,8 @@ import '../../../routes/route_path.dart';
 
 class CourseCard extends StatelessWidget {
 final Course? course;
-  const CourseCard({Key? key, this.course ,}) : super(key: key);
+final int? buttonColor;
+CourseCard({Key? key, this.course, this.buttonColor=0xFFEB6A20}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +37,10 @@ final Course? course;
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
           shadows: [
             BoxShadow(
-              color: Color(0x26A8A4A4),
-              blurRadius: 15,
-              offset: Offset(0, 8),
-              spreadRadius: 0,
+              color: Color(0x266E6D6D),
+              blurRadius: 6,
+              offset: Offset(1, 12),
+              spreadRadius: 2,
             )
           ],
         ),
@@ -49,8 +51,18 @@ final Course? course;
             Expanded(
               flex: 1,
               child: CachedNetworkImage(
-                imageUrl:course!.banner!,
-                placeholder: (context, url) => LoadingWidget(),
+                imageUrl:course!.banner!.toString(),
+                placeholder: (context, url) => Skeletonizer(
+                    enabled: true,
+                    child:Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: Assets.images.course.provider(),
+                      fit: BoxFit.cover,
+                    ),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                )),
                 errorWidget: (context, url, error){
                   return Container(
                     height: 300,
@@ -197,7 +209,7 @@ final Course? course;
                                 width: double.infinity,
                                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 0),
                                 decoration: ShapeDecoration(
-                                  color: Color(0xFFEB6A20),
+                                  color:Color(buttonColor!) ,
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
                                   shadows: [
                                     BoxShadow(

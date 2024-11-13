@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/common/widgets/text field/search_bar.dart';
@@ -7,6 +9,7 @@ import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/routes/route_path.dart';
 import '../../../Home/presentation/widget/home_slider_component.dart';
+import '../controller/BookStore_controller.dart';
 import '../widget/popular_book_component.dart';
 
 class BookStorePage extends StatelessWidget {
@@ -67,12 +70,19 @@ class BookStorePage extends StatelessWidget {
           height: 1.0.sh,
           width: 1.0.sw,
           color: AppColors.primaryBackground,
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                  child: StorePoularBookComponent()
-              ),
-            ],
+          child: RefreshIndicator(
+            onRefresh: ()async{
+              Future.delayed(Duration(seconds: 1),(){});
+              Get.find<BookStoreController>().getStoreBok();
+
+            },
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                    child: StorePoularBookComponent()
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -8,6 +8,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/common/widgets/Image/full_image.dart';
 import '../../../../core/common/widgets/loading/loading_widget.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
@@ -41,7 +42,46 @@ class GallaryDetailsPage extends StatelessWidget {
             return Container(
               padding: EdgeInsets.symmetric(horizontal: 24),
                 height: 1.0.sh,
-                child:controller.photoCircle.value?LoadingWidget():
+                child:controller.photoCircle.value?Container(
+                  child: Skeletonizer(
+                    enabled: true,
+                    child: GridView.custom(
+                      gridDelegate: SliverQuiltedGridDelegate(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 4,
+                        crossAxisSpacing: 4,
+                        repeatPattern: QuiltedGridRepeatPattern.inverted,
+                        pattern: [
+                          QuiltedGridTile(1, 1),
+                          QuiltedGridTile(2, 1),
+                          QuiltedGridTile(1, 1),
+                        ],
+                      ),
+                      childrenDelegate: SliverChildBuilderDelegate(
+                        childCount: 6,
+                            (context, index) => Container(
+                          padding: EdgeInsets.all(0),
+                          margin: EdgeInsets.only(bottom: 12),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(color: Colors.black12),
+                              borderRadius: BorderRadius.circular(12)
+                          ),
+                          child:  Container(
+                            height: 0,
+                            decoration:  BoxDecoration(
+                                borderRadius: BorderRadius.only(topRight: Radius.circular(4),topLeft: Radius.circular(4) ),
+                                image: DecorationImage(
+                                    image: Assets.images.course.provider(),
+                                    fit: BoxFit.cover
+                                )
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ):
                 GridView.custom(
                   gridDelegate: SliverQuiltedGridDelegate(
                     crossAxisCount: 2,

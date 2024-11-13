@@ -5,6 +5,7 @@ import 'package:biddabari_new/features/AllCourse/data/models/course/Course.dart'
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/common/widgets/loading/loading_widget.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
@@ -24,7 +25,15 @@ class FreeVideoCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12)
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Color(0x266E6D6D),
+              blurRadius: 24,
+              offset: Offset(6, 12),
+              spreadRadius: 2,
+            )
+          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +42,23 @@ class FreeVideoCard extends StatelessWidget {
               flex: 5,
               child: CachedNetworkImage(
                 imageUrl:ApiEndpoint.imageBaseUrl+course!.thumbnail!,
-                placeholder: (context, url) => LoadingWidget(),
+                placeholder: (context, url) => Skeletonizer(
+                  enabled: true,
+                  child: Container(
+                    height: 100,
+                    width: double.infinity,
+                    padding: EdgeInsets.all(50),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: Assets.images.course.provider(),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(5),),
+
+                    ),
+                    child: Assets.icons.play.svg(),
+                  ),
+                ),
                 errorWidget: (context, url, error){
                   return Container(
                     height: 100,

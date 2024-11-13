@@ -1,4 +1,5 @@
 import 'package:biddabari_new/core/common/widgets/Appbar/custom_appbar.dart';
+import 'package:biddabari_new/core/common/widgets/shimer%20component/shimer_grid.dart';
 import 'package:biddabari_new/core/config/Strings/api_endpoint.dart';
 import 'package:biddabari_new/core/config/color/app_colors.dart';
 import 'package:biddabari_new/features/Affiliation/presentation/controller/Affiliation_controller.dart';
@@ -44,7 +45,7 @@ class AffiliationPage extends StatelessWidget {
               width: 1.0.sw,
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: controller.loading.value
-                  ? LoadingWidget() :
+                  ? ShimerGrid() :
               ListView(
                 children: [
                   Column(

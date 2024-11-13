@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/common/widgets/container/discount_badge.dart';
 import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/config/util/text_style.dart';
@@ -30,14 +31,56 @@ class ClassRoomCourse extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
+
           child: Row(
             children: [
               // image
               Expanded(
                 flex: 1,
-                child: CachedNetworkImage(
-                    imageUrl:courseOrder!.course==null?"": ApiEndpoint.imageBaseUrl +courseOrder!.course!.banner.toString(),
-                    placeholder: (context, url) => CircularProgressIndicator(),
+                child:courseOrder==null?Container(
+                  width: 106,
+                  height: 121.70,
+                  decoration: ShapeDecoration(
+                    image: DecorationImage(
+                      image: Assets.images.course.provider(),
+                      fit: BoxFit.cover,
+                    ),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight:  Radius.circular(10),
+                    )
+                    ),
+                    shadows: [
+                      BoxShadow(
+                        color: Color(0x26A8A4A4),
+                        blurRadius: 15,
+                        offset: Offset(0, 8),
+                        spreadRadius: 0,
+                      )
+                    ],
+                  ),
+                ):
+
+                CachedNetworkImage(
+                    imageUrl:courseOrder?.course==null?"": ApiEndpoint.imageBaseUrl +courseOrder!.course!.banner.toString(),
+                    placeholder: (context, url) => Skeletonizer(
+                      enabled: true,
+                      child: Container(
+                        width: 106,
+                        height: 121.70,
+                        decoration: ShapeDecoration(
+                          image: DecorationImage(
+                            image: Assets.images.course.provider(),
+                            fit: BoxFit.cover,
+                          ),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight:  Radius.circular(10),
+                          )
+                          ),
+                        ),
+                      ),
+                    ),
                     errorWidget: (context, url, error){
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -102,7 +145,7 @@ class ClassRoomCourse extends StatelessWidget {
                       ),
                       const SizedBox(height: 6),
                       // title
-                      Text(courseOrder!.course==null?"":courseOrder!.course!.title??"",
+                      Text(courseOrder?.course==null?"":courseOrder?.course!.title??"",
                         maxLines: 2,
                         style: semiBoldText(16),),
 

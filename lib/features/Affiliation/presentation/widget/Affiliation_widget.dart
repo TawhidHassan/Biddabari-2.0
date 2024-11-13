@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/common/widgets/loading/loading_widget.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
@@ -29,7 +30,19 @@ class AffiliationCourseCard extends StatelessWidget {
         children: [
           CachedNetworkImage(
             imageUrl:course!.banner!,
-            placeholder: (context, url) => LoadingWidget(),
+            placeholder: (context, url) => Skeletonizer(
+              enabled: true,
+              child: Container(
+                height: 130.h,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: Assets.images.course.provider(),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(5),),
+                ),
+              ),
+            ),
             errorWidget: (context, url, error){
               return Container(
                 height: 130.h,

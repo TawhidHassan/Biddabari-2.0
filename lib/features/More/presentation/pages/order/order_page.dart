@@ -1,4 +1,6 @@
+import 'package:biddabari_new/core/common/widgets/empty/empty_widget.dart';
 import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
+import 'package:biddabari_new/core/common/widgets/shimer%20component/shimer_list.dart';
 import 'package:biddabari_new/features/More/presentation/controller/More_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,7 +43,7 @@ class OrderPage extends StatelessWidget {
               width: 1.0.sw,
               color: AppColors.primaryBackground,
               padding: EdgeInsets.symmetric(horizontal: 16),
-              child: controller.orderLoading.value?LoadingWidget():
+              child: controller.orderLoading.value?ShimerList():
               CustomScrollView(
                 slivers: [
                   SliverToBoxAdapter(
@@ -71,6 +73,15 @@ class OrderPage extends StatelessWidget {
                   ),
                   SliverToBoxAdapter(
                     child:controller.selectFilter.value=="Pending"?
+                    controller.pendingList.value.isEmpty?SizedBox(
+                      height: 0.5.sh,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          EmptyWidget(title: "There has no pending order",),
+                        ],
+                      ),
+                    ):
                     ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
@@ -82,6 +93,15 @@ class OrderPage extends StatelessWidget {
                         }
                     )
                     :
+                    controller.confirmList.value.isEmpty?SizedBox(
+                      height: 0.5.sh,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          EmptyWidget(title: "There has no confirm order",),
+                        ],
+                      ),
+                    ):
                     ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,

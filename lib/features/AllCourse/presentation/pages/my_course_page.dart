@@ -1,4 +1,6 @@
+import 'package:biddabari_new/core/common/widgets/empty/empty_widget.dart';
 import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
+import 'package:biddabari_new/core/common/widgets/shimer%20component/shimer_list.dart';
 import 'package:biddabari_new/features/AllCourse/presentation/controller/AllCourse_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -68,7 +70,7 @@ class MyCoursePage extends StatelessWidget {
           assignId: true,
           builder: (controller) {
             return Obx(() {
-              return controller.myCourseLoading.value?LoadingWidget():
+              return
               Container(
                 height: 1.0.sh,
                 width: 1.0.sw,
@@ -80,7 +82,11 @@ class MyCoursePage extends StatelessWidget {
                       child: SizedBox(height: 12,),
                     ),
                     SliverToBoxAdapter(
-                      child: controller.myCourseResponse!.value==null||controller.myCourseResponse!.value!.courseOrders==null?SizedBox():ListView.builder(
+                      child:
+                      controller.myCourseLoading.value?ShimerList():
+                      controller.myCourseResponse!.value==null||
+                          controller.myCourseResponse!.value!.courseOrders==null?EmptyWidget():
+                      ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: controller.myCourseResponse!.value!.courseOrders!.length,

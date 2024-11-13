@@ -44,9 +44,8 @@ class Search extends StatelessWidget {
         ),
         readOnly: readOnly!,
         decoration: InputDecoration(
-
           suffixIcon:suffixIcon,
-          contentPadding: EdgeInsets.all(0),
+          contentPadding: EdgeInsets.symmetric(vertical: 16),
             filled: true,
             fillColor: Colors.white,
             prefixIcon: Container(

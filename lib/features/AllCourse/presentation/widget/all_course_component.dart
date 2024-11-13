@@ -1,5 +1,6 @@
 import 'package:biddabari_new/core/common/widgets/empty/empty_widget.dart';
 import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
+import 'package:biddabari_new/core/common/widgets/shimer%20component/shimer_grid.dart';
 import 'package:biddabari_new/core/config/color/app_colors.dart';
 import 'package:biddabari_new/core/utils/system_util.dart';
 import 'package:biddabari_new/features/BookStore/presentation/controller/BookStore_controller.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/common/widgets/card/book_card.dart';
 import '../../../../core/common/widgets/container/horizontal_category.dart';
@@ -31,7 +33,7 @@ class AllCourseComponent extends StatelessWidget {
         return Obx(() {
           return Padding(
             padding: const EdgeInsets.all(24.0),
-            child:controller.allCourseLoading.value?LoadingWidget():
+            child:
             Column(
               children: [
                 Row(
@@ -44,6 +46,28 @@ class AllCourseComponent extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 16,),
+                controller.allCourseLoading.value==false&&controller.allCourseResponse.value==null?
+                SizedBox():
+                controller.allCourseLoading.value&&controller.allCourseResponse.value==null?
+                Container(
+                  margin: EdgeInsets.only(bottom: 32),
+                  height: 30,
+                  width: 1.0.sw,
+                  child: Skeletonizer(
+                    enabled: true,
+                    child: ListView.builder(
+                      itemCount: 8,
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemBuilder: (context,index){
+                        return   HorizontalCategoryCard(
+                          active: false,
+                          title: "ddd",
+                        );
+                      },
+                    ),
+                  ),
+                ):
                 SizedBox(
                   height: 30,
                   width: 1.0.sw,
@@ -65,9 +89,16 @@ class AllCourseComponent extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 24,),
-                controller.allCourseResponse.value==null?SizedBox():
+                controller.allCourseResponse.value==null&&controller.allCourseLoading.value?
+                ShimerGrid():
+                controller.allCourseResponse.value==null&&controller.allCourseLoading.value==false?
+                EmptyWidget():
                 controller.allCourseResponse.value!.courseCategories![controller.selectedcategory.value].courses!.isEmpty?
-                    EmptyWidget(title: "There has no course",height: 200,):
+                Column(
+                  children: [
+                    EmptyWidget(title: "There has no course",height: 200,),
+                  ],
+                ):
                 GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,

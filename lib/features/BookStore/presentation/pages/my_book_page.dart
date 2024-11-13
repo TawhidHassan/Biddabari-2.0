@@ -1,4 +1,5 @@
 import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
+import 'package:biddabari_new/core/common/widgets/shimer%20component/shimer_list.dart';
 import 'package:biddabari_new/features/BookStore/data/models/book/Book.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,7 +38,10 @@ class MyBookPage extends StatelessWidget {
         assignId: true,
         builder: (controller) {
           return Obx(() {
-            return controller.myBookLoading.value?LoadingWidget():
+            return controller.myBookLoading.value?Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: ShimerList(),
+            ):
             NestedScrollView(
               headerSliverBuilder: (BuildContext context,
                   bool innerBoxIsScrolled) {

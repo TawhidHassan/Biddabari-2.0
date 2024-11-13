@@ -1,3 +1,4 @@
+import 'package:biddabari_new/core/common/widgets/empty/empty_widget.dart';
 import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
 import 'package:biddabari_new/core/config/color/app_colors.dart';
 import 'package:biddabari_new/core/utils/system_util.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/common/widgets/card/book_card.dart';
+import '../../../../core/common/widgets/shimer component/shimer_grid.dart';
 import '../../../../core/config/util/text_style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/common/widgets/card/category_card.dart';
@@ -27,21 +29,13 @@ class StorePoularBookComponent extends StatelessWidget {
         return Obx(() {
           return Padding(
             padding: const EdgeInsets.all(24.0),
-            child:controller.storeBookLoading.value?LoadingWidget():
+            child:
             Column(
               children: [
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                        'পপুলার বুকস ',
-                        style: boldText(16, color: Color(0xFF202244))
-                    ),
-                  ],
-                ),
-                SizedBox(height: 19,),
-                controller.storeBookResponse.value==null?SizedBox():
+                controller.storeBookLoading.value?
+                ShimerGrid():
+                controller.storeBookResponse.value==null&&controller.storeBookLoading.value==false?
+                EmptyWidget():
                 GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,

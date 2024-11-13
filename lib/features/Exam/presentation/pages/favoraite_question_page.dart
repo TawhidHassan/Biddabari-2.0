@@ -1,8 +1,10 @@
 
+import 'package:biddabari_new/features/Exam/data/models/Question/Question.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/common/widgets/empty/empty_widget.dart';
 import '../../../../core/common/widgets/loading/loading_widget.dart';
@@ -37,7 +39,65 @@ class FavoraiteQuestion extends StatelessWidget {
           builder: (controller) {
             return Obx(() {
               return controller.saveQuesCirculer.value?
-              LoadingWidget():
+              Skeletonizer(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: ListView.builder(
+                        itemCount: 12,
+                        itemBuilder: (context,index){
+                          return Container(
+                            margin: EdgeInsets.only(bottom: 12),
+                            padding: EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey.shade200),
+                              borderRadius: BorderRadius.circular(12)
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("dhbdhdbhdbdhb dhdbhd dhbdh dhbdg d dg dgd gd dg "),
+                                SizedBox(height: 12,),
+                                Container(
+                                  padding: EdgeInsets.all(4),
+                                  margin: EdgeInsets.only(bottom: 12),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(color: Colors.grey.shade200)
+                                  ),
+                                  child: Text("dhbdhdbhjd ndjndjdbdhbdhdb "),
+                                ),Container(
+                                  padding: EdgeInsets.all(4),
+                                  margin: EdgeInsets.only(bottom: 12),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(color: Colors.grey.shade200)
+                                  ),
+                                  child: Text("dhbdhdbhjd ndjndjdbdhbdhdb "),
+                                ),Container(
+                                  padding: EdgeInsets.all(4),
+                                  margin: EdgeInsets.only(bottom: 12),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(color: Colors.grey.shade200)
+                                  ),
+                                  child: Text("dhbdhdbhjd ndjndjdbdhbdhdb "),
+                                ),Container(
+                                  padding: EdgeInsets.all(4),
+                                  margin: EdgeInsets.only(bottom: 12),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(color: Colors.grey.shade200)
+                                  ),
+                                  child: Text("dhbdhdbhjd ndjndjdbdhbdhdb "),
+                                ),
+
+                              ],
+                            ),
+                          );
+                        }
+                    ),
+                  )
+              ):
               controller.questionSaveResponse.value!.questions!.isEmpty?
                   Center(child: EmptyWidget(title: "There has no questions",)):
               RefreshIndicator(

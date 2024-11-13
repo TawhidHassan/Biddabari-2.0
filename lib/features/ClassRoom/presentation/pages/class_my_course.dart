@@ -1,3 +1,4 @@
+import 'package:biddabari_new/core/common/widgets/empty/empty_widget.dart';
 import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
 import 'package:biddabari_new/features/ClassRoom/presentation/controller/ClassRoom_controller.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 import '../../../../core/common/widgets/container/discount_badge.dart';
+import '../../../../core/common/widgets/shimer component/shimer_list.dart';
 import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/config/util/text_style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
@@ -21,7 +23,9 @@ class ClassRoomMyCourse extends StatelessWidget {
       builder: (controller) {
         return Obx(() {
           return controller.myClassCourseLoading.value?
-          LoadingWidget()
+          ShimerList()
+              :
+          controller.courseMyResponse.value==null&&controller.myClassCourseLoading.value==false?EmptyWidget()
               :
           ListView.builder(
             shrinkWrap: true,

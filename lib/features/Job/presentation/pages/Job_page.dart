@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/common/widgets/Button/custom_button.dart';
 import '../../../../core/common/widgets/card/course_card.dart';
@@ -41,7 +42,129 @@ class JobPage extends StatelessWidget {
         assignId: true,
         builder: (controller) {
           return Obx(() {
-            return controller.circleJob.value?LoadingWidget():
+            return controller.circleJob.value?
+            Skeletonizer(
+              enabled: true,
+              child: Container(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        HorizontalCategoryCard(
+                          active: false,
+                          title: "djdjjjdndjdjd",
+                        ),
+                        HorizontalCategoryCard(
+                          active: false,
+                          title: "djdjjdimdinddjd",
+                        ),
+                        HorizontalCategoryCard(
+                          active: false,
+                          title: "djdiudndujdjd",
+                        ),
+                
+                      ],
+                    ),
+                    SizedBox(height: 24,),
+                    GridView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 12.0,
+                          mainAxisSpacing: 12.0,
+                          childAspectRatio: 4 / 4,
+                          mainAxisExtent: 220
+                      ),
+                      itemCount: 6,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                          },
+                          child: Container(
+                            decoration: ShapeDecoration(
+                              color: Colors.white,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius
+                                  .circular(7)),
+                              shadows: [
+                                BoxShadow(
+                                  color: Color(0x26A8A4A4),
+                                  blurRadius: 15,
+                                  offset: Offset(0, 8),
+                                  spreadRadius: 0,
+                                )
+                              ],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    height: 300,
+                                    width: 1.0.sw,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(4),
+                                            topLeft: Radius.circular(4)),
+                                        image: DecorationImage(
+                                            image: Assets.images.course
+                                                .provider(),
+                                            fit: BoxFit.fill
+                                        )
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 8,),
+                                Expanded(
+                                  flex: 1,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        DiscountBadge(
+                                          textSize: 8,
+                                          text: 'Most Recent',
+                                          backgroundColor: Colors.grey.shade200,
+                                          foregroundColor: Colors.white,
+                                        ),
+                                        SizedBox(height: 4,),
+                                        Text(
+                                          "titjdbhdbdubdudble",
+                                          style: boldText(
+                                              16, color: AppColors.textClorColor),
+                                          textAlign: TextAlign.start,
+                                          maxLines: 2, // Set a limit for lines
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+
+                                        const SizedBox(height: 8),
+                                        DiscountBadge(
+                                          textSize: 8,
+                                          text: 'Most Recent',
+                                          backgroundColor: Colors.grey.shade200,
+                                          foregroundColor: Colors.white,
+                                        ),
+
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ):
             Container(
               height: 1.0.sh,
               width: 1.0.sw,
@@ -109,7 +232,23 @@ class JobPage extends StatelessWidget {
                                 flex: 1,
                                 child: CachedNetworkImage(
                                   imageUrl:controller.selectedJobcategory!.value!.circulars![index].image??"",
-                                  placeholder: (context, url) => LoadingWidget(),
+                                  placeholder: (context, url) => Skeletonizer(
+                                    enabled: true,
+                                    child: Container(
+                                      height: 300,
+                                      width: 1.0.sw,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(4),
+                                              topLeft: Radius.circular(4)),
+                                          image: DecorationImage(
+                                              image: Assets.images.course
+                                                  .provider(),
+                                              fit: BoxFit.fill
+                                          )
+                                      ),
+                                    ),
+                                  ),
                                   errorWidget: (context, url, error) {
                                     return Container(
                                       height: 300,

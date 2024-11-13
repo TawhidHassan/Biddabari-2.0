@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
+import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/config/util/text_style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/routes/route_path.dart';
@@ -48,7 +50,71 @@ class CourseProgressPage extends StatelessWidget {
               width: 1.0.sw,
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: controller.circuler.value ?
-              LoadingWidget()
+              Skeletonizer(
+                enabled: true,
+                child: ListView.builder(
+                  itemCount: 10,
+                 itemBuilder: (context, index) {
+                   return Container(
+                     height: 80,
+                     margin: EdgeInsets.only(bottom: 12),
+                     padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 12),
+                     decoration: ShapeDecoration(
+                       color: Color(0xffF1F7FF),
+                       shape: RoundedRectangleBorder(
+                         side: BorderSide(width: 0.75, color: Color(0xFFB4BDC4)),
+                         borderRadius: BorderRadius.circular(6),
+                       ),
+                       shadows: [
+                         BoxShadow(
+                           color: Color(0x26A8A4A4),
+                           blurRadius: 6,
+                           offset: Offset(3, 4),
+                           spreadRadius: 2,
+                         )
+                       ],
+                     ),
+                     child: Row(
+                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       children: [
+                         Expanded(
+                           flex: 8,
+                           child: Row(
+                             children: [
+                               Container(
+                                 height: 50,
+                                 width: 50,
+                                 padding: EdgeInsets.all(12),
+                                 decoration: ShapeDecoration(
+                                   shape: RoundedRectangleBorder(
+                                     side: BorderSide(width: 0.75, color: Color(0xFFD9D9D9)),
+                                     borderRadius: BorderRadius.circular(100),
+                                   ),
+                                 ),
+                               ),
+                               SizedBox(width: 12,),
+                               Expanded(
+                                   child:
+
+                                   Column(
+                                     crossAxisAlignment: CrossAxisAlignment.start,
+                                     mainAxisAlignment: MainAxisAlignment.center,
+                                     children: [
+                                       Text('ccjndjbdjddbjdc',style: boldText(16,),maxLines: 1,),
+                                       Text('cdjndjbdhdbhhdbdhbdhdddddd',style: extraBoldText(14,color: Colors.green),maxLines: 1,),
+                                     ],
+                                   )
+                               ),
+                             ],
+                           ),
+                          ),
+                         Assets.icons.forwordArrow.svg(color: Colors.grey)
+                       ],
+                     ),
+                   );
+                 }
+                ),
+              )
                   :
               ListView.builder(
                 itemCount: controller.courseContentDetails.value!.course!

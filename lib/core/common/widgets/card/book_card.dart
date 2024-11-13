@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../config/color/app_colors.dart';
 import '../../../config/util/text_style.dart';
@@ -20,8 +21,21 @@ class BookCard extends StatelessWidget {
       onTap: () {
         context.pushNamed(Routes.bookDetailsPage,extra:book );
       },
-      child: Padding(
+      child: Container(
         padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 10.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Color(0x266E6D6D),
+              blurRadius: 24,
+              offset: Offset(1, 12),
+              spreadRadius: 2,
+            )
+          ],
+          
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +48,17 @@ class BookCard extends StatelessWidget {
 
                   CachedNetworkImage(
                     imageUrl:book!.image!,
-                    placeholder: (context, url) => LoadingWidget(),
+                    placeholder: (context, url) => Skeletonizer(
+                      enabled: true,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: Assets.images.course.provider(),
+                              fit: BoxFit.cover,
+                            ),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        )),
                     errorWidget: (context, url, error){
                       return Container(
                         decoration: BoxDecoration(

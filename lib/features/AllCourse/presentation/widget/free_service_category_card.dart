@@ -4,6 +4,7 @@ import 'package:biddabari_new/core/config/util/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/common/widgets/loading/loading_widget.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
@@ -23,14 +24,33 @@ class FreeServiceCategoryCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12)
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Color(0x26A8A4A4),
+              blurRadius: 12,
+              offset: Offset(0, 12),
+              spreadRadius: 0,
+            )
+          ],
         ),
         child: Column(
           children: [
             Expanded(
               child: CachedNetworkImage(
-                imageUrl:ApiEndpoint.imageBaseUrl+categoryData!.second_image!,
-                placeholder: (context, url) => LoadingWidget(),
+                imageUrl:ApiEndpoint.imageBaseUrl+categoryData!.second_image.toString(),
+                placeholder: (context, url) => Skeletonizer(
+                  enabled: true,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: Assets.images.course.provider(),
+                        fit: BoxFit.contain,
+                      ),
+                      borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(5),),
+                    ),
+                  ),
+                ),
                 errorWidget: (context, url, error){
                   return Container(
                     decoration: BoxDecoration(

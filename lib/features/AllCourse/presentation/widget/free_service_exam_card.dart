@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/common/widgets/loading/loading_widget.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
@@ -50,7 +51,15 @@ class FreeServiceExamCard extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(12)
+                borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0x266E6D6D),
+                  blurRadius: 24,
+                  offset: Offset(6, 12),
+                  spreadRadius: 2,
+                )
+              ],
             ),
             child: ListView(
               physics: NeverScrollableScrollPhysics(),
@@ -58,9 +67,23 @@ class FreeServiceExamCard extends StatelessWidget {
                 CachedNetworkImage(
                   imageUrl: ApiEndpoint.imageBaseUrl +
                       categoryData!.category_exam!.banner!,
-                  placeholder: (context, url) => LoadingWidget(),
+                  placeholder: (context, url) =>  Skeletonizer(
+                    enabled: true,
+                    child: Container(
+                      height: 100,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: Assets.images.course.provider(),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.only(topRight: Radius
+                            .circular(5), topLeft: Radius.circular(5),),
+                      ),
+                    ),
+                  ),
                   errorWidget: (context, url, error) {
                     return Container(
+                      height: 100,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: Assets.images.course.provider(),

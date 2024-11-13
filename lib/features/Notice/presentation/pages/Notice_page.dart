@@ -1,4 +1,5 @@
 import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
+import 'package:biddabari_new/core/common/widgets/shimer%20component/shimer_list.dart';
 import 'package:biddabari_new/features/Notice/presentation/controller/Notice_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +33,10 @@ class NoticePage extends StatelessWidget {
         assignId: true,
         builder: (controller) {
           return Obx(() {
-            return controller.noticeLoading.value?LoadingWidget():
+            return controller.noticeLoading.value?Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: ShimerList(),
+            ):
             Container(
               height: 1.0.sw,
               padding: EdgeInsets.symmetric(horizontal: 16),

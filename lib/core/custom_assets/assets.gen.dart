@@ -274,6 +274,10 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/authentication.jpg
+  AssetGenImage get authentication =>
+      const AssetGenImage('assets/images/authentication.jpg');
+
   /// File path: assets/images/biddabari_white.png
   AssetGenImage get biddabariWhite =>
       const AssetGenImage('assets/images/biddabari_white.png');
@@ -350,6 +354,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<dynamic> get values => [
+        authentication,
         biddabariWhite,
         course,
         empty,

@@ -6,6 +6,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/common/widgets/container/discount_badge.dart';
 import '../../../../core/common/widgets/loading/loading_widget.dart';
@@ -33,9 +34,9 @@ class AllCourseCard extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
           shadows: [
             BoxShadow(
-              color: Color(0x26A8A4A4),
+              color: Color(0x26807C7C),
               blurRadius: 15,
-              offset: Offset(0, 8),
+              offset: Offset(12, 12),
               spreadRadius: 0,
             )
           ],
@@ -52,7 +53,18 @@ class AllCourseCard extends StatelessWidget {
 
                   CachedNetworkImage(
                     imageUrl:ApiEndpoint.imageBaseUrl+course!.banner!,
-                    placeholder: (context, url) => LoadingWidget(),
+                    placeholder: (context, url) => Skeletonizer(
+                      enabled: true,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: Assets.images.course.provider(),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                    ),
                     errorWidget: (context, url, error){
                       return Container(
                         decoration: BoxDecoration(

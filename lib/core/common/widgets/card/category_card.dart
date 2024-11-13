@@ -2,6 +2,7 @@ import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
 import 'package:biddabari_new/core/config/color/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../config/util/text_style.dart';
 import '../../../custom_assets/assets.gen.dart';
@@ -22,10 +23,10 @@ class CategoryCard extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
         shadows: [
           BoxShadow(
-            color: Color(0x26A8A4A4),
-            blurRadius: 15,
-            offset: Offset(0, 8),
-            spreadRadius: 0,
+            color: Color(0x266E6D6D),
+            blurRadius: 6,
+            offset: Offset(1, 12),
+            spreadRadius: 2,
           )
         ],
       ),
@@ -37,9 +38,23 @@ class CategoryCard extends StatelessWidget {
             flex: 2,
             child: CachedNetworkImage(
               imageUrl:image!,
-              placeholder: (context, url) => LoadingWidget(),
+              placeholder: (context, url) => Skeletonizer(
+                  enabled: true,
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.grey,
+                  )),
               errorWidget: (context, url, error){
-                return Assets.images.logo.image();
+                return Container(
+                  padding: EdgeInsets.all(16),
+                  height: 300,
+                  decoration:  BoxDecoration(
+                      borderRadius: BorderRadius.only(topRight: Radius.circular(4),topLeft: Radius.circular(4) ),
+                    color: Colors.grey
+                  ),
+                  child: Assets.images.logo.image(),
+                );
               },
               imageBuilder: (context, image) =>
                   Container(

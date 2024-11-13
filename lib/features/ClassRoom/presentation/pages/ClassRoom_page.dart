@@ -69,16 +69,37 @@ class ClassRoomPage extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("You are not Login", style: boldText(
-                            14, color: AppColors.textClorColor)),
-                        SizedBox(height: 8,),
-                        InkWell(
-                            onTap: () {
-                              context.pushNamed(Routes.loginPage);
-                              // Navigator.pushNamedAndRemoveUntil(context, );
-                            },
-                            child: Text("Click To Login",
-                                style: boldText(14, color: Colors.blueAccent))),
+                        Container(
+                          padding: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                              color: Color(0x26A8A4A4),
+                              blurRadius: 15,
+                              offset: Offset(0, 8),
+                              spreadRadius: 0,
+                             )
+                           ],
+                          ),
+                          child: Column(
+                            children: [
+                              Assets.images.authentication.image(height: 200.h,width: 200.w),
+                              SizedBox(height: 6,),
+                              Text("You are not Login, access your course \nplease login first", style: boldText(
+                                  16, color: AppColors.textClorColor),textAlign: TextAlign.center,),
+                              SizedBox(height: 8,),
+                              InkWell(
+                                  onTap: () {
+                                    context.pushNamed(Routes.loginPage);
+                                    // Navigator.pushNamedAndRemoveUntil(context, );
+                                  },
+                                  child: Text("Click To Login >",
+                                      style: extraBoldText(16, color: Colors.blueAccent))),
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ) :
@@ -195,9 +216,7 @@ class ClassRoomPage extends StatelessWidget {
                         child: Container(
                           padding: EdgeInsets.symmetric(horizontal: 16),
                           child: Obx(() {
-                            return controller.myClassCourseLoading.value ?
-                            LoadingWidget()
-                                :
+                            return
                             Column(
                               children: [
                                 SizedBox(height: 21,),

@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return [
-            SliverToBoxAdapter(child: SizedBox(height: 28.h,)),
+            SliverToBoxAdapter(child: SizedBox(height: 8,)),
             SliverToBoxAdapter(child:  Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: Search(

@@ -6,6 +6,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/common/widgets/container/discount_badge.dart';
 import '../../../../core/common/widgets/loading/loading_widget.dart';
@@ -51,7 +52,19 @@ class MyOrderCard extends StatelessWidget {
               flex: 3,
               child: CachedNetworkImage(
                 imageUrl:ApiEndpoint.imageBaseUrl+"course!.banner!",
-                placeholder: (context, url) => LoadingWidget(),
+                placeholder: (context, url) => Skeletonizer(
+                  enabled: true,
+                  child: Container(
+                    height: 110,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: Assets.images.course.provider(),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                ),
                 errorWidget: (context, url, error){
                   return Container(
                     height: 110,

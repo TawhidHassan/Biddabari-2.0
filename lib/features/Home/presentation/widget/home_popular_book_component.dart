@@ -1,4 +1,6 @@
+import 'package:biddabari_new/core/common/widgets/empty/empty_widget.dart';
 import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
+import 'package:biddabari_new/core/common/widgets/shimer%20component/shimer_grid.dart';
 import 'package:biddabari_new/core/config/color/app_colors.dart';
 import 'package:biddabari_new/core/utils/system_util.dart';
 import 'package:biddabari_new/features/BookStore/presentation/controller/BookStore_controller.dart';
@@ -6,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/common/widgets/card/book_card.dart';
 import '../../../../core/config/util/text_style.dart';
@@ -27,10 +30,9 @@ class HomePoularBookComponent extends StatelessWidget {
         return Obx(() {
           return Padding(
             padding: const EdgeInsets.all(24.0),
-            child:controller.topBookLoading.value?LoadingWidget():
+            child:
             Column(
               children: [
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -52,7 +54,15 @@ class HomePoularBookComponent extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 19,),
-                controller.topBookResponse.value==null?SizedBox():
+                controller.topBookResponse.value==null&&controller.topBookLoading.value?
+                ShimerGrid():
+                controller.topBookResponse.value==null?
+                Column(
+                  children: [
+                    EmptyWidget(),
+                    SizedBox(height: 80,),
+                  ],
+                ):
                 GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,

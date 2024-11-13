@@ -45,7 +45,9 @@ class CourseContentListPage extends StatelessWidget {
         child: GetBuilder<CourseProgressController>(
           assignId: true,
           builder: (controller) {
-            return courseSection!.course_section_contents!.isEmpty?EmptyWidget(): ListView.builder(
+            return courseSection!.course_section_contents!.isEmpty?
+            EmptyWidget(title: "There has no content",):
+            ListView.builder(
                 itemCount:courseSection!.course_section_contents!.length,
                 itemBuilder: (context, index) {
                   return InkWell(

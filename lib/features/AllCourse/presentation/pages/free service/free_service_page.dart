@@ -1,4 +1,5 @@
 import 'package:biddabari_new/core/common/widgets/Appbar/custom_appbar.dart';
+import 'package:biddabari_new/core/common/widgets/empty/empty_widget.dart';
 import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
 import 'package:biddabari_new/features/AllCourse/presentation/controller/AllCourse_controller.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../core/common/widgets/shimer component/shimer_grid.dart';
 import '../../../../../core/custom_assets/assets.gen.dart';
 import '../../../../../core/routes/route_path.dart';
 import '../../../../../core/utils/system_util.dart';
@@ -37,12 +39,15 @@ class FreeServicePage extends StatelessWidget {
         assignId: true,
         builder: (controller) {
           return Obx(() {
-            return controller.freeLoding.value?LoadingWidget():
+            return
             Container(
               height: 1.0.sh,
               width: 1.0.sw,
               padding: EdgeInsets.all(16),
-              child: controller.freeServiceResponse!.value==null?SizedBox():
+              child:
+              controller.freeLoding.value?ShimerGrid():
+              controller.freeServiceResponse!.value==null&&controller.freeLoding.value==false?
+              EmptyWidget():
               GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
