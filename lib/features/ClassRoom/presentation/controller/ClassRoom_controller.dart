@@ -76,7 +76,6 @@ class ClassRoomController extends GetxController implements GetxService{
       );
     }, (r){
       myClassResponse.value=r;
-      ///"pending", "start", "continue", "stop"
     });
     myClassLoading.value=false;
   }
@@ -97,7 +96,6 @@ class ClassRoomController extends GetxController implements GetxService{
       );
     }, (r){
       todayExamResponse.value=r;
-      ///"pending", "start", "continue", "stop"
     });
     myClassExamLoading.value=false;
   }

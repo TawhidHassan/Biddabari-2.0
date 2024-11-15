@@ -45,8 +45,6 @@ class MyBookCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-
-            // image
             Expanded(
               flex: 3,
               child: CachedNetworkImage(

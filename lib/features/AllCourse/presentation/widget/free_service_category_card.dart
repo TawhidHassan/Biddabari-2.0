@@ -57,8 +57,7 @@ class FreeServiceCategoryCard extends StatelessWidget {
                     height: 80,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: Assets.images.biddabariLogo.provider(),
-                        fit: BoxFit.contain,
+                        image: Assets.images.biddabariLogo.provider(), fit: BoxFit.contain,
                       ),
                       borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(5),),
                     ),

@@ -327,8 +327,8 @@ class BookDetailsPage extends StatelessWidget {
                   .discount_amount??"0.0")).toString()
                   :
               controller.bookSingelResponse.value!.product!.price!.toString(),
-              discountPercent: '${calculateDiscountPercentage(double.parse(controller.bookSingelResponse.value!.product!
-                  .price??"0.0") , double.parse(controller.bookSingelResponse.value!.product!
+              discountPercent: '${calculateDiscountPercentage(double.parse(controller.bookSingelResponse.value!.product!.price??"0.0") ,
+                  double.parse(controller.bookSingelResponse.value!.product!
                   .discount_amount??"0.0"))}',
               loading: controller.storeBookLoading.value,
             ),
