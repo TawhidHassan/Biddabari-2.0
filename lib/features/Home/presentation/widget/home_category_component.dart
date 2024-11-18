@@ -52,8 +52,8 @@ class HomeCategoryComponent extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return CategoryCard(
                         image: "",
-                        name:"ss",
-                        total: "12",
+                        name:"",
+                        total: "",
                         id: 0,
                         slug: ""
                     );

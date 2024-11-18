@@ -50,7 +50,7 @@ class SetNewPasswordPage extends StatelessWidget {
                         ),
 
                         Text(
-                          'We sent a reset link to ${controller.emailController.text}\nenter 5 digit code that mentioned in the email',
+                          'We sent a OTP to ${controller.emailController.text}\nenter 5 digit code that mentioned in the phone number',
                           style: semiBoldText(12, color: Color(0xFF545454),),
                           textAlign: TextAlign.center,
                         ),
@@ -119,7 +119,7 @@ class SetNewPasswordPage extends StatelessWidget {
                                      controller.passwordChange(context);
                                   }
                                 },
-                                titleText: 'Register',
+                                titleText: 'Change Password',
                                 titleSize: 14,
                                 titleColor: Colors.white,
                                 buttonColor: AppColors.primaryColor,

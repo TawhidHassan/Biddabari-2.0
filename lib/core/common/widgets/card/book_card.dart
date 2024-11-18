@@ -125,13 +125,13 @@ class BookCard extends StatelessWidget {
             const SizedBox(height: 10),
 
             // category
-            Text(
-              'category',
-              style: const TextStyle(
-                color: AppColors.orange400,
-                fontSize: 12,
-              ),
-            ),
+            // Text(
+            //   'category',
+            //   style: const TextStyle(
+            //     color: AppColors.orange400,
+            //     fontSize: 12,
+            //   ),
+            // ),
 
             const SizedBox(height: 5),
 
@@ -168,7 +168,7 @@ class BookCard extends StatelessWidget {
 
                 // rating
                 Text(
-                  "3.2",
+                  "4.6",
                   style: const TextStyle(
                     fontSize: 12,
                     color: Colors.black54,
@@ -179,8 +179,9 @@ class BookCard extends StatelessWidget {
 
                 // rating star
                 RatingBar.builder(
-                  initialRating: 3,
+                  initialRating: 4.6,
                   minRating: 1,
+                  ignoreGestures: true,
                   direction: Axis.horizontal,
                   allowHalfRating: true,
                   itemCount: 5,
@@ -200,13 +201,13 @@ class BookCard extends StatelessWidget {
                 const SizedBox(width: 5),
 
                 // total rating count
-                Text(
-                  '(12)',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.black54,
-                  ),
-                ),
+                // Text(
+                //   '(12)',
+                //   style: const TextStyle(
+                //     fontSize: 12,
+                //     color: Colors.black54,
+                //   ),
+                // ),
               ],
             ),
           ],

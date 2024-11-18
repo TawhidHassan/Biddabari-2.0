@@ -72,5 +72,6 @@ class HomeController extends GetxController implements GetxService{
 
 
 
+
 }
 

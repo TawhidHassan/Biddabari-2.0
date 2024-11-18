@@ -44,12 +44,12 @@ class ForgetPasswordPage extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          'Forgot Password',
+                          'Forgot/Change Password',
                           style: boldText(20),
                         ),
 
                         Text(
-                          'Please enter your email to reset the password',
+                          'Please enter your phone number to reset the password',
                           style: semiBoldText(12, color: Color(0xFF545454),),
                         ),
 
@@ -99,7 +99,7 @@ class ForgetPasswordPage extends StatelessWidget {
                                     controller.resetPassword(context);
                                   }
                                 },
-                                titleText: 'Reset Password',
+                                titleText: 'Get Otp',
                                 titleSize: 14,
                                 titleColor: Colors.white,
                                 buttonColor: AppColors.primaryColor,

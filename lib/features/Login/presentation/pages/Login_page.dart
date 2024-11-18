@@ -95,31 +95,31 @@ class LoginPage extends StatelessWidget {
 
                                 ),
                                 SizedBox(height: 16,),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    SizedBox(width: 4,),
-                                    SizedBox(
-                                      height: 12,
-                                      width: 12,
-                                      child: Checkbox(
-                                          value: true,
-                                          onChanged: (onChanged) {}
-                                      ),
-                                    ),
-                                    SizedBox(width: 8,),
-                                    Text(
-                                      'Agree to Terms & Conditions',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Color(0xFF545454),
-                                        fontSize: 12,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    )
-                                  ],
-                                ),
+                                // Row(
+                                //   mainAxisAlignment: MainAxisAlignment.start,
+                                //   children: [
+                                //     SizedBox(width: 4,),
+                                //     SizedBox(
+                                //       height: 12,
+                                //       width: 12,
+                                //       child: Checkbox(
+                                //           value: true,
+                                //           onChanged: (onChanged) {}
+                                //       ),
+                                //     ),
+                                //     SizedBox(width: 8,),
+                                //     Text(
+                                //       'Agree to Terms & Conditions',
+                                //       textAlign: TextAlign.center,
+                                //       style: TextStyle(
+                                //         color: Color(0xFF545454),
+                                //         fontSize: 12,
+                                //         fontFamily: 'Poppins',
+                                //         fontWeight: FontWeight.w500,
+                                //       ),
+                                //     )
+                                //   ],
+                                // ),
 
                               ],
                             ),

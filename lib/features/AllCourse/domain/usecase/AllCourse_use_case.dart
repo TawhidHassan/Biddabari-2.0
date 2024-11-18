@@ -24,11 +24,15 @@ AllCourseUseCase({this.allCourseRepository});
     Future<Either<Failure, CourseResponse>> getRuningCourse() {
     // TODO: implement call
     return allCourseRepository!.getRuningCourse();
+    }  @override
+    Future<Either<Failure, CourseResponse>> getAllPopularCourse() {
+    // TODO: implement call
+    return allCourseRepository!.getAllPopularCourse();
     }
     @override
-    Future<Either<Failure, AllCourseResponse>> getAllCourse() {
+    Future<Either<Failure, AllCourseResponse>> getAllCourse(int? page) {
     // TODO: implement call
-    return allCourseRepository!.getAllCourse();
+    return allCourseRepository!.getAllCourse(page);
     }
     @override
     Future<Either<Failure, CourseCategoryResponse>> getCategoryCourse(String? slug)async {
@@ -50,6 +54,8 @@ AllCourseUseCase({this.allCourseRepository});
   Future<Either<Failure, CourseCategoryResponse>>getFreeServiceContent(String? slug)async {
       return allCourseRepository!.getFreeServiceContent(slug);
   }
+
+
 
 
 

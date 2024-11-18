@@ -113,14 +113,20 @@ class BookDetailsPage extends StatelessWidget {
                             children: [
                               const SizedBox(width: 15),
                               DiscountBadge(
-                                text: '-36%',
+                                text: '${calculateDiscountPercentage(double.parse(controller.bookSingelResponse.value!.product!.price??"0.0"), double.parse(controller.bookSingelResponse.value!.product!.discount_amount??"0.0"))} %',
                                 backgroundColor: Color(0xFf18C667),
                                 foregroundColor: Colors.white,
                                 radius: 12,
                               ),
                               const SizedBox(width: 15),
+                              controller.bookSingelResponse.value!.product!.stock_amount!>0?
                               DiscountBadge(
-                                text: 'Free shipping',
+                                text: 'In Stock',
+                                backgroundColor: Color(0xFf18C667),
+                                foregroundColor: Colors.white,
+                                radius: 12,
+                              ):DiscountBadge(
+                                text: 'Out Of Stock',
                                 backgroundColor: Color(0xFf18C667),
                                 foregroundColor: Colors.white,
                                 radius: 12,
@@ -141,12 +147,17 @@ class BookDetailsPage extends StatelessWidget {
                     child: Row(
                       children: [
                         SizedBox(
-                          width: 120,
-                          child: DiscountBadge(
-                            text: 'Free shipping',
-                            backgroundColor: Color(0xFf167F71),
-                            foregroundColor: Colors.white,
-                            radius: 4,
+                          width: 100,
+                          child: InkWell(
+                            onTap: (){
+                              context.pushNamed(Routes.readMorePage,extra: controller.bookSingelResponse.value!.product!);
+                            },
+                            child: DiscountBadge(
+                              text: "Read More",
+                              backgroundColor: Color(0xFf167F71),
+                              foregroundColor: Colors.white,
+                              radius: 4,
+                            ),
                           ),
                         ),
                       ],
@@ -165,8 +176,9 @@ class BookDetailsPage extends StatelessWidget {
                         Row(
                           children: [
                             RatingBar.builder(
-                              initialRating: 3,
+                              initialRating: 5,
                               minRating: 1,
+                              ignoreGestures: true,
                               direction: Axis.horizontal,
                               allowHalfRating: true,
                               itemCount: 5,
@@ -183,20 +195,20 @@ class BookDetailsPage extends StatelessWidget {
                               },
                             ),
                             SizedBox(width: 6,),
-                            Text(
-                              '(1 customer review)',
-                              style: regularText(10, color: Color(0xFF777777)),
-                            ),
+                            // Text(
+                            //   '(1 customer review)',
+                            //   style: regularText(10, color: Color(0xFF777777)),
+                            // ),
                           ],
                         ),
 
                         SizedBox(height: 10,),
                         BookInfo(
                           bookDetails: [
-                            ['লেখক', 'writer'],
-                            ['প্রকাশনী', 'publication'],
-                            ['বিষয়', 'subject'],
-                            ['কভার', 'cover'],
+                            ['লেখক', '${controller.bookSingelResponse.value!.product!.product_author!.name}'],
+                            ['প্রকাশনী', 'Biddabari'],
+                            ['বিষয়', '${controller.bookSingelResponse.value!.product!.title}'],
+                            ['কভার', 'Good Printing Press'],
                           ],
                         ),
 
@@ -247,9 +259,8 @@ class BookDetailsPage extends StatelessWidget {
 
                         BookInfo(
                           bookDetails: [
-                            ['অনুবাদ', 'translation'],
-                            ['সম্পাদনা', 'edition'],
-                            ['পৃষ্ঠা', 'page'],
+                            ['অনুবাদ', 'Bangla'],
+                            ['সম্পাদনা', 'Biddabari'],
                           ],
                         ),
 

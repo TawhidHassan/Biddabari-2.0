@@ -37,7 +37,7 @@ class CourseInstector extends StatelessWidget {
             // instructor's image
             CachedNetworkImage(
               imageUrl: ApiEndpoint.imageBaseUrl +
-                  teacher!.user!.profilePhotoPath.toString(),
+                  teacher!.image.toString(),
               errorWidget: (context, url, error){
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -59,7 +59,7 @@ class CourseInstector extends StatelessWidget {
 
             // instructor's name
             Text(
-              teacher!.user!.name??"",
+              teacher!.first_name??"",
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
@@ -79,118 +79,118 @@ class CourseInstector extends StatelessWidget {
             const SizedBox(height: 12),
 
             // rating, students and courses
-            Row(
-              mainAxisAlignment:
-              MainAxisAlignment.spaceEvenly,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // star icon
-                    const Icon(
-                      Icons.star,
-                      color: Color(0xFFEB6A20),
-                      size: 15,
-                    ),
-
-                    const SizedBox(width: 3),
-
-                    // rating count
-                    Text(
-                      "12",
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-
-                    const SizedBox(width: 3),
-
-                    // Course Rating text
-                    // const Text(
-                    //   'Course Rating',
-                    //   style: TextStyle(
-                    //     fontSize: 12,
-                    //     color: Colors.grey,
-                    //     fontWeight: FontWeight.w400,
-                    //   ),
-                    // ),
-                  ],
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // number of students
-                    Text(
-                      "12",
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-
-                    const SizedBox(width: 3),
-
-                    // Student text
-                    const Text(
-                      'Students',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // play icon
-                    const Icon(
-                      Icons.play_circle,
-                      color: Color(0xFFEB6A20),
-                      size: 15,
-                    ),
-
-                    const SizedBox(width: 3),
-
-                    // rating count
-                    Text(
-                      "12",
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-
-                    const SizedBox(width: 3),
-
-                    // course rating text
-                    const Text(
-                      'Courses',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment:
+            //   MainAxisAlignment.spaceEvenly,
+            //   children: [
+            //     Row(
+            //       mainAxisSize: MainAxisSize.min,
+            //       children: [
+            //         // star icon
+            //         const Icon(
+            //           Icons.star,
+            //           color: Color(0xFFEB6A20),
+            //           size: 15,
+            //         ),
+            //
+            //         const SizedBox(width: 3),
+            //
+            //         // rating count
+            //         Text(
+            //           "12",
+            //           style: const TextStyle(
+            //             fontSize: 12,
+            //             fontWeight: FontWeight.w400,
+            //           ),
+            //         ),
+            //
+            //         const SizedBox(width: 3),
+            //
+            //         // Course Rating text
+            //         // const Text(
+            //         //   'Course Rating',
+            //         //   style: TextStyle(
+            //         //     fontSize: 12,
+            //         //     color: Colors.grey,
+            //         //     fontWeight: FontWeight.w400,
+            //         //   ),
+            //         // ),
+            //       ],
+            //     ),
+            //     Row(
+            //       mainAxisSize: MainAxisSize.min,
+            //       children: [
+            //         // number of students
+            //         Text(
+            //           "12",
+            //           style: const TextStyle(
+            //             fontSize: 12,
+            //             fontWeight: FontWeight.w400,
+            //           ),
+            //         ),
+            //
+            //         const SizedBox(width: 3),
+            //
+            //         // Student text
+            //         const Text(
+            //           'Students',
+            //           style: TextStyle(
+            //             fontSize: 12,
+            //             color: Colors.grey,
+            //             fontWeight: FontWeight.w400,
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //     Row(
+            //       mainAxisSize: MainAxisSize.min,
+            //       children: [
+            //         // play icon
+            //         const Icon(
+            //           Icons.play_circle,
+            //           color: Color(0xFFEB6A20),
+            //           size: 15,
+            //         ),
+            //
+            //         const SizedBox(width: 3),
+            //
+            //         // rating count
+            //         Text(
+            //           "12",
+            //           style: const TextStyle(
+            //             fontSize: 12,
+            //             fontWeight: FontWeight.w400,
+            //           ),
+            //         ),
+            //
+            //         const SizedBox(width: 3),
+            //
+            //         // course rating text
+            //         const Text(
+            //           'Courses',
+            //           style: TextStyle(
+            //             fontSize: 12,
+            //             color: Colors.grey,
+            //             fontWeight: FontWeight.w400,
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ],
+            // ),
 
             const SizedBox(height: 12),
 
             // instructor's description
-            Text(
-              "djndjndjdnjdndj  dj dhjd jdndhj udndund  bdhdbhd",
-              textAlign: TextAlign.center,
-              maxLines: 6,
-              style: const TextStyle(
-                  overflow: TextOverflow.ellipsis,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w500),
-            ),
+            // Text(
+            //   "djndjndjdnjdndj  dj dhjd jdndhj udndund  bdhdbhd",
+            //   textAlign: TextAlign.center,
+            //   maxLines: 6,
+            //   style: const TextStyle(
+            //       overflow: TextOverflow.ellipsis,
+            //       color: Colors.grey,
+            //       fontWeight: FontWeight.w500),
+            // ),
           ],
         ),
       ),

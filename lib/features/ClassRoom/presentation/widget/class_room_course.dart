@@ -117,32 +117,32 @@ class ClassRoomCourse extends StatelessWidget {
 
 
                       // category
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .spaceBetween,
-                        children: [
-                          Text(
-                            "category",
-                            style: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xFFFF6B00),
-                            ),
-                          ),
-                          DiscountBadge(
-                            text: 1 == 1
-                                ? 'Approved'
-                                : 'Not Approved',
-                            backgroundColor: 1 == 1 ? Color(
-                                0xFf18C667)
-                                .withOpacity(0.14) : Colors.red
-                                .withOpacity(0.14),
-                            foregroundColor: 1 == 1
-                                ? Color(0xFf18C667)
-                                : Colors.red,
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment
+                      //       .spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       "category",
+                      //       style: const TextStyle(
+                      //         fontSize: 10,
+                      //         fontWeight: FontWeight.w500,
+                      //         color: Color(0xFFFF6B00),
+                      //       ),
+                      //     ),
+                      //     // DiscountBadge(
+                      //     //   text: 1 == 1
+                      //     //       ? 'Approved'
+                      //     //       : 'Not Approved',
+                      //     //   backgroundColor: 1 == 1 ? Color(
+                      //     //       0xFf18C667)
+                      //     //       .withOpacity(0.14) : Colors.red
+                      //     //       .withOpacity(0.14),
+                      //     //   foregroundColor: 1 == 1
+                      //     //       ? Color(0xFf18C667)
+                      //     //       : Colors.red,
+                      //     // ),
+                      //   ],
+                      // ),
                       const SizedBox(height: 6),
                       // title
                       Text(courseOrder?.course==null?"":courseOrder?.course!.title??"",
@@ -155,12 +155,13 @@ class ClassRoomCourse extends StatelessWidget {
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text("4.0", style: regularText(
+                          Text("4.5", style: regularText(
                               11, color: Color(0xFF888C94)),),
                           const SizedBox(width: 8),
                           RatingBar.builder(
-                            initialRating: 3,
+                            initialRating: 4.5,
                             minRating: 1,
+                            ignoreGestures: true,
                             direction: Axis.horizontal,
                             allowHalfRating: true,
                             itemCount: 5,

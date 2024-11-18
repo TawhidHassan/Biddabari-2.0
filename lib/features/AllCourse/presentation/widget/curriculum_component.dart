@@ -1,12 +1,14 @@
 import 'package:biddabari_new/core/utils/format_date.dart';
 import 'package:biddabari_new/features/AllCourse/presentation/controller/AllCourse_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/common/widgets/text/expandeable_text.dart';
 import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/config/util/text_style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
+import '../../../../core/routes/route_path.dart';
 import 'course_details_idecator.dart';
 
 
@@ -18,15 +20,15 @@ class CurriculumComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 12,),
-        ///details
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: ExpandableText(
-            text: 'This batch offers live, interactive sessions with expert instructors, covering essential topics like general knowledge, English, and Bangla. The focus is on conceptual clarity, consistent assessments, and strategic exam preparation.Participants will have access to detailed study materials, mock tests, and live doubt-solving',
-            maxLines: 7,
-          ),
-        ),
+        // SizedBox(height: 12,),
+        // ///details
+        // Padding(
+        //   padding: EdgeInsets.symmetric(horizontal: 16),
+        //   child: ExpandableText(
+        //     text: 'This batch offers live, interactive sessions with expert instructors, covering essential topics like general knowledge, English, and Bangla. The focus is on conceptual clarity, consistent assessments, and strategic exam preparation.Participants will have access to detailed study materials, mock tests, and live doubt-solving',
+        //     maxLines: 7,
+        //   ),
+        // ),
         SizedBox(height: 12,),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
@@ -35,7 +37,7 @@ class CurriculumComponent extends StatelessWidget {
               // course duration
               CourseDetailsIdecator(
                 title: 'Course Duration',
-                value: '6 Month',
+                value: '${controller!.detailsCategoryResponse!.value!.course!.duration_in_month??"0.0"}',
                 icon: Assets.icons.clock.svg(color: Colors.grey),
               ),
               CourseDetailsIdecator(
@@ -45,19 +47,20 @@ class CurriculumComponent extends StatelessWidget {
               ),
               CourseDetailsIdecator(
                 title: 'Students Enrolled',
-                value: '69,419,618',
+                value: '${controller!.detailsCategoryResponse!.value!.totalStudentEnrollments}',
                 icon: Assets.icons.users.svg(color: Colors.grey),
               ),
               CourseDetailsIdecator(
-                title: 'Language',
-                value: 'Mandarin',
-                icon: Assets.icons.language.svg(color: Colors.grey),
-              ),
-              CourseDetailsIdecator(
-                title: 'Subtittle Language',
-                value: 'English',
+                title: 'Total Exam',
+                value: '${controller!.detailsCategoryResponse!.value!.course!.total_exam}',
                 icon: Assets.icons.subtitle.svg(color: Colors.grey),
               ),
+              CourseDetailsIdecator(
+                title: 'Language',
+                value: 'Bangla',
+                icon: Assets.icons.language.svg(color: Colors.grey),
+              ),
+
 
 
 
@@ -128,72 +131,125 @@ class CurriculumComponent extends StatelessWidget {
                   // content under first heading
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children:controller!.detailsCategoryResponse!.value!.course!.course_sections!
+                    children:controller!.detailsCategoryResponse!.value!.courseSec!.course_sections!
                         .map<Widget>((contentData) {
-                      return Padding(
-                        padding: const EdgeInsets.only(
-                            left: 40.0, top: 8.0),
-                        child: Column(
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                // blue circle icon before title
-                                const Icon(Icons.circle,
-                                    color: Color(0xFF01A437),
-                                    size: 12),
-                                const SizedBox(width: 8),
-
-                                // title
-                                Expanded(
-                                  child: Text(
-                                    contentData.title??"",
-                                    maxLines: 2,
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      overflow:
-                                      TextOverflow.ellipsis,
+                      return ExpansionTile(
+                        title:Padding(
+                          padding: const EdgeInsets.only(
+                              left: 0.0, top: 8.0),
+                          child: Column(
+                            crossAxisAlignment:
+                            CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      contentData.title??"",
+                                      maxLines: 2,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        overflow:
+                                        TextOverflow.ellipsis,
+                                      ),
                                     ),
                                   ),
+
+                                ],
+                              ),
+
+                              const SizedBox(height: 4),
+
+                              // Duration under title
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 0.0),
+                                child: Text(
+                                  contentData.available_at??"",
+                                  style: const TextStyle(
+                                      fontSize: 13.9,
+                                      color: Colors.black54,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        children:contentData!.course_section_contents!.map((toElement){
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                                left: 40.0, top: 8.0),
+                            child: Column(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    // blue circle icon before title
+                                    const Icon(Icons.circle,
+                                        color: Color(0xFF01A437),
+                                        size: 12),
+                                    const SizedBox(width: 8),
+
+                                    // title
+                                    Expanded(
+                                      child: Text(
+                                        contentData.title??"",
+                                        maxLines: 2,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          overflow:
+                                          TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ),
+
+                                    // play button
+                                    GestureDetector(
+                                      onTap: () {
+
+                                        contentData!.is_paid==0?
+                                        context.pushNamed(Routes.videoContentPage,extra: {
+                                          "courseSectionContent":toElement,
+                                          "isCourseExam":true
+                                        }):null;
+                                      },
+                                      child:  Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 8.0),
+                                        child: Icon(
+                                            Icons.play_circle_fill,
+                                            color:contentData!.is_paid==0? Color(0xFF0961F5):Colors.grey,
+                                            size: 24),
+                                      ),
+                                    ),
+                                  ],
                                 ),
 
-                                // play button
-                                GestureDetector(
-                                  onTap: () {
-                                    debugPrint(
-                                        'Play button pressed');
-                                  },
-                                  child: const Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 8.0),
-                                    child: Icon(
-                                        Icons.play_circle_fill,
-                                        color: Color(0xFF0961F5),
-                                        size: 24),
+                                const SizedBox(height: 4),
+
+                                // Duration under title
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 20.0),
+                                  child: Text(
+                                    contentData.available_at??"",
+                                    style: const TextStyle(
+                                        fontSize: 13.9,
+                                        color: Colors.black54,
+                                        fontWeight: FontWeight.w700),
                                   ),
                                 ),
                               ],
                             ),
-
-                            const SizedBox(height: 4),
-
-                            // Duration under title
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20.0),
-                              child: Text(
-                                contentData.available_at??"",
-                                style: const TextStyle(
-                                    fontSize: 13.9,
-                                    color: Colors.black54,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ),
-                          ],
-                        ),
+                          );
+                        }).toList(),
                       );
+                        
+                        
+
                     }).toList(),
                   ),
                 ],

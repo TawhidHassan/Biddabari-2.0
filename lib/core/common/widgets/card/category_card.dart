@@ -41,19 +41,22 @@ class CategoryCard extends StatelessWidget {
               placeholder: (context, url) => Skeletonizer(
                   enabled: true,
                   child: Container(
-                    height: 100,
-                    width: 100,
-                    color: Colors.grey,
-                  )),
+                    height: 300,
+                    decoration:  BoxDecoration(
+                        borderRadius: BorderRadius.only(topRight: Radius.circular(4),topLeft: Radius.circular(4) ),
+                        image: DecorationImage(image: Assets.images.course.provider())
+                    ),
+                  )
+              ),
               errorWidget: (context, url, error){
                 return Container(
-                  padding: EdgeInsets.all(16),
                   height: 300,
+                  width: double.infinity,
                   decoration:  BoxDecoration(
                       borderRadius: BorderRadius.only(topRight: Radius.circular(4),topLeft: Radius.circular(4) ),
-                    color: Colors.grey
+                      image: DecorationImage(image: Assets.images.course.provider())
                   ),
-                  child: Assets.images.logo.image(),
+                  child: Assets.images.biddabariLogo.image(),
                 );
               },
               imageBuilder: (context, image) =>

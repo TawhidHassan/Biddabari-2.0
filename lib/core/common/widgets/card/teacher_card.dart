@@ -44,45 +44,41 @@ class TeacherCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Stack(
-              clipBehavior: Clip.none,
-              alignment: Alignment.center,
-              children: [
-
-                SizedBox(
-                  height: 130,
-                  child: Container(
-                    height: 180,
-                    width: 1.0.sw,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(4),
-                            topLeft: Radius.circular(4)),
-                        image: DecorationImage(
-                            image: Assets.images.teacherBg.provider(),
-                            fit: BoxFit.fill
-                        )
-                    ),
+            CachedNetworkImage(
+              imageUrl:ApiEndpoint.imageBaseUrl+"${teacher?.image}",
+              placeholder: (context, url) => Skeletonizer(
+                enabled: true,
+                child: Container(
+                  height: 180,
+                  width: 1.0.sw,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(4),
+                          topLeft: Radius.circular(4)),
+                      image: DecorationImage(
+                          image: Assets.images.teacherBg.provider(),
+                          fit: BoxFit.fill
+                      )
                   ),
                 ),
-                Positioned(
-                    top: -50,
-                    child:
-
-
-                    CachedNetworkImage(
-                      imageUrl:ApiEndpoint.imageBaseUrl+"${teacher?.image}",
-                      placeholder: (context, url) => Skeletonizer(
-                        enabled: true,
-                        child: Assets.images.teacher.image(height: 180),
-                      ),
-                      errorWidget: (context, url, error){
-                        return Assets.images.teacher.image(
-                            height: 180);
-                      },
-                      imageBuilder: (context, image) => Image(image: image,height: 180),
-                    )),
-              ],
+              ),
+              errorWidget: (context, url, error){
+                return Assets.images.teacher.image(
+                    height: 180);
+              },
+              imageBuilder: (context, image) =>Container(
+                height: 180,
+                width: 1.0.sw,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(4),
+                        topLeft: Radius.circular(4)),
+                    image: DecorationImage(
+                        image: image,
+                        fit: BoxFit.fill
+                    )
+                ),
+              ),
             ),
             Container(
 

@@ -61,7 +61,7 @@ class Routes {
   static const String allCoursePagePath = '/allCoursePage';
 
   static const String categoryCoursePage = 'categoryCoursePage';
-  static const String categoryCoursePagePath = 'categoryCoursePage';
+  static const String categoryCoursePagePath = '/categoryCoursePage';
 
 
   static const String detailsCoursePage = 'detailsCoursePage';
@@ -160,6 +160,9 @@ class Routes {
 
   static const String myOrderPage = 'myOrderPage';
   static const String myOrderPagePath = '/myOrderPage';
+
+  static const String readMorePage = 'readMorePage';
+  static const String readMorePagePath = '/readMorePage';
 
 
   static const String myDwonloadsPage = 'myDwonloadsPage';

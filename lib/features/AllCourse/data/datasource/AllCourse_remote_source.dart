@@ -11,12 +11,15 @@ import '../models/Student/CourseOrderResponse.dart';
 abstract class AllCourseRemoteSource {
 
 Future<CourseResponse?> getRuningCourse();
-Future<AllCourseResponse?> getAllCourse();
+Future<CourseResponse?> getAllPopularCourse();
+Future<AllCourseResponse?> getAllCourse(int? page);
 Future<CourseCategoryResponse?> getCategoryCourse(String? slug);
 Future<CourseDetailsResponse?> detailsCourse(String? id);
 Future<CourseOrderResponse?> getMyCourse();
 Future<CourseCategoryResponse?> getFreeService();
 Future<CourseCategoryResponse?>  getFreeServiceContent(String? slug);
+
+
 
 
 
@@ -39,10 +42,10 @@ class AllCourseRemoteSourceImpl implements AllCourseRemoteSource {
   }
 
   @override
-  Future<AllCourseResponse?> getAllCourse()async {
+  Future<AllCourseResponse?> getAllCourse(int? page)async {
     // TODO: implement getAllCourse
     try{
-      final result =await apiMethod.get(url: ApiEndpoint.ALL_COURSE_LIST,showResult: true,isBasic: true,duration: 30);
+      final result =await apiMethod.get(url: ApiEndpoint.ALL_COURSE_LIST+"?page=$page",showResult: true,isBasic: true,duration: 30);
       return AllCourseResponse.fromJson(result!);
     }catch (e) {
       throw ServerException(e.toString());
@@ -99,6 +102,17 @@ class AllCourseRemoteSourceImpl implements AllCourseRemoteSource {
     try{
       final result =await apiMethod.get(url: ApiEndpoint.FREE_SERVICE_CONTENT+"$slug",showResult: true,isBasic: false,duration: 30);
       return CourseCategoryResponse.fromJson(result!);
+    }catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<CourseResponse?> getAllPopularCourse()async {
+    // TODO: implement getAllPopularCourse
+    try{
+      final result =await apiMethod.get(url: ApiEndpoint.POPULAR_COURSE_LIST,showResult: true,isBasic: true,duration: 30);
+      return CourseResponse.fromJson(result!);
     }catch (e) {
       throw ServerException(e.toString());
     }

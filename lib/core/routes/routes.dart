@@ -41,6 +41,7 @@ import '../../features/Blog/data/models/Blog/Blog.dart';
 import '../../features/Blog/presentation/pages/blog_details_page.dart';
 import '../../features/BookStore/presentation/pages/book_cart.dart';
 import '../../features/BookStore/presentation/pages/book_details.dart';
+import '../../features/BookStore/presentation/pages/book_read_more_page.dart';
 import '../../features/BookStore/presentation/pages/book_read_pdf.dart';
 import '../../features/BookStore/presentation/pages/my_book_page.dart';
 import '../../features/CourseProgress/presentation/pages/CourseProgress_page.dart';
@@ -700,6 +701,16 @@ class AppRouter {
           ),
           routes: []
       ),
+      GoRoute(
+          name: Routes.readMorePage,
+          path: Routes.readMorePagePath,
+          pageBuilder: (context, state) =>  NoTransitionPage(
+            child: BookReadMorePage(
+              book: state.extra as Book,
+            ),
+          ),
+          routes: []
+      ),
 
       GoRoute(
           name: Routes.profileEditPage,
@@ -710,6 +721,14 @@ class AppRouter {
           routes: []
       ),
 
+      GoRoute(
+          name: Routes.categoryCoursePage,
+          path: Routes.categoryCoursePagePath,
+          pageBuilder: (context, state) =>  NoTransitionPage(
+            child: CategoryCoursePage(categorie:state.extra as Categorie ,),
+          ),
+          routes: []
+      ),
       ///Bottom nav bar
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
@@ -730,14 +749,7 @@ class AppRouter {
                         child: HomePage(),
                   ),
                 routes: [
-                  GoRoute(
-                      name: Routes.categoryCoursePage,
-                      path: Routes.categoryCoursePagePath,
-                      pageBuilder: (context, state) =>  NoTransitionPage(
-                        child: CategoryCoursePage(categorie:state.extra as Categorie ,),
-                      ),
-                      routes: []
-                  ),
+
                 ]
               ),
 

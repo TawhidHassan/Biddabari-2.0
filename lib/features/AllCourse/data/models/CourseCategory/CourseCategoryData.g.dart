@@ -31,7 +31,7 @@ CourseCategoryData _$CourseCategoryDataFromJson(Map<String, dynamic> json) =>
           ?.map((e) => Course.fromJson(e as Map<String, dynamic>))
           .toList(),
       (json['course_categories'] as List<dynamic>?)
-          ?.map((e) => SubCategory.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Categorie.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

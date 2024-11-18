@@ -135,74 +135,76 @@ class ClassRoomPage extends StatelessWidget {
                                     Text( profileController.profileResponse!
                                         .value!
                                         .user!.name ?? "", style: boldText(21),),
-                                    Text("Graphic Designer At Google",
+                                    Text(profileController.profileResponse!
+                                        .value!
+                                        .user!.mobile ?? "",
                                       style: boldText(
                                           13, color: Color(0xFF545454)),),
 
-                                    const SizedBox(height: 18),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 32),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .spaceBetween,
-                                        children: [
-
-                                          // total course
-                                          Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Text(
-                                                '12',
-                                                style: boldText(17),
-                                              ),
-                                              Text(
-                                                'Total Course',
-                                                style: semiBoldText(
-                                                    12,
-                                                    color: Color(
-                                                        0xFF545454)),
-                                              ),
-                                            ],
-                                          ),
-                                          Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Text(
-                                                '12',
-                                                style: boldText(17),
-                                              ),
-                                              Text(
-                                                'Completed',
-                                                style: semiBoldText(
-                                                    12,
-                                                    color: Color(
-                                                        0xFF545454)),
-                                              ),
-                                            ],
-                                          ),
-                                          Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Text(
-                                                '12',
-                                                style: boldText(17),
-                                              ),
-                                              Text(
-                                                'Ongoing',
-                                                style: semiBoldText(
-                                                    12,
-                                                    color: Color(
-                                                        0xFF545454)),
-                                              ),
-                                            ],
-                                          ),
-
-
-                                          // completed
-                                        ],
-                                      ),
-                                    ),
+                                    // const SizedBox(height: 18),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.symmetric(
+                                    //       horizontal: 32),
+                                    //   child: Row(
+                                    //     mainAxisAlignment: MainAxisAlignment
+                                    //         .spaceBetween,
+                                    //     children: [
+                                    //
+                                    //       // total course
+                                    //       Column(
+                                    //         mainAxisSize: MainAxisSize.min,
+                                    //         children: [
+                                    //           Text(
+                                    //             '12',
+                                    //             style: boldText(17),
+                                    //           ),
+                                    //           Text(
+                                    //             'Total Course',
+                                    //             style: semiBoldText(
+                                    //                 12,
+                                    //                 color: Color(
+                                    //                     0xFF545454)),
+                                    //           ),
+                                    //         ],
+                                    //       ),
+                                    //       Column(
+                                    //         mainAxisSize: MainAxisSize.min,
+                                    //         children: [
+                                    //           Text(
+                                    //             '12',
+                                    //             style: boldText(17),
+                                    //           ),
+                                    //           Text(
+                                    //             'Completed',
+                                    //             style: semiBoldText(
+                                    //                 12,
+                                    //                 color: Color(
+                                    //                     0xFF545454)),
+                                    //           ),
+                                    //         ],
+                                    //       ),
+                                    //       Column(
+                                    //         mainAxisSize: MainAxisSize.min,
+                                    //         children: [
+                                    //           Text(
+                                    //             '12',
+                                    //             style: boldText(17),
+                                    //           ),
+                                    //           Text(
+                                    //             'Ongoing',
+                                    //             style: semiBoldText(
+                                    //                 12,
+                                    //                 color: Color(
+                                    //                     0xFF545454)),
+                                    //           ),
+                                    //         ],
+                                    //       ),
+                                    //
+                                    //
+                                    //       // completed
+                                    //     ],
+                                    //   ),
+                                    // ),
 
                                   ],
                                 );

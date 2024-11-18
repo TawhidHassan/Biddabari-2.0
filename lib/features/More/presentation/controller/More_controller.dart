@@ -16,7 +16,7 @@ class MoreController extends GetxController implements GetxService{
  RxList<Order> confirmList = RxList();
 
  final orderLoading=false.obs;
- final selectFilter="Pending".obs;
+ final selectFilter="Confirm".obs;
 
 
  Future getMyOrder() async{

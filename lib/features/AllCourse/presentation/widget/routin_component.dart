@@ -4,10 +4,11 @@ import 'package:biddabari_new/features/AllCourse/presentation/widget/routine_row
 import 'package:flutter/material.dart';
 
 import '../../../../core/config/color/app_colors.dart';
+import '../../data/models/course/Course.dart';
 
 class RoutinComponent extends StatelessWidget {
-  final AllCourseController? controller;
-  const RoutinComponent({super.key, this.controller});
+  final Course? course;
+  const RoutinComponent({super.key, this.course});
 
   @override
   Widget build(BuildContext context) {
@@ -68,14 +69,17 @@ class RoutinComponent extends StatelessWidget {
           ),
 
           ListView.builder(
-            itemCount: 3,
+            itemCount: course!.course_routines!.length,
             shrinkWrap: true,
             primary: false,
             itemBuilder: (context, index) {
               return Padding(
                 padding:
                 const EdgeInsets.only(bottom: 20.0),
-                child: RoutineRow()
+                child: RoutineRow(
+                  index:index,
+                  routineModel: course!.course_routines![index],
+                )
               );
             },
           ),

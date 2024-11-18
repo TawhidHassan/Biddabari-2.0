@@ -49,25 +49,32 @@ class ExamPackageCard extends StatelessWidget {
               ),
             ),
             SizedBox(height: 6,),
-            exam!.packageTitle==null?Text(""):
-            Text(exam!.packageTitle!.length>18?exam!.packageTitle!.substring(0,15)+"..":exam!.packageTitle ??"",style: boldText(16),),
-            SizedBox(height: 6,),
-            Text("Duration: "+exam!.packageDurationInDays.toString()+"Days",style: mediumText(12),),
-            SizedBox(height: 4,),
-            Text((exam!.discountAmount!=null||exam!.discountAmount!=""?"Regular Price: ":"Price: ")+exam!.price.toString(),style: mediumText(12),),
-            exam!.discountAmount!=null||exam!.discountAmount!=""?
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 4,),
-                Text("Discount: "+exam!.discountAmount.toString()+"Tk",style: mediumText(12,),),
-                SizedBox(height: 4,),
-                Text("Current Price: "+(exam!.price-exam!.discountAmount).toString()+"Tk",style: mediumText(12),),
-                SizedBox(height: 4,),
-                Text("Valid Till: "+exam!.discountEndDate!,style: mediumText(12,color:isCurrentTimeValid(
-                    exam!.discountStartDate!,exam!.discountEndDate!)?AppColors.textClorColor:Colors.redAccent),),
-              ],
-            ):SizedBox()
+            FittedBox(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  exam!.packageTitle==null?Text(""):
+                  Text(exam!.packageTitle!.length>18?exam!.packageTitle!.substring(0,15)+"..":exam!.packageTitle ??"",style: boldText(16),),
+                  SizedBox(height: 6,),
+                  Text("Duration: "+exam!.packageDurationInDays.toString()+"Days",style: mediumText(12),),
+                  SizedBox(height: 4,),
+                  Text((exam!.discountAmount!=null||exam!.discountAmount!=""?"Regular Price: ":"Price: ")+exam!.price.toString(),style: mediumText(12),),
+                  exam!.discountAmount!=null||exam!.discountAmount!=""?
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 4,),
+                      Text("Discount: "+exam!.discountAmount.toString()+"Tk",style: mediumText(12,),),
+                      SizedBox(height: 4,),
+                      Text("Current Price: "+(exam!.price-exam!.discountAmount).toString()+"Tk",style: mediumText(12),),
+                      SizedBox(height: 4,),
+                      Text("Valid Till: "+exam!.discountEndDate!,style: mediumText(12,color:isCurrentTimeValid(
+                          exam!.discountStartDate!,exam!.discountEndDate!)?AppColors.textClorColor:Colors.redAccent),),
+                    ],
+                  ):SizedBox(),
+                ],
+              ),
+            )
 
           ],
         ),

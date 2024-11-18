@@ -76,76 +76,76 @@ class TeacherDetailsPage extends StatelessWidget {
                           ),
 
                           const SizedBox(height: 18),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 32),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-
-                                // total course
-                                Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      '12',
-                                      style: boldText(17),
-                                    ),
-                                    Text(
-                                      'Total Course',
-                                      style: semiBoldText(
-                                          12, color: Color(0xFF545454)),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      '12',
-                                      style: boldText(17),
-                                    ),
-                                    Text(
-                                      'Completed',
-                                      style: semiBoldText(
-                                          12, color: Color(0xFF545454)),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      '12',
-                                      style: boldText(17),
-                                    ),
-                                    Text(
-                                      'Ongoing',
-                                      style: semiBoldText(
-                                          12, color: Color(0xFF545454)),
-                                    ),
-                                  ],
-                                ),
-
-
-                                // completed
-                              ],
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.symmetric(horizontal: 32),
+                          //   child: Row(
+                          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //     children: [
+                          //
+                          //       // total course
+                          //       Column(
+                          //         mainAxisSize: MainAxisSize.min,
+                          //         children: [
+                          //           Text(
+                          //             '12',
+                          //             style: boldText(17),
+                          //           ),
+                          //           Text(
+                          //             'Total Course',
+                          //             style: semiBoldText(
+                          //                 12, color: Color(0xFF545454)),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //       Column(
+                          //         mainAxisSize: MainAxisSize.min,
+                          //         children: [
+                          //           Text(
+                          //             '12',
+                          //             style: boldText(17),
+                          //           ),
+                          //           Text(
+                          //             'Completed',
+                          //             style: semiBoldText(
+                          //                 12, color: Color(0xFF545454)),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //       Column(
+                          //         mainAxisSize: MainAxisSize.min,
+                          //         children: [
+                          //           Text(
+                          //             '12',
+                          //             style: boldText(17),
+                          //           ),
+                          //           Text(
+                          //             'Ongoing',
+                          //             style: semiBoldText(
+                          //                 12, color: Color(0xFF545454)),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //
+                          //
+                          //       // completed
+                          //     ],
+                          //   ),
+                          // ),
 
                         ],
                       ),
                     ),
                   ),
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12.0, vertical: 12),
-                      child: Text(
-                        controller.teacherDetailsResponse.value!.teacher!.bio??"Bio not found",
-                        style: mediumText(13, color: Color(0xFFA0A4AB)),
-                        textAlign: TextAlign.center,),
-                    ),
-                  ),
+                  // SliverToBoxAdapter(
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.symmetric(
+                  //         horizontal: 12.0, vertical: 12),
+                  //     child: Text(
+                  //       controller.teacherDetailsResponse.value!.teacher!.bio??"Bio not found",
+                  //       style: mediumText(13, color: Color(0xFFA0A4AB)),
+                  //       textAlign: TextAlign.center,),
+                  //   ),
+                  // ),
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
@@ -197,7 +197,7 @@ class TeacherDetailsPage extends StatelessWidget {
                           SizedBox(height: 12,),
                           Center(child: Text('About ${controller.teacherDetailsResponse!.value!.teacher!.firstName??''}', style: boldText(21),)),
                           SizedBox(height: 6,),
-                          Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis consectetur adipiscing elit.',
+                          Text(controller.teacherDetailsResponse.value!.teacher!.bio??'',
                             style: mediumText(12,color: Color(0xFF5D5A6F)),textAlign: TextAlign.center,),
 
                           SizedBox(height: 24,),

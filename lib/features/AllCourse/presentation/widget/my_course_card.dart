@@ -105,21 +105,21 @@ class MyCourseCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Category",
-                          textAlign: TextAlign.justify,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style:mediumText(11,color: AppColors.orange400),
-                        ),
-                        Assets.icons.donePng.image(height: 15)
-                      ],
-                    ),
-                    SizedBox(height: 4,),
+                    // const SizedBox(height: 8),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Text(
+                    //       "Category",
+                    //       textAlign: TextAlign.justify,
+                    //       maxLines: 1,
+                    //       overflow: TextOverflow.ellipsis,
+                    //       style:mediumText(11,color: AppColors.orange400),
+                    //     ),
+                    //     Assets.icons.donePng.image(height: 15)
+                    //   ],
+                    // ),
+                    SizedBox(height: 8,),
                     Text(
                       course!.course!.title??"",
                       textAlign: TextAlign.justify,
@@ -166,8 +166,9 @@ class MyCourseCard extends StatelessWidget {
                             ),
                             const SizedBox(width: 5),
                             RatingBar.builder(
-                              initialRating: 3,
+                              initialRating: 4.5,
                               minRating: 1,
+                              ignoreGestures: true,
                               direction: Axis.horizontal,
                               allowHalfRating: true,
                               itemCount: 5,
@@ -186,13 +187,13 @@ class MyCourseCard extends StatelessWidget {
                             const SizedBox(width: 5),
 
                             // total rating count
-                            Text(
-                              '(12)',
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Colors.black54,
-                              ),
-                            ),
+                            // Text(
+                            //   '(12)',
+                            //   style: const TextStyle(
+                            //     fontSize: 12,
+                            //     color: Colors.black54,
+                            //   ),
+                            // ),
                           ],
                         ),
 

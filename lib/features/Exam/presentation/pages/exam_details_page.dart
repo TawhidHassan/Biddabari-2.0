@@ -90,7 +90,7 @@ class ExamDetailsPage extends StatelessWidget {
                               ),
                         ),
                         Positioned(
-                          top: 240,
+                          top: 250,
                           child: Stack(
                             fit: StackFit.passthrough,
                             alignment: Alignment.topRight,
@@ -117,16 +117,16 @@ class ExamDetailsPage extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                                       child: Column(
                                         children: [
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                  'category',
-                                                  style: semiBoldText(14,color: AppColors.orange400)
-                                              ),
-                                              Text('⭐ ${'12'}'),
-                                            ],
-                                          ),
+                                          // Row(
+                                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          //   children: [
+                                          //     Text(
+                                          //         'category',
+                                          //         style: semiBoldText(14,color: AppColors.orange400)
+                                          //     ),
+                                          //     Text('⭐ ${'12'}'),
+                                          //   ],
+                                          // ),
                                           const SizedBox(height: 10),
                                           Row(
                                             crossAxisAlignment: CrossAxisAlignment.end,
@@ -157,7 +157,11 @@ class ExamDetailsPage extends StatelessWidget {
                                                               0.0, 0.0, bounds.width, bounds.height),
                                                         ),
                                                     child: Text(
-                                                      '৳ ${controller.examDetailsResponse.value!.exam!.price??''}',
+                                                      '৳ ${controller.packageSelected.value!=null?controller.packageSelected.value!
+                                                          .discountAmount!=null?
+                                                      (controller.packageSelected.value!
+                                                          .price!.toDouble() - controller.packageSelected.value!
+                                                          .discountAmount!.toDouble()).toString():"":""}',
                                                       style: boldText(20,color: AppColors.whiteColor),
                                                       textAlign: TextAlign.right,
                                                     ),
@@ -182,7 +186,7 @@ class ExamDetailsPage extends StatelessWidget {
 
                                                   // Number of classes
                                                   Text(
-                                                      '${controller.examDetailsResponse.value!.exam!.requiredTime} Class',
+                                                      '${controller.examDetailsResponse.value!.exam!.packageDurationInDays??"0"} Day',
                                                       style: semiBoldText(14)
                                                   ),
 
@@ -202,7 +206,7 @@ class ExamDetailsPage extends StatelessWidget {
 
                                                   // Number of hours
                                                   Text(
-                                                      '12 Hours',
+                                                      '${(controller.examDetailsResponse.value!.exam!.packageDurationInDays??0)*24} Hours',
                                                       style: semiBoldText(14)
                                                   ),
                                                 ],
@@ -210,7 +214,9 @@ class ExamDetailsPage extends StatelessWidget {
 
                                               // offer
                                               DiscountBadge(
-                                                text: '12% Off',
+                                                text: '${controller.packageSelected.value==null?0.0:(calculateDiscountPercentage(controller.packageSelected.value!
+                                                  .price!.toDouble() , controller.packageSelected.value!
+                                                  .discountAmount!.toDouble()))}% Off',
                                                 textSize: 13,
                                               )
                                             ],
@@ -324,7 +330,7 @@ class ExamDetailsPage extends StatelessWidget {
                                       const EdgeInsets.symmetric(vertical: 15),
                                       child: Center(
                                         child: Text(
-                                          'Review',
+                                          'Packages',
                                           style: TextStyle(
                                             color: controller.isCurriculumSelected.value==false
                                                 ? AppColors.whiteColor
@@ -391,7 +397,60 @@ class ExamDetailsPage extends StatelessWidget {
                               ],
                             ),
                           ):
-                          ReviewComponent()
+                          Column(
+                            children: [
+                              SizedBox(height: 8,),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+                                              height: 16,
+                                              width: 5,
+                                              color: AppColors.kPrimaryColorx,
+                                            ),
+                                            SizedBox(width: 6,),
+                                            Text("Select Packages", style: semiBoldText(16,),)
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 4,),
+                                    GridView.builder(
+                                      physics: NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 12.0,
+                                        mainAxisSpacing: 12.0,
+                                        childAspectRatio: 5.5 / 8,
+                                      ),
+                                      itemCount: controller.examDetailsResponse.value!
+                                          .exam!.batchExamSubscriptions!.length,
+                                      itemBuilder: (context, indexx) {
+                                        return ExamPackageCard(
+                                          index: indexx,
+                                          controller: controller,
+                                          image: controller.examDetailsResponse.value!
+                                              .exam!.banner ?? "",
+                                          exam: controller.examDetailsResponse.value!
+                                              .exam!.batchExamSubscriptions![indexx],
+                                        );
+                                      },
+                                    ),
+                                    SizedBox(height: 65,),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),
@@ -417,55 +476,7 @@ class ExamDetailsPage extends StatelessWidget {
                         ],
                       ),
                     ):SizedBox(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment
-                                .spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    height: 16,
-                                    width: 5,
-                                    color: AppColors.kPrimaryColorx,
-                                  ),
-                                  SizedBox(width: 6,),
-                                  Text("Select Packages", style: semiBoldText(16,),)
-                                ],
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 4,),
-                          GridView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 12.0,
-                              mainAxisSpacing: 12.0,
-                              childAspectRatio: 5.5 / 8,
-                            ),
-                            itemCount: controller.examDetailsResponse.value!
-                                .exam!.batchExamSubscriptions!.length,
-                            itemBuilder: (context, indexx) {
-                              return ExamPackageCard(
-                                index: indexx,
-                                controller: controller,
-                                image: controller.examDetailsResponse.value!
-                                    .exam!.banner ?? "",
-                                exam: controller.examDetailsResponse.value!
-                                    .exam!.batchExamSubscriptions![indexx],
-                              );
-                            },
-                          ),
-                          SizedBox(height: 65,),
-                        ],
-                      ),
-                    ),
+
 
                     const SizedBox(height: 120),
 

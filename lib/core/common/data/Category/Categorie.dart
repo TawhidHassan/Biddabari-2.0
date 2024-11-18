@@ -16,6 +16,7 @@ class Categorie{
   String? name;
   String? title;
   String? image;
+  String? parentId;
   String? slug;
   List<JobModel>? circulars;
 

@@ -82,8 +82,9 @@ class TeacherListCard extends StatelessWidget {
                         Text(teacher!.subject??'',style: semiBoldText(10,color: Color(0xFF777777)),),
                         SizedBox(height: 6,),
                         RatingBar.builder(
-                          initialRating: 3,
+                          initialRating: 5,
                           minRating: 1,
+                          ignoreGestures: true,
                           direction: Axis.horizontal,
                           allowHalfRating: true,
                           itemCount: 5,

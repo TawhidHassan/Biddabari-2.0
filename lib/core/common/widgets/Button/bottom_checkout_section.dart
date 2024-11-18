@@ -7,6 +7,7 @@ import '../../../config/color/app_colors.dart';
 import '../../../config/util/text_style.dart';
 import '../../../custom_assets/assets.gen.dart';
 import '../../../routes/route_path.dart';
+import '../../../utils/calculate_day_left.dart';
 import '../container/discount_badge.dart';
 import '../loading/loading_widget.dart';
 import 'elevated_button.dart';
@@ -79,23 +80,26 @@ class BottomCheckoutSection extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 6,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Assets.icons.alarm.svg(),
-                    SizedBox(width: 8,),
-                    Text(
-                      '$dayslLeft days left at this price!',
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFFC71720),
+                dayslLeft==null||dayslLeft=="0"||dayslLeft==""?SizedBox():
+                FittedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Assets.icons.alarm.svg(),
+                      SizedBox(width: 8,),
+                      Text(
+                        '${DayLeftcalculate(dayslLeft)} left at this price!',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFC71720),
+
+                        ),
 
                       ),
-
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),

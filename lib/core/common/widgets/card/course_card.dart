@@ -132,12 +132,13 @@ CourseCard({Key? key, this.course, this.buttonColor=0xFFEB6A20}) : super(key: ke
                     ),
                     SizedBox(height: 4,),
                     RatingBar.builder(
-                      initialRating: 3,
+                      initialRating: 4.5,
                       minRating: 1,
                       direction: Axis.horizontal,
                       allowHalfRating: true,
                       itemCount: 5,
                       itemSize: 12.sp,
+                      ignoreGestures: true,
                       itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
                       itemBuilder: (context, _) => Icon(
                         Icons.star,

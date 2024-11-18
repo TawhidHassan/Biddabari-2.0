@@ -1,3 +1,4 @@
+import 'package:biddabari_new/core/common/widgets/empty/empty_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -29,7 +30,9 @@ class FreeExamPage extends StatelessWidget {
         height: 1.0.sh,
         width: 1.0.sw,
         padding: EdgeInsets.all(16),
-        child: courseCategoryResponse==null?SizedBox():
+        child: courseCategoryResponse==null?EmptyWidget():
+        courseCategoryResponse!.free_exams!.isEmpty?
+            EmptyWidget(title: "There has no exam",):
         GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,

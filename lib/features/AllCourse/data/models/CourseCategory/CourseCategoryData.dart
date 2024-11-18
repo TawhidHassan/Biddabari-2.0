@@ -2,6 +2,7 @@
 import 'package:biddabari_new/features/Exam/data/models/Exam.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../../core/common/data/Category/Categorie.dart';
 import '../../../../../core/common/data/Category/subCategory/SubCategory.dart';
 import '../course/Course.dart';
 
@@ -29,7 +30,7 @@ class CourseCategoryData{
   Course? category_video;
   Exam? category_exam;
   List<Course>? courses;
-  List<SubCategory>? course_categories;
+  List<Categorie>? course_categories;
 
 
   CourseCategoryData(

@@ -13,6 +13,9 @@ CourseResponse _$CourseResponseFromJson(Map<String, dynamic> json) =>
       (json['courses'] as List<dynamic>?)
           ?.map((e) => Course.fromJson(e as Map<String, dynamic>))
           .toList(),
+      (json['popular_courses'] as List<dynamic>?)
+          ?.map((e) => Course.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$CourseResponseToJson(CourseResponse instance) =>
@@ -20,4 +23,5 @@ Map<String, dynamic> _$CourseResponseToJson(CourseResponse instance) =>
       'success': instance.success,
       'message': instance.message,
       'courses': instance.courses,
+      'popular_courses': instance.popular_courses,
     };

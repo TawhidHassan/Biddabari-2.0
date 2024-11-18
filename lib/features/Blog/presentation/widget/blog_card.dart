@@ -133,22 +133,22 @@ class BlogCard extends StatelessWidget {
 
                             style: semiBoldText(8),
                             children:[
-                              WidgetSpan(
-                                child: CircleAvatar(
-                                  radius: 6,
-                                ),
-                              ),
-                              WidgetSpan(
-                                child:SizedBox(width: 6,),
-                              ),
-                              TextSpan(text: 'Pritomtaw.. ', style: TextStyle(color: Color(0xff777777))),
-                              WidgetSpan(
-                                child:SizedBox(width: 6,),
-                              ),
-                              TextSpan(text: ' | ', style: TextStyle(color: Color(0xff777777))),
-                              WidgetSpan(
-                                child:SizedBox(width: 6,),
-                              ),
+                              // WidgetSpan(
+                              //   child: CircleAvatar(
+                              //     radius: 6,
+                              //   ),
+                              // ),
+                              // WidgetSpan(
+                              //   child:SizedBox(width: 6,),
+                              // ),
+                              // TextSpan(text: 'Pritomtaw.. ', style: TextStyle(color: Color(0xff777777))),
+                              // WidgetSpan(
+                              //   child:SizedBox(width: 6,),
+                              // ),
+                              // TextSpan(text: ' | ', style: TextStyle(color: Color(0xff777777))),
+                              // WidgetSpan(
+                              //   child:SizedBox(width: 6,),
+                              // ),
                               WidgetSpan(
                                 child: Icon(Icons.calendar_month,color: AppColors.primaryColor,size: 12,),
                               ),

@@ -131,13 +131,13 @@ class ExamCard extends StatelessWidget {
             const SizedBox(height: 10),
 
             // category
-            Text(
-              'category',
-              style: const TextStyle(
-                color: AppColors.orange400,
-                fontSize: 12,
-              ),
-            ),
+            // Text(
+            //   'category',
+            //   style: const TextStyle(
+            //     color: AppColors.orange400,
+            //     fontSize: 12,
+            //   ),
+            // ),
 
             const SizedBox(height: 5),
 
@@ -174,7 +174,7 @@ class ExamCard extends StatelessWidget {
 
                 // rating
                 Text(
-                  "3.2",
+                  "4.7",
                   style: const TextStyle(
                     fontSize: 12,
                     color: Colors.black54,
@@ -185,8 +185,9 @@ class ExamCard extends StatelessWidget {
 
                 // rating star
                 RatingBar.builder(
-                  initialRating: 3,
+                  initialRating: 4.5,
                   minRating: 1,
+                  ignoreGestures: true,
                   direction: Axis.horizontal,
                   allowHalfRating: true,
                   itemCount: 5,
@@ -203,16 +204,16 @@ class ExamCard extends StatelessWidget {
                   },
                 ),
 
-                const SizedBox(width: 5),
-
-                // total rating count
-                Text(
-                  '(12)',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.black54,
-                  ),
-                ),
+                // const SizedBox(width: 5),
+                //
+                // // total rating count
+                // Text(
+                //   '(12)',
+                //   style: const TextStyle(
+                //     fontSize: 12,
+                //     color: Colors.black54,
+                //   ),
+                // ),
               ],
             ),
           ],

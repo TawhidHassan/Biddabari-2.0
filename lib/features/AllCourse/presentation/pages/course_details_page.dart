@@ -107,7 +107,7 @@ class CourseDetailsPage extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          top: 240,
+                          top: 200,
                           child: Stack(
                             fit: StackFit.passthrough,
                             alignment: Alignment.topRight,
@@ -134,17 +134,17 @@ class CourseDetailsPage extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                                       child: Column(
                                         children: [
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                'category',
-                                                style: semiBoldText(14,color: AppColors.orange400)
-                                              ),
-                                              Text('⭐ ${'12'}'),
-                                            ],
-                                          ),
-                                          const SizedBox(height: 10),
+                                          // Row(
+                                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          //   children: [
+                                          //     Text(
+                                          //       'category',
+                                          //       style: semiBoldText(14,color: AppColors.orange400)
+                                          //     ),
+                                          //     Text('⭐ ${'12'}'),
+                                          //   ],
+                                          // ),
+                                          // const SizedBox(height: 10),
                                           Row(
                                             crossAxisAlignment: CrossAxisAlignment.end,
                                             children: [
@@ -265,7 +265,7 @@ class CourseDetailsPage extends StatelessWidget {
                     ),
 
 
-                    const SizedBox(height: 140),
+                    const SizedBox(height: 0),
                     Container(
                       width: 0.9.sw,
                       padding: EdgeInsets.symmetric(vertical: 12,horizontal: 0),
@@ -497,11 +497,11 @@ class CourseDetailsPage extends StatelessWidget {
 
                                           const SizedBox(height: 12),
                                           ///Routin
-                                          RoutinComponent(controller: controller,)
+                                          RoutinComponent(course: controller.detailsCategoryResponse.value!.course!,)
                                         ],
                                       ):
                                       ///Routin
-                                      RoutinComponent(controller: controller,)
+                                      RoutinComponent(course: controller.detailsCategoryResponse.value!.course!,)
 
                                     ],
                                   ),

@@ -1,3 +1,4 @@
+import 'package:biddabari_new/core/config/Strings/api_endpoint.dart';
 import 'package:biddabari_new/features/Job/presentation/controller/Job_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -209,6 +210,7 @@ class JobPage extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
+                          print(controller.selectedJobcategory!.value!.circulars![index].image??'');
                           context.pushNamed(Routes.jobDetailsPage,extra:controller.selectedJobcategory!.value!.circulars![index] );
                         },
                         child: Container(
@@ -230,9 +232,9 @@ class JobPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Expanded(
-                                flex: 1,
+                                flex: 2,
                                 child: CachedNetworkImage(
-                                  imageUrl:controller.selectedJobcategory!.value!.circulars![index].image??"",
+                                  imageUrl: controller.selectedJobcategory!.value!.circulars![index].image??'',
                                   placeholder: (context, url) => Skeletonizer(
                                     enabled: true,
                                     child: Container(
@@ -303,13 +305,13 @@ class JobPage extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      DiscountBadge(
-                                        textSize: 8,
-                                        text: 'Most Recent',
-                                        backgroundColor: Color(0xFF167F71),
-                                        foregroundColor: Colors.white,
-                                      ),
-                                      SizedBox(height: 4,),
+                                      // DiscountBadge(
+                                      //   textSize: 8,
+                                      //   text: 'Most Recent',
+                                      //   backgroundColor: Color(0xFF167F71),
+                                      //   foregroundColor: Colors.white,
+                                      // ),
+                                      // SizedBox(height: 4,),
                                       Text(
                                         controller.selectedJobcategory!.value!.circulars![index].jobTitle??'',
                                         style: boldText(

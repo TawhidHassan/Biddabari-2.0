@@ -4,6 +4,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../core/common/widgets/empty/empty_widget.dart';
 import '../../../../../core/common/widgets/loading/loading_widget.dart';
 import '../../../../../core/custom_assets/assets.gen.dart';
 import '../../../../../core/utils/system_util.dart';
@@ -33,7 +34,9 @@ class FreeVideoPage extends StatelessWidget {
         height: 1.0.sh,
         width: 1.0.sw,
         padding: EdgeInsets.all(16),
-        child: courseCategoryResponse==null?SizedBox():
+        child: courseCategoryResponse==null?EmptyWidget():
+        courseCategoryResponse!.free_class_videos!.isEmpty?
+        EmptyWidget(title: "There has no video",):
         GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,

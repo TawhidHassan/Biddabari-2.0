@@ -35,8 +35,10 @@ class FreeServiceCategoryCard extends StatelessWidget {
           ],
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
+              flex: 5,
               child: CachedNetworkImage(
                 imageUrl:ApiEndpoint.imageBaseUrl+categoryData!.second_image.toString(),
                 placeholder: (context, url) => Skeletonizer(
@@ -77,23 +79,27 @@ class FreeServiceCategoryCard extends StatelessWidget {
               ),
             ),
             SizedBox(height: 12,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DiscountBadge(
-                      text: "Most Recent",
-                      radius: 6,
-                    textSize: 8,
-                    backgroundColor: Color(0xFF167F71),
-                    foregroundColor: Colors.white,
-                  ),
-                  SizedBox(height: 8,),
-                  Text(categoryData!.name??'',style: boldText(12),maxLines: 2,),
-                  SizedBox(height: 6,),
-                  Text("প্রতিযোগিতামূলক এই জব-মার্কেটে নিজের ক্যারিয়ারকে",style: mediumText(8,color: Color(0xFF777777)),maxLines: 2,)
-                ],
+            Expanded(
+              flex: 5,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // DiscountBadge(
+                    //     text: "Most Recent",
+                    //     radius: 6,
+                    //   textSize: 8,
+                    //   backgroundColor: Color(0xFF167F71),
+                    //   foregroundColor: Colors.white,
+                    // ),
+                    // SizedBox(height: 8,),
+                    Text(categoryData!.name??'',style: boldText(18),maxLines: 2,),
+                    SizedBox(height: 8,),
+                    // SizedBox(height: 6,),
+                    // Text("প্রতিযোগিতামূলক এই জব-মার্কেটে নিজের ক্যারিয়ারকে",style: mediumText(8,color: Color(0xFF777777)),maxLines: 2,)
+                  ],
+                ),
               ),
             ),
             SizedBox(height: 6,),

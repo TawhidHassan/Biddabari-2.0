@@ -15,9 +15,10 @@ class CourseResponse{
   bool? success;
   String? message;
   List<Course>?courses;
+  List<Course>?popular_courses;
 
 
-  CourseResponse(this.success, this.message, this.courses);
+  CourseResponse(this.success, this.message, this.courses,this.popular_courses);
 
   factory CourseResponse.fromJson(Map<String,dynamic>json)=>
       _$CourseResponseFromJson(json);

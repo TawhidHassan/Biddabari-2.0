@@ -67,7 +67,7 @@ class TeacherCourseCard extends StatelessWidget {
                     children: [
                       Text(course!.title??"",maxLines: 2, style: boldText(16),),
                       SizedBox(height: 6,),
-                      Text(course!.description??"",maxLines: 2, style: regularText(9,color: Color(0xFF777777)),),
+                      Text(course!.sub_title??"",maxLines: 2, style: regularText(9,color: Color(0xFF777777)),),
                       SizedBox(height: 6,),
                       Text(course!.price.toString()+"Tk",maxLines: 1, style: mediumText(18,color:AppColors.primaryColor),),
                     ],

@@ -45,12 +45,12 @@ class FreeServicePage extends StatelessWidget {
               width: 1.0.sw,
               padding: EdgeInsets.all(16),
               child:
-              controller.freeLoding.value?ShimerGrid():
+              controller.freeLoding.value?ShimerGrid(count: 2,):
               controller.freeServiceResponse!.value==null&&controller.freeLoding.value==false?
               EmptyWidget():
               GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
+                    crossAxisCount: 3,
                     crossAxisSpacing: 12.0,
                     mainAxisSpacing: 12.0,
                     childAspectRatio: SystemUtil.getChildAspectRatio(context)

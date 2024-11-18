@@ -32,7 +32,7 @@ class MyBookPage extends StatelessWidget {
               padding: EdgeInsets.all(18),
               child: Assets.icons.backArrow.svg()),
         ),
-        title: Text('My Bok'),
+        title: Text('My Book'),
       ),
       body: GetBuilder<BookStoreController>(
         assignId: true,

@@ -18,7 +18,6 @@ class AllCoursePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -31,55 +30,62 @@ class AllCoursePage extends StatelessWidget {
         ),
         title: Text('All Course'),
       ),
-      body:  NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [
-            SliverToBoxAdapter(child: SizedBox(height: 12.h,)),
-            SliverToBoxAdapter(child:  Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: Search(
-                readOnly: true,
-                onTap: (){
-                  print("object");
-                  context.pushNamed(Routes.searchPage,extra: "Course");
-                },
-                suffixIcon: Container(
-                  width: 31,
-                  height: 31,
-                  padding: EdgeInsets.all(8),
-                  margin: EdgeInsets.all(8),
-                  decoration: ShapeDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment(1.00, -0.02),
-                      end: Alignment(-1, 0.02),
-                      colors: [Color(0xFFAA076B), Color(0xFF61045F)],
-                    ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  child: Assets.icons.filter.svg(),
-                ),
-              ),
-            ),),
-            SliverToBoxAdapter(child: SizedBox(height: 12.h,)),
-            SliverToBoxAdapter(
-                child: HomeSliderComponent()
-            ),
+      body: GetBuilder<AllCourseController>(
+        assignId: true,
+        builder: (controller) {
+          return NestedScrollView(
+            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+              return [
 
-          ];
-        },
-        body: Container(
-          height: 1.0.sh,
-          width: 1.0.sw,
-          color: AppColors.primaryBackground,
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                  child: AllCourseComponent()
+
+              ];
+            },
+            body: Container(
+              height: 1.0.sh,
+              width: 1.0.sw,
+              color: AppColors.primaryBackground,
+              child: CustomScrollView(
+                controller: controller.controllerScroolCourse,
+                slivers: [
+                  SliverToBoxAdapter(child: SizedBox(height: 12.h,)),
+                  SliverToBoxAdapter(child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Search(
+                      readOnly: true,
+                      onTap: () {
+                        print("object");
+                        context.pushNamed(Routes.searchPage, extra: "Course");
+                      },
+                      suffixIcon: Container(
+                        width: 31,
+                        height: 31,
+                        padding: EdgeInsets.all(8),
+                        margin: EdgeInsets.all(8),
+                        decoration: ShapeDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment(1.00, -0.02),
+                            end: Alignment(-1, 0.02),
+                            colors: [Color(0xFFAA076B), Color(0xFF61045F)],
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                        ),
+                        child: Assets.icons.filter.svg(),
+                      ),
+                    ),
+                  ),),
+                  SliverToBoxAdapter(child: SizedBox(height: 12.h,)),
+                  SliverToBoxAdapter(
+                      child: HomeSliderComponent()
+                  ),
+                  SliverToBoxAdapter(
+                      child: AllCourseComponent()
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

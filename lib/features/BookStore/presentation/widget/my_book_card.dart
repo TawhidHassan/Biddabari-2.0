@@ -7,6 +7,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/common/widgets/container/discount_badge.dart';
 import '../../../../core/common/widgets/loading/loading_widget.dart';
@@ -49,10 +50,22 @@ class MyBookCard extends StatelessWidget {
               flex: 3,
               child: CachedNetworkImage(
                 imageUrl:ApiEndpoint.imageBaseUrl+book!.product!.image!,
-                placeholder: (context, url) => LoadingWidget(),
+                placeholder: (context, url) => Skeletonizer(
+                  enabled: true,
+                  child: Container(
+                    height: 100,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: Assets.images.course.provider(),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                ),
                 errorWidget: (context, url, error){
                   return Container(
-                    height: 120,
+                    height: 100,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: Assets.images.course.provider(),
@@ -64,7 +77,7 @@ class MyBookCard extends StatelessWidget {
                 },
                 imageBuilder: (context, image) =>
                     Container(
-                      height: 120,
+                      height: 100,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: image,
@@ -80,7 +93,7 @@ class MyBookCard extends StatelessWidget {
 
             // title
             Expanded(
-              flex: 7,
+              flex: 6,
               child: Padding(
                 padding: const EdgeInsets.only(right: 18,top: 12,bottom: 12),
                 child: Column(
@@ -88,19 +101,19 @@ class MyBookCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Category",
-                          textAlign: TextAlign.justify,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style:mediumText(11,color: AppColors.orange400),
-                        ),
-                        Assets.icons.donePng.image()
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Text(
+                    //       "Category",
+                    //       textAlign: TextAlign.justify,
+                    //       maxLines: 1,
+                    //       overflow: TextOverflow.ellipsis,
+                    //       style:mediumText(11,color: AppColors.orange400),
+                    //     ),
+                    //     Assets.icons.donePng.image()
+                    //   ],
+                    // ),
                     SizedBox(height: 4,),
                     Text(
                       book!.product!.title??"",
@@ -148,8 +161,9 @@ class MyBookCard extends StatelessWidget {
                             ),
                             const SizedBox(width: 5),
                             RatingBar.builder(
-                              initialRating: 3,
+                              initialRating: 4.5,
                               minRating: 1,
+                              ignoreGestures: true,
                               direction: Axis.horizontal,
                               allowHalfRating: true,
                               itemCount: 5,
@@ -168,13 +182,13 @@ class MyBookCard extends StatelessWidget {
                             const SizedBox(width: 5),
 
                             // total rating count
-                            Text(
-                              '(12)',
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Colors.black54,
-                              ),
-                            ),
+                            // Text(
+                            //   '(12)',
+                            //   style: const TextStyle(
+                            //     fontSize: 12,
+                            //     color: Colors.black54,
+                            //   ),
+                            // ),
                           ],
                         ),
 

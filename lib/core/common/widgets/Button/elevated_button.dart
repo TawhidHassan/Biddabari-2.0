@@ -76,7 +76,8 @@ class CustomElevatedButton extends StatelessWidget {
             )
           ],
         ),
-        child: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -92,7 +93,7 @@ class CustomElevatedButton extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: PoppinsMedium.copyWith(color: titleColor, fontSize: titleSize, fontWeight: titleWeight
                 ),
-              ),
+                             ),
               SizedBox(width: titleText==""?0:buttonMarginRight,),
               iconRight ?? SizedBox(),
 

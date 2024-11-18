@@ -9,14 +9,26 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../widget/notice_card.dart';
 
-class NoticePage extends StatelessWidget {
+class NoticePage extends StatefulWidget {
   const NoticePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<NoticePage> createState() => _NoticePageState();
+}
+
+class _NoticePageState extends State<NoticePage> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
     Future.delayed(Duration.zero, () {
       Get.find<NoticeController>().getNotice();
     });
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(

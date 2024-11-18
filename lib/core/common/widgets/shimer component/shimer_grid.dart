@@ -6,7 +6,8 @@ import '../../../utils/system_util.dart';
 import '../card/course_card.dart';
 
 class ShimerGrid extends StatelessWidget {
-  const ShimerGrid({super.key});
+  final int? count;
+  const ShimerGrid({super.key, this.count=2});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class ShimerGrid extends StatelessWidget {
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+          crossAxisCount: count!,
           crossAxisSpacing: 12.0,
           mainAxisSpacing: 12.0,
           childAspectRatio: SystemUtil.getChildAspectRatio(context),

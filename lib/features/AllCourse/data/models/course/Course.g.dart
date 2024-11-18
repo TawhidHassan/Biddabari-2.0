@@ -13,6 +13,7 @@ Course _$CourseFromJson(Map<String, dynamic> json) => Course(
       sub_title: json['sub_title'] as String?,
       banner: json['banner'] as String?,
       image: json['image'] as String?,
+      duration_in_month: json['duration_in_month'] as String?,
       description: json['description'] as String?,
       starting_date_time: json['starting_date_time'] as String?,
       ending_date_time: json['ending_date_time'] as String?,
@@ -21,7 +22,10 @@ Course _$CourseFromJson(Map<String, dynamic> json) => Course(
       total_video: json['total_video'] as num?,
       total_class: json['total_class'],
       total_note: json['total_note'] as num?,
+      enroll_student_count: json['enroll_student_count'] as num?,
+      total_written_exam: json['total_written_exam'] as num?,
       total_exam: json['total_exam'] as num?,
+      total_live: json['total_live'] as num?,
       is_paid: json['is_paid'] as num?,
       status: json['status'] as num?,
       discount_start_date: json['discount_start_date'] as String?,
@@ -31,6 +35,9 @@ Course _$CourseFromJson(Map<String, dynamic> json) => Course(
       video_link: json['video_link'] as String?,
       teachers: (json['teachers'] as List<dynamic>?)
           ?.map((e) => Teacher.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      course_routines: (json['course_routines'] as List<dynamic>?)
+          ?.map((e) => RoutineModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       course_sections: (json['course_sections'] as List<dynamic>?)
           ?.map((e) => CourseSection.fromJson(e as Map<String, dynamic>))
@@ -44,6 +51,7 @@ Map<String, dynamic> _$CourseToJson(Course instance) => <String, dynamic>{
       'sub_title': instance.sub_title,
       'banner': instance.banner,
       'image': instance.image,
+      'duration_in_month': instance.duration_in_month,
       'description': instance.description,
       'starting_date_time': instance.starting_date_time,
       'ending_date_time': instance.ending_date_time,
@@ -52,7 +60,10 @@ Map<String, dynamic> _$CourseToJson(Course instance) => <String, dynamic>{
       'total_video': instance.total_video,
       'total_class': instance.total_class,
       'total_note': instance.total_note,
+      'enroll_student_count': instance.enroll_student_count,
+      'total_written_exam': instance.total_written_exam,
       'total_exam': instance.total_exam,
+      'total_live': instance.total_live,
       'is_paid': instance.is_paid,
       'status': instance.status,
       'discount_start_date': instance.discount_start_date,
@@ -61,5 +72,6 @@ Map<String, dynamic> _$CourseToJson(Course instance) => <String, dynamic>{
       'order_status': instance.order_status,
       'video_link': instance.video_link,
       'teachers': instance.teachers,
+      'course_routines': instance.course_routines,
       'course_sections': instance.course_sections,
     };

@@ -39,15 +39,34 @@ AllCourseRepositoryImpl({required this.remoteSource,required this.connectionChec
       return left(Failure(e.message));
     }
   }
+  @override
+  Future<Either<Failure, CourseResponse>> getAllPopularCourse()async {
+    // TODO: implement getRuningCourse
+     try{
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure("no internet connection!!"));
+      }else{
+        final data = await remoteSource.getAllPopularCourse();
+        if(data!.popular_courses==null){
+          return left(Failure("Somethings wrong"));
+        }else{
+          return right(data);
+        }
+        // return right(episodes!.results!);
+      }
+    }on ServerException catch(e){
+      return left(Failure(e.message));
+    }
+  }
 
   @override
-  Future<Either<Failure, AllCourseResponse>> getAllCourse()async {
+  Future<Either<Failure, AllCourseResponse>> getAllCourse(int? page)async {
     // TODO: implement getAllCourse
     try{
       if (!await (connectionChecker.isConnected)) {
         return left(Failure("no internet connection!!"));
       }else{
-        final data = await remoteSource.getAllCourse();
+        final data = await remoteSource.getAllCourse(page);
         if(data!.courseCategories==null){
           return left(Failure("Some things wrong"));
         }else{

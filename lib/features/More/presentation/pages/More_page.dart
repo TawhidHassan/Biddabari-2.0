@@ -52,7 +52,8 @@ class MorePage extends StatelessWidget {
                         LoadingWidget()
                             :
                         homeController.userName.value != ""
-                            ? Container(
+                            ?
+                        Container(
                           height: 200,
                           width: 1.0.sw,
                           child: Center(
@@ -82,8 +83,7 @@ class MorePage extends StatelessWidget {
                                   child: profileController.profileResponse!
                                       .value!
                                       .user==null?SizedBox(): Column(
-                                    mainAxisAlignment: MainAxisAlignment
-                                        .end,
+                                    mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Text(
                                         profileController.profileResponse!

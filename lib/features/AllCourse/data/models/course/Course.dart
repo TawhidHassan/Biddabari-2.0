@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../Teacher/data/models/Teacher/Teacher.dart';
 import '../courseSection/CourseSection.dart';
+import '../routine_model.dart';
 
 
 
@@ -19,6 +20,7 @@ class Course{
   String? sub_title;
   String? banner;
   String? image;
+  String? duration_in_month;
   String? description;
   String? starting_date_time;
   String? ending_date_time;
@@ -27,7 +29,10 @@ class Course{
   num? total_video;
   dynamic? total_class;
   num? total_note;
+  num? enroll_student_count;
+  num? total_written_exam;
   num? total_exam;
+  num? total_live;
   num? is_paid;
   num? status;
   String? discount_start_date;
@@ -36,6 +41,8 @@ class Course{
   String? order_status;
   String? video_link;
   List<Teacher>?teachers;
+  List<RoutineModel>?course_routines;
+
   List<CourseSection>?course_sections;
 
 
@@ -46,6 +53,7 @@ class Course{
       this.sub_title,
       this.banner,
       this.image,
+      this.duration_in_month,
       this.description,
       this.starting_date_time,
       this.ending_date_time,
@@ -54,7 +62,10 @@ class Course{
       this.total_video,
       this.total_class,
       this.total_note,
+      this.enroll_student_count,
+      this.total_written_exam,
       this.total_exam,
+      this.total_live,
       this.is_paid,
       this.status,
       this.discount_start_date,
@@ -63,6 +74,7 @@ class Course{
       this.order_status,
       this.video_link,
       this.teachers,
+      this.course_routines,
       this.course_sections});
 
   factory Course.fromJson(Map<String,dynamic>json)=>

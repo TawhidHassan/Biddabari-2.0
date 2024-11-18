@@ -50,26 +50,26 @@ class _MyExamPageState extends State<MyExamPage> {
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return [
-            SliverToBoxAdapter(child: SizedBox(height: 0.h,)),
+            // SliverToBoxAdapter(child: SizedBox(height: 0.h,)),
 
             ///search bar
             ///home slider top part
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  children: ["Completed","Ongoing"].map((cat){
-                    return Expanded(
-                      child: HorizontalCategoryCard(
-                        height: 42,
-                        title: cat,
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ),
-
-            ),
+            // SliverToBoxAdapter(
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            //     child: Row(
+            //       children: ["Completed","Ongoing"].map((cat){
+            //         return Expanded(
+            //           child: HorizontalCategoryCard(
+            //             height: 42,
+            //             title: cat,
+            //           ),
+            //         );
+            //       }).toList(),
+            //     ),
+            //   ),
+            //
+            // ),
 
           ];
         },

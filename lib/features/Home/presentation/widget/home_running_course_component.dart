@@ -1,9 +1,12 @@
 import 'package:biddabari_new/core/common/widgets/empty/empty_widget.dart';
 import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
 import 'package:biddabari_new/core/config/color/app_colors.dart';
+import 'package:biddabari_new/core/network/api_services.dart';
+import 'package:biddabari_new/core/routes/route_path.dart';
 import 'package:biddabari_new/features/AllCourse/presentation/controller/AllCourse_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/common/widgets/shimer component/shimer_grid.dart';
@@ -40,15 +43,20 @@ class HomeRunningCourseComponent extends StatelessWidget {
                           style: boldText(16, color: Color(0xFF202244))
                       ),
 
-                      Row(
-                        children: [
-                          Text(
-                              'See All',
-                              style: boldText(12, color: Color(0xFF5F61F0))
-                          ),
-                          SizedBox(width: 12,),
-                          Assets.icons.forwordArrow.svg(height: 12)
-                        ],
+                      InkWell(
+                        onTap: (){
+                          context.goNamed(Routes.allCoursePage);
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                                'See All',
+                                style: boldText(12, color: Color(0xFF5F61F0))
+                            ),
+                            SizedBox(width: 12,),
+                            Assets.icons.forwordArrow.svg(height: 12)
+                          ],
+                        ),
                       ),
                     ],
                   ),

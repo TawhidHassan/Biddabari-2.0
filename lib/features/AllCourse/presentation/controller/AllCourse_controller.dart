@@ -1,4 +1,5 @@
 
+import 'package:biddabari_new/features/AllCourse/data/models/course/Course.dart';
 import 'package:biddabari_new/features/AllCourse/data/models/course/CourseResponse.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -25,6 +26,7 @@ class AllCourseController extends GetxController implements GetxService{
   final selectDescription = 0.obs;
   final catetegoryList=["Courses","Mentors"].obs;
   Rx<CourseResponse?>  runingCourseResponse=Rx<CourseResponse?>(null);
+  Rx<CourseResponse?>  popularCourseResponse=Rx<CourseResponse?>(null);
   Rx<AllCourseResponse?> allCourseResponse = Rx<AllCourseResponse?>(null);
 
   Rx<CourseCategoryData?> courseCategoryData = Rx<CourseCategoryData?>(null);
@@ -37,6 +39,27 @@ class AllCourseController extends GetxController implements GetxService{
     selectedcategory.value = id!.toInt();
     courseCategoryData.value = courseCategoryDatax;
     update();
+  }
+
+  Future getAllPopularCourse()async {
+    popularCourseLoading.value=true;
+    popularCourseResponse.value=null;
+    var rs= await allCourseUseCase!.getAllPopularCourse();
+    rs.fold((l){
+      Fluttertoast.showToast(
+          msg: l.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    }, (r){
+      popularCourseResponse.value=r;
+
+    });
+    popularCourseLoading.value=false;
   }
 
   Future getRuningCourse()async {
@@ -59,10 +82,47 @@ class AllCourseController extends GetxController implements GetxService{
     });
     runningCourseLoading.value=false;
   }
-  Future getAllCourse()async {
+
+
+  ///all course pagin  start===============================================
+
+
+  List<Course> courseList = [];
+  ScrollController controllerScroolCourse = ScrollController();
+  int coursePage = 1;
+  final  coursePagingCirculer = false.obs;
+
+  addCourseItems() async {
+    controllerScroolCourse.addListener(() {
+      // if (controllerScroolCourse.position.atEdge) {
+      //   bool isAtBottom = controllerScroolCourse.position.pixels ==
+      //       controllerScroolCourse.position.maxScrollExtent;
+      //
+      //   if (isAtBottom) {
+      //     print("Scrolled to the bottom!");
+      //     // coursePage++;
+      //     // getTeacherPagingData(page: coursePage);
+      //     // update();
+      //     // Add your action here (e.g., load more data)
+      //   }
+      // }
+
+      if (controllerScroolCourse.position.maxScrollExtent == controllerScroolCourse.position.pixels) {
+        print("Scrolled to the bottom!");
+        coursePage++;
+        getTeacherPagingData(page: coursePage);
+        update();
+      }
+    });
+  }
+
+
+  Future getAllCourse(int? page)async {
     allCourseLoading.value=true;
     allCourseResponse.value=null;
-    var rs= await allCourseUseCase!.getAllCourse();
+    coursePage = 1;
+    addCourseItems();
+    var rs= await allCourseUseCase!.getAllCourse(page);
     rs.fold((l){
       Fluttertoast.showToast(
           msg: l.message,
@@ -75,11 +135,46 @@ class AllCourseController extends GetxController implements GetxService{
       );
     }, (r){
       allCourseResponse.value=r;
-      selectCat(0,allCourseResponse.value!.courseCategories![0]);
+      courseList.clear();
+      for (var i = 0; i < r.courses!.data!.length; i++) {
+        courseList.add(r.courses!.data![i]);
+      }
+      update();
       ///"pending", "start", "continue", "stop"
     });
     allCourseLoading.value=false;
   }
+
+  getTeacherPagingData({int? page}) async {
+    coursePagingCirculer.value = true;
+    var rs= await allCourseUseCase!.getAllCourse(page!);
+    rs.fold((l){
+      Fluttertoast.showToast(
+          msg: l.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    }, (r){
+      allCourseResponse.value=r;
+
+      for (var i = 0; i < r.courses!.data!.length; i++) {
+        courseList.add(r.courses!.data![i]);
+      }
+      update();
+      ///"pending", "start", "continue", "stop"
+    });
+    coursePagingCirculer.value = false;
+
+  }
+
+
+
+  ///all course pagin  end===============================================
+
 
   Future getCategoryCourse(String? slug) async{
     categoryCourseLoading.value=true;
