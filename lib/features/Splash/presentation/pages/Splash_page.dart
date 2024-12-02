@@ -37,7 +37,7 @@ class _SplashPageState extends State<SplashPage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
 
-          Assets.images.biddabariWhite.image(),
+          Assets.images.logoWhite.image(height: 200,width: 200),
           SizedBox(height: 100,),
           Assets.images.splash.image(),
         ],

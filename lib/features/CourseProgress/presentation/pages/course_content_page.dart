@@ -77,7 +77,7 @@ class CourseContentListPage extends StatelessWidget {
                           context.pushNamed(Routes.videoContentPage,extra: {
                             "courseSectionContent":courseSection!.course_section_contents![index],
                             "isCourseExam":true
-                          },
+                           },
                           );
                         }
                         else if(courseSection!.course_section_contents![index].contentType=="pdf"){
@@ -116,6 +116,7 @@ class CourseContentListPage extends StatelessWidget {
                             "courseSectionContent":courseSection!.course_section_contents![index],
                             "isCourseExam":true
                           });
+
 
                         }
                       },

@@ -14,7 +14,11 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 
+import '../../../../Dependenci Injection/getx Injection/getx_dependenci_injection.dart';
+import '../../../../Dependenci Injection/init_dependencies.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
+import '../../../../core/service/hive_service.dart';
+import '../../../../main.dart';
 
 class MorePage extends StatelessWidget {
   const MorePage({super.key});
@@ -195,6 +199,15 @@ class MorePage extends StatelessWidget {
 
                   homeController.userName.value == "" ? SizedBox() :
                   MoreOtptionCard(
+                    onTap: (){
+                      context.pushNamed(Routes.myExamPage);
+                    },
+                    title: "My Exam",
+                    icon: Assets.icons.exam.path,
+                  ),
+
+                  homeController.userName.value == "" ? SizedBox() :
+                  MoreOtptionCard(
                     onTap: () {
                       context.pushNamed(Routes.myOrderPage);
                     },
@@ -210,6 +223,16 @@ class MorePage extends StatelessWidget {
                     title: "My Downloads",
                     icon: Assets.icons.review.path,
                   ),
+
+                  homeController.userName.value == "" ? SizedBox() :
+                  MoreOtptionCard(
+                    onTap: () {
+                      context.pushNamed(Routes.myBookPage);
+                    },
+                    title: "My Book",
+                    icon: Assets.icons.book.path,
+                  ),
+
 
                   homeController.userName.value == "" ? SizedBox() :
                   MoreOtptionCard(
@@ -244,24 +267,7 @@ class MorePage extends StatelessWidget {
                   ),
 
 
-                  homeController.userName.value == "" ? SizedBox() :
-                  MoreOtptionCard(
-                    onTap: (){
-                      context.pushNamed(Routes.myExamPage);
-                    },
-                    title: "My Exam",
-                    icon: Assets.icons.exam.path,
-                  ),
 
-
-                  homeController.userName.value == "" ? SizedBox() :
-                  MoreOtptionCard(
-                    onTap: () {
-                      context.pushNamed(Routes.myBookPage);
-                    },
-                    title: "My Book",
-                    icon: Assets.icons.book.path,
-                  ),
 
                   homeController.userName.value == "" ? SizedBox() :
                   MoreOtptionCard(
@@ -350,7 +356,7 @@ class MorePage extends StatelessWidget {
                   MoreOtptionCard(
                     onTap: () async {
                       var users = await Hive.openBox('users');
-                      users.clear().then((value) {
+                      users.clear().then((value)async {
                         context.goNamed(Routes.loginPage);
                       });
                     },

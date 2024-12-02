@@ -23,6 +23,7 @@ import 'core/Location/location_config.dart';
 import 'core/config/Strings/app_strings.dart';
 import 'core/config/color/app_colors.dart';
 import 'core/config/theme/app_themes.dart';
+import 'core/routes/back_button.dart';
 import 'core/routes/routes.dart';
 import 'core/service/hive_service.dart';
 import 'core/utils/system_util.dart';
@@ -192,6 +193,8 @@ class MyApp extends StatelessWidget {
         routeInformationParser: AppRouter.router.routeInformationParser,
         routerDelegate: AppRouter.router.routerDelegate,
         routeInformationProvider: AppRouter.router.routeInformationProvider,
+        backButtonDispatcher: CustomBackButtonDispatcher(
+            AppRouter.router, context),
       ),
     );
   }

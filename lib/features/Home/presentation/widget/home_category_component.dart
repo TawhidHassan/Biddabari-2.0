@@ -73,7 +73,12 @@ class HomeCategoryComponent extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: (){
-                        context.pushNamed(Routes.categoryCoursePage,extra: controller.categoryResponse.value!.courseCategories![index]);
+                        if(controller.categoryResponse.value!.courseCategories![index].name=="ফ্রি শিখুন!"){
+                          context.goNamed(Routes.freeCoursePage);
+                        }else{
+                          context.pushNamed(Routes.categoryCoursePage,extra: controller.categoryResponse.value!.courseCategories![index]);
+
+                        }
                       },
                       child: CategoryCard(
                           image: controller.categoryResponse.value!.courseCategories![index].image??"",

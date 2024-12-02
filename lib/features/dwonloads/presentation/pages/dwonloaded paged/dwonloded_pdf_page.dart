@@ -59,7 +59,7 @@ class _DwonlodedPdfPageState extends State<DwonlodedPdfPage> {
       Column(
         children: [
           SizedBox(height: 200,),
-          Center(child: EmptyWidget(title: "There has no downloaded pdf" ,)),
+          Center(child: EmptyWidget(title: "There has no downloaded PDF" ,)),
         ],
       ):
       ListView.builder(

@@ -52,6 +52,8 @@ class AffiliationPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      controller.affilitaeResponse.value!
+                          .affiliateRegister != null ?SizedBox():
                       Container(
                         width: 1.0.sw,
                         padding: EdgeInsets.all(12),
@@ -81,7 +83,8 @@ class AffiliationPage extends StatelessWidget {
                             controller.affilitaeResponse.value!
                                 .affiliateRegister == null ?
                             controller.affilitaerCreateCirculer.value
-                                ? SizedBox(
+                                ?
+                            SizedBox(
                                 height: 32,
                                 width: 32,
                                 child: LoadingWidget())
@@ -104,8 +107,9 @@ class AffiliationPage extends StatelessWidget {
                               ),
                             ) :
                             Text(
-                                controller.affilitaeResponse.value!
-                                    .affiliateRegister!.affiliate_code ?? "",
+                                // controller.affilitaeResponse.value!
+                                //     .affiliateRegister!.affiliate_code ?? "",
+                                "*********",
                                 style: mediumText(16, color: Colors.green)
                             ),
                           ],
@@ -215,38 +219,10 @@ class AffiliationPage extends StatelessWidget {
                         itemCount: controller.affilitaeResponse.value!
                             .courses!.length,
                         itemBuilder: (context, index) {
-                          return InkWell(
-                              onTap: () {
-                                if (controller.affilitaeResponse.value!
-                                    .affiliateRegister != null) {
-                                  Clipboard.setData(ClipboardData(
-                                      text: ApiEndpoint.baseUrl +
-                                          "course-details/${controller
-                                              .affilitaeResponse.value!
-                                              .courses![index]
-                                              .title}?rc=${controller
-                                              .affilitaeResponse.value!
-                                              .affiliateRegister!
-                                              .affiliate_code}")).then((
-                                      value) {
-                                    Get.snackbar("Copied",
-                                        ApiEndpoint.baseUrl +
-                                            "course-details/${controller
-                                                .affilitaeResponse.value!
-                                                .courses![index]
-                                                .title}?rc=${controller
-                                                .affilitaeResponse.value!
-                                                .affiliateRegister!
-                                                .affiliate_code}",
-                                        backgroundColor: Colors.green,
-                                        colorText: Colors.white);
-                                  });
-                                }
-                              },
-                              child: AffiliationCourseCard(
-                                response: controller.affilitaeResponse.value!,
-                                course: controller.affilitaeResponse.value!
-                                    .courses![index],));
+                          return AffiliationCourseCard(
+                            response: controller.affilitaeResponse.value!,
+                            course: controller.affilitaeResponse.value!
+                                .courses![index],);
                         },
                       ),
 

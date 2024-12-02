@@ -31,15 +31,14 @@ class ClassRoomCourse extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-
           child: Row(
             children: [
               // image
               Expanded(
-                flex: 1,
+                flex: 3,
                 child:courseOrder==null?Container(
                   width: 106,
-                  height: 121.70,
+                  height: 100.70,
                   decoration: ShapeDecoration(
                     image: DecorationImage(
                       image: Assets.images.course.provider(),
@@ -67,7 +66,7 @@ class ClassRoomCourse extends StatelessWidget {
                       enabled: true,
                       child: Container(
                         width: 106,
-                        height: 121.70,
+                        height: 70.70,
                         decoration: ShapeDecoration(
                           image: DecorationImage(
                             image: Assets.images.course.provider(),
@@ -89,15 +88,15 @@ class ClassRoomCourse extends StatelessWidget {
                     },
                     imageBuilder: (context, image) =>Container(
                       width: 106,
-                      height: 121.70,
+                      height: 100.70,
                       decoration: ShapeDecoration(
                         image: DecorationImage(
                           image: image,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(10),
-                          topRight:  Radius.circular(10),
+                          bottomLeft:  Radius.circular(10),
                          )
                         ),
                       ),
@@ -106,7 +105,7 @@ class ClassRoomCourse extends StatelessWidget {
 
               // Other details
               Expanded(
-                flex: 2,
+                flex: 4,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 12),
                   child: Column(
@@ -165,7 +164,7 @@ class ClassRoomCourse extends StatelessWidget {
                             direction: Axis.horizontal,
                             allowHalfRating: true,
                             itemCount: 5,
-                            itemSize: 22,
+                            itemSize: 16,
                             itemPadding: EdgeInsets.symmetric(
                                 horizontal: 0.0),
                             itemBuilder: (context, _) =>

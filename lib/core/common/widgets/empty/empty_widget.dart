@@ -28,7 +28,7 @@ class EmptyWidget extends StatelessWidget {
           ):
           Assets.lottie.emptyTwo.lottie(),
           SizedBox(height: 12,),
-          Text(title??'Something wrong please try again',style: boldText(14,color: AppColors.primaryColor),)
+          Text(title??'Something wrong please try again',style: boldText(14,color: AppColors.primaryColor),textAlign: TextAlign.center,)
         ],
       ),
     );

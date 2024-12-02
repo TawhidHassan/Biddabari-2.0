@@ -226,7 +226,7 @@ class CourseDetailsPage extends StatelessWidget {
 
                                                   // Number of hours
                                                   Text(
-                                                    '12 Hours',
+                                                    '${controller.detailsCategoryResponse.value!.course!.total_exam} Exam',
                                                     style: semiBoldText(14)
                                                   ),
                                                 ],
@@ -265,7 +265,7 @@ class CourseDetailsPage extends StatelessWidget {
                     ),
 
 
-                    const SizedBox(height: 0),
+                    const SizedBox(height: 50),
                     Container(
                       width: 0.9.sw,
                       padding: EdgeInsets.symmetric(vertical: 12,horizontal: 0),
@@ -528,7 +528,7 @@ class CourseDetailsPage extends StatelessWidget {
                   "course":controller.detailsCategoryResponse.value!.course!
                 });
               },
-              dayslLeft: "0",
+              dayslLeft: controller.detailsCategoryResponse.value!.course!.discount_end_date??"0",
               offerAvilable: true,
               mainPrice: controller.detailsCategoryResponse.value!.course!.price!.toString(),
               totalPrice:  controller.detailsCategoryResponse.value!

@@ -31,7 +31,7 @@ class RankUserTopCard extends StatelessWidget {
               ),
               child: CircleAvatar(
                   radius: 10,
-                  backgroundImage: NetworkImage(ApiEndpoint.imageBaseUrl+exam!.user!.profilePhotoPath!),
+                  backgroundImage: NetworkImage(ApiEndpoint.imageBaseUrl+"${exam!.user==null?"":exam!.user!.profilePhotoPath??""}"),
               ),
             ),
             exam!.user==null? SizedBox()

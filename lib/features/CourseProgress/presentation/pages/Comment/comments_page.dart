@@ -51,68 +51,73 @@ class _CourseCommentPageState extends State<CourseCommentPage> {
               height: 1.0.sh,
               width: 1.0.sw,
               margin: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.blueGrey.shade200),
-                        borderRadius: BorderRadius.circular(6)
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 8,
-                          child:CustomTextField(
-                            textEditingController: controller.commentTextController,
-                            inputFormatters: [],
-                            validator: (text) {
-                              if (text!.isEmpty) {
-                                return "Please enter your comment";
-                              }
-                            },
-                            hintText: "Enter your comment",
-                            isPrefixIcon: true,
-                            icon: Padding(
-                              padding: const EdgeInsets.all(14.0),
-                              child: Icon(Icons.person_outline),
+              child: Form(
+                key: controller.commentFormKey,
+                child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: Colors.blueGrey.shade200),
+                          borderRadius: BorderRadius.circular(6)
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 8,
+                            child:CustomTextField(
+                              textEditingController: controller.commentTextController,
+                              inputFormatters: [],
+                              validator: (text) {
+                                if (text!.isEmpty) {
+                                  return "Please enter your comment";
+                                }
+                              },
+                              hintText: "Enter your comment",
+                              isPrefixIcon: true,
+                              icon: Padding(
+                                padding: const EdgeInsets.all(14.0),
+                                child: Icon(Icons.person_outline),
+                              ),
                             ),
-                          ),
 
-                        ),
-                        Expanded(
-                            flex: 1,
-                            child:controller.circuler.value?
-                            SizedBox(
+                          ),
+                          Expanded(
+                              flex: 1,
+                              child:controller.circuler.value?
+                              SizedBox(
+                                  height: 24,
+                                  child: LoadingWidget())
+                                  :
+                              SizedBox(
                                 height: 24,
-                                child: LoadingWidget())
-                                :
-                            SizedBox(
-                              height: 24,
-                              child: InkWell(
-                                  onTap: (){
-                                    if(controller.commentTextController.text!=""){
-                                      controller.commentsSubmitFun(widget.id!,controller.commentTextController.text,widget.type??"");
-                                    }
-                                  },
-                                  child: Icon(Icons.send,)),
-                            )
-                        )
-                      ],
+                                child: InkWell(
+                                    onTap: (){
+                                      if(controller.commentFormKey.currentState!.validate()){
+                                        controller.commentsSubmitFun(context,widget.id!,controller.commentTextController.text,widget.type??"");
+                                      }
+                                      // if(controller.commentTextController.text!=""){
+                                      // }
+                                    },
+                                    child: Icon(Icons.send,)),
+                              )
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 24,),
-                  Expanded(
-                      child:controller.circuler.value?LoadingWidget():
-                      ListView.builder(
-                        itemCount: controller.comments.value!.comments!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return CommentCard(index: index,comment: controller.comments.value!.comments![index],);
-                        },
-                      )
-                  ),
-                ],
+                    SizedBox(height: 24,),
+                    Expanded(
+                        child:controller.circuler.value?LoadingWidget():
+                        ListView.builder(
+                          itemCount: controller.comments.value!.comments!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return CommentCard(index: index,comment: controller.comments.value!.comments![index],);
+                          },
+                        )
+                    ),
+                  ],
+                ),
               ),
             );
           });

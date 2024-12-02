@@ -27,7 +27,7 @@ class BlogController extends GetxController implements GetxService{
  Rx<Categorie?> selectedcategory = Rx<Categorie?>(null);
  ScrollController controller = ScrollController();
  int listLength = 10;
- int page = 0;
+ int page = 1;
  final blogPagingCirculer = false.obs;
 
 
@@ -46,11 +46,11 @@ class BlogController extends GetxController implements GetxService{
   blogCircle.value = true;
   list.clear();
   listCopy.clear();
-  page = 0;
+  page = 1;
   addItems();
 var rs=  await blogUseCase?.getBlogs(
    20,
-   pagex ?? '0',
+   pagex ?? '1',
   );
   rs!.fold((l){
    Fluttertoast.showToast(

@@ -45,17 +45,11 @@ class ExamController extends GetxController implements GetxService{
   Rx<Exam?> packageSelected = Rx<Exam?>(null);
 
   void selectExamPackage(int? index, Exam? exam) {
-    if(index==selectedExamIndex.value){
-      selectedExamIndex.value=10000;
-      packageSelected.value=null;
-      update();
-      print("unselect");
-    }else{
+
       selectedExamIndex.value=index!;
       packageSelected.value=exam;
       print("select");
       update();
-    }
 
 
   }
@@ -100,6 +94,7 @@ class ExamController extends GetxController implements GetxService{
       );
     }, (r){
       examDetailsResponse.value=r;
+      selectExamPackage(0,r.exam!.batchExamSubscriptions![0]);
 
     });
 

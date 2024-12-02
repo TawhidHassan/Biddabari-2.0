@@ -8,6 +8,7 @@ import 'package:biddabari_new/features/AllCourse/data/models/course/Course.dart'
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:go_router/go_router.dart';
@@ -30,8 +31,26 @@ class AffiliationCourseCard extends StatelessWidget {
     return InkWell(
       onTap: ()async{
         if(response!.affiliateRegister!=null){
+          Fluttertoast.showToast(
+              msg: "Link copy successfully",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 2,
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+              fontSize: 16.0
+          );
           Clipboard.setData(ClipboardData(text: ApiEndpoint.baseUrl+"course-details/${course!.title}?rc=${response!.affiliateRegister!.affiliate_code}")).then((value){
-            Get.snackbar("Copied", ApiEndpoint.baseUrl+"course-details/${course!.title}?rc=${response!.affiliateRegister!.affiliate_code}",backgroundColor: Colors.green,colorText: Colors.white);
+            Fluttertoast.showToast(
+                msg: "Link copy successfully",
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 2,
+                backgroundColor: Colors.green,
+                textColor: Colors.white,
+                fontSize: 16.0
+            );
+            // Get.snackbar("Copied", ApiEndpoint.baseUrl+"course-details/${course!.title}?rc=${response!.affiliateRegister!.affiliate_code}",backgroundColor: Colors.green,colorText: Colors.white);
           });
         }
       },

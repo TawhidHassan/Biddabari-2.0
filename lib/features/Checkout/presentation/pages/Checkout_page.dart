@@ -23,6 +23,7 @@ import '../../../../core/config/util/text_style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/routes/route_path.dart';
 import '../../../../core/service/discount_calculate.dart';
+import '../../../../core/utils/calculate_day_left.dart';
 import '../../../../core/utils/system_util.dart';
 import '../../../BookStore/data/models/book/Book.dart';
 import '../../../Exam/data/models/Exam.dart';
@@ -68,7 +69,7 @@ class CheckoutPage extends StatelessWidget {
               child: Container(
                 height: 1.0.sh,
                 width: 1.0.sw,
-                margin: EdgeInsets.only(bottom: 120),
+                margin: EdgeInsets.only(bottom: 200),
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,8 +86,9 @@ class CheckoutPage extends StatelessWidget {
                           style: regularText(10, color: Color(0xFF777777)),
                         ),
                         SizedBox(height: 6,),
+                        course!.discount_end_date==null?SizedBox():
                         DiscountBadge(
-                          text: 'Duration 5 Days',
+                          text: 'Duration ${DayLeftcalculate(course!.discount_end_date??"0")} Days',
                           backgroundColor: Color(0xFf167F71),
                           foregroundColor: Colors.white,
                           radius: 4,
@@ -95,12 +97,13 @@ class CheckoutPage extends StatelessWidget {
                         Row(
                           children: [
                             RatingBar.builder(
-                              initialRating: 3,
+                              initialRating: 4.5,
                               minRating: 1,
                               direction: Axis.horizontal,
                               allowHalfRating: true,
                               itemCount: 5,
                               itemSize: 16,
+                              ignoreGestures: true,
                               itemPadding: EdgeInsets.symmetric(
                                   horizontal: 0.0),
                               itemBuilder: (context, _) =>
@@ -113,10 +116,10 @@ class CheckoutPage extends StatelessWidget {
                               },
                             ),
                             SizedBox(width: 6,),
-                            Text(
-                              '(1 customer review)',
-                              style: regularText(10, color: Color(0xFF777777)),
-                            ),
+                            // Text(
+                            //   '(1 customer review)',
+                            //   style: regularText(10, color: Color(0xFF777777)),
+                            // ),
                           ],
                         ),
                       ],
@@ -133,8 +136,9 @@ class CheckoutPage extends StatelessWidget {
                           style: regularText(10, color: Color(0xFF777777)),
                         ),
                         SizedBox(height: 6,),
+                        exam!.discountEndDate==null?SizedBox():
                         DiscountBadge(
-                          text: 'Duration 5 Days',
+                          text: 'Duration ${DayLeftcalculate(exam!.discountEndDate??"0")} Days',
                           backgroundColor: Color(0xFf167F71),
                           foregroundColor: Colors.white,
                           radius: 4,
@@ -143,8 +147,9 @@ class CheckoutPage extends StatelessWidget {
                         Row(
                           children: [
                             RatingBar.builder(
-                              initialRating: 3,
+                              initialRating: 4.5,
                               minRating: 1,
+                              ignoreGestures: true,
                               direction: Axis.horizontal,
                               allowHalfRating: true,
                               itemCount: 5,
@@ -182,8 +187,9 @@ class CheckoutPage extends StatelessWidget {
                           style: regularText(10, color: Color(0xFF777777)),
                         ),
                         SizedBox(height: 6,),
+                        book!.discount_end_date==null?SizedBox():
                         DiscountBadge(
-                          text: 'Duration 5 Days',
+                          text: 'Duration ${DayLeftcalculate(book!.discount_end_date)} Days',
                           backgroundColor: Color(0xFf167F71),
                           foregroundColor: Colors.white,
                           radius: 4,
@@ -192,8 +198,9 @@ class CheckoutPage extends StatelessWidget {
                         Row(
                           children: [
                             RatingBar.builder(
-                              initialRating: 3,
+                              initialRating: 4.5,
                               minRating: 1,
+                              ignoreGestures: true,
                               direction: Axis.horizontal,
                               allowHalfRating: true,
                               itemCount: 5,
@@ -210,10 +217,10 @@ class CheckoutPage extends StatelessWidget {
                               },
                             ),
                             SizedBox(width: 6,),
-                            Text(
-                              '(1 customer review)',
-                              style: regularText(10, color: Color(0xFF777777)),
-                            ),
+                            // Text(
+                            //   '(1 customer review)',
+                            //   style: regularText(10, color: Color(0xFF777777)),
+                            // ),
                           ],
                         ),
                       ],
@@ -259,7 +266,7 @@ class CheckoutPage extends StatelessWidget {
                             const SizedBox(height: 5),
                             // note
                             Text(
-                              "আপনার এই নাম এ কোর্সটি রেজিস্টার করা হবে",
+                              "আপনার এই নামে রেজিস্টার করা হবে",
                               style: const TextStyle(
                                 fontSize: 12,
                                 color: AppColors.primaryColor,
@@ -343,6 +350,42 @@ class CheckoutPage extends StatelessWidget {
                               ),
                             ),
 
+                            type == "product"?
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 18,),
+                                Text(
+                                  'Address',
+                                  style: semiBoldText(14),
+                                ),
+                                SizedBox(height: 8,),
+                                CustomTextField(
+                                  textEditingController: controller
+                                      .delievrAddressTextController,
+                                  validator:type == "product"? (text) {
+                                    if (text!.isEmpty) {
+                                      return "Please enter your delivery address";
+                                    }
+                                  }:null,
+                                  hintText: "Enter your delivery address",
+                                  isPrefixIcon: false,
+                                  paddingLeft: 16,
+
+                                ),
+                                const SizedBox(height: 5),
+                                // note
+                                Text(
+                                  "এই আপনার ডেলিভারি ঠিকানা",
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: AppColors.primaryColor,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ):SizedBox(),
+
 
                             const SizedBox(height: 20),
 
@@ -356,7 +399,7 @@ class CheckoutPage extends StatelessWidget {
                                 color: controller.paymentType.value == "বিকাশ"
                                     ? AppColors.primaryColor
                                     : Colors.grey,
-                                icon: Icons.payment,
+                                icon: Image.asset("assets/images/bkashLogo.png"),
                               ),
                             ),
 
@@ -372,7 +415,7 @@ class CheckoutPage extends StatelessWidget {
                                 color: controller.paymentType.value == "ডিজিটাল"
                                     ? AppColors.primaryColor
                                     : Colors.grey,
-                                icon: Icons.payment,
+                                icon: Image.asset("assets/images/sslLogo.png"),
                               ),
                             ),
 
@@ -465,8 +508,44 @@ class CheckoutPage extends StatelessWidget {
                         ],
                       )
                       :
-                      SizedBox(),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+
+                          PaymentSummeryItem(
+                            item: 'Sub Total',
+                            amount: book!.discount_amount != null ?
+                            (num.parse(book!.price!).toDouble() - num.parse(book!.discount_amount!).toDouble()).toString()
+                                :
+                            book!.price!.toString(),
+                          ),
+
+                          const SizedBox(height: 10),
+
+                          PaymentSummeryItem(
+                            item: 'Fee & Delivery',
+                            amount: "0.0",
+                          ),
+
+                          const Divider(
+                            height: 25,
+                            thickness: 0.3,
+                            color: Colors.black54,
+                          ),
+
+                          PaymentSummeryItem(
+                            item: 'Total',
+                            amount: book!.discount_amount != null ?
+                            (num.parse(book!.price!).toDouble() - num.parse(book!.discount_amount!).toDouble()).toString()
+                                :
+                            book!.price!.toString(),
+                            isBold: true,
+                          ),
+                        ],
+                      )
                     ),
+
+
 
 
 
@@ -487,7 +566,6 @@ class CheckoutPage extends StatelessWidget {
                 if (controller.loginGlobalkey.currentState!.validate()) {
                   controller.circuler.value=true;
                   controller.login(context, "course",course,exam,parentExam,book).then((onValue){
-
                   });
                 }
               },

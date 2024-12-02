@@ -39,6 +39,7 @@ class CheckoutController extends GetxController implements GetxService{
 
  TextEditingController mobileTextController = new TextEditingController(text: "01");
  TextEditingController mobileConfirmTextController = new TextEditingController(text: "01");
+ TextEditingController delievrAddressTextController = new TextEditingController(text: "");
  TextEditingController coupenCodeTextController = new TextEditingController();
  TextEditingController nameTextController = new TextEditingController();
  final loginGlobalkey = GlobalKey<FormState>();
@@ -68,7 +69,7 @@ class CheckoutController extends GetxController implements GetxService{
            mobile: value.user!.mobile,image: value.user!.profile_photo_url).then((valuex) async {
        });
 
-       if(paymentType.value=="ডিজিটাল"||paymentType.value!=""){
+       if(paymentType.value=="ডিজিটাল"&&paymentType.value!=""){
            var trnId= DateTime.now().microsecond.toString();
            var invoiceId= DateTime.now().millisecond.toInt();
            paymentMetods.value="ssl";
@@ -354,7 +355,7 @@ class CheckoutController extends GetxController implements GetxService{
    orderResponseCourse.value=null;
    var res=await  checkoutUseCase!.orderBook(
        book:book,
-       address: "",
+       address: delievrAddressTextController.text,
        type: type,
        payment_method: paymentMetods.value,
        trnxId: trnxId,

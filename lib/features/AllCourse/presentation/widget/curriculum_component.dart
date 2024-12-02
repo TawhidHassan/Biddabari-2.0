@@ -129,9 +129,12 @@ class CurriculumComponent extends StatelessWidget {
                   const SizedBox(height: 5),
 
                   // content under first heading
+                  controller!.detailsCategoryResponse!.value!.courseSec!.course_sections!
+                      .where((test)=>test.course_section_contents!.isNotEmpty).toList().isEmpty?Text("No course sections available."):
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children:controller!.detailsCategoryResponse!.value!.courseSec!.course_sections!
+                        .where((test)=>test.course_section_contents!.isNotEmpty).toList()
                         .map<Widget>((contentData) {
                       return ExpansionTile(
                         title:Padding(

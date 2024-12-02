@@ -51,7 +51,7 @@ class OrderPage extends StatelessWidget {
                       height: 50,
                       width: 1.0.sw,
                       child: Row(
-                        children: ["Pending", "Confirm"].map((cat) {
+                        children: ["Confirm","Pending"].map((cat) {
                           return Expanded(
                             child: InkWell(
                               onTap: (){

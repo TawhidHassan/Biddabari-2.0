@@ -5,6 +5,7 @@ import 'package:biddabari_new/features/Exam/data/models/Exam.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -49,6 +50,7 @@ class ExamCard extends StatelessWidget {
 
             // image
             Expanded(
+              flex: 4,
               child: Stack(
                 children: [
                   CachedNetworkImage(
@@ -128,93 +130,112 @@ class ExamCard extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
+            Expanded(
+              flex: 4,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 16),
+                      // category
+                      // Text(
+                      //   'category',
+                      //   style: const TextStyle(
+                      //     color: AppColors.orange400,
+                      //     fontSize: 12,
+                      //   ),
+                      // ),
 
-            // category
-            // Text(
-            //   'category',
-            //   style: const TextStyle(
-            //     color: AppColors.orange400,
-            //     fontSize: 12,
-            //   ),
-            // ),
-
-            const SizedBox(height: 5),
-
-            // title
-            Text(
-              exam!.title??"",
-              textAlign: TextAlign.justify,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15,
-              ),
-            ),
-
-            const SizedBox(height: 5),
-
-            // price
-            Text(
-              'price' + '/-${exam!.price}',
-              style: const TextStyle(
-                color: AppColors.primaryColor,
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 5),
-
-            // rating bar
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-
-                // rating
-                Text(
-                  "4.7",
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.black54,
-                  ),
-                ),
-
-                const SizedBox(width: 5),
-
-                // rating star
-                RatingBar.builder(
-                  initialRating: 4.5,
-                  minRating: 1,
-                  ignoreGestures: true,
-                  direction: Axis.horizontal,
-                  allowHalfRating: true,
-                  itemCount: 5,
-                  itemSize: 12,
-                  itemPadding: EdgeInsets.symmetric(
-                      horizontal: 0.0),
-                  itemBuilder: (context, _) =>
-                      Icon(
-                        Icons.star,
-                        color: Colors.amber,
+                      // title
+                      Text(
+                        exam!.title??'',
+                        textAlign: TextAlign.justify,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style:  TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
                       ),
-                  onRatingUpdate: (rating) {
-                    print(rating);
-                  },
-                ),
+                    ],
+                  ),
 
-                // const SizedBox(width: 5),
-                //
-                // // total rating count
-                // Text(
-                //   '(12)',
-                //   style: const TextStyle(
-                //     fontSize: 12,
-                //     color: Colors.black54,
-                //   ),
-                // ),
-              ],
+                  FittedBox(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+
+
+                        // price
+                        Text(
+                          'price' + '/-${exam!.price}',
+                          style: const TextStyle(
+                            color: AppColors.primaryColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+
+                        // rating bar
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+
+                            // rating
+                            Text(
+                              "4.7",
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.black54,
+                              ),
+                            ),
+
+                            const SizedBox(width: 5),
+
+                            // rating star
+                            RatingBar.builder(
+                              initialRating: 4.5,
+                              minRating: 1,
+                              ignoreGestures: true,
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              itemCount: 5,
+                              itemSize: 12,
+                              itemPadding: EdgeInsets.symmetric(
+                                  horizontal: 0.0),
+                              itemBuilder: (context, _) =>
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                              onRatingUpdate: (rating) {
+                                print(rating);
+                              },
+                            ),
+
+                            // const SizedBox(width: 5),
+                            //
+                            // // total rating count
+                            // Text(
+                            //   '(12)',
+                            //   style: const TextStyle(
+                            //     fontSize: 12,
+                            //     color: Colors.black54,
+                            //   ),
+                            // ),
+
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

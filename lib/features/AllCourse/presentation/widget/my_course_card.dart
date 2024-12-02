@@ -54,7 +54,7 @@ class MyCourseCard extends StatelessWidget {
             Expanded(
               flex: 5,
               child: CachedNetworkImage(
-                imageUrl:ApiEndpoint.imageBaseUrl+course!.course!.banner!,
+                imageUrl:ApiEndpoint.imageBaseUrl+course!.course!.banner.toString(),
                 placeholder: (context, url) => Skeletonizer(
                   enabled: true,
                   child: Container(

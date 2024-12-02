@@ -1,3 +1,4 @@
+import 'package:biddabari_new/core/common/widgets/empty/empty_widget.dart';
 import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
 import 'package:biddabari_new/core/common/widgets/shimer%20component/shimer_list.dart';
 import 'package:biddabari_new/features/BookStore/data/models/book/Book.dart';
@@ -53,10 +54,11 @@ class MyBookPage extends StatelessWidget {
                 width: 1.0.sw,
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 color: AppColors.primaryBackground,
-                child: CustomScrollView(
+                child:controller.mybookResponse.value!.products!.isEmpty?Center(child: EmptyWidget(title: "There has no book",)): CustomScrollView(
                   slivers: [
                     SliverToBoxAdapter(
-                        child: ListView.builder(
+                        child:
+                        ListView.builder(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           itemCount: controller.mybookResponse.value!.products!.length,

@@ -1,4 +1,5 @@
 import 'package:biddabari_new/core/common/widgets/Appbar/custom_appbar.dart';
+import 'package:biddabari_new/core/common/widgets/empty/empty_widget.dart';
 import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
 import 'package:biddabari_new/core/common/widgets/shimer%20component/shimer_grid.dart';
 import 'package:flutter/material.dart';
@@ -114,6 +115,7 @@ class SearchPage extends StatelessWidget {
                     SizedBox(height: 16,),
                     controller.response.value!=null?
                     controller.selectCat.value=="Course"?
+                    controller.response.value!.courses!.isEmpty?EmptyWidget(title: "No Course Found, Search again",):
                     GridView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
@@ -129,7 +131,9 @@ class SearchPage extends StatelessWidget {
                             course:controller.response.value!.courses![index]
                         );
                       },
-                    ): controller.selectCat.value=="Product"?
+                    ):
+                    controller.selectCat.value=="Product"?
+                    controller.response.value!.products!.isEmpty?EmptyWidget(title: "No Book Found, Search again",):
                     GridView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
@@ -147,6 +151,7 @@ class SearchPage extends StatelessWidget {
                       },
                     )
                         :
+                    controller.response.value!.batchExams!.isEmpty?EmptyWidget(title: "No Exam Found, Search again",):
                     GridView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
@@ -163,7 +168,8 @@ class SearchPage extends StatelessWidget {
                         );
                       },
                     )
-                        :SizedBox()
+                        :
+                    EmptyWidget(title: "🙁 No matches found! Try tweaking your preferences to discover better results.",)
                   ],
                 ),
               ),

@@ -251,7 +251,7 @@ class ClassRoomPage extends StatelessWidget {
                                             height: 38,
                                             active: controller.tabIndex.value ==
                                                 1,
-                                            title: "Ajker Class",),
+                                            title: "Today Class",),
                                         ),
                                       ),
                                       Expanded(
@@ -264,7 +264,7 @@ class ClassRoomPage extends StatelessWidget {
                                             height: 38,
                                             active: controller.tabIndex.value ==
                                                 2,
-                                            title: "Ajker Exam",),
+                                            title: "Today Exam",),
                                         ),
                                       ),
                                     ],

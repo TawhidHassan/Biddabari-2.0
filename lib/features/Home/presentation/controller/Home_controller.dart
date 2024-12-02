@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:biddabari_new/core/common/data/Slider/SliderResponse.dart';
 import 'package:get/get.dart';
 import '../../../../Dependenci Injection/init_dependencies.dart';
@@ -13,6 +15,7 @@ class HomeController extends GetxController implements GetxService{
   HomeController({ this.homeUseCase });
 
 
+  final selectedIndex=0.obs;
   final sliderIndex=0.obs;
   final categoryLoading=false.obs;
   final sliderLoading=false.obs;
@@ -20,6 +23,44 @@ class HomeController extends GetxController implements GetxService{
 
  Rx<CategoryResponse?>  categoryResponse=Rx<CategoryResponse?>(null);
  Rx<SliderResponse?>  sliderResponse=Rx<SliderResponse?>(null);
+
+ void showDialog() {
+  Get.dialog(
+      barrierDismissible: false,
+      Dialog(
+       backgroundColor: Colors.transparent,
+       child: WillPopScope(
+        onWillPop: () async => false,
+        child: Container(
+         padding: EdgeInsets.all(10),
+         decoration: BoxDecoration(
+             color: Colors.white,
+             borderRadius: BorderRadius.circular(20)),
+         child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+           Center(
+            child: Text("No Internet Connection"),
+           ),
+           SizedBox(height:10,),
+           Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Text("Please check your connection again,or connect to wi-fi.",),
+           ),
+           Divider(
+            color: Colors.grey,
+            thickness: 1,
+           ),
+
+          ],
+         ),
+        ),
+       ),
+      )
+  );
+ }
+
 
   Future getcatgeoryList()async {
    categoryLoading.value=true;
@@ -69,6 +110,8 @@ class HomeController extends GetxController implements GetxService{
 
 
   }
+
+
 
 
 

@@ -3,6 +3,7 @@ import 'package:biddabari_new/core/config/color/app_colors.dart';
 import 'package:biddabari_new/features/CourseProgress/presentation/controller/CourseProgress_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
@@ -71,7 +72,6 @@ class _CourseContentCommentPageState extends State<CourseContentCommentPage> {
                           flex: 8,
                           child:CustomTextField(
                             textEditingController: controller.commentTextController,
-                            inputFormatters: [],
                             validator: (text) {
                               if (text!.isEmpty) {
                                 return "Please enter your comment";
@@ -95,7 +95,8 @@ class _CourseContentCommentPageState extends State<CourseContentCommentPage> {
                               child: InkWell(
                                   onTap: (){
                                     if(controller.commentTextController.text!=""){
-                                      controller.commentsSubmitFun(widget.id!,controller.commentTextController.text,widget.type??"");
+
+                                      controller.commentsSubmitFun(context,widget.id!,controller.commentTextController.text,widget.type??"");
                                     }
                                   },
                                   child: Icon(Icons.send, color: AppColors.primaryColor,)),
@@ -130,65 +131,89 @@ class _CourseContentCommentPageState extends State<CourseContentCommentPage> {
             return Container(
               width: 1.0.sw,
               margin: EdgeInsets.symmetric(horizontal: widget.page!?24:0, vertical: widget.page!?24:0),
-              child: ListView(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                children: [
-                  Text( "Leave a Reply",style:extraBoldText(24),),
-                  SizedBox(height: 12,),
-                  CustomTextField(
-                    textEditingController: controller.commentTextController,
-                    inputFormatters: [],
-                    hintText: "Enter your comment",
-                    isPrefixIcon: true,
-                    icon: Padding(
-                      padding: const EdgeInsets.all(14.0),
-                      child: Icon(Icons.comment),
-                    ),
-                  ),
-                  SizedBox(height: 16,),
-
-                  controller.commentCircle.value?
-                  SizedBox(
-                      height: 20,
-                      child: LoadingWidget())
-                      :
-                  CustomElevatedButton(
-                    onPressed: () {
-                      if(controller.commentTextController.text!=""){
-                        controller.commentsSubmitFun(widget.id!,controller.commentTextController.text,widget.type??"");
-                      }
-                    },
-                    titleText: 'সাবমিট করুন ',
-                    titleSize: 14,
-                    titleColor: Colors.white,
-                    buttonColor: AppColors.primaryColor,
-                    borderRdius: 100.r,
-                    buttonMarginLeft: 52,
-                    iconRight: Container(
-                      width: 36,
-                      height: 36,
-                      margin: EdgeInsets.symmetric(horizontal: 10),
-                      decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: OvalBorder(),
+              child: Form(
+                key: controller.formKey,
+                autovalidateMode: AutovalidateMode.disabled,
+                child: ListView(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  children: [
+                    Text( "Leave a Reply",style:extraBoldText(24),),
+                    SizedBox(height: 12,),
+                    CustomTextField(
+                      textEditingController: controller.commentTextController,
+                      inputFormatters: [],
+                      hintText: "Enter your comment",
+                      isPrefixIcon: true,
+                      // validator: (text) {
+                      //   if (text!.isEmpty) {
+                      //     return "Please enter your comment";
+                      //   }else{
+                      //     return null;
+                      //   }
+                      //
+                      // },
+                      icon: Padding(
+                        padding: const EdgeInsets.all(14.0),
+                        child: Icon(Icons.comment),
                       ),
-                      child: Icon(Icons.arrow_forward_ios_sharp,
-                        color: AppColors.primaryColor,),
                     ),
-                  ),
+                    SizedBox(height: 16,),
 
-                  SizedBox(height: 24,),
-                  controller.circuler.value ||controller.comments.value==null?LoadingWidget():
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: controller.comments.value!.comments!.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return CommentCard(index: index,comment: controller.comments.value!.comments![index],);
-                    },
-                  ),
-                ],
+                    controller.commentCircle.value?
+                    SizedBox(
+                        height: 20,
+                        child: LoadingWidget())
+                        :
+                    CustomElevatedButton(
+                      onPressed: () {
+                          if(controller.commentTextController.text!=""){
+                            controller.commentsSubmitFun(context,widget.id!,controller.commentTextController.text,widget.type??"");
+                          }else{
+                            Fluttertoast.showToast(
+                                msg: "Please enter your comment",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 2,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0
+                            );
+                          }
+
+
+                      },
+                      titleText: 'Send ',
+                      titleSize: 14,
+                      titleColor: Colors.white,
+                      buttonColor: AppColors.primaryColor,
+                      borderRdius: 100.r,
+                      buttonMarginLeft: 52,
+                      iconRight: Container(
+                        width: 36,
+                        height: 36,
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: OvalBorder(),
+                        ),
+                        child: Icon(Icons.arrow_forward_ios_sharp,
+                          color: AppColors.primaryColor,),
+                      ),
+                    ),
+
+                    SizedBox(height: 24,),
+                    controller.circuler.value ||controller.comments.value==null?LoadingWidget():
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: controller.comments.value!.comments!.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CommentCard(index: index,comment: controller.comments.value!.comments![index],);
+                      },
+                    ),
+                  ],
+                ),
               ),
             );
           });

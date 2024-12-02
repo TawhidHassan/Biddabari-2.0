@@ -203,14 +203,15 @@ class JobPage extends StatelessWidget {
                         crossAxisCount: 2,
                         crossAxisSpacing: 12.0,
                         mainAxisSpacing: 12.0,
-                        childAspectRatio: SystemUtil.getChildAspectRatio(context),
+                        childAspectRatio: 1,
 
                     ),
                     itemCount: controller.selectedJobcategory!.value!.circulars!.length,
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
-                          print(controller.selectedJobcategory!.value!.circulars![index].image??'');
+                          print('xxx');
+                          print(controller.selectedJobcategory!.value!.image??'');
                           context.pushNamed(Routes.jobDetailsPage,extra:controller.selectedJobcategory!.value!.circulars![index] );
                         },
                         child: Container(
@@ -234,7 +235,7 @@ class JobPage extends StatelessWidget {
                               Expanded(
                                 flex: 2,
                                 child: CachedNetworkImage(
-                                  imageUrl: controller.selectedJobcategory!.value!.circulars![index].image??'',
+                                  imageUrl: controller.selectedJobcategory!.value!.image??'',
                                   placeholder: (context, url) => Skeletonizer(
                                     enabled: true,
                                     child: Container(
@@ -245,8 +246,7 @@ class JobPage extends StatelessWidget {
                                               topRight: Radius.circular(4),
                                               topLeft: Radius.circular(4)),
                                           image: DecorationImage(
-                                              image: Assets.images.course
-                                                  .provider(),
+                                              image: Assets.images.course.provider(),
                                               fit: BoxFit.fill
                                           )
                                       ),
@@ -278,7 +278,7 @@ class JobPage extends StatelessWidget {
                                                 topLeft: Radius.circular(4)),
                                             image: DecorationImage(
                                                 image: image,
-                                                fit: BoxFit.cover
+                                                fit: BoxFit.fitWidth
                                             )
                                         ),
                                         child: Container(
@@ -297,7 +297,7 @@ class JobPage extends StatelessWidget {
                               ),
                               SizedBox(height: 8,),
                               Expanded(
-                                flex: 1,
+                                flex: 2,
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 10.0),
@@ -315,7 +315,7 @@ class JobPage extends StatelessWidget {
                                       Text(
                                         controller.selectedJobcategory!.value!.circulars![index].jobTitle??'',
                                         style: boldText(
-                                            16, color: AppColors.textClorColor),
+                                            11, color: AppColors.textClorColor),
                                         textAlign: TextAlign.start,
                                         maxLines: 2, // Set a limit for lines
                                         overflow: TextOverflow.ellipsis,
@@ -323,10 +323,11 @@ class JobPage extends StatelessWidget {
 
                                       const SizedBox(height: 8),
                                       CustomButton(
-                                        height: 30,
-                                        width: 100,
-                                        onTap: () {},
+                                        height: 24,
+                                        width: 80,
+                                        onTap: null,
                                         isBorder: true,
+                                        textSize: 9,
                                         textColor: AppColors.primaryColor,
                                         title: "View Details",
                                       )

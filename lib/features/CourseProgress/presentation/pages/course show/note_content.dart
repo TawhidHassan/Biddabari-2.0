@@ -41,16 +41,25 @@ class NoteContentPage extends StatelessWidget {
       ),
       body: Container(
         height: 1.0.sh,
+        width: 1.0.sw,
         padding: EdgeInsets.symmetric(horizontal: 0,vertical: 0),
         child: GetBuilder<CourseProgressController>(
           assignId: true,
           builder: (controller) {
             return isive!||isLink!?
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 isive!?Text("Live start time: "+courseSectionContent!.liveStartTime.toString(),style: mediumText(14),):SizedBox(),
                 isive!?Text("Live end time: "+courseSectionContent!.liveEndTime.toString(),style: mediumText(14),):SizedBox(),
+                SizedBox(height: 12,),
+                isLink!?
+                Column(
+                  children: [
+                    Assets.images.link.svg(),
+                    Text("Click The Link Below",style: mediumText(14,color: Color(0xFF777777)),)
+                  ],
+                ):SizedBox(),
                 SizedBox(height: 12,),
                 InkWell(
                     onTap: () async {
@@ -58,7 +67,7 @@ class NoteContentPage extends StatelessWidget {
                           isLink!?courseSectionContent!.regularLink??"":courseSectionContent!.liveLink??""
                       );
                     },
-                    child: Text(isLink!?courseSectionContent!.regularLink??"":courseSectionContent!.liveLink??"",style: boldText(14,color: Colors.blueAccent),))
+                    child: Text(isLink!?courseSectionContent!.regularLink??"":courseSectionContent!.liveLink??"",style: boldText(14,color: AppColors.primaryColor),))
               ],
             ):
             // Text(courseSectionContent!.liveLink??"")

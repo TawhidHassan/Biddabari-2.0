@@ -102,15 +102,6 @@ CourseCard({Key? key, this.course, this.buttonColor=0xFFEB6A20}) : super(key: ke
                               fit: BoxFit.cover
                           )
                       ),
-                      child: Container(
-                        width: 19,
-                        height: 19,
-                        decoration: ShapeDecoration(
-                          shape: OvalBorder(
-                            side: BorderSide(width: 1, color: Colors.white),
-                          ),
-                        ),
-                      ),
                     )
                 ,
               ),
@@ -125,7 +116,7 @@ CourseCard({Key? key, this.course, this.buttonColor=0xFFEB6A20}) : super(key: ke
                   children: [
                     Text(
                       course!.title??"",
-                      style:boldText(16.sp,color: AppColors.textClorColor),
+                      style:boldText(14,color: AppColors.textClorColor),
                       textAlign: TextAlign.start,
                       maxLines: 2, // Set a limit for lines
                       overflow: TextOverflow.ellipsis,
@@ -160,13 +151,23 @@ CourseCard({Key? key, this.course, this.buttonColor=0xFFEB6A20}) : super(key: ke
                             Text(
                               '৳ ${course!.price!}',
                               style: TextStyle(
-                                color: Color(0xFFC71720),
-                                fontSize: 8.sp,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w600,
-                                decoration: TextDecoration.lineThrough,
+                                  fontSize: 9,
+                                  color: Color(0xFFC71720),
+                                  decoration: TextDecoration.lineThrough
                               ),
-                            ):SizedBox(),
+
+                            )
+                            // Text(
+                            //   '৳ ${course!.price!}',
+                            //   style: TextStyle(
+                            //     color: Color(0xFFC71720),
+                            //     fontSize: 8,
+                            //     fontFamily: 'Poppins',
+                            //     fontWeight: FontWeight.w500,
+                            //     decoration: TextDecoration.lineThrough,
+                            //   ),
+                            // )
+                                :SizedBox(),
                             course!.discount_amount!=null?
                             Text(
                               '৳ ${(course!.price!-course!.discount_amount!)}',
@@ -208,7 +209,7 @@ CourseCard({Key? key, this.course, this.buttonColor=0xFFEB6A20}) : super(key: ke
                               Container(
                                 height: 20,
                                 width: double.infinity,
-                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 0),
+                                padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 0),
                                 decoration: ShapeDecoration(
                                   color:Color(buttonColor!) ,
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
@@ -226,7 +227,7 @@ CourseCard({Key? key, this.course, this.buttonColor=0xFFEB6A20}) : super(key: ke
                                     'Buy Now',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 10,
+                                      fontSize: 8,
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w700,
                                     ),

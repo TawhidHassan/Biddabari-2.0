@@ -6,7 +6,7 @@ import '../../../../core/common/widgets/container/circular_point.dart';
 class PaymentOptionCard extends StatelessWidget {
   final String title;
   final Color color;
-  final IconData icon;
+  final Widget icon;
 
   const PaymentOptionCard({
     super.key,
@@ -35,10 +35,7 @@ class PaymentOptionCard extends StatelessWidget {
         title: Text( title,style: boldText(14),),
 
         // logo
-        trailing: Icon(
-          icon,
-          color: color,
-        ),
+        trailing: icon,
       ),
     );
   }

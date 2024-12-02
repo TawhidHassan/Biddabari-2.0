@@ -25,31 +25,43 @@ class ExamPackageCard extends StatelessWidget {
         padding: EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color:index==controller!.selectedExamIndex.value?AppColors.kPrimaryColorx: Colors.black12),
-          borderRadius: BorderRadius.circular(12)
+          boxShadow: [
+            BoxShadow(
+              color: Color(0x266E6D6D),
+              blurRadius: 24,
+              offset: Offset(1, 12),
+              spreadRadius: 2,
+            )
+          ],
+          // border: Border.all(color:index==controller!.selectedExamIndex.value?AppColors.kPrimaryColorx: Colors.black12),
+          borderRadius: BorderRadius.circular(12),
         ),
-        child: Column(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CachedNetworkImage(
-              imageUrl:ApiEndpoint.imageBaseUrl+image!,
-              placeholder: (context, url) => CircularProgressIndicator(),
-              errorWidget: (context, url, error){
-                return Image.asset("assets/images/biddabari-logo.png");
-              },
-              imageBuilder: (context, image) =>  Container(
-                height: 80,
-                decoration:  BoxDecoration(
-                    borderRadius: BorderRadius.only(topRight: Radius.circular(4),topLeft: Radius.circular(4) ),
-                    image: DecorationImage(
-                        image: image,
-                        fit: BoxFit.fill
-                    )
+            Expanded(
+              flex: 4,
+              child: CachedNetworkImage(
+                imageUrl:ApiEndpoint.imageBaseUrl+image!,
+                placeholder: (context, url) => CircularProgressIndicator(),
+                errorWidget: (context, url, error){
+                  return Image.asset("assets/images/biddabari-logo.png");
+                },
+                imageBuilder: (context, image) =>  Container(
+                  height: 125,
+                  decoration:  BoxDecoration(
+                      borderRadius: BorderRadius.only(topRight: Radius.circular(4),topLeft: Radius.circular(4) ),
+                      image: DecorationImage(
+                          image: image,
+                          fit: BoxFit.fill
+                      )
+                  ),
                 ),
               ),
             ),
-            SizedBox(height: 6,),
-            FittedBox(
+            SizedBox(width: 12,),
+            Expanded(
+              flex: 4,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

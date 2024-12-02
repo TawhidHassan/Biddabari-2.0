@@ -9,7 +9,7 @@ String DayLeftcalculate(String? time){
   int hoursLeft = difference.inHours % 24;
   int minutesLeft = difference.inMinutes % 60;
 
-  print('Time left: $daysLeft days, $hoursLeft hours, $minutesLeft minutes');
+  print('Time left: $daysLeft days, $hoursLeft:$minutesLeft');
 
-  return "${'$daysLeft days, $hoursLeft hours, $minutesLeft minutes'}";
+  return "${'$daysLeft days, $hoursLeft H : $minutesLeft M'}";
 }

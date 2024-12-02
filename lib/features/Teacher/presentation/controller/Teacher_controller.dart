@@ -2,6 +2,7 @@
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:pod_player/pod_player.dart';
 import '../../../../core/common/data/user/User.dart';
 import '../../data/models/Teacher/TeacherDetailsResponse.dart';
 import '../../data/models/Teacher/TeacherResponse.dart';
@@ -18,9 +19,12 @@ class TeacherController extends GetxController implements GetxService{
 
 
   final teacherCircle = false.obs;
-  final teacherAboutClick = true.obs;
+  final teacherAboutClick = false.obs;
   List<User> teacherList = [];
 
+  PodPlayerController? controllerPodIntro;
+  PodPlayerController? controllerPoddemo1;
+  PodPlayerController? controllerPoddemo2;
   Rx<TeacherResponse?> teacherResponse = Rx<TeacherResponse?>(null);
   ScrollController controllerTeacher = ScrollController();
   int teacherListLength = 10;

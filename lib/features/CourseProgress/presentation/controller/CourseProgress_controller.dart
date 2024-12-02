@@ -36,6 +36,8 @@ class CourseProgressController extends GetxController implements GetxService{
 
  CountdownTimer? countDownTimer;
 
+ final formKey = GlobalKey<FormState>();
+ final commentFormKey = GlobalKey<FormState>();
  final currentTime=0.obs;
  final circuler=false.obs;
  final playOneline=false.obs;
@@ -228,7 +230,7 @@ class CourseProgressController extends GetxController implements GetxService{
   commentCircle.value = false;
  }
 
-  Future commentsSubmitFun(String id, String comment, String type)async {
+  Future commentsSubmitFun(BuildContext context,String id, String comment, String type)async {
    commentCircle.value=true;
    var rs= await courseProgressUseCase!.commentsSubmitFun(id,comment,type);
    rs.fold((l){
@@ -243,7 +245,16 @@ class CourseProgressController extends GetxController implements GetxService{
     );
    }, (r){
     commentTextController.text="";
-    Get.snackbar("Successfully", "Add comment",backgroundColor: Colors.green);
+    FocusScope.of(context).unfocus();
+    Fluttertoast.showToast(
+        msg:"Successfully Add comment",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 2,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
     getComments(id,type);
    });
    commentCircle.value = false;

@@ -286,6 +286,10 @@ class $AssetsImagesGen {
   AssetGenImage get biddabariWhite =>
       const AssetGenImage('assets/images/biddabari_white.png');
 
+  /// File path: assets/images/bkashLogo.png
+  AssetGenImage get bkashLogo =>
+      const AssetGenImage('assets/images/bkashLogo.png');
+
   /// File path: assets/images/course.png
   AssetGenImage get course => const AssetGenImage('assets/images/course.png');
 
@@ -314,8 +318,15 @@ class $AssetsImagesGen {
   AssetGenImage get freeExam =>
       const AssetGenImage('assets/images/free_exam.png');
 
+  /// File path: assets/images/link.svg
+  SvgGenImage get link => const SvgGenImage('assets/images/link.svg');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
+  /// File path: assets/images/logo_white.png
+  AssetGenImage get logoWhite =>
+      const AssetGenImage('assets/images/logo_white.png');
 
   /// File path: assets/images/onboarding1.png
   AssetGenImage get onboarding1 =>
@@ -345,6 +356,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/splash.png
   AssetGenImage get splash => const AssetGenImage('assets/images/splash.png');
 
+  /// File path: assets/images/sslLogo.png
+  AssetGenImage get sslLogo => const AssetGenImage('assets/images/sslLogo.png');
+
   /// File path: assets/images/teacher.png
   AssetGenImage get teacher => const AssetGenImage('assets/images/teacher.png');
 
@@ -361,6 +375,7 @@ class $AssetsImagesGen {
         authentication,
         biddabariLogo,
         biddabariWhite,
+        bkashLogo,
         course,
         empty,
         examBg,
@@ -369,7 +384,9 @@ class $AssetsImagesGen {
         fram,
         freeClass,
         freeExam,
+        link,
         logo,
+        logoWhite,
         onboarding1,
         onboarding2,
         onboarding3,
@@ -378,6 +395,7 @@ class $AssetsImagesGen {
         rankBg,
         slider,
         splash,
+        sslLogo,
         teacher,
         teacherBg,
         walletBg

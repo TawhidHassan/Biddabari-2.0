@@ -6,6 +6,7 @@ import 'package:biddabari_new/features/BookStore/presentation/controller/BookSto
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:go_router/go_router.dart';
@@ -127,7 +128,7 @@ class BookDetailsPage extends StatelessWidget {
                                 radius: 12,
                               ):DiscountBadge(
                                 text: 'Out Of Stock',
-                                backgroundColor: Color(0xFf18C667),
+                                backgroundColor: Colors.redAccent,
                                 foregroundColor: Colors.white,
                                 radius: 12,
                               ),
@@ -320,15 +321,29 @@ class BookDetailsPage extends StatelessWidget {
             bottomSheet:controller.storeBookLoading.value?LoadingWidget():
             BottomCheckoutSection(
               action: (){
-                context.pushNamed(Routes.checkOutPage,extra: {
-                  "type":"product",
-                  "course":null,
-                  "exam":null,
-                  "parentExam":null,
-                  "book":controller.bookSingelResponse.value!.product!,
-                });
-              },
+                print( controller.bookSingelResponse.value!.product!.stock_amount!);
+                if( controller.bookSingelResponse.value!.product!.stock_amount!.isLowerThan(1)){
+                  Fluttertoast.showToast(
+                      msg: "This Book Out Of Stock",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 2,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0
+                  );
+                }else{
+                  context.pushNamed(Routes.checkOutPage,extra: {
+                    "type":"product",
+                    "course":null,
+                    "exam":null,
+                    "parentExam":null,
+                    "book":controller.bookSingelResponse.value!.product!,
+                  });
+                }
 
+              },
+              buttonText:  controller.bookSingelResponse.value!.product!.stock_amount!>0?"এখনই কিনুন ":"Out of Stock",
               dayslLeft: controller.bookSingelResponse.value!.product!.discount_end_date??'',
               offerAvilable: true,
               mainPrice: controller.bookSingelResponse.value!.product!.price!.toString(),

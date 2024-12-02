@@ -1,8 +1,10 @@
+import 'package:biddabari_new/core/config/localization/app_translations.dart';
 import 'package:biddabari_new/core/routes/route_path.dart';
 import 'package:biddabari_new/features/BookStore/data/models/book/Book.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -92,12 +94,13 @@ class BookCard extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10),
                         decoration: BoxDecoration(
-                          color: AppColors.orange400,
+                          color:book!.stock_amount!.isLowerThan(1)?Colors.redAccent: AppColors.orange400,
                           borderRadius: BorderRadius.circular(
                               3),
                         ),
                         child: Text(
-                          'Best Sell', style: boldText(
+                          book!.stock_amount!.isLowerThan(1)?"Out of stock":
+                          'In Stock', style: boldText(
                             12, color: Colors.white),),
                       ),
                     ),

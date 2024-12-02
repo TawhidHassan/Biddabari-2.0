@@ -67,7 +67,8 @@ class HomeCustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                        context.pushNamed(Routes.notificationPage);
+                        // context.pushNamed(Routes.notificationPage);
+                        context.pushNamed(Routes.noticePage);
                       },
                       child: Container(
                         width: 32,

@@ -6,14 +6,17 @@ import 'package:biddabari_new/features/Blog/presentation/controller/Blog_control
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../../core/config/Strings/api_endpoint.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/utils/format_date.dart';
 import '../widget/blog_card.dart';
+import 'package:flutter/src/services/clipboard.dart';
 
 class BlogDetailsPage extends StatelessWidget {
   final Blog? blog;
@@ -61,37 +64,36 @@ class BlogDetailsPage extends StatelessWidget {
                     SizedBox(height: 12,),
                     Row(
                       children: [
-                        CircleAvatar(
-                          radius: 18,
-                          backgroundColor: Color(0XFFF2F2F7),
-                          child: Icon(
-                            Icons.facebook, color: AppColors.primaryColor,),
+                        InkWell(
+                          onTap: (){
+                            Fluttertoast.showToast(
+                                msg: "Link copy successfully",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 2,
+                                backgroundColor: Colors.green,
+                                textColor: Colors.white,
+                                fontSize: 16.0
+                            );
+                            Clipboard.setData(ClipboardData(
+                                text: ApiEndpoint.webMainDomain +
+                                    "blog-details/${controller.blogDetailsResponse.value!.blog!.slug}")).then((
+                                value) {
+                              Get.snackbar("Copied",
+                                  ApiEndpoint.webMainDomain +
+                                      "blog-details/${controller.blogDetailsResponse.value!.blog!.slug}",
+                                  backgroundColor: Colors.green,
+                                  colorText: Colors.white);
+                            });
+                          },
+                          child: CircleAvatar(
+                            radius: 24,
+                            backgroundColor: Color(0XFFF2F2F7),
+                            child: Icon(
+                              Icons.share, color: AppColors.primaryColor,),
+                          ),
                         ),
-                        SizedBox(width: 12,), CircleAvatar(
-                          radius: 18,
-                          backgroundColor: Color(0XFFF2F2F7),
-                          child: Icon(
-                            Icons.facebook, color: AppColors.primaryColor,),
-                        ),
-                        SizedBox(width: 12,), CircleAvatar(
-                          radius: 18,
-                          backgroundColor: Color(0XFFF2F2F7),
-                          child: Icon(
-                            Icons.facebook, color: AppColors.primaryColor,),
-                        ),
-                        SizedBox(width: 12,), CircleAvatar(
-                          radius: 18,
-                          backgroundColor: Color(0XFFF2F2F7),
-                          child: Icon(
-                            Icons.facebook, color: AppColors.primaryColor,),
-                        ),
-                        SizedBox(width: 12,), CircleAvatar(
-                          radius: 18,
-                          backgroundColor: Color(0XFFF2F2F7),
-                          child: Icon(
-                            Icons.facebook, color: AppColors.primaryColor,),
-                        ),
-                        SizedBox(width: 12,),
+
                       ],
                     ),
                     SizedBox(height: 12,),

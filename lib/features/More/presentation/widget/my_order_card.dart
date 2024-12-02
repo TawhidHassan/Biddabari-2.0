@@ -49,14 +49,14 @@ class MyOrderCard extends StatelessWidget {
 
             // image
             Expanded(
-              flex: 3,
+              flex: 5,
               child: CachedNetworkImage(
                 imageUrl:ApiEndpoint.imageBaseUrl+
                     "${
                       order!.ordered_for == "batch_exam"
                           ? order!.batch_exam!.banner!
                           : order!.course != null
-                              ? order!.course!.banner!
+                              ? order!.course!.banner.toString()
                               : order!.product!.title!
                     }",
                 placeholder: (context, url) => Skeletonizer(

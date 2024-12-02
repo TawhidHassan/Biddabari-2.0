@@ -27,6 +27,7 @@ import '../../../../../core/common/widgets/Button/custom_button.dart';
 import '../../../../../core/common/widgets/loading/loading_widget.dart';
 import '../../../../../core/config/util/text_style.dart';
 import '../../../../../core/custom_assets/assets.gen.dart';
+import '../../../../../core/routes/route_path.dart';
 import '../../../../AllCourse/data/models/courseSectionContent/CourseSectionContent.dart';
 import '../../controller/CourseProgress_controller.dart';
 import '../Comment/content_comments_page.dart';
@@ -369,10 +370,18 @@ class _VideoContentState extends State<VideoContent> {
                       children: [
                         Container(
                           margin: EdgeInsets.all(0),
-                          padding: EdgeInsets.all(16),
+                          padding: EdgeInsets.all(0),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(12)
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0x266E6D6D),
+                                blurRadius: 24,
+                                offset: Offset(1, 12),
+                                spreadRadius: 2,
+                              )
+                            ],
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -511,13 +520,21 @@ class _VideoContentState extends State<VideoContent> {
                               
 
                               SizedBox(height: 12,),
-                              DiscountBadge(
-                                text: "Most Recent",
-                                backgroundColor:AppColors.orange400,
-                                foregroundColor: Colors.white,
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    DiscountBadge(
+                                      text: "Most Recent",
+                                      backgroundColor:AppColors.orange400,
+                                      foregroundColor: Colors.white,
+                                    ),
+                                    SizedBox(height: 6,),
+                                    Text(widget.courseSectionContent!.title ?? "",style:boldText(16),),
+                                  ],
+                                ),
                               ),
-                              SizedBox(height: 6,),
-                              Text(widget.courseSectionContent!.title ?? "",style:boldText(16),),
                             ],
                           ),
                         ),
@@ -533,6 +550,13 @@ class _VideoContentState extends State<VideoContent> {
                           title: "See Class Test Answer",
                           onTap: () {
                             print(widget.courseSectionContent!.id.toString());
+                            context.pushNamed(Routes.answerExamPage,extra: {
+                              "id":  widget.courseSectionContent!.id.toString(),
+                              "isCourseExam": widget.isCourseExam,
+                              "iswriitenExam": false,
+                              "hasClassXm":widget.courseSectionContent!.hasClassXm!.toInt(),
+                              "isClassExam":true
+                            });
                             // Navigator.pushNamed(
                             //     context, SEE_ANSWER_PAGE, arguments: {
                             //   "id": widget.courseSectionContent!.id.toString(),

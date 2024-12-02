@@ -141,7 +141,12 @@ class _CategoryCoursePageState extends State<CategoryCoursePage> {
                       child: SizedBox(height: 12,),
                     ),
                     SliverToBoxAdapter(
-                      child:ListView.builder(
+                      child: controller.courseCategoryResponse.value!.courseCategory!.courses!.isEmpty?
+                      Container(
+                          margin: EdgeInsets.only(top: 200),
+                          child: EmptyWidget(title: "There has no course",))
+                      :
+                      ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: controller.courseCategoryResponse.value!.courseCategory!.courses!.length,

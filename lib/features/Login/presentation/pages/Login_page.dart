@@ -22,14 +22,15 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         // automaticallyImplyLeading: true,
-        leading: InkWell(
+        leading:context.canPop()? InkWell(
           onTap: () {
+            print(context.canPop());
             context.pop();
           },
           child: Padding(
               padding: EdgeInsets.all(18),
               child: Assets.icons.backArrow.svg()),
-        ),
+        ):SizedBox(),
       ),
       body: GetBuilder<LoginController>(
         assignId: true,

@@ -2,6 +2,7 @@ import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
 import 'package:biddabari_new/core/config/Strings/api_endpoint.dart';
 import 'package:biddabari_new/features/Teacher/data/models/Teacher/Teacher.dart';
 import 'package:biddabari_new/features/Teacher/presentation/controller/Teacher_controller.dart';
+import 'package:biddabari_new/features/Teacher/presentation/pages/teacher_video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -162,6 +163,15 @@ class TeacherDetailsPage extends StatelessWidget {
                               children: [
                                 InkWell(
                                   onTap: () {
+                                    controller.teacherAboutClick.value=false;
+                                  },
+                                  child: HorizontalCategoryCard(
+                                    height: 40,
+                                    textSize: 18,
+                                    active: !controller.teacherAboutClick.value, title: "Class",),
+                                ),
+                                InkWell(
+                                  onTap: () {
                                     controller.teacherAboutClick.value=true;
                                   },
                                   child: HorizontalCategoryCard(
@@ -169,15 +179,7 @@ class TeacherDetailsPage extends StatelessWidget {
                                     textSize: 18,
                                     active: controller.teacherAboutClick.value, title: "About",),
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    controller.teacherAboutClick.value=false;
-                                  },
-                                  child: HorizontalCategoryCard(
-                                    height: 40,
-                                    textSize: 18,
-                                    active: !controller.teacherAboutClick.value, title: "Class",),
-                                )
+
                               ],
                             ),
                           ),
@@ -197,29 +199,80 @@ class TeacherDetailsPage extends StatelessWidget {
                           SizedBox(height: 12,),
                           Center(child: Text('About ${controller.teacherDetailsResponse!.value!.teacher!.firstName??''}', style: boldText(21),)),
                           SizedBox(height: 6,),
-                          Text(controller.teacherDetailsResponse.value!.teacher!.bio??'',
+                          Text(controller.teacherDetailsResponse.value!.teacher!.description??'',
                             style: mediumText(12,color: Color(0xFF5D5A6F)),textAlign: TextAlign.center,),
 
                           SizedBox(height: 24,),
 
                           Center(child: Text('Certification', style: boldText(21),)),
                           SizedBox(height: 6,),
-                          Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis consectetur adipiscing elit.',
+                          Text(controller.teacherDetailsResponse.value!.teacher!.github??'',
                             style: mediumText(12,color: Color(0xFF5D5A6F)),textAlign: TextAlign.center,),
+                          SizedBox(height: 24,)
 
                         ],
                       ),
                     )
                         :
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 18.0,vertical: 12),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: controller.teacherDetailsResponse.value!.latestCourses!.length,
-                        itemBuilder: (context,index){
-                        return TeacherCourseCard(course:controller.teacherDetailsResponse.value!.latestCourses![index] ,);
-                      }),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 18.0,vertical: 0),
+                          child: Text("Free class",style: boldText(18),),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 18),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              controller.teacherDetailsResponse.value!.teacher!.teacher_intro_video==null?SizedBox():
+                              TeacherVideo(
+                                videoUrl: controller.teacherDetailsResponse.value!.teacher!.teacher_intro_video,
+                                thumnilUrl: controller.teacherDetailsResponse.value!.teacher!.teacher_intro_banner??"",
+                              ),
+                              SizedBox(height: 0,),
+                              Row(
+                                children: [
+                                  controller.teacherDetailsResponse.value!.teacher!.demo_video_1==null?SizedBox():
+                                  Expanded(
+                                    child: TeacherVideo(
+                                      videoUrl: controller.teacherDetailsResponse.value!.teacher!.demo_video_1,
+                                      thumnilUrl: controller.teacherDetailsResponse.value!.teacher!.demo_banner_1??"",
+                                    ),
+                                  ),
+                              
+                                  SizedBox(width: 0,),
+                                  controller.teacherDetailsResponse.value!.teacher!.demo_video_2==null?SizedBox():
+                                  Expanded(
+                                    child: TeacherVideo(
+                                      videoUrl: controller.teacherDetailsResponse.value!.teacher!.demo_video_2,
+                                      thumnilUrl: controller.teacherDetailsResponse.value!.teacher!.demo_banner_2??"",
+                                    ),
+                                  ),
+                              
+                              
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 18.0,vertical: 0),
+                          child: Text("Courses",style: boldText(18),),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 18.0,vertical: 12),
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: controller.teacherDetailsResponse.value!.latestCourses!.length,
+                            itemBuilder: (context,index){
+                            return TeacherCourseCard(course:controller.teacherDetailsResponse.value!.latestCourses![index] ,);
+                          }),
+                        ),
+                      ],
                     ),
                   )
 

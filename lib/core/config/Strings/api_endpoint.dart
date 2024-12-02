@@ -2,7 +2,7 @@ import '/core/extentions/custom_extentions.dart';
 
 class ApiEndpoint {
   ///staging
-  // static const String mainDomain = "https://biddabari.online";
+  static const String  webMainDomain = "https://biddabari.com/";
   static const String mainDomain = "https://api.biddabari.com";
   static const String baseUrl = "$mainDomain/api/v1/";
   static const String imageBaseUrl = "https://biddabari.s3.ap-southeast-1.amazonaws.com/";

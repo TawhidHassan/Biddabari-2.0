@@ -27,8 +27,10 @@ class ExamContextCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment:title==null?MainAxisAlignment.center: MainAxisAlignment.start,
               children: [
-                Text( value??"",
-                  style: semiBoldText(title==null?18:12, color:title==null?AppColors.textClorColor: Colors.green),)
+                Expanded(
+                  child: Text( value??"",
+                    style: semiBoldText(title==null?18:12, color:title==null?AppColors.textClorColor: Colors.green)),
+                )
               ],
             ),
           ),

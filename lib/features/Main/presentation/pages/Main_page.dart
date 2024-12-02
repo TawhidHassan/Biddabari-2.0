@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:biddabari_new/features/profile/presentation/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,13 +27,13 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin {
   void _goBranch(int index, BuildContext context) {
+    Get.find<HomeController>().selectedIndex.value==index;
     if (index == 5) {
       Future.delayed(Duration.zero, () {
         Get.find<ClassRoomController>().getMyCourse();
         // Get.find<CartController>().getCartData();
       });
     }
-
     widget.navigationShell.goBranch(
       index,
       // A common pattern when using bottom navigation bars is to support
@@ -77,8 +79,6 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
     return Scaffold(
         body: widget.navigationShell,
         bottomNavigationBar:
-
-
         BottomNavigationBar(
           backgroundColor: AppColors.whiteColor,
           showSelectedLabels: true,
@@ -141,6 +141,9 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         )
     );
   }
+
+
+
 }
 
 

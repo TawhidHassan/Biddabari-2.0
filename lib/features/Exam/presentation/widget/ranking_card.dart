@@ -39,7 +39,7 @@ class RankingCard extends StatelessWidget {
               ),
               child: CircleAvatar(
                 radius: 20,
-                backgroundImage: NetworkImage(ApiEndpoint.imageBaseUrl+exam!.user!.profilePhotoPath!),
+                backgroundImage: NetworkImage(ApiEndpoint.imageBaseUrl+exam!.user!.profilePhotoPath.toString()),
               ),
             ),
           ),
