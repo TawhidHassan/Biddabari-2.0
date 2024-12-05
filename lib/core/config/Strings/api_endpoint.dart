@@ -5,7 +5,7 @@ class ApiEndpoint {
   static const String  webMainDomain = "https://biddabari.com/";
   static const String mainDomain = "https://api.biddabari.com";
   static const String baseUrl = "$mainDomain/api/v1/";
-  static const String imageBaseUrl = "https://biddabari.s3.ap-southeast-1.amazonaws.com/";
+  static const String imageBaseUrl = "https://biddabaribucket.s3.ap-southeast-1.amazonaws.com/";
 
       ///------------------------------End point----------------------------------------
   static  String OTP_SEND= 'send-otp?mobile='.addBaseURl;

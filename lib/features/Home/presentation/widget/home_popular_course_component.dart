@@ -33,7 +33,7 @@ class HomePopularCourseComponent extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                  'পলুপার কোর্সস',
+                  'পপুলার কোর্স ',
                   style: boldText(16, color: Color(0xFF202244))
               ),
 

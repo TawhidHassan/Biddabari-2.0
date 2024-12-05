@@ -2,7 +2,9 @@
 import 'package:biddabari_new/core/common/widgets/container/discount_badge.dart';
 import 'package:biddabari_new/core/config/Strings/api_endpoint.dart';
 import 'package:biddabari_new/core/config/color/app_colors.dart';
+import 'package:biddabari_new/features/CourseProgress/presentation/pages/course%20show/exam_question_pdf_show.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
@@ -54,14 +56,17 @@ class _QuestionCardState extends State<QuestionCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 flex: 10,
-                child: Html(data: widget.question!.question ?? ""),),
+                child: Html(data: widget.question!.question ?? "",shrinkWrap: true,),),
               Expanded(
-                  flex: 2,
+                  flex: 1,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(height: 16,),
                       GetBuilder<CourseProgressController>(
                         assignId: true,
                         builder: (logic) {
@@ -69,6 +74,7 @@ class _QuestionCardState extends State<QuestionCard> {
                             return widget.controller!.saveQuesCirculer.value?SizedBox(child: CircularProgressIndicator(),):
                             InkWell(
                                 onTap: () {
+                                  print(ApiEndpoint.imageBaseUrl + widget.question!.questionImage);
                                   if( widget.controller!.questionSaveResponse.value!.questions!.where((element) => element.question_store_id==widget.question!.id).isNotEmpty){
                                     widget.controller!.removeQues(widget.question!.id);
                                   }else{
@@ -82,22 +88,27 @@ class _QuestionCardState extends State<QuestionCard> {
                           });
                         },
                       ),
-                      SizedBox(height: 6,),
-                      (widget.question!.isfixed == null || widget.question!.isfixed == false)?
-                          SizedBox():
-                      DiscountBadge(
-                        textSize: 5,
-                          radius: 6,
-                          text: "Answered"
-                      )
                     ],
                   ))
             ],
           ),
           widget.question!.questionImage != null
-              ? Image.network(
-            ApiEndpoint.imageBaseUrl + widget.question!.questionImage ?? "", height: 140,)
-              : SizedBox(),
+              ?
+          widget.question!.questionImage!.toString().contains(".pdf")?
+          InkWell(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ExamQuestionPdfShow(
+                    url:  ApiEndpoint.imageBaseUrl + widget.question!.questionImage!,
+                      courseSectionContent:widget.controller!.slectCouserContentForExamPdf.value)),
+                );
+              },
+              child: Text("Click to See Exam Pdf Question!",style: boldText(18,color: Colors.blue),)):
+          Image.network(
+            ApiEndpoint.imageBaseUrl + widget.question!.questionImage!)
+              :
+          SizedBox(),
           ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),

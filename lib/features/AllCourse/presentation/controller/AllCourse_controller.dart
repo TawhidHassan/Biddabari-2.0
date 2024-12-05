@@ -15,6 +15,7 @@ class AllCourseController extends GetxController implements GetxService{
   final AllCourseUseCase? allCourseUseCase;
   AllCourseController({ this.allCourseUseCase });
 
+  final sliderIndex=0.obs;
   final runningCourseLoading=false.obs;
   final popularCourseLoading=false.obs;
   final categoryCourseLoading=false.obs;
@@ -24,6 +25,8 @@ class AllCourseController extends GetxController implements GetxService{
   final isCurriculumSelected=true.obs;
   final selectedcategory = 0.obs;
   final selectDescription = 0.obs;
+  final categoryCoursePage = 0.obs;
+  final categoryCoursePageUrl = [].obs;
   final catetegoryList=["Courses","Mentors"].obs;
   Rx<CourseResponse?>  runingCourseResponse=Rx<CourseResponse?>(null);
   Rx<CourseResponse?>  popularCourseResponse=Rx<CourseResponse?>(null);

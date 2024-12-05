@@ -3,6 +3,11 @@ import 'package:flutter/services.dart';
 
 class SystemUtil{
 
+  String convertDecimalToTime(double decimalTime) {
+    int hours = decimalTime.floor(); // Extract hours
+    int minutes = ((decimalTime - hours) * 60).round(); // Convert fractional part to minutes
+    return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}';
+  }
   static double getChildAspectRatio(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
@@ -61,5 +66,8 @@ class CustomTextInputFormatter extends TextInputFormatter {
 
     return newValue;
   }
+
+
+
 }
 

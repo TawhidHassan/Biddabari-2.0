@@ -99,7 +99,11 @@ class _AllCourseComponentState extends State<AllCourseComponent> {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
-                              context.pushNamed(Routes.categoryCoursePage,extra: homeController.categoryResponse.value!.courseCategories![index]);
+                              if(homeController.categoryResponse.value!.courseCategories![index].name=="ফ্রি শিখুন!"){
+                                context.goNamed(Routes.freeCoursePage);
+                              }else{
+                                context.pushNamed(Routes.categoryCoursePage,extra: homeController.categoryResponse.value!.courseCategories![index]);
+                              }
                             },
                             child: HorizontalCategoryCard(
                               title:homeController.categoryResponse.value!.courseCategories![index].name ?? "",

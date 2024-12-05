@@ -51,7 +51,7 @@ CourseCard({Key? key, this.course, this.buttonColor=0xFFEB6A20}) : super(key: ke
             Expanded(
               flex: 1,
               child: CachedNetworkImage(
-                imageUrl:course!.banner!.toString(),
+                imageUrl:course!.banner!.contains("https://")?course!.banner!:  ApiEndpoint.imageBaseUrl+course!.banner!.toString(),
                 placeholder: (context, url) => Skeletonizer(
                     enabled: true,
                     child:Container(

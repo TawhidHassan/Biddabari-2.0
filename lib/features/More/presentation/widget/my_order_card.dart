@@ -189,13 +189,12 @@ class MyOrderCard extends StatelessWidget {
                                 style: semiBoldText(10),
                                 children: <TextSpan>[
                                   TextSpan(text: 'Grand Total: ',),
-                                  TextSpan(text:  order!.total_amount!.toString(), style: TextStyle(color: Color(0xff167F71))),
+                                  TextSpan(text:  order!.total_amount!=null?"${order!.total_amount!}":"", style: TextStyle(color: Color(0xff167F71))),
                                 ],
                               ),
                             ),
                           ],
                         )
-
                       ],
                     ),
 

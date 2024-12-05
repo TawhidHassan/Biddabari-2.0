@@ -139,7 +139,8 @@ class _CourseClassExamState extends State<CourseClassExam> {
                               width: 1.0.sw,
                               textColor: Colors.white,
                               borderRadius: 12,
-                              title: "See Answer",
+                              textSize: 12,
+                              title: "Class Test Answer",
                               onTap: () {
                                 print(
                                     widget.courseSectionContent!.id.toString());
@@ -174,6 +175,7 @@ class _CourseClassExamState extends State<CourseClassExam> {
                               width: 1.0.sw,
                               textColor: Colors.white,
                               borderRadius: 12,
+                              textSize: 12,
                               title: "See Video",
                               onTap: () {
                                 context.pushNamed(

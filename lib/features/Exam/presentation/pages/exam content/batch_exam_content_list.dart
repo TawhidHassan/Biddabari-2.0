@@ -55,7 +55,7 @@ class BatchExamContentListPage extends StatelessWidget {
                       else if(batchExamSection!.batch_exam_section_contents![index].contentType=="video"){
                        context.pushNamed(Routes.videoContentPage,extra: {
                          "courseSectionContent":batchExamSection!.batch_exam_section_contents![index],
-                         "isCourseExam":true
+                         "isCourseExam":false
                        },
                        );
                       }
@@ -74,7 +74,7 @@ class BatchExamContentListPage extends StatelessWidget {
                      else if(batchExamSection!.batch_exam_section_contents![index].contentType=="exam"){
                         context.pushNamed(Routes.examContentPage,extra:{
                           "courseSectionContent":batchExamSection!.batch_exam_section_contents![index],
-                          "isCourseExam":true
+                          "isCourseExam":false
                         });
 
                       }
@@ -82,7 +82,7 @@ class BatchExamContentListPage extends StatelessWidget {
                         print(batchExamSection!.batch_exam_section_contents![index].examDurationInMinutes);
                         context.pushNamed(Routes.writtenExamContentPage,extra:{
                           "courseSectionContent":batchExamSection!.batch_exam_section_contents![index],
-                          "isCourseExam":true
+                          "isCourseExam":false
                         });
                       }
 

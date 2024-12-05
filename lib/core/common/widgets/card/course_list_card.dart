@@ -90,7 +90,7 @@ final Course? course;
                         Expanded(
                           child: Text(
                             course!.title??"",
-                            style:boldText(14,color: AppColors.textClorColor),
+                            style:boldText(11,color: AppColors.textClorColor),
                             textAlign: TextAlign.start,
                             maxLines: 2, // Set a limit for lines
                             overflow: TextOverflow.ellipsis,
@@ -137,7 +137,7 @@ final Course? course;
                               '৳ ${(course!.price!-course!.discount_amount!)}',
                               style: TextStyle(
                                 color: Color(0xFF191919),
-                                fontSize: 12,
+                                fontSize: 11,
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w700,
                               ),
@@ -146,7 +146,7 @@ final Course? course;
                               '৳ ${course!.price!}',
                               style: TextStyle(
                                 color: Color(0xFF191919),
-                                fontSize: 12,
+                                fontSize: 11,
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w700,
                               ),
@@ -165,7 +165,7 @@ final Course? course;
                       direction: Axis.horizontal,
                       allowHalfRating: true,
                       itemCount: 5,
-                      itemSize: 11,
+                      itemSize: 10,
                       itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
                       itemBuilder: (context, _) => Icon(
                         Icons.star,

@@ -80,7 +80,7 @@ dependencies:
 
   flutter_local_notifications: ^17.2.4
 
-  flutter_sslcommerz: ^2.2.2-nullsafety.0
+  flutter_sslcommerz: ^2.3.6
 
   flutter_bkash: ^0.2.0
 
@@ -91,8 +91,7 @@ dependencies:
   #  firebase_crashlytics: ^2.5.1
   firebase_messaging: ^15.0.4
   googleapis_auth: ^1.6.0
-  youtube_explode_dart: ^2.3.5
-
+  youtube_explode_dart: ^2.3.6
   loading_indicator: ^3.1.1
 
 
@@ -125,6 +124,8 @@ dependencies:
   #timer
   quiver: ^3.2.1
   shimmer: ^3.0.0
+
+  share_plus: ^10.1.2
 
 
   #db

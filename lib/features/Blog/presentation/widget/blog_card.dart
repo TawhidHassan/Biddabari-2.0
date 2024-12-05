@@ -156,23 +156,23 @@ class BlogCard extends StatelessWidget {
                                 child:SizedBox(width: 6,),
                               ),
                               TextSpan(text: getCustomFormattedDateTime(blog!.updated_at??'','yyy-MMM-dd').toString(), style: TextStyle(color: Color(0xff777777))),
-                              WidgetSpan(
-                                child:SizedBox(width: 6,),
-                              ),
-                              TextSpan(text: ' | ', style: TextStyle(color: Color(0xff777777))),
-                              WidgetSpan(
-                                child:SizedBox(width: 6,),
-                              ),
-                              WidgetSpan(
-                                child:SizedBox(width: 6,),
-                              ),
-                              WidgetSpan(
-                                child: Icon(Icons.watch_later_outlined,color: AppColors.primaryColor,size: 12,),
-                              ),
-                              WidgetSpan(
-                                child:SizedBox(width: 6,),
-                              ),
-                              TextSpan(text:  getCustomFormattedDateTime(blog!.updated_at??'','h:mm a').toString(), style: TextStyle(color: Color(0xff777777))),
+                              // WidgetSpan(
+                              //   child:SizedBox(width: 6,),
+                              // ),
+                              // TextSpan(text: ' | ', style: TextStyle(color: Color(0xff777777))),
+                              // WidgetSpan(
+                              //   child:SizedBox(width: 6,),
+                              // ),
+                              // WidgetSpan(
+                              //   child:SizedBox(width: 6,),
+                              // ),
+                              // WidgetSpan(
+                              //   child: Icon(Icons.watch_later_outlined,color: AppColors.primaryColor,size: 12,),
+                              // ),
+                              // WidgetSpan(
+                              //   child:SizedBox(width: 6,),
+                              // ),
+                              // TextSpan(text:  getCustomFormattedDateTime(blog!.updated_at??'','h:mm a').toString(), style: TextStyle(color: Color(0xff777777))),
 
 
                             ],

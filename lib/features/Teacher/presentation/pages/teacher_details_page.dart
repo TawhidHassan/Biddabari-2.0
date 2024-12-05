@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/common/widgets/container/horizontal_category.dart';
 import '../../../../core/config/util/text_style.dart';
@@ -200,14 +201,14 @@ class TeacherDetailsPage extends StatelessWidget {
                           Center(child: Text('About ${controller.teacherDetailsResponse!.value!.teacher!.firstName??''}', style: boldText(21),)),
                           SizedBox(height: 6,),
                           Text(controller.teacherDetailsResponse.value!.teacher!.description??'',
-                            style: mediumText(12,color: Color(0xFF5D5A6F)),textAlign: TextAlign.center,),
+                            style: mediumText(12,color: Color(0xFF5D5A6F)),textAlign: TextAlign.start,),
 
                           SizedBox(height: 24,),
 
                           Center(child: Text('Certification', style: boldText(21),)),
                           SizedBox(height: 6,),
                           Text(controller.teacherDetailsResponse.value!.teacher!.github??'',
-                            style: mediumText(12,color: Color(0xFF5D5A6F)),textAlign: TextAlign.center,),
+                            style: mediumText(12,color: Color(0xFF5D5A6F)),textAlign: TextAlign.start,),
                           SizedBox(height: 24,)
 
                         ],
@@ -227,32 +228,187 @@ class TeacherDetailsPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               controller.teacherDetailsResponse.value!.teacher!.teacher_intro_video==null?SizedBox():
-                              TeacherVideo(
-                                videoUrl: controller.teacherDetailsResponse.value!.teacher!.teacher_intro_video,
-                                thumnilUrl: controller.teacherDetailsResponse.value!.teacher!.teacher_intro_banner??"",
+                              InkWell(
+                                onTap: (){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => TeacherVideo(
+                                     videoUrl: controller.teacherDetailsResponse.value!.teacher!.teacher_intro_video,
+                                     thumnilUrl: controller.teacherDetailsResponse.value!.teacher!.teacher_intro_banner??"",
+                                    ),
+                                    )
+                                  );
+                                },
+                                child: CachedNetworkImage(
+                                  imageUrl:ApiEndpoint.imageBaseUrl+controller.teacherDetailsResponse.value!.teacher!.teacher_intro_banner.toString(),
+                                  placeholder: (context, url) => Skeletonizer(
+                                    enabled: true,
+                                      child: Container(
+                                    height: 200,
+                                    width: 1.0.sw,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(6),
+                                      image: DecorationImage(
+                                          image: Assets.images.course.provider()
+                                      ),
+                                    ),
+                                    child: Center(child: Icon(Icons.play_arrow_outlined),),
+                                  )),
+                                  errorWidget: (context, url, error){
+                                    return Container(
+                                      height: 200,
+                                      width: 1.0.sw,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(6),
+                                        image: DecorationImage(
+                                            image: Assets.images.course.provider()
+                                        ),
+                                      ),
+                                      child: Center(child: Icon(Icons.play_arrow_outlined),),
+                                    );
+                                  },
+                                  imageBuilder: (context, image) =>  Container(
+                                    height: 200,
+                                    width: 1.0.sw,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(6),
+                                        image: DecorationImage(
+                                            image: image
+                                        )
+                                    ),
+                                  ),
+                                ),
                               ),
-                              SizedBox(height: 0,),
-                              Row(
-                                children: [
-                                  controller.teacherDetailsResponse.value!.teacher!.demo_video_1==null?SizedBox():
-                                  Expanded(
-                                    child: TeacherVideo(
-                                      videoUrl: controller.teacherDetailsResponse.value!.teacher!.demo_video_1,
-                                      thumnilUrl: controller.teacherDetailsResponse.value!.teacher!.demo_banner_1??"",
+
+
+                              SizedBox(
+                                width: 1.0.sw,
+                                child: Row(
+                                  children: [
+                                    controller.teacherDetailsResponse.value!.teacher!.demo_video_1==null?SizedBox():
+                                    Expanded(
+                                      child:    InkWell(
+                                        onTap: (){
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(builder: (context) => TeacherVideo(
+                                                videoUrl: controller.teacherDetailsResponse.value!.teacher!.demo_video_1,
+                                                thumnilUrl: controller.teacherDetailsResponse.value!.teacher!.demo_banner_1??"",
+                                              ),
+                                              )
+                                          );
+                                        },
+                                        child: CachedNetworkImage(
+                                          imageUrl:ApiEndpoint.imageBaseUrl+controller.teacherDetailsResponse.value!.teacher!.demo_banner_1.toString(),
+                                          placeholder: (context, url) => Skeletonizer(
+                                              enabled: true,
+                                              child: Container(
+                                                height: 200,
+                                                width: 1.0.sw,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.circular(6),
+                                                  image: DecorationImage(
+                                                      image: Assets.images.course.provider()
+                                                  ),
+                                                ),
+                                                child: Center(child: Icon(Icons.play_arrow_outlined),),
+                                              )),
+                                          errorWidget: (context, url, error){
+                                            return Container(
+                                              height: 200,
+                                              width: 1.0.sw,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.circular(6),
+                                                image: DecorationImage(
+                                                    image: Assets.images.course.provider()
+                                                ),
+                                              ),
+                                              child: Center(child: Icon(Icons.play_arrow_outlined),),
+                                            );
+                                          },
+                                          imageBuilder: (context, image) =>  Container(
+                                            height: 200,
+                                            width: 1.0.sw,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.circular(6),
+                                                image: DecorationImage(
+                                                    image: image
+                                                )
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                              
-                                  SizedBox(width: 0,),
-                                  controller.teacherDetailsResponse.value!.teacher!.demo_video_2==null?SizedBox():
-                                  Expanded(
-                                    child: TeacherVideo(
-                                      videoUrl: controller.teacherDetailsResponse.value!.teacher!.demo_video_2,
-                                      thumnilUrl: controller.teacherDetailsResponse.value!.teacher!.demo_banner_2??"",
+
+                                    SizedBox(width: 6,),
+                                    controller.teacherDetailsResponse.value!.teacher!.demo_video_2==null?SizedBox():
+                                    Expanded(
+                                      child:    InkWell(
+                                        onTap: (){
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(builder: (context) => TeacherVideo(
+                                                videoUrl: controller.teacherDetailsResponse.value!.teacher!.demo_video_2,
+                                                thumnilUrl: controller.teacherDetailsResponse.value!.teacher!.demo_banner_2??"",
+                                              ),
+                                              )
+                                          );
+                                        },
+                                        child: CachedNetworkImage(
+                                          imageUrl:ApiEndpoint.imageBaseUrl+controller.teacherDetailsResponse.value!.teacher!.demo_banner_2.toString(),
+                                          placeholder: (context, url) => Skeletonizer(
+                                              enabled: true,
+                                              child: Container(
+                                                height: 200,
+                                                width: 1.0.sw,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.circular(6),
+                                                  image: DecorationImage(
+                                                      image: Assets.images.course.provider()
+                                                  ),
+                                                ),
+                                                child: Center(child: Icon(Icons.play_arrow_outlined),),
+                                              )),
+                                          errorWidget: (context, url, error){
+                                            return Container(
+                                              height: 200,
+                                              width: 1.0.sw,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.circular(6),
+                                                image: DecorationImage(
+                                                    image: Assets.images.course.provider()
+                                                ),
+                                              ),
+                                              child: Center(child: Icon(Icons.play_arrow_outlined),),
+                                            );
+                                          },
+                                          imageBuilder: (context, image) =>  Container(
+                                            height: 200,
+                                            width: 1.0.sw,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.circular(6),
+                                                image: DecorationImage(
+                                                    image: image
+                                                )
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                              
-                              
-                                ],
+
+
+
+                                  ],
+                                ),
                               ),
                             ],
                           ),

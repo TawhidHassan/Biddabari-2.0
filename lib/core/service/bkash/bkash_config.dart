@@ -22,14 +22,14 @@ class BkashConfig{
     FlutterBkash? flutterBkash;
     flutterBkash = FlutterBkash(
       bkashCredentials: BkashCredentials(
-        username: "01770618567",
-        // username: "01896060888",
-        password: "D7DaC<*E*eG",
-        // password: "FjY%8ShYf@}",
-        appKey: "0vWQuCRGiUX7EPVjQDr0EUAYtc",
-        // appKey: "YNpYUucNwX0uxfoUa9hJ4Jf1tc",
-        appSecret: "jcUNPBgbcqEDedNKdvE4G1cAK7D3hCjmJccNPZZBq96QIxxwAMEx",
-        // appSecret: "vFqcGRRIeqqpjVe5q3PsTOEc7ttg0wqncqOWmlDSvAWAXqX3mlLb",
+        // username: "01770618567",
+        username: "01896060888",
+        // password: "D7DaC<*E*eG",
+        password: "FjY%8ShYf@}",
+        // appKey: "0vWQuCRGiUX7EPVjQDr0EUAYtc",
+        appKey: "YNpYUucNwX0uxfoUa9hJ4Jf1tc",
+        // appSecret: "jcUNPBgbcqEDedNKdvE4G1cAK7D3hCjmJccNPZZBq96QIxxwAMEx",
+        appSecret: "vFqcGRRIeqqpjVe5q3PsTOEc7ttg0wqncqOWmlDSvAWAXqX3mlLb",
         isSandbox: true,
         // isSandbox: false,
       ),

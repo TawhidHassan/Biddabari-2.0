@@ -17,6 +17,7 @@ import '../../../../core/LocalDataBase/AddressLocal/AddressLocal.dart';
 import '../../../../core/config/Strings/app_strings.dart';
 import '../../../../core/service/hive_service.dart';
 import '../../../AllCourse/data/models/course/CourseDetailsResponse.dart';
+import '../../../AllCourse/data/models/courseSectionContent/CourseSectionContent.dart';
 import '../../../Exam/data/models/Question/QuestionResponse.dart';
 import '../../../Exam/data/models/Question/QuestionSaveResponse.dart';
 import '../../data/models/Comment/CommentResponse.dart';
@@ -28,6 +29,7 @@ class CourseProgressController extends GetxController implements GetxService{
   CourseProgressController({ this.courseProgressUseCase });
 
 
+ Rx<CourseSectionContent?>  slectCouserContentForExamPdf=Rx<CourseSectionContent?>(null);
  Rx<CourseDetailsResponse?>  courseContentDetails=Rx<CourseDetailsResponse?>(null);
  Rx<QuestionResponse?>  assigmentScriptResponse=Rx<QuestionResponse?>(null);
  Rx<QuestionResponse?>  questionResponse=Rx<QuestionResponse?>(null);
@@ -38,7 +40,8 @@ class CourseProgressController extends GetxController implements GetxService{
 
  final formKey = GlobalKey<FormState>();
  final commentFormKey = GlobalKey<FormState>();
- final currentTime=0.obs;
+ final showToast=0.obs;
+ final currentTime=900.obs;
  final circuler=false.obs;
  final playOneline=false.obs;
  final examSubmitCirculer=false.obs;
@@ -58,14 +61,19 @@ class CourseProgressController extends GetxController implements GetxService{
  final picker = ImagePicker();
 
  Future<File?> filepic()async{
-  FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
+  // FilePickerResult? result = await FilePicker.platform.pi(type: FileType.image);
+  final result = await  picker.pickMultiImage();
   if (result != null) {
-   filePath.value="";
-   File filer = File(result.files.single.path!);
-   filePath.value=result.files.single.path!;
-   filePathList.add(result.files.single.path!);
-   fileList.add(File(result.files.single.path!));
-   file=filer;
+   // filePath.value="";
+   // File filer = File(result.files.single.path!);
+   // filePath.value=result.files.single.path!;
+   result.forEach((action){
+    filePathList.add(action.path);
+    fileList.add(File(action.path!));
+   });
+   // filePathList.add(result.files.single.path!);
+   // fileList.add(File(result.files.single.path!));
+   // file=filer;
   } else {
    // User canceled the picker
   }
@@ -308,7 +316,7 @@ class CourseProgressController extends GetxController implements GetxService{
 
    }, (r){
     Fluttertoast.showToast(
-        msg: "Added this question in favorite section",
+        msg: "Added this question in favorite collection",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 2,
@@ -341,7 +349,7 @@ class CourseProgressController extends GetxController implements GetxService{
 
    }, (r){
     Fluttertoast.showToast(
-        msg: "Added this question in favorite section",
+        msg: "Removed this question in favorite collection",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 2,
@@ -364,15 +372,15 @@ class CourseProgressController extends GetxController implements GetxService{
     var rs= await courseProgressUseCase!.getMyFavoraiteQuestion(onValue);
     saveQuesCirculer.value=false;
     rs.fold((l){
-     Fluttertoast.showToast(
-         msg: l.message,
-         toastLength: Toast.LENGTH_SHORT,
-         gravity: ToastGravity.BOTTOM,
-         timeInSecForIosWeb: 2,
-         backgroundColor: Colors.red,
-         textColor: Colors.white,
-         fontSize: 16.0
-     );
+     // Fluttertoast.showToast(
+     //     msg: l.message,
+     //     toastLength: Toast.LENGTH_SHORT,
+     //     gravity: ToastGravity.BOTTOM,
+     //     timeInSecForIosWeb: 2,
+     //     backgroundColor: Colors.red,
+     //     textColor: Colors.white,
+     //     fontSize: 16.0
+     // );
     }, (r){
      questionSaveResponse.value=r;
     });
@@ -382,6 +390,7 @@ class CourseProgressController extends GetxController implements GetxService{
  void startTimer(int _start,String id,BuildContext context,bool hasExam,bool courseExam) {
   // Logger().w(_start);
   var startx=Duration(minutes: _start).inSeconds;
+  currentTime.value=99999999999;
   countDownTimer =  CountdownTimer(
    Duration(seconds: startx),
    Duration(seconds: 1),
@@ -434,11 +443,15 @@ class CourseProgressController extends GetxController implements GetxService{
   }
 
   var token= await serviceLocator<DBHelper>().getToken();
-  var minute=Duration(seconds: currentTime.value).inMinutes;
+  var minute=Duration(seconds: currentTime.value).inSeconds;
+
+  var sec=(
+      (questionResponse.value!.exam!.examDurationInMinutes!=null?
+  questionResponse.value!.exam!.examDurationInMinutes!:questionResponse.value!.exam!.writtenExamDurationInMinutes!=null?int.parse(questionResponse.value!.exam!.writtenExamDurationInMinutes!):questionResponse.value!.exam!.classExamDurationInMinutes!)*60)-minute;
   log(questionsMain.toString(),name: "xx");
   questionsMain.addAll({
    "_token": token??"",
-   "required_time": minute.toString(),
+   "required_time": sec.toString(),
   });
   examSubmitCirculer.value=true;
   var rs= await courseProgressUseCase!.submitExam(fileList.value,hasExam,id,minute,token??"",questionsMain, file,courseExam);
@@ -454,6 +467,8 @@ class CourseProgressController extends GetxController implements GetxService{
        fontSize: 16.0
    );
   }, (r){
+   fileList.value=[];
+   filePathList.value=[];
    Get.snackbar("Successfully", "Congratulation your exam submit",backgroundColor: Colors.green);
    context.pop();
    Get.find<CourseProgressController>().getExamQuestions(id.toString(), hasExam?0:1, courseExam);

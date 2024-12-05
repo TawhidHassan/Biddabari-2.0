@@ -79,7 +79,9 @@ class CategoryCard extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4.0),
               child: Text(
-                name!.length>12?name!.substring(0,6)+"..":name!,
+                name!,
+                maxLines: 1,
+                textAlign: TextAlign.center,
                 style: boldText(13,color: AppColors.textClorColor),
               ),
             ),

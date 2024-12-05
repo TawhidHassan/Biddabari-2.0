@@ -43,7 +43,8 @@ class _DwonlodedPdfPageState extends State<DwonlodedPdfPage> {
     getTasks = await FlutterDownloader.loadTasks();
     Logger().w(getTasks!.length);
     getTasks!.forEach((_task) {
-      if(_task.filename!.contains(".pdf")){
+
+      if(_task.progress==100&&_task.filename!.contains(".pdf")){
         downloadsListMaps.add(LoacalVideo(_task.status.index, _task.progress, _task.taskId, _task.filename, _task.savedDir));
       }
     });

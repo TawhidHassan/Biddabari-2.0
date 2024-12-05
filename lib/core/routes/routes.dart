@@ -292,7 +292,7 @@ class AppRouter {
         name: Routes.forgetPasswordPage,
         path: Routes.forgetPasswordPagePath,
         pageBuilder: (context, state) =>  NoTransitionPage(
-          child: ForgetPasswordPage(),
+          child: ForgetPasswordPage(userLogedIn: state.extra as bool?,),
         ),
       ),
       GoRoute(

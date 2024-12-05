@@ -287,7 +287,7 @@ class ExamDetailsPage extends StatelessWidget {
                                       const EdgeInsets.symmetric(vertical: 15),
                                       child: Center(
                                         child: Text(
-                                          'Curriculum',
+                                          'Exam Details',
                                           style: TextStyle(
                                             color: controller.isCurriculumSelected.value
                                                 ? AppColors.whiteColor
@@ -330,7 +330,7 @@ class ExamDetailsPage extends StatelessWidget {
                                       const EdgeInsets.symmetric(vertical: 15),
                                       child: Center(
                                         child: Text(
-                                          'Exam Details',
+                                          'Curriculum',
                                           style: TextStyle(
                                             color: controller.isCurriculumSelected.value==false
                                                 ? AppColors.whiteColor
@@ -358,37 +358,18 @@ class ExamDetailsPage extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 12),
                                 CourseDetailsIdecator(
-                                  title: "Lifetime access",
-                                  value: "",
-                                  icon: Assets.icons.clock.svg(),
-                                ),
-                                CourseDetailsIdecator(
-                                  title: "30-days money-back guarantee",
+                                  title: "24-hour money-back guarantee",
                                   value: "",
                                   icon: Assets.icons.doller.svg(),
                                 ),
+
                                 CourseDetailsIdecator(
-                                  title: "Free exercises file & downloadable resources",
-                                  value: "",
-                                  icon: Assets.icons.onlineCourse.svg(),
-                                ),
-                                CourseDetailsIdecator(
-                                  title: "Shareable certificate of completion",
-                                  value: "",
-                                  icon: Assets.icons.cup.svg(),
-                                ),
-                                CourseDetailsIdecator(
-                                  title: "Access on mobile , tablet and TV",
+                                  title: "Access on mobile , tablet and Pc",
                                   value: "",
                                   icon: Assets.icons.tv.svg(),
                                 ),
                                 CourseDetailsIdecator(
-                                  title: "English subtitles",
-                                  value: "",
-                                  icon: Assets.icons.subtitle.svg(color: AppColors.orange400),
-                                ),
-                                CourseDetailsIdecator(
-                                  title: "100% online course",
+                                  title: "100% online exam",
                                   value: "",
                                   icon: Assets.icons.onlineCourse.svg(color: AppColors.orange400),
                                 ),

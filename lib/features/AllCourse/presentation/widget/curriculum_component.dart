@@ -165,17 +165,17 @@ class CurriculumComponent extends StatelessWidget {
                               const SizedBox(height: 4),
 
                               // Duration under title
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 0.0),
-                                child: Text(
-                                  contentData.available_at??"",
-                                  style: const TextStyle(
-                                      fontSize: 13.9,
-                                      color: Colors.black54,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.only(
+                              //       left: 0.0),
+                              //   child: Text(
+                              //     contentData.available_at??"",
+                              //     style: const TextStyle(
+                              //         fontSize: 13.9,
+                              //         color: Colors.black54,
+                              //         fontWeight: FontWeight.w700),
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),
@@ -198,11 +198,11 @@ class CurriculumComponent extends StatelessWidget {
                                     // title
                                     Expanded(
                                       child: Text(
-                                        contentData.title??"",
+                                        toElement.title??"",
                                         maxLines: 2,
                                         style: const TextStyle(
                                           fontSize: 16,
-                                          fontWeight: FontWeight.w500,
+                                          fontWeight: FontWeight.w700,
                                           overflow:
                                           TextOverflow.ellipsis,
                                         ),
@@ -234,17 +234,17 @@ class CurriculumComponent extends StatelessWidget {
                                 const SizedBox(height: 4),
 
                                 // Duration under title
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 20.0),
-                                  child: Text(
-                                    contentData.available_at??"",
-                                    style: const TextStyle(
-                                        fontSize: 13.9,
-                                        color: Colors.black54,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                ),
+                                // Padding(
+                                //   padding: const EdgeInsets.only(
+                                //       left: 20.0),
+                                //   child: Text(
+                                //     contentData.available_at??"",
+                                //     style: const TextStyle(
+                                //         fontSize: 13.9,
+                                //         color: Colors.black54,
+                                //         fontWeight: FontWeight.w700),
+                                //   ),
+                                // ),
                               ],
                             ),
                           );
@@ -270,7 +270,10 @@ class CurriculumComponent extends StatelessWidget {
               // See All button
               GestureDetector(
                 onTap: () {
-
+                  context.pushNamed(Routes.checkOutPage,extra: {
+                    "type":"course",
+                    "course":controller!.detailsCategoryResponse.value!.course!
+                  });
                 },
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,

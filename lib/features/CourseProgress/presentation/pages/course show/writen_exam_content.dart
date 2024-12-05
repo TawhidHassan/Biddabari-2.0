@@ -24,6 +24,7 @@ class WritenExamContentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.find<CourseProgressController>().slectCouserContentForExamPdf.value=courseSectionContent;
     Get.find<CourseProgressController>().getExamQuestions(
         courseSectionContent!.id.toString(),
         courseSectionContent!.hasClassXm!.toInt(), isCourseExam!);
@@ -57,7 +58,7 @@ class WritenExamContentPage extends StatelessWidget {
                   children: [
                     ExamContextCard(value: courseSectionContent!.title??'',),
 
-                    ExamContextCard(title: "Exam Name",value:  courseSectionContent!.title??'',),
+                    // ExamContextCard(title: "Exam Name",value:  courseSectionContent!.title??'',),
                     ExamContextCard(title: "Exam Type",value: courseSectionContent!.contentType ?? '',),
 
                     ExamContextCard(title: "পরীক্ষা শুরুর সময়",
@@ -72,7 +73,7 @@ class WritenExamContentPage extends StatelessWidget {
                       )) :"",),
 
                     ExamContextCard(title: "সর্বমোট প্রশ্ন",value:courseSectionContent!.writtenTotalQuestions ?? "",),
-                    ExamContextCard(title: "সর্বমোট বিষয়",value:courseSectionContent!.writtenTotalSubject ?? "",),
+                    ExamContextCard(title: "সর্বমোট সময়",value: "${courseSectionContent!.writtenExamDurationInMinutes} Min",),
                     ExamContextCard(title: "ফলাফল প্রকাশ",value:courseSectionContent!.writtenPublishTime ?? "",),
 
                     Row(
@@ -120,11 +121,11 @@ class WritenExamContentPage extends StatelessWidget {
                 ],
               ),
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-              height: controller.questionResponse.value!.error == null && getTime(courseSectionContent!.writtenEndTime.toString()) == "Not late" ? 80 : 110,
+              height: getTime(courseSectionContent!.writtenEndTime.toString()) == "Not late" ? 80 : 110,
               child: courseSectionContent!.writtenEndTime == null ? SizedBox() :
               Column(
                 children: [
-                  controller.questionResponse.value!.error == null &&  getTime(courseSectionContent!.writtenEndTime.toString()) ==
+                   getTime(courseSectionContent!.writtenEndTime.toString()) ==
                       "Not late" ? SizedBox() :
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -143,10 +144,12 @@ class WritenExamContentPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  controller.questionResponse.value!.error == null && getTime(courseSectionContent!.writtenEndTime.toString()) ==
+                  controller.questionResponse.value!.error == null &&
+                   getTime(courseSectionContent!.writtenEndTime.toString()) ==
                       "Not late" ? SizedBox() : SizedBox(height: 6,),
 
-                  controller.questionResponse.value!.error == null && getTime(courseSectionContent!.writtenEndTime.toString()) ==
+                  controller.questionResponse.value!.error == null &&
+                  getTime(courseSectionContent!.writtenEndTime.toString()) ==
                       "Not late" ? SizedBox() :
                   Row(
                     children: [
@@ -205,7 +208,8 @@ class WritenExamContentPage extends StatelessWidget {
                   ),
 
                   SizedBox(height: 6,),
-                  controller.questionResponse.value!.error == null && getTime(courseSectionContent!.writtenEndTime.toString()) ==
+                  controller.questionResponse.value!.error == null &&
+                  getTime(courseSectionContent!.writtenEndTime.toString()) ==
                       "Not late" ?
                   CustomButton(
                       color: AppColors.primaryColor,

@@ -35,6 +35,7 @@ class CommentCard extends StatelessWidget {
                     width: 40,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
+                        color: Colors.grey,
                         image: DecorationImage(
                             image: AssetImage("assets/images/user.png")
                         )

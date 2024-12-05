@@ -1,3 +1,4 @@
+import 'package:biddabari_new/core/common/widgets/empty/empty_widget.dart';
 import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
 import 'package:biddabari_new/features/AllCourse/presentation/controller/AllCourse_controller.dart';
 import 'package:biddabari_new/features/Exam/presentation/controller/Exam_controller.dart';
@@ -89,7 +90,11 @@ class _MyExamPageState extends State<MyExamPage> {
                       child: SizedBox(height: 12,),
                     ),
                     SliverToBoxAdapter(
-                      child: controller.myExamReponse!.value==null||controller.myExamReponse!.value!.exams==null?SizedBox():ListView.builder(
+                      child: controller.myExamReponse!.value==null||controller.myExamReponse!.value!.exams==null?SizedBox():
+              controller.myExamReponse!.value!.exams!.isEmpty?
+                  EmptyWidget(title: "You haven't bought any exam course.",)
+                  :
+                      ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: controller.myExamReponse!.value!.exams!.length,

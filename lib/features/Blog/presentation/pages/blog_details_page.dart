@@ -8,15 +8,24 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'dart:convert';
+import 'dart:io';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../../core/common/widgets/Image/full_image.dart';
 import '../../../../core/config/Strings/api_endpoint.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/utils/format_date.dart';
 import '../widget/blog_card.dart';
 import 'package:flutter/src/services/clipboard.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+ // hides to test if share_plus exports XFile
+import 'package:share_plus/share_plus.dart';
+
 
 class BlogDetailsPage extends StatelessWidget {
   final Blog? blog;
@@ -65,7 +74,16 @@ class BlogDetailsPage extends StatelessWidget {
                     Row(
                       children: [
                         InkWell(
-                          onTap: (){
+                          onTap: ()async{
+                            // await FlutterShare.share(
+                            //     title: 'share',
+                            //     text: controller.blogDetailsResponse.value!.blog!.title??"",
+                            //     linkUrl: ApiEndpoint.webMainDomain +
+                            //         "blog-details/${controller.blogDetailsResponse.value!.blog!.slug}",
+                            //     chooserTitle: controller.blogDetailsResponse.value!.blog!.title??""
+                            // );
+                            await Share.share( ApiEndpoint.webMainDomain +
+                                "blog-details/${controller.blogDetailsResponse.value!.blog!.slug}");
                             Fluttertoast.showToast(
                                 msg: "Link copy successfully",
                                 toastLength: Toast.LENGTH_SHORT,
@@ -97,20 +115,28 @@ class BlogDetailsPage extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 12,),
-                    CachedNetworkImage(
-                      imageUrl:controller.blogDetailsResponse.value!.blog!.image!,
-                      placeholder: (context, url) => LoadingWidget(),
-                      errorWidget: (context, url, error){
-                        return Image.asset("assets/images/biddabari-logo.png");
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ImageFullScreen(image:controller.blogDetailsResponse.value!.blog!.image!)),
+                        );
                       },
-                      imageBuilder: (context, image) =>  Container(
-                        height: 200,
-                        decoration:  BoxDecoration(
-                            borderRadius: BorderRadius.only(topRight: Radius.circular(4),topLeft: Radius.circular(4) ),
-                            image: DecorationImage(
-                                image: image,
-                                fit: BoxFit.fill
-                            )
+                      child: CachedNetworkImage(
+                        imageUrl:controller.blogDetailsResponse.value!.blog!.image!,
+                        placeholder: (context, url) => LoadingWidget(),
+                        errorWidget: (context, url, error){
+                          return Image.asset("assets/images/biddabari-logo.png");
+                        },
+                        imageBuilder: (context, image) =>  Container(
+                          height: 200,
+                          decoration:  BoxDecoration(
+                              borderRadius: BorderRadius.only(topRight: Radius.circular(4),topLeft: Radius.circular(4) ),
+                              image: DecorationImage(
+                                  image: image,
+                                  fit: BoxFit.fill
+                              )
+                          ),
                         ),
                       ),
                     ),

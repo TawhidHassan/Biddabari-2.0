@@ -5,6 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:flutter/services.dart';
 
@@ -44,24 +45,22 @@ class _VideoPageFreeCourseState extends State<VideoPageFreeCourse> {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) async {
-        if (didPop) {
-          return;
-        }
-        // final bool? shouldPop = await _showBackDialog();
-        // print("object");
-
         await SystemChrome.setPreferredOrientations(
-            [
-              DeviceOrientation.portraitUp,
-              DeviceOrientation.portraitUp
-            ]);
-        if (youtubeController != null) {
+            [DeviceOrientation.portraitUp, DeviceOrientation.portraitUp]);
+        Get.find<CourseProgressController>().videoFullScrren.value=false;
+        Logger().w("message");
+        if(youtubeController!=null){
           youtubeController!.pause();
           youtubeController!.dispose();
         }
-        Get.find<CourseProgressController>().videoFullScrren.value=false;
 
         context.pop();
+
+        // final bool? shouldPop = await _showBackDialog();
+        // print("object");
+
+
+
       },
       child: GetBuilder<CourseProgressController>(
         assignId: true,

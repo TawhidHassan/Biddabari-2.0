@@ -40,24 +40,20 @@ class JobDetailsPage extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            Expanded(
-              flex: 1,
-              child: Container(
-                width: 1.0.sw,
-                height: 80,
-                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 16),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(topRight: Radius.circular(12),topLeft: Radius.circular(12)),
-                    border: Border.all(color: AppColors.primarySlate300)
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(job!.jobTitle??'',style: boldText(14),),
-                    Text(formatDateBydMMMYYYY(job!.createdAt!),style: boldText(11,color: AppColors.primaryColor),),
-                  ],
-                ),
+            Container(
+              width: 1.0.sw,
+              padding: EdgeInsets.symmetric(horizontal: 12,vertical: 16),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(12),topLeft: Radius.circular(12)),
+                  border: Border.all(color: AppColors.primarySlate300)
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(job!.jobTitle??'',style: boldText(14),),
+                  Text(formatDateBydMMMYYYY(job!.createdAt!),style: boldText(11,color: AppColors.primaryColor),),
+                ],
               ),
             ),
             Expanded(

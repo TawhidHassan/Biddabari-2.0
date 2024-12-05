@@ -1,3 +1,31 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
+
+import '../../../../../core/config/Strings/api_endpoint.dart';
+
+// class ExamQuestionPdfShow extends StatelessWidget {
+//   final String? url;
+//   const ExamQuestionPdfShow({super.key, this.url});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("Exam Question"),
+//       ),
+//       body: PDF(autoSpacing: false).cachedFromUrl(
+//         ApiEndpoint.imageBaseUrl + url!,
+//         placeholder: (double progress) =>
+//             Center(child: Text('$progress %')),
+//         errorWidget: (dynamic error) =>
+//             Center(child: Text(error.toString())),
+//       ),
+//     );
+//   }
+// }
+
+
+
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
@@ -24,16 +52,17 @@ import '../../../../../core/custom_assets/assets.gen.dart';
 import '../../../../AllCourse/data/models/courseSectionContent/CourseSectionContent.dart';
 import '../../controller/CourseProgress_controller.dart';
 
-class PdfContentPage extends StatefulWidget {
+class ExamQuestionPdfShow extends StatefulWidget {
   final CourseSectionContent? courseSectionContent;
+  final String? url;
 
-  const PdfContentPage({Key? key, this.courseSectionContent}) : super(key: key);
+  const ExamQuestionPdfShow({Key? key, this.courseSectionContent, this.url}) : super(key: key);
 
   @override
-  State<PdfContentPage> createState() => _PdfContentPageState();
+  State<ExamQuestionPdfShow> createState() => _PdfContentPageState();
 }
 
-class _PdfContentPageState extends State<PdfContentPage> {
+class _PdfContentPageState extends State<ExamQuestionPdfShow> {
 
 
   ReceivePort _port = ReceivePort();
@@ -56,13 +85,7 @@ class _PdfContentPageState extends State<PdfContentPage> {
       }
     });
     setState(() {
-      String urll=( widget.courseSectionContent!.pdfLink!=null?
-      widget.courseSectionContent!.pdfLink!
-          :
-      ApiEndpoint.imageBaseUrl +
-          (widget.courseSectionContent!.contentType == "assignment"
-              ? widget.courseSectionContent!.assignmentQuestion ?? ""
-              : widget.courseSectionContent!.pdfFile ?? ""));
+      String urll=widget.url!;
       Logger().w(urll.split("/")[8]);
       downloadsListMaps.forEach((action){
         Logger().d(action!.filename);
@@ -111,9 +134,9 @@ class _PdfContentPageState extends State<PdfContentPage> {
             //     Get.find<CourseProgressController>().courseContentDetails.value!.course!.title??'');
 
             Get.find<CourseProgressController>().addAddress(
-              AddressLocal(name: widget.courseSectionContent!.title??"",
-                  number: widget.courseSectionContent!.title!+widget.courseSectionContent!.id.toString()+".pdf" ,
-                  address: Get.find<CourseProgressController>().courseContentDetails.value!.course!.title??'' )
+                AddressLocal(name: widget.courseSectionContent!.title??"",
+                    number: widget.courseSectionContent!.title!+widget.courseSectionContent!.id.toString()+".pdf" ,
+                    address: Get.find<CourseProgressController>().courseContentDetails.value!.course!.title??'' )
             );
 
             if(Get.find<CourseProgressController>().showToast.value==0){
@@ -154,13 +177,7 @@ class _PdfContentPageState extends State<PdfContentPage> {
 
   @override
   Widget build(BuildContext context) {
-    print( widget.courseSectionContent!.pdfLink!=null?
-    widget.courseSectionContent!.pdfLink!
-        :
-    ApiEndpoint.imageBaseUrl +
-        (widget.courseSectionContent!.contentType == "assignment"
-            ? widget.courseSectionContent!.assignmentQuestion ?? ""
-            : widget.courseSectionContent!.pdfFile ?? ""));
+
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -174,8 +191,8 @@ class _PdfContentPageState extends State<PdfContentPage> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Course Content"),
-            Text(widget.courseSectionContent!.title??'',style:semiBoldText(12),),
+            Text("Exam PDF Question"),
+
           ],
         ),
 
@@ -199,36 +216,13 @@ class _PdfContentPageState extends State<PdfContentPage> {
 
 
                   if(fileExits){
-                    Fluttertoast.showToast(
-                        msg:"Already downloaded",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 2,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0
-                    );
-                    // Get.snackbar("", "Check download list",backgroundColor: Colors.green,colorText: Colors.white);
+                    Get.snackbar("Already downloaded", "Check download list",backgroundColor: Colors.green,colorText: Colors.white);
                   }else
                   if(progress!=100){
                     savePdfFile(widget.courseSectionContent!.title!+widget.courseSectionContent!.id.toString(),
-                        widget.courseSectionContent!.pdfLink!=null?
-                        widget.courseSectionContent!.pdfLink!
-                            :
-                        ApiEndpoint.imageBaseUrl +
-                            (widget.courseSectionContent!.contentType == "assignment"
-                                ? widget.courseSectionContent!.assignmentQuestion ?? ""
-                                : widget.courseSectionContent!.pdfFile ?? ""));
+                        widget.url!);
                   }else{
-                    Fluttertoast.showToast(
-                        msg:"Already downloaded",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 2,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0
-                    );
+                    Get.snackbar("Already downloaded", "Check download list",backgroundColor: Colors.green,colorText: Colors.white);
                   }
 
                 },
@@ -246,12 +240,10 @@ class _PdfContentPageState extends State<PdfContentPage> {
           builder: (controller) {
             return Obx(() {
               return  Container(
-                width: 1.0.sw,
                   child:controller.dwonloadsatart.value||dwonloaingStrat?
                   Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text("Progress: ${progress}",style: boldText(16,color: AppColors.primaryColor),),
                         Text("Wait until your pdf download completed"),
@@ -290,13 +282,7 @@ class _PdfContentPageState extends State<PdfContentPage> {
 
                             ),
                             child: PDF(autoSpacing: false).cachedFromUrl(
-                              widget.courseSectionContent!.pdfLink!=null?
-                              widget.courseSectionContent!.pdfLink!
-                                  :
-                              ApiEndpoint.imageBaseUrl +
-                                  (widget.courseSectionContent!.contentType == "assignment"
-                                      ? widget.courseSectionContent!.assignmentQuestion ?? ""
-                                      : widget.courseSectionContent!.pdfFile ?? ""),
+                              widget.url!,
                               placeholder: (double progress) =>
                                   Center(child: Text('$progress %')),
                               errorWidget: (dynamic error) =>

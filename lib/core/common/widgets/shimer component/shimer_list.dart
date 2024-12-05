@@ -9,7 +9,8 @@ import '../../../config/util/text_style.dart';
 import '../../../custom_assets/assets.gen.dart';
 
 class ShimerList extends StatelessWidget {
-  const ShimerList({super.key});
+  final int? listCount;
+  const ShimerList({super.key, this.listCount=10});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class ShimerList extends StatelessWidget {
       child: ListView.builder(
         shrinkWrap: true,
         primary: false,
-        itemCount: 10,
+        itemCount: listCount,
         scrollDirection: Axis.vertical,
         itemBuilder: (context, index) {
           return Padding(

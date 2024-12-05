@@ -27,6 +27,7 @@ class ClassRoomMyCourse extends StatelessWidget {
               :
           controller.courseMyResponse.value==null&&controller.myClassCourseLoading.value==false?EmptyWidget()
               :
+          controller.courseMyResponse.value!.courseOrders!.isEmpty?EmptyWidget(title: "There has no course",):
           ListView.builder(
             shrinkWrap: true,
             primary: false,

@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/common/widgets/container/discount_badge.dart';
 import '../../../../core/common/widgets/loading/loading_widget.dart';
+import '../../../../core/common/widgets/shimer component/shimer_list.dart';
 import '../../../../core/config/color/app_colors.dart';
 import '../../../../core/config/util/text_style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
@@ -26,7 +27,14 @@ class ClassRoomAjkerClass extends StatelessWidget {
         return Obx(() {
           return
             controller.myClassLoading.value?
-          LoadingWidget()
+          Column(
+            children: [
+              ShimerList(
+                listCount: 3,
+              ),
+              Text("Please wait,something its take few second",style: boldText(14,color: AppColors.primaryColor),)
+            ],
+          )
               :
             controller.myClassLoading.value==false&& controller.myClassResponse.value==null?EmptyWidget(title: "Somethings wrong",):
             controller.myClassResponse.value!.courseClassContents!.isEmpty?EmptyWidget(title: "There has no class"):

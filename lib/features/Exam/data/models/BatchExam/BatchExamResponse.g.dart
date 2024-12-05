@@ -17,6 +17,9 @@ BatchExamResponse _$BatchExamResponseFromJson(Map<String, dynamic> json) =>
       (json['allExams'] as List<dynamic>?)
           ?.map((e) => Exam.fromJson(e as Map<String, dynamic>))
           .toList(),
+      (json['exam_sliders'] as List<dynamic>?)
+          ?.map((e) => Slider.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$BatchExamResponseToJson(BatchExamResponse instance) =>
@@ -24,4 +27,5 @@ Map<String, dynamic> _$BatchExamResponseToJson(BatchExamResponse instance) =>
       'examCategories': instance.examCategories,
       'masterExam': instance.masterExam,
       'allExams': instance.allExams,
+      'exam_sliders': instance.exam_sliders,
     };

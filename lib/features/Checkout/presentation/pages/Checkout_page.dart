@@ -541,15 +541,10 @@ class CheckoutPage extends StatelessWidget {
                             book!.price!.toString(),
                             isBold: true,
                           ),
+
                         ],
                       )
                     ),
-
-
-
-
-
-
                   ],
 
                 ),

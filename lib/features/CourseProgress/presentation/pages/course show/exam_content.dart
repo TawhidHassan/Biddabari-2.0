@@ -19,7 +19,7 @@ import '../../widget/exam_context_card.dart';
 
 
 
-class ExamContentPage extends StatelessWidget {
+class ExamContentPage extends StatefulWidget {
   final CourseSectionContent? courseSectionContent;
   final bool? isCourseExam;
 
@@ -28,12 +28,26 @@ class ExamContentPage extends StatelessWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  State<ExamContentPage> createState() => _ExamContentPageState();
+}
+
+class _ExamContentPageState extends State<ExamContentPage> {
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
     Future.delayed(Duration.zero,(){
       Get.find<CourseProgressController>().getExamQuestions(
-          courseSectionContent!.id.toString(),
-          courseSectionContent!.hasClassXm!.toInt(), isCourseExam!);
+          widget.courseSectionContent!.id.toString(),
+          widget.courseSectionContent!.hasClassXm!.toInt(), widget.isCourseExam!);
     });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
     return GetBuilder<CourseProgressController>(
       assignId: true,
       builder: (controller) {
@@ -65,27 +79,27 @@ class ExamContentPage extends StatelessWidget {
                 child: Column(
                   children: [
 
-                    ExamContextCard(value: courseSectionContent!.title??'',),
+                    ExamContextCard(value: widget.courseSectionContent!.title??'',),
 
-                    ExamContextCard(title: "Exam Name",value:  courseSectionContent!.title??'',),
-                    ExamContextCard(title: "Exam Type",value: courseSectionContent!.contentType ?? '',),
+                    ExamContextCard(title: "Exam Name",value:  widget.courseSectionContent!.title??'',),
+                    ExamContextCard(title: "Exam Type",value: widget.courseSectionContent!.contentType ?? '',),
                     ExamContextCard(title: "পরীক্ষা শুরুর সময়",
-                      value:courseSectionContent!.examStartTime!=null?
-                      DateFormat('dd MMM yyyy hh:mm a').format(DateTime.parse(courseSectionContent!.examStartTime))
+                      value:widget.courseSectionContent!.examStartTime!=null?
+                      DateFormat('dd MMM yyyy hh:mm a').format(DateTime.parse(widget.courseSectionContent!.examStartTime))
                           :
                       "",),
                     ExamContextCard(title: "পরীক্ষা শেষের সময়",
-                      value:courseSectionContent!.examEndTime!=null ?
+                      value:widget.courseSectionContent!.examEndTime!=null ?
                       DateFormat('dd MMM yyyy hh:mm a').format(DateTime.parse(
-                          courseSectionContent!.examEndTime
+                          widget.courseSectionContent!.examEndTime
                       )) :"",),
 
-                    ExamContextCard(title: "সর্বমোট প্রশ্ন",value:courseSectionContent!.examTotalQuestions ?? "",),
+                    ExamContextCard(title: "সর্বমোট প্রশ্ন",value:widget.courseSectionContent!.examTotalQuestions ?? "",),
                     ExamContextCard(title: "ফলাফল প্রকাশ",
                       value:
-                      courseSectionContent!.examResultPublishTime!=null?
+                      widget.courseSectionContent!.examResultPublishTime!=null?
                       DateFormat('dd MMM yyyy hh:mm a').format(DateTime.parse(
-                          courseSectionContent!.examResultPublishTime!
+                          widget.courseSectionContent!.examResultPublishTime!
                       )) :"",),
 
 
@@ -99,12 +113,12 @@ class ExamContentPage extends StatelessWidget {
             controller.examCirculer.value ?
             LoadingWidget()
                 :
-            courseSectionContent!.examMode == "exam" && courseSectionContent!.examEndTime == null ?
+            widget.courseSectionContent!.examMode == "exam" && widget.courseSectionContent!.examEndTime == null ?
             Container(
               height: 100,
             ) :
-            courseSectionContent!.examMode == "exam" ||
-                courseSectionContent!.examMode == "group" ?
+            widget.courseSectionContent!.examMode == "exam" ||
+                widget.courseSectionContent!.examMode == "group" ?
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -119,13 +133,13 @@ class ExamContentPage extends StatelessWidget {
               ),
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 0),
               height: controller.questionResponse.value!.error == null &&
-                  getTime(courseSectionContent!.examEndTime.toString()) ==
+                  getTime(widget.courseSectionContent!.examEndTime.toString()) ==
                       "Not late" ? 80 : 100,
               child: Column(
                 children: [
                   SizedBox(height: 6,),
                   controller.questionResponse.value!.error == null &&
-                      getTime(courseSectionContent!.examEndTime.toString()) == "Not late" ?
+                      getTime(widget.courseSectionContent!.examEndTime.toString()) == "Not late" ?
                    SizedBox()
                       :
                   Container(
@@ -148,11 +162,11 @@ class ExamContentPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  getTime(courseSectionContent!.examEndTime.toString()) ==
+                  getTime(widget.courseSectionContent!.examEndTime.toString()) ==
                       "Not late" ? SizedBox() : SizedBox(height: 6,),
 
                   controller.questionResponse.value!.error == null &&
-                      getTime(courseSectionContent!.examEndTime.toString()) ==
+                      getTime(widget.courseSectionContent!.examEndTime.toString()) ==
                           "Not late" ? SizedBox()
                       :
                   Row(
@@ -166,7 +180,7 @@ class ExamContentPage extends StatelessWidget {
                           borderRadius: 12,
                           title: "See Answer",
                           onTap: () {
-                            print(courseSectionContent!.id.toString());
+                            print(widget.courseSectionContent!.id.toString());
                             // Navigator.pushNamed(
                             //     context, SEE_ANSWER_PAGE, arguments: {
                             //   "id": courseSectionContent!.id.toString(),
@@ -176,10 +190,10 @@ class ExamContentPage extends StatelessWidget {
                             //   "isClassExam":false
                             // });
                             context.pushNamed(Routes.answerExamPage,extra: {
-                                "id": courseSectionContent!.id.toString(),
-                                "isCourseExam": isCourseExam,
+                                "id": widget.courseSectionContent!.id.toString(),
+                                "isCourseExam": widget.isCourseExam,
                                 "iswriitenExam": false,
-                                "hasClassXm":courseSectionContent!.hasClassXm!.toInt(),
+                                "hasClassXm":widget.courseSectionContent!.hasClassXm!.toInt(),
                                 "isClassExam":false
                             });
                           },
@@ -206,8 +220,8 @@ class ExamContentPage extends StatelessWidget {
                             // });
 
                             context.pushNamed(Routes.rankExamPage,extra: {
-                              "id": courseSectionContent!.id.toString(),
-                              "isCourseExam":isCourseExam
+                              "id": widget.courseSectionContent!.id.toString(),
+                              "isCourseExam":widget.isCourseExam
                             });
                           },
                         ),
@@ -215,9 +229,9 @@ class ExamContentPage extends StatelessWidget {
                     ],
                   ),
 
-                  courseSectionContent!.examEndTime == null ? SizedBox() :
+                  widget.courseSectionContent!.examEndTime == null ? SizedBox() :
                   controller.questionResponse.value!.error == null &&
-                      getTime(courseSectionContent!.examEndTime.toString()) == "Not late"&& getEarlyTime(courseSectionContent!.examStartTime.toString())=="Not Early"
+                      getTime(widget.courseSectionContent!.examEndTime.toString()) == "Not late"&& getEarlyTime(widget.courseSectionContent!.examStartTime.toString())=="Not Early"
                       ?
 
                   CustomButton(
@@ -228,7 +242,7 @@ class ExamContentPage extends StatelessWidget {
                     borderRadius: 12,
                     title: "Start Exam",
                     onTap: () {
-                      Logger().w(courseSectionContent!.hasClassXm);
+                      Logger().w(widget.courseSectionContent!.hasClassXm);
                       // Navigator.pushNamed(context, EXAM_PAGE, arguments: {
                       //   "id": courseSectionContent!.id.toString(),
                       //   "hasExam": courseSectionContent!.hasClassXm,
@@ -237,15 +251,15 @@ class ExamContentPage extends StatelessWidget {
                       // });
 
                       context.pushNamed(Routes.givenExamPage,extra:{
-                        "id": courseSectionContent!.id.toString(),
-                          "hasExam": courseSectionContent!.hasClassXm,
-                          "isCourseExam": isCourseExam,
+                        "id": widget.courseSectionContent!.id.toString(),
+                          "hasExam": widget.courseSectionContent!.hasClassXm,
+                          "isCourseExam": widget.isCourseExam,
                           "iswriitenExam": false
                       });
                     },
                   ) : Container(
                     width: 1.0.sw,
-                    child: Center(child: Text(getEarlyTime(courseSectionContent!.examStartTime.toString())=="Not Early"?"":"There is still time left for the exam to start ",style: boldText(14,color: AppColors.primaryColor),)),
+                    child: Center(child: Text(getEarlyTime(widget.courseSectionContent!.examStartTime.toString())=="Not Early"?"":"There is still time left for the exam to start ",style: boldText(14,color: AppColors.primaryColor),)),
                   ),
 
                 ],
@@ -267,7 +281,7 @@ class ExamContentPage extends StatelessWidget {
                           borderRadius: 12,
                           title: "See Answer",
                           onTap: () {
-                            print(courseSectionContent!.id.toString());
+                            print(widget.courseSectionContent!.id.toString());
                             // Navigator.pushNamed(
                             //     context, SEE_ANSWER_PAGE, arguments: {
                             //   "id": courseSectionContent!.id.toString(),
@@ -277,10 +291,10 @@ class ExamContentPage extends StatelessWidget {
                             //   "isClassExam":false
                             // });
                             context.pushNamed(Routes.answerExamPage,extra: {
-                                "id": courseSectionContent!.id.toString(),
-                                "isCourseExam": isCourseExam,
+                                "id": widget.courseSectionContent!.id.toString(),
+                                "isCourseExam": widget.isCourseExam,
                                 "iswriitenExam": false,
-                                "hasClassXm":courseSectionContent!.hasClassXm!.toInt(),
+                                "hasClassXm":widget.courseSectionContent!.hasClassXm!.toInt(),
                                 "isClassExam":false
                             });
                           },
@@ -297,7 +311,7 @@ class ExamContentPage extends StatelessWidget {
                     borderRadius: 12,
                     title: "Start Exam",
                     onTap: () {
-                      Logger().w(courseSectionContent!.hasClassXm);
+                      Logger().w(widget.courseSectionContent!.hasClassXm);
                       // Navigator.pushNamed(context, EXAM_PAGE, arguments: {
                       //   "id": courseSectionContent!.id.toString(),
                       //   "hasExam": courseSectionContent!.hasClassXm,
@@ -305,9 +319,9 @@ class ExamContentPage extends StatelessWidget {
                       //   "iswriitenExam": false
                       // });
                       context.pushNamed(Routes.givenExamPage,extra:{
-                          "id": courseSectionContent!.id.toString(),
-                          "hasExam": courseSectionContent!.hasClassXm,
-                          "isCourseExam": isCourseExam,
+                          "id": widget.courseSectionContent!.id.toString(),
+                          "hasExam": widget.courseSectionContent!.hasClassXm,
+                          "isCourseExam": widget.isCourseExam,
                           "iswriitenExam": false
                       });
                     },
@@ -350,5 +364,4 @@ class ExamContentPage extends StatelessWidget {
     }
     // return formattedTime.toString();
   }
-
 }

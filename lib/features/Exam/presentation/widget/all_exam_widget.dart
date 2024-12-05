@@ -108,7 +108,9 @@ class AllExamComponent extends StatelessWidget {
                     );
                   },
                 ):
-                controller.examCategorieData.value!.batch_exams!.isEmpty?
+
+                controller.examCategorieData.value!.batch_exams==null||
+                    controller.examCategorieData.value!.batch_exams!.isEmpty?
                 EmptyWidget(
                   height: 200,
                   title: "There has no exam",

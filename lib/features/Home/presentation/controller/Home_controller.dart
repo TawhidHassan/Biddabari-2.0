@@ -61,7 +61,6 @@ class HomeController extends GetxController implements GetxService{
   );
  }
 
-
   Future getcatgeoryList()async {
    categoryLoading.value=true;
    var rs= await homeUseCase!.getcatgeoryList();

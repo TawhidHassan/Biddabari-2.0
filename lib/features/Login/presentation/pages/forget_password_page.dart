@@ -2,9 +2,12 @@ import 'package:biddabari_new/core/common/widgets/loading/loading_widget.dart';
 import 'package:biddabari_new/core/config/color/app_colors.dart';
 import 'package:biddabari_new/core/config/util/text_style.dart';
 import 'package:biddabari_new/features/Login/presentation/controller/Login_controller.dart';
+import 'package:biddabari_new/features/Main/presentation/controller/Main_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:go_router/go_router.dart';
@@ -12,9 +15,30 @@ import '../../../../core/common/widgets/Button/elevated_button.dart';
 import '../../../../core/common/widgets/text field/text_field.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
 import '../../../../core/utils/system_util.dart';
+import '../../../profile/presentation/controller/profile_controller.dart';
 
-class ForgetPasswordPage extends StatelessWidget {
-  const ForgetPasswordPage({super.key});
+class ForgetPasswordPage extends StatefulWidget {
+  final bool? userLogedIn;
+  const ForgetPasswordPage({super.key, this.userLogedIn=false});
+
+  @override
+  State<ForgetPasswordPage> createState() => _ForgetPasswordPageState();
+}
+
+class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    Get.find<LoginController>().emailController.text="01";
+    if(widget.userLogedIn!){
+      Future.delayed(Duration.zero,(){
+        Get.find<ProfileController>().profileResponse.value!.user!.mobile;
+        Get.find<LoginController>().emailController.text=Get.find<ProfileController>().profileResponse!.value!.user!.mobile??"";
+      });
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +92,7 @@ class ForgetPasswordPage extends StatelessWidget {
                               CustomTextField(
                                 textEditingController: controller.emailController,
                                 hintText: "Enter your mobile number",
+                                readOnly: widget.userLogedIn!,
                                 inputFormatters: [
 
                                   FilteringTextInputFormatter.allow(

@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/common/data/Category/Categorie.dart';
@@ -31,140 +32,180 @@ class CategoryCoursePage extends StatefulWidget {
 
 class _CategoryCoursePageState extends State<CategoryCoursePage> {
 
+  final controllerx = Get.find<AllCourseController>();
   @override
   void initState() {
     // TODO: implement initState
     Future.delayed(Duration.zero, () {
-      Get.find<AllCourseController>().getCategoryCourse(widget.categorie!.slug);
+     controllerx.categoryCoursePageUrl.value.add(widget.categorie!.slug);
+     controllerx.categoryCoursePage.value =controllerx.categoryCoursePage.value + 1;
+     controllerx.getCategoryCourse(controllerx.categoryCoursePageUrl.value[controllerx.categoryCoursePage.value-1]);
+
+     controllerx.update();
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didpop,rr){
+        print(controllerx.categoryCoursePage.value);
+        print(controllerx.categoryCoursePageUrl.value);
+        if (controllerx.categoryCoursePage.value == 0) {
+          controllerx.categoryCoursePage.value=0;
+          controllerx.categoryCoursePageUrl.value=[];
+          if(context.canPop()){
+            context.pop();
+          }
 
-    return Scaffold(
-      appBar: AppBar(
-        leading: InkWell(
-          onTap: () {
-            context.goNamed(Routes.mainPage);
-          },
-          child: Padding(
-              padding: EdgeInsets.all(18),
-              child: Assets.icons.backArrow.svg()),
-        ),
-        title: Text(widget.categorie!.name ?? ""),
-      ),
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [
+        } else {
+          controllerx.categoryCoursePageUrl.value.remove(widget.categorie!.slug);
+          controllerx.categoryCoursePage.value=controllerx.categoryCoursePage.value>0?controllerx.categoryCoursePage.value-1:controllerx.categoryCoursePage.value;
+          controllerx.categoryCoursePageUrl.value.isNotEmpty?
+          controllerx.getCategoryCourse(controllerx.categoryCoursePageUrl.value[(controllerx.categoryCoursePage.value>0?controllerx.categoryCoursePage.value-1:0 )]):null;
+          if(context.canPop()){
+            context.pop();
+          }
+        }
+      },
+      child: GetBuilder<AllCourseController>(
+        assignId: false,
+        builder: (controller) {
+          return Obx(() {
+            return Scaffold(
+              appBar: AppBar(
+                leading: InkWell(
+                  onTap: () {
+                    print(controller.categoryCoursePage.value);
+                    print(controller.categoryCoursePageUrl.value);
+                    if (controller.categoryCoursePage.value == 0) {
+                      controller.categoryCoursePage.value=0;
+                      controller.categoryCoursePageUrl.value=[];
+                      if(context.canPop()){
+                        context.pop();
+                      }
+                    } else {
+                      controller.categoryCoursePageUrl.value.remove(widget.categorie!.slug);
+                      controller.categoryCoursePage.value=controller.categoryCoursePage.value>0?controller.categoryCoursePage.value-1:controller.categoryCoursePage.value;
+                      controller.categoryCoursePageUrl.value.isNotEmpty?
+                      controller.getCategoryCourse(controller.categoryCoursePageUrl.value[(controller.categoryCoursePage.value>0?controller.categoryCoursePage.value-1:0 )]):null;
+                      if(context.canPop()){
+                        context.pop();
+                      }
+                    }
 
-          ];
-        },
-        body: GetBuilder<AllCourseController>(
-          assignId: true,
-          builder: (controller) {
-            return Obx(() {
-              return controller.categoryCourseLoading.value?
-              SingleChildScrollView(
-                child: Container(
-                  padding: EdgeInsets.all(16),
-                  child: Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(bottom: 32),
-                            height: 30,
-                            width: 1.0.sw,
-                            child: Skeletonizer(
-                              enabled: true,
-                              child: ListView.builder(
-                                itemCount: 8,
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                itemBuilder: (context,index){
-                                  return   HorizontalCategoryCard(
-                                    active: false,
-                                    title: "ddd",
-                                  );
-                                },
-                              ),
+
+                  },
+                  child: Padding(
+                      padding: EdgeInsets.all(18),
+                      child: Assets.icons.backArrow.svg()),
+                ),
+                title: Text(widget.categorie!.name ?? ""),
+              ),
+              body:  controller.categoryCourseLoading.value ?
+                SingleChildScrollView(
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(bottom: 32),
+                          height: 30,
+                          width: 1.0.sw,
+                          child: Skeletonizer(
+                            enabled: true,
+                            child: ListView.builder(
+                              itemCount: 8,
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return HorizontalCategoryCard(
+                                  active: false,
+                                  title: "ddd",
+                                );
+                              },
                             ),
                           ),
-                          ShimerList()
-                        ],
-                      ),
-                ),
-              ):
-              controller.courseCategoryResponse.value==null&&controller.categoryCourseLoading.value==false?
-              EmptyWidget()
-                  :
-              Container(
-                height: 1.0.sh,
-                width: 1.0.sw,
-                color: AppColors.primaryBackground,
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: CustomScrollView(
-                  slivers: [
-                    SliverToBoxAdapter(
-                        child:SizedBox(
-                          height: controller.courseCategoryResponse.value!.courseCategory!.course_categories!.isEmpty?0:36,
+                        ),
+                        ShimerList()
+                      ],
+                    ),
+                  ),
+                ) :
+                controller.courseCategoryResponse.value == null &&
+                    controller.categoryCourseLoading.value == false ?
+                EmptyWidget()
+                    :
+                Container(
+                  height: 1.0.sh,
+                  width: 1.0.sw,
+                  color: AppColors.primaryBackground,
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: controller.courseCategoryResponse.value!.courseCategory!.course_categories!.isEmpty ? 0 : 36,
                           width: 1.0.sw,
                           child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                              itemCount: controller.courseCategoryResponse.value!.courseCategory!.course_categories!.length,
-                              itemBuilder: (context,index){
+                            shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: controller.courseCategoryResponse
+                                  .value!.courseCategory!
+                                  .course_categories!
+                                  .length,
+                              itemBuilder: (context, index) {
                                 return InkWell(
-                                  onTap: (){
-                                    context.pushNamed(Routes.categoryCoursePage,extra: controller.courseCategoryResponse.value!.courseCategory!.course_categories![index]);
+                                  onTap: () {
+                                    context.pushNamed(
+                                        Routes.categoryCoursePage,
+                                        extra: controller
+                                            .courseCategoryResponse.value!
+                                            .courseCategory!
+                                            .course_categories![index]);
                                   },
                                   child: HorizontalCategoryCard(
-                                    title: controller.courseCategoryResponse.value!.courseCategory!.course_categories![index].name,
+                                    title: controller
+                                        .courseCategoryResponse
+                                        .value!.courseCategory!
+                                        .course_categories![index].name,
                                   ),
                                 );
                               }
                           ),
-                        )
+                        ),
 
-                    ),
-                    // SliverToBoxAdapter(
-                    //     child: Row(
-                    //       children: controller.courseCategoryResponse.value!.courseCategory!.course_categories!.map((cat){
-                    //         return Expanded(
-                    //           child: HorizontalCategoryCard(
-                    //             title: cat.name,
-                    //           ),
-                    //         );
-                    //       }).toList(),
-                    //     ),
-                    //
-                    // ),
-                    SliverToBoxAdapter(
-                      child: SizedBox(height: 12,),
-                    ),
-                    SliverToBoxAdapter(
-                      child: controller.courseCategoryResponse.value!.courseCategory!.courses!.isEmpty?
-                      Container(
-                          margin: EdgeInsets.only(top: 200),
-                          child: EmptyWidget(title: "There has no course",))
-                      :
-                      ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: controller.courseCategoryResponse.value!.courseCategory!.courses!.length,
-                          itemBuilder: (context,index){
-                            return CourseListCard(course: controller.courseCategoryResponse.value!.courseCategory!.courses![index],);
-                          }
-                      ),
-                    ),
-                    SliverToBoxAdapter(
-                      child: SizedBox(height: 80,),
-                    ),
+                        SizedBox(height: 12,),
 
-                  ],
+                        controller.courseCategoryResponse.value!
+                            .courseCategory!.courses!.isEmpty ?
+                        Container(
+                            margin: EdgeInsets.only(top: 200),
+                            child: EmptyWidget(
+                              title: "There has no course",))
+                            :
+                        ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: controller.courseCategoryResponse
+                                .value!.courseCategory!.courses!.length,
+                            itemBuilder: (context, index) {
+                              return CourseListCard(
+                                course: controller.courseCategoryResponse
+                                    .value!.courseCategory!
+                                    .courses![index],);
+                            }
+                        ),
+
+                      ],
+                    ),
+                  ),
                 ),
               );
-            });
-          },
-        ),
+          });
+        },
       ),
     );
   }

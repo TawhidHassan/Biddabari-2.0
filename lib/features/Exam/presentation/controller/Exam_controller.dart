@@ -19,6 +19,7 @@ class ExamController extends GetxController implements GetxService{
   ExamController({ this.examUseCase });
 
 
+  final sliderIndex=0.obs;
   Rx<BatchExamResponse?> batchExamResponse = Rx<BatchExamResponse?>(null);
   Rx<ExamCategorie?> examCategorieData = Rx<ExamCategorie?>(null);
   Rx<ExamDetailsResponse?> examDetailsResponse = Rx<ExamDetailsResponse?>(null);

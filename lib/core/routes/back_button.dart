@@ -27,6 +27,7 @@ class CustomBackButtonDispatcher extends RootBackButtonDispatcher {
       _router.pop();
       return true;
     }
+
     Logger().w(_router.canPop());
     Logger().w("sknjdjd");
 
@@ -39,9 +40,20 @@ class CustomBackButtonDispatcher extends RootBackButtonDispatcher {
 
 
     }else{
-      Logger().w("xxx");
-      showExitPopup(AppRouter.router.routerDelegate.navigatorKey.currentContext);
-      return true;
+      // Logger().w(AppRouter.router.routeInformationProvider.value.location);
+      // Logger().w(AppRouter.router.routeInformationProvider.value.location.toString()==Routes.mainPagePath);
+      // Logger().w("xxx");
+      if(AppRouter.router.routeInformationProvider.value.location.toString()!=Routes.mainPagePath){
+        AppRouter.router.goNamed(Routes.mainPage);
+        // Logger().w("ooo");
+        return true;
+      }
+      else{
+        // Logger().w("ppp");
+        showExitPopup(AppRouter.router.routerDelegate.navigatorKey.currentContext);
+        return true;
+      }
+
     }
     return false;
   }

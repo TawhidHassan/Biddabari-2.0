@@ -17,7 +17,7 @@ import '../widget/question_card.dart';
 import '../widget/ranking_card.dart';
 
 
-class SeeAnswerPage extends StatelessWidget {
+class SeeAnswerPage extends StatefulWidget {
   final String? id;
   final bool? isCourseExam;
   final bool? isClassExam;
@@ -27,11 +27,21 @@ class SeeAnswerPage extends StatelessWidget {
   const SeeAnswerPage({super.key, this.id, this.isCourseExam, this.iswriitenExam=false, this.hasClassXm, this.isClassExam=false});
 
   @override
-  Widget build(BuildContext context) {
+  State<SeeAnswerPage> createState() => _SeeAnswerPageState();
+}
+
+class _SeeAnswerPageState extends State<SeeAnswerPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
     Future.delayed(Duration.zero, () {
-      Get.find<CourseProgressController>().getExamAnswer(id: id, isCourseExam: isCourseExam,isClassExam: isClassExam);
+      Get.find<CourseProgressController>().getExamAnswer(id: widget.id, isCourseExam: widget.isCourseExam,isClassExam: widget.isClassExam);
       Get.find<CourseProgressController>().getMyFavoraiteQuestion();
     });
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -39,8 +49,8 @@ class SeeAnswerPage extends StatelessWidget {
               context.pop();
               // Navigator.pop(context);
               Get.find<CourseProgressController>().getExamQuestions(
-                  id.toString(),
-                 hasClassXm!.toInt(), isCourseExam!);
+                  widget.id.toString(),
+                 widget.hasClassXm!.toInt(), widget.isCourseExam!);
             },
             child: Padding(
                 padding: EdgeInsets.all(18),
@@ -54,12 +64,13 @@ class SeeAnswerPage extends StatelessWidget {
           assignId: true,
           builder: (controller) {
             return Obx(() {
-              return controller.circuler.value?
+              return controller.circuler.value && controller.questionResponse.value==null?
               LoadingWidget():
+              controller.questionResponse.value==null?LoadingWidget():
               controller.questionResponse.value!.error != null ?
               Center(child: Text(controller.questionResponse.value!.error!, style: boldText(14),),)
                   :
-              iswriitenExam!?
+              widget.iswriitenExam!?
               Container(
                   child:controller.questionResponse.value!.writtenFile!=null?
                   PDF().cachedFromUrl(
@@ -77,7 +88,11 @@ class SeeAnswerPage extends StatelessWidget {
                         margin: EdgeInsets.symmetric(horizontal: 12),
                         child: RankingCard(
                           exam:  controller.questionResponse.value!.myPosition!,
-                          examTime:controller.questionResponse.value!.content!.writtenExamDurationInMinutes!=null?controller.questionResponse.value!.content!.writtenExamDurationInMinutes:controller.questionResponse.value!.content!.examDurationInMinutes==null?controller.questionResponse.value!.content!.classExamDurationInMinutes:controller.questionResponse.value!.content!.examDurationInMinutes,
+                          examTime:controller.questionResponse.value!.content!.writtenExamDurationInMinutes!=null?
+                         controller.questionResponse.value!.content!.writtenExamDurationInMinutes!.toString()
+                              :controller.questionResponse.value!.content!.examDurationInMinutes==null?
+                          controller.questionResponse.value!.content!.classExamDurationInMinutes.toString()
+                              :controller.questionResponse.value!.content!.examDurationInMinutes.toString(),
                           index:"1",
                         ),
                       )
@@ -86,12 +101,12 @@ class SeeAnswerPage extends StatelessWidget {
                       flex: 12,
                       child: Container(
                         child: ListView.builder(
-                            itemCount:isClassExam!?controller.questionResponse.value!.content!.questionStoresClassExam!.length: controller.questionResponse.value!.content!.questionStores!.length,
+                            itemCount:widget.isClassExam!?controller.questionResponse.value!.content!.questionStoresClassExam!.length: controller.questionResponse.value!.content!.questionStores!.length,
                             itemBuilder: (context, index) {
                               return QuestionCard(
                                 controller: controller,
                                 showAnswer: true,
-                                question:isClassExam!? controller.questionResponse.value!.content!.questionStoresClassExam![index]:controller.questionResponse.value!.content!.questionStores![index]
+                                question:widget.isClassExam!? controller.questionResponse.value!.content!.questionStoresClassExam![index]:controller.questionResponse.value!.content!.questionStores![index]
                               );
                             }
                         ),

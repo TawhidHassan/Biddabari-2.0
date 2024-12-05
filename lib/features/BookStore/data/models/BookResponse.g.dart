@@ -12,6 +12,9 @@ BookResponse _$BookResponseFromJson(Map<String, dynamic> json) => BookResponse(
       (json['products'] as List<dynamic>?)
           ?.map((e) => Book.fromJson(e as Map<String, dynamic>))
           .toList(),
+      (json['product_sliders'] as List<dynamic>?)
+          ?.map((e) => Slider.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$BookResponseToJson(BookResponse instance) =>
@@ -19,4 +22,5 @@ Map<String, dynamic> _$BookResponseToJson(BookResponse instance) =>
       'success': instance.success,
       'message': instance.message,
       'products': instance.products,
+      'product_sliders': instance.product_sliders,
     };

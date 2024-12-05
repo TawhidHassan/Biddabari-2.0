@@ -290,71 +290,71 @@ class _VideoContentState extends State<VideoContent> {
 
 
                 actions: [
-                  downloadsListMaps
-                      .where((element) =>
-                  element.filename == widget.courseSectionContent!.id.toString())
-                      .isNotEmpty ?
-                  Container(
-                    margin: EdgeInsets.only(right: 24),
-                    child: InkWell(
-                        onTap: () async {
-                          // final status = await Permission.storage.request();
-                          Get.snackbar(
-                              "Already Downloaded The video", "Now You Can Play This",
-                              colorText: Colors.white,
-                              backgroundColor: Colors.green,
-                              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8));
-                          controllerx.playOneline.value = true;
-                          youtubeController = YoutubePlayerController(
-                            initialVideoId: widget.courseSectionContent!.videoLink.toString().split("v=")[1],
-                            flags: YoutubePlayerFlags(
-                              autoPlay: false,
-                              mute: false,
-                            ),
-                          );
-                          setState(() {
-
-                          });
-
-                        },
-                        child: Icon(Icons.play_circle_outline_sharp,
-                          color: Colors.redAccent,)),
-                  )
-                      :
-                  Container(
-                    margin: EdgeInsets.only(right: 24),
-                    child: InkWell(
-                        onTap: () async {
-                          // final status = await Permission.storage.request();
-                          youtubeController!.pause();
-                          // controllerPod.pause();
-                          // controllerPod.dispose();
-                          controller.downloadCirculer.value = true;
-                          controller.downloadProgress.value = 0;
-                          controllerx.playOneline.value = false;
-                          controller.update();
-                          getDownloadUrl(videoId!).then((value) async {
-                            final externalDir = await getExternalStorageDirectory();
-                            final id = await FlutterDownloader.enqueue(
-                              headers: {
-                                HttpHeaders.connectionHeader: 'keep-alive',
-                              },
-                              url: value,
-                              savedDir: externalDir!.path,
-                              fileName: widget.courseSectionContent!.id!
-                                  .toString(),
-                              showNotification: true,
-                              openFileFromNotification: true,
-                            ).then((value) {
-                              // controllerx.downloadCirculer.value = false;
-                              // controllerx.downloadProgress.value = 0;
-                              // controllerx.update();
-                              // Logger().i(value);
-                            });
-                          });
-                        },
-                        child: Assets.icons.dwonload2.svg( )),
-                  )
+                  // downloadsListMaps
+                  //     .where((element) =>
+                  // element.filename == widget.courseSectionContent!.id.toString())
+                  //     .isNotEmpty ?
+                  // Container(
+                  //   margin: EdgeInsets.only(right: 24),
+                  //   child: InkWell(
+                  //       onTap: () async {
+                  //         // final status = await Permission.storage.request();
+                  //         Get.snackbar(
+                  //             "Already Downloaded The video", "Now You Can Play This",
+                  //             colorText: Colors.white,
+                  //             backgroundColor: Colors.green,
+                  //             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8));
+                  //         controllerx.playOneline.value = true;
+                  //         youtubeController = YoutubePlayerController(
+                  //           initialVideoId: widget.courseSectionContent!.videoLink.toString().split("v=")[1],
+                  //           flags: YoutubePlayerFlags(
+                  //             autoPlay: false,
+                  //             mute: false,
+                  //           ),
+                  //         );
+                  //         setState(() {
+                  //
+                  //         });
+                  //
+                  //       },
+                  //       child: Icon(Icons.play_circle_outline_sharp,
+                  //         color: Colors.redAccent,)),
+                  // )
+                  //     :
+                  // Container(
+                  //   margin: EdgeInsets.only(right: 24),
+                  //   child: InkWell(
+                  //       onTap: () async {
+                  //         // final status = await Permission.storage.request();
+                  //         youtubeController!.pause();
+                  //         // controllerPod.pause();
+                  //         // controllerPod.dispose();
+                  //         controller.downloadCirculer.value = true;
+                  //         controller.downloadProgress.value = 0;
+                  //         controllerx.playOneline.value = false;
+                  //         controller.update();
+                  //         getDownloadUrl(videoId!).then((value) async {
+                  //           final externalDir = await getExternalStorageDirectory();
+                  //           final id = await FlutterDownloader.enqueue(
+                  //             headers: {
+                  //               HttpHeaders.connectionHeader: 'keep-alive',
+                  //             },
+                  //             url: value,
+                  //             savedDir: externalDir!.path,
+                  //             fileName: widget.courseSectionContent!.id!
+                  //                 .toString(),
+                  //             showNotification: true,
+                  //             openFileFromNotification: true,
+                  //           ).then((value) {
+                  //             // controllerx.downloadCirculer.value = false;
+                  //             // controllerx.downloadProgress.value = 0;
+                  //             // controllerx.update();
+                  //             // Logger().i(value);
+                  //           });
+                  //         });
+                  //       },
+                  //       child: Assets.icons.dwonload2.svg( )),
+                  // )
 
                 ],
               ),
@@ -585,24 +585,25 @@ class _VideoContentState extends State<VideoContent> {
         ),
         canPop: false,
         onPopInvoked: (didPop) async {
-          if (didPop) {
-            return;
-          }
+            await SystemChrome.setPreferredOrientations(
+                [DeviceOrientation.portraitUp, DeviceOrientation.portraitUp]);
+            Get.find<CourseProgressController>().videoFullScrren.value=false;
+            Logger().w("message");
+            if(youtubeController!=null){
+              youtubeController!.pause();
+              youtubeController!.dispose();
+            }
+
+            context.pop();
+
           // final bool? shouldPop = await _showBackDialog();
           // print("object");
 
-          await SystemChrome.setPreferredOrientations(
-              [DeviceOrientation.portraitUp, DeviceOrientation.portraitUp]);
-          if(youtubeController!=null){
-            youtubeController!.pause();
-            youtubeController!.dispose();
-          }
 
-          context.pop();
 
         }
         );
-  }
+       }
 
 
   void changeTaskID(String taskid, String newTaskID) {

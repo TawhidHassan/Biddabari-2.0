@@ -154,7 +154,7 @@ class BookCard extends StatelessWidget {
 
             // price
             Text(
-              'price' + '/-${book!.price}',
+              'price' + '/- ${book!.price}',
               style: const TextStyle(
                 color: AppColors.primaryColor,
                 fontSize: 14,

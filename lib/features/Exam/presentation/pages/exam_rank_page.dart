@@ -215,7 +215,7 @@ class ExamRankingPage extends StatelessWidget {
 
                               controller.examResponse.value!.courseExamResults!.length>0?
                               Positioned(
-                                top: 25,
+                                top: 25.h,
                                 child: RankUserTopCard(
                                   exam: controller.examResponse.value!.courseExamResults![0],
                                 ),
@@ -223,7 +223,7 @@ class ExamRankingPage extends StatelessWidget {
                               controller.examResponse.value!.courseExamResults!.length>1?
                               Positioned(
                                 top: 45.h,
-                                left: 65.w,
+                                left: 0.18.sw,
                                 child: RankUserTopCard(
                                   exam: controller.examResponse.value!.courseExamResults![1],
                                 ),
@@ -232,13 +232,13 @@ class ExamRankingPage extends StatelessWidget {
                               controller.examResponse.value!.courseExamResults!.length>2?
                               Positioned(
                                 top: 60.h,
-                                right: 69.w,
+                                right: 0.18.sw,
                                 child: RankUserTopCard(
                                   exam: controller.examResponse.value!.courseExamResults![2],
                                 ),
                               ):SizedBox(),
 
-                              Assets.images.posiutionImage.image(),
+                              Assets.images.posiutionImage.image(height: 100.h,width: 0.8.sw),
                             ],
                           ),
                         )
@@ -251,9 +251,9 @@ class ExamRankingPage extends StatelessWidget {
                             return  RankingCard(
                               exam: controller.examResponse.value!.courseExamResults![index],
                               examTime:controller.examResponse.value!.courseExamResults![index].courseSectionContent!.writtenExamDurationInMinutes!=null?
-                              controller.examResponse.value!.courseExamResults![index].courseSectionContent!.writtenExamDurationInMinutes??0
+                              controller.examResponse.value!.courseExamResults![index].courseSectionContent!.writtenExamDurationInMinutes??"0"
                                   :
-                              controller.examResponse.value!.courseExamResults![index].courseSectionContent!.examDurationInMinutes??0,
+                              controller.examResponse.value!.courseExamResults![index].courseSectionContent!.examDurationInMinutes.toString(),
                               index:(index+1).toString(),
                             );
                           },

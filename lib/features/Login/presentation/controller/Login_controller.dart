@@ -202,6 +202,8 @@ class LoginController extends GetxController implements GetxService{
       );
     },(r) async {
      loginResponse.value=r;
+     emailController.text="01";
+     passwordController.text="";
      await localBd.storeTokenUserdata(
          deviceToken:r.user!.device_token!,id:r.user!.id.toString(),email: r.user!.email,token: r.auth_token,name: r.user!.name,
          mobile: r.user!.mobile,image: r.user!.profile_photo_url

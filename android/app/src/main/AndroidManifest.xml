@@ -34,6 +34,8 @@
     <application
         android:label="Biddabari"
         android:name="${applicationName}"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:label"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -95,6 +97,16 @@
                 android:name="vn.hunghd.flutterdownloader.MAX_CONCURRENT_TASKS"
                 android:value="5" />
         </provider>
+
+<!--        <provider-->
+<!--            android:name="androidx.core.content.FileProvider"-->
+<!--            android:authorities="${applicationId}.provider"-->
+<!--            android:exported="false"-->
+<!--            android:grantUriPermissions="true">-->
+<!--            <meta-data-->
+<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
+<!--                android:resource="@xml/provider_paths"/>-->
+<!--        </provider>-->
         <!-- End FlutterDownloader customization -->
 
     </application>

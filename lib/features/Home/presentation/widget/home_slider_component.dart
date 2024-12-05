@@ -88,6 +88,7 @@ class HomeSliderComponent extends StatelessWidget {
                               Container(
                                 width: MediaQuery.of(context).size.width,
                                 height: 164,
+                                margin: EdgeInsets.only(right: 8),
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
                                         image: imageProvider,

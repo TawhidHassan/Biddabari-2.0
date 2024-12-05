@@ -21,7 +21,12 @@ import 'package:bottom_picker/resources/arrays.dart';
 
 class ProfileEditPage extends StatelessWidget {
   const ProfileEditPage({super.key});
-
+  bool validateEmail(String email) {
+    // Regular expression pattern to match an email address
+    String pattern = r'^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,7}$';
+    RegExp regExp = new RegExp(pattern);
+    return regExp.hasMatch(email);
+  }
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(
@@ -363,10 +368,14 @@ class ProfileEditPage extends StatelessWidget {
                               CustomTextField(
                                 textEditingController: controller
                                     .emailController,
-                                inputFormatters: [],
+                                inputFormatters: [
+
+                                ],
                                 validator: (text) {
                                   if (text!.isEmpty) {
-                                    return "Please enter your name";
+                                    return "Please enter your email";
+                                  }else if(!validateEmail(text)){
+                                    return "Please enter valid email";
                                   }
                                 },
                                 hintText: "Enter your name",

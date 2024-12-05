@@ -171,7 +171,7 @@ class ExamCard extends StatelessWidget {
 
                         // price
                         Text(
-                          'price' + '/-${exam!.price}',
+                          'price' + '/- ${exam!.price}',
                           style: const TextStyle(
                             color: AppColors.primaryColor,
                             fontSize: 14,

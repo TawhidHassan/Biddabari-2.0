@@ -105,7 +105,20 @@ class BookDetailsPage extends StatelessWidget {
                               ),
                         ),
 
-
+                        SizedBox(
+                          width: 120,
+                          child: InkWell(
+                            onTap: (){
+                              context.pushNamed(Routes.readMorePage,extra: controller.bookSingelResponse.value!.product!);
+                            },
+                            child: DiscountBadge(
+                              text: "একটু পড়ে দেখুন ",
+                              backgroundColor: Color(0xFf167F71),
+                              foregroundColor: Colors.white,
+                              radius: 4,
+                            ),
+                          ),
+                        ),
                         // Discount and shipping status at the top
                         Positioned(
                           top: 10,
@@ -141,29 +154,8 @@ class BookDetailsPage extends StatelessWidget {
                     ),
 
                   ),
-                  SliverToBoxAdapter(
-                    child: SizedBox(height: 12,),
-                  ),
-                  SliverToBoxAdapter(
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 100,
-                          child: InkWell(
-                            onTap: (){
-                              context.pushNamed(Routes.readMorePage,extra: controller.bookSingelResponse.value!.product!);
-                            },
-                            child: DiscountBadge(
-                              text: "Read More",
-                              backgroundColor: Color(0xFf167F71),
-                              foregroundColor: Colors.white,
-                              radius: 4,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+
+
                   SliverToBoxAdapter(
                     child: SizedBox(height: 16,),
                   ),

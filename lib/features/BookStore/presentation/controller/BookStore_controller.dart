@@ -44,7 +44,7 @@ class BookStoreController extends GetxController implements GetxService{
 
 
 
-
+   final sliderIndex=0.obs;
    Future getStoreBok()async {
      storeBookLoading.value=true;
      var rs= await bookStoreUseCase!.getStoreBok();

@@ -520,7 +520,8 @@ class CourseDetailsPage extends StatelessWidget {
                 ),
               ),
             ),
-            bottomSheet:controller.detailsCategoryResponse.value==null?SizedBox(): BottomCheckoutSection(
+            bottomSheet:controller.detailsCategoryResponse.value==null?SizedBox():
+            BottomCheckoutSection(
               loading: controller.deatilsCourseLoading.value,
               action: (){
                 context.pushNamed(Routes.checkOutPage,extra: {

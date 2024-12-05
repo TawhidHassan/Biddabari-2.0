@@ -2,17 +2,20 @@
 import 'package:biddabari_new/core/config/color/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/config/Strings/api_endpoint.dart';
 import '../../../../core/config/util/text_style.dart';
 import '../../../../core/custom_assets/assets.gen.dart';
+import '../../../../core/utils/system_util.dart';
 import '../../data/models/Exam.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class RankingCard extends StatelessWidget {
   final Exam? exam;
   final String? index;
-  final num? examTime;
-  const RankingCard({Key? key, this.exam, this.index,  this.examTime=100}) : super(key: key);
+  final String? examTime;
+  const RankingCard({Key? key, this.exam, this.index,  this.examTime="100"}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,21 +29,49 @@ class RankingCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+
           Expanded(
             flex: 2,
-            child: Container(
-              height: 60,
-              width: 60,
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: Assets.images.fram.provider(),
+            child: CachedNetworkImage(
+                imageUrl: ApiEndpoint.imageBaseUrl+exam!.user!.profilePhotoPath.toString(),
+                placeholder: (context, url) => Skeletonizer(
+                    enabled: true,
+                    child:CircleAvatar(
+                      radius: 28,
+                      child: Text(""),
+                    )
                 ),
-              ),
-              child: CircleAvatar(
-                radius: 20,
-                backgroundImage: NetworkImage(ApiEndpoint.imageBaseUrl+exam!.user!.profilePhotoPath.toString()),
-              ),
+                errorWidget: (context, url, error) {
+                  return Container(
+                    height: 50,
+                    width: 50,
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: Assets.images.fram.provider(),
+                      ),
+                    ),
+                    child: CircleAvatar(
+                      radius: 10,
+                      child: Text(exam!.user!.name![0]),
+                    ),
+                  );
+                },
+                imageBuilder: (context, image) =>
+                    Container(
+                      height: 50,
+                      width: 50,
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: Assets.images.fram.provider(),
+                        ),
+                      ),
+                      child: CircleAvatar(
+                          radius: 10,
+                          backgroundImage: image
+                      ),
+                    )
             ),
           ),
 
@@ -58,7 +89,7 @@ class RankingCard extends StatelessWidget {
                      children: [
                        Assets.icons.stopWatch.svg(),
                        SizedBox(width: 6,),
-                       Text((examTime!-exam!.requiredTime!).toString()+" Min".toString(),style: mediumText(11),)
+                       Text(SystemUtil().convertDecimalToTime(double.parse((int.parse(examTime!)-(((int.parse(examTime!)*60)-exam!.requiredTime!)/60)).toStringAsFixed(2))).toString()+" Min".toString(),style: mediumText(11),)
                      ],
                    ),
                  ],

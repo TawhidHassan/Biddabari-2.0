@@ -1,3 +1,4 @@
+import 'package:biddabari_new/core/common/widgets/empty/empty_widget.dart';
 import 'package:biddabari_new/core/config/Strings/api_endpoint.dart';
 import 'package:biddabari_new/features/Job/presentation/controller/Job_controller.dart';
 import 'package:flutter/material.dart';
@@ -196,6 +197,7 @@ class JobPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 6,),
+                  controller.selectedJobcategory!.value==null?EmptyWidget(title: "There has no circular",):
                   GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
@@ -291,8 +293,7 @@ class JobPage extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                      )
-                                  ,
+                                      ),
                                 ),
                               ),
                               SizedBox(height: 8,),

@@ -134,7 +134,7 @@ class LoginPage extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                context.pushNamed(Routes.forgetPasswordPage);
+                                context.pushNamed(Routes.forgetPasswordPage,extra: false);
                               },
                               child: Text(
                                 'Forgot Password?',

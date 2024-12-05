@@ -27,7 +27,7 @@ Exam _$ExamFromJson(Map<String, dynamic> json) => Exam(
       json['exam_result_publish_time'],
       json['exam_result_publish_time_timestamp'] as String?,
       json['exam_total_subject'],
-      json['written_exam_duration_in_minutes'] as num?,
+      json['written_exam_duration_in_minutes'] as String?,
       json['written_total_questions'],
       json['written_description'],
       json['written_is_strict'],

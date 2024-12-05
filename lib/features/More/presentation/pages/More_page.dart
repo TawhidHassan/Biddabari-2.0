@@ -237,7 +237,7 @@ class MorePage extends StatelessWidget {
                   homeController.userName.value == "" ? SizedBox() :
                   MoreOtptionCard(
                     onTap: () {
-                      context.pushNamed(Routes.forgetPasswordPage);
+                      context.pushNamed(Routes.forgetPasswordPage,extra: true);
                     },
                     title: "Change Password",
                     icon: Assets.icons.people.path,
